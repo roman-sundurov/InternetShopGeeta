@@ -1,24 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Welcome Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="WelcomeController" customModule="Skillbox_diploma_step2" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Welcome" translatesAutoresizingMaskIntoConstraints="NO" id="Hex-Mb-hn9">
+                                <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="i3J-az-BJq">
+                                <rect key="frame" x="42.666666666666657" y="500.00000000000006" width="305" height="77.666666666666686"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="77.670000000000002" id="edo-i8-z46"/>
+                                    <constraint firstAttribute="width" constant="305" id="pNi-7T-6Ft"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LHN-Gc-CSk">
+                                <rect key="frame" x="84" y="637.66666666666663" width="222" height="54"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="222" id="KWL-Un-VuJ"/>
+                                    <constraint firstAttribute="height" constant="54" id="U63-Dv-Het"/>
+                                </constraints>
+                                <state key="normal" image="Get Started Button"/>
+                            </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WelcomeSlide" translatesAutoresizingMaskIntoConstraints="NO" id="j7b-rr-F4k">
+                                <rect key="frame" x="161.33333333333334" y="774" width="67.333333333333343" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="TkB-Gy-LaB"/>
+                                    <constraint firstAttribute="width" secondItem="j7b-rr-F4k" secondAttribute="height" multiplier="15:8" id="kjM-NH-osc"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Hex-Mb-hn9" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="6Hc-xM-tRw"/>
+                            <constraint firstItem="LHN-Gc-CSk" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="8d9-sd-MWE"/>
+                            <constraint firstItem="Hex-Mb-hn9" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="CL5-tf-wuh"/>
+                            <constraint firstItem="j7b-rr-F4k" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Cax-IS-wOq"/>
+                            <constraint firstItem="LHN-Gc-CSk" firstAttribute="top" secondItem="i3J-az-BJq" secondAttribute="bottom" constant="60" id="GYh-BP-R0f"/>
+                            <constraint firstItem="j7b-rr-F4k" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="OMe-78-OTf"/>
+                            <constraint firstItem="i3J-az-BJq" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="500" id="Szc-e5-Ydt"/>
+                            <constraint firstItem="i3J-az-BJq" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="o1i-0j-zGT"/>
+                            <constraint firstAttribute="bottom" secondItem="Hex-Mb-hn9" secondAttribute="bottom" id="pRk-Az-dr4"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Hex-Mb-hn9" secondAttribute="trailing" id="pUF-LN-Mwh"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="132" y="109"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Get Started Button" width="222" height="54"/>
+        <image name="Logo" width="305" height="77.666664123535156"/>
+        <image name="Welcome" width="390" height="844"/>
+        <image name="WelcomeSlide" width="52" height="6"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

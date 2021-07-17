@@ -8,15 +8,15 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Welcome Controller-->
+        <!--Welcome-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="WelcomeController" customModule="Skillbox_diploma_step2" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="VCWelcome" customModule="Skillbox_diploma_step2" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Welcome" translatesAutoresizingMaskIntoConstraints="NO" id="Hex-Mb-hn9">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BackgroundWelcome" translatesAutoresizingMaskIntoConstraints="NO" id="Hex-Mb-hn9">
                                 <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="i3J-az-BJq">
@@ -33,8 +33,11 @@
                                     <constraint firstAttribute="height" constant="54" id="U63-Dv-Het"/>
                                 </constraints>
                                 <state key="normal" image="Get Started Button"/>
+                                <connections>
+                                    <action selector="buttonSegueToVCRecognition:" destination="BYZ-38-t0r" eventType="touchUpInside" id="avL-M2-Eeu"/>
+                                </connections>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WelcomeSlide" translatesAutoresizingMaskIntoConstraints="NO" id="j7b-rr-F4k">
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WelcomeSlide" translatesAutoresizingMaskIntoConstraints="NO" id="j7b-rr-F4k">
                                 <rect key="frame" x="161.33333333333334" y="774" width="67.333333333333343" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="36" id="TkB-Gy-LaB"/>
@@ -47,26 +50,96 @@
                         <constraints>
                             <constraint firstItem="Hex-Mb-hn9" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="6Hc-xM-tRw"/>
                             <constraint firstItem="LHN-Gc-CSk" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="8d9-sd-MWE"/>
-                            <constraint firstItem="Hex-Mb-hn9" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="CL5-tf-wuh"/>
+                            <constraint firstItem="Hex-Mb-hn9" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="CL5-tf-wuh"/>
                             <constraint firstItem="j7b-rr-F4k" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Cax-IS-wOq"/>
                             <constraint firstItem="LHN-Gc-CSk" firstAttribute="top" secondItem="i3J-az-BJq" secondAttribute="bottom" constant="60" id="GYh-BP-R0f"/>
                             <constraint firstItem="j7b-rr-F4k" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="OMe-78-OTf"/>
                             <constraint firstItem="i3J-az-BJq" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="500" id="Szc-e5-Ydt"/>
                             <constraint firstItem="i3J-az-BJq" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="o1i-0j-zGT"/>
                             <constraint firstAttribute="bottom" secondItem="Hex-Mb-hn9" secondAttribute="bottom" id="pRk-Az-dr4"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Hex-Mb-hn9" secondAttribute="trailing" id="pUF-LN-Mwh"/>
+                            <constraint firstAttribute="trailing" secondItem="Hex-Mb-hn9" secondAttribute="trailing" id="pUF-LN-Mwh"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="buttonSegueToVCRecognition" destination="LHN-Gc-CSk" id="VQ2-cg-h5R"/>
+                        <segue destination="ljf-he-QsI" kind="presentation" identifier="segueToVCRecognition" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="32S-5W-Tme"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="132" y="109"/>
+            <point key="canvasLocation" x="-97" y="109"/>
+        </scene>
+        <!--Recognition-->
+        <scene sceneID="0hG-Ul-eSb">
+            <objects>
+                <viewController id="ljf-he-QsI" customClass="VCRecognition" customModule="Skillbox_diploma_step2" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="aHP-I7-K5L">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BackgroundRecognition" translatesAutoresizingMaskIntoConstraints="NO" id="U4y-jJ-XY6">
+                                <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nbp-IL-fIm">
+                                <rect key="frame" x="84" y="464" width="222" height="54"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="222" id="T8e-vn-qiZ"/>
+                                    <constraint firstAttribute="height" constant="54" id="ZKV-OS-Mjq"/>
+                                </constraints>
+                                <state key="normal" image="Log In Button"/>
+                                <connections>
+                                    <action selector="buttonSegueToVCRecognition:" destination="BYZ-38-t0r" eventType="touchUpInside" id="buy-my-X6I"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yy4-Y8-vw5">
+                                <rect key="frame" x="84" y="558" width="222" height="54"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="222" id="odR-Hk-Nfy"/>
+                                    <constraint firstAttribute="height" constant="54" id="sAa-9l-mJg"/>
+                                </constraints>
+                                <state key="normal" image="Register Button"/>
+                                <connections>
+                                    <action selector="buttonSegueToVCRecognition:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kXn-O1-ksS"/>
+                                </connections>
+                            </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Or_group" translatesAutoresizingMaskIntoConstraints="NO" id="hIo-kz-c6N">
+                                <rect key="frame" x="37.666666666666657" y="528" width="315" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="315" id="hkb-9T-Y6l"/>
+                                    <constraint firstAttribute="height" constant="20" id="urL-bb-5Ya"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="e9F-1O-Yzl"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="U4y-jJ-XY6" firstAttribute="leading" secondItem="aHP-I7-K5L" secondAttribute="leading" id="BPs-1x-xNc"/>
+                            <constraint firstItem="hIo-kz-c6N" firstAttribute="centerX" secondItem="aHP-I7-K5L" secondAttribute="centerX" id="Bbf-nW-rdO"/>
+                            <constraint firstItem="hIo-kz-c6N" firstAttribute="top" secondItem="nbp-IL-fIm" secondAttribute="bottom" constant="10" id="IJV-IA-IAE"/>
+                            <constraint firstAttribute="bottom" secondItem="U4y-jJ-XY6" secondAttribute="bottom" id="IpC-n7-zKF"/>
+                            <constraint firstItem="Yy4-Y8-vw5" firstAttribute="top" secondItem="hIo-kz-c6N" secondAttribute="bottom" constant="10" id="Orv-Cg-5vu"/>
+                            <constraint firstItem="nbp-IL-fIm" firstAttribute="top" secondItem="e9F-1O-Yzl" secondAttribute="top" constant="420" id="UQC-6r-WTZ"/>
+                            <constraint firstAttribute="trailing" secondItem="U4y-jJ-XY6" secondAttribute="trailing" id="WbG-NT-AHJ"/>
+                            <constraint firstItem="nbp-IL-fIm" firstAttribute="centerX" secondItem="aHP-I7-K5L" secondAttribute="centerX" id="bgr-gx-JJd"/>
+                            <constraint firstItem="U4y-jJ-XY6" firstAttribute="top" secondItem="aHP-I7-K5L" secondAttribute="top" id="k51-OB-83P"/>
+                            <constraint firstItem="Yy4-Y8-vw5" firstAttribute="centerX" secondItem="aHP-I7-K5L" secondAttribute="centerX" id="zHs-ag-kTu"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="RBc-GG-zoR"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cG9-Re-1pH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="824.61538461538464" y="108.76777251184834"/>
         </scene>
     </scenes>
     <resources>
+        <image name="BackgroundRecognition" width="390" height="844"/>
+        <image name="BackgroundWelcome" width="390" height="844"/>
         <image name="Get Started Button" width="222" height="54"/>
+        <image name="Log In Button" width="222" height="54"/>
         <image name="Logo" width="305" height="77.666664123535156"/>
-        <image name="Welcome" width="390" height="844"/>
+        <image name="Or_group" width="315" height="20"/>
+        <image name="Register Button" width="222" height="54"/>
         <image name="WelcomeSlide" width="52" height="6"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

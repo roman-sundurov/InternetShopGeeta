@@ -7,6 +7,11 @@
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Lato-Black.ttf">
+            <string>Lato-Black</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Welcome-->
         <scene sceneID="tne-QT-ifu">
@@ -67,7 +72,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-97" y="109"/>
+            <point key="canvasLocation" x="168" y="102"/>
         </scene>
         <!--Recognition-->
         <scene sceneID="0hG-Ul-eSb">
@@ -88,7 +93,8 @@
                                 </constraints>
                                 <state key="normal" image="Log In Button"/>
                                 <connections>
-                                    <action selector="buttonSegueToVCRecognition:" destination="BYZ-38-t0r" eventType="touchUpInside" id="buy-my-X6I"/>
+                                    <action selector="buttonSegueToVCRecognition:" destination="ljf-he-QsI" eventType="touchUpInside" id="6F3-EC-SgI"/>
+                                    <segue destination="gjG-OB-Q0A" kind="presentation" identifier="segueToVCLogin" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="i2Z-V2-dd5"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yy4-Y8-vw5">
@@ -98,9 +104,6 @@
                                     <constraint firstAttribute="height" constant="54" id="sAa-9l-mJg"/>
                                 </constraints>
                                 <state key="normal" image="Register Button"/>
-                                <connections>
-                                    <action selector="buttonSegueToVCRecognition:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kXn-O1-ksS"/>
-                                </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Or_group" translatesAutoresizingMaskIntoConstraints="NO" id="hIo-kz-c6N">
                                 <rect key="frame" x="37.666666666666657" y="528" width="315" height="20"/>
@@ -126,13 +129,101 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="RBc-GG-zoR"/>
+                    <connections>
+                        <outlet property="buttonSegueToVCLogin" destination="nbp-IL-fIm" id="zFi-vE-GN2"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cG9-Re-1pH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="824.61538461538464" y="108.76777251184834"/>
+            <point key="canvasLocation" x="960" y="-171"/>
+        </scene>
+        <!--Login-->
+        <scene sceneID="t5w-ed-8go">
+            <objects>
+                <viewController id="gjG-OB-Q0A" customClass="VCLogin" customModule="Skillbox_diploma_step2" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="oZF-4s-1zW">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BackgroundLogin" translatesAutoresizingMaskIntoConstraints="NO" id="aF6-cB-e9o">
+                                <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PT8-lK-Ddj">
+                                <rect key="frame" x="33" y="462" width="324" height="338"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QHw-Nz-6Oa">
+                                        <rect key="frame" x="0.0" y="0.0" width="324" height="77"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9IJ-AU-nsT">
+                                                <rect key="frame" x="0.0" y="0.0" width="88" height="17"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="88" id="9v3-qx-N4O"/>
+                                                    <constraint firstAttribute="height" constant="17" id="WWI-XQ-wDn"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="14"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1wS-Ca-4vN">
+                                                <rect key="frame" x="0.0" y="27" width="324" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="nYQ-X1-H6H"/>
+                                                </constraints>
+                                                <nil key="textColor"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="1wS-Ca-4vN" secondAttribute="bottom" id="8Cl-o9-6gA"/>
+                                            <constraint firstItem="9IJ-AU-nsT" firstAttribute="top" secondItem="QHw-Nz-6Oa" secondAttribute="top" id="FQ8-GU-mtC"/>
+                                            <constraint firstItem="1wS-Ca-4vN" firstAttribute="leading" secondItem="QHw-Nz-6Oa" secondAttribute="leading" id="MGY-Zy-iIy"/>
+                                            <constraint firstAttribute="trailing" secondItem="1wS-Ca-4vN" secondAttribute="trailing" id="MP6-ab-PlI"/>
+                                            <constraint firstItem="9IJ-AU-nsT" firstAttribute="leading" secondItem="QHw-Nz-6Oa" secondAttribute="leading" id="XEY-tn-2Uo"/>
+                                            <constraint firstItem="1wS-Ca-4vN" firstAttribute="top" secondItem="9IJ-AU-nsT" secondAttribute="bottom" constant="10" id="dXf-mf-kdh"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemGray2Color"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="324" id="52E-iz-QwL"/>
+                                    <constraint firstAttribute="height" constant="338" id="Aai-GR-Mg3"/>
+                                    <constraint firstItem="QHw-Nz-6Oa" firstAttribute="leading" secondItem="PT8-lK-Ddj" secondAttribute="leading" id="BW1-GU-VZp"/>
+                                    <constraint firstItem="QHw-Nz-6Oa" firstAttribute="top" secondItem="PT8-lK-Ddj" secondAttribute="top" id="THG-at-Evy"/>
+                                    <constraint firstAttribute="trailing" secondItem="QHw-Nz-6Oa" secondAttribute="trailing" id="alF-Pk-QTs"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6WC-wZ-Nhw">
+                                <rect key="frame" x="45" y="54" width="19" height="16"/>
+                                <state key="normal" backgroundImage="BackButton"/>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="YH4-6o-4tF"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="aF6-cB-e9o" secondAttribute="trailing" id="2hp-wo-vwf"/>
+                            <constraint firstItem="YH4-6o-4tF" firstAttribute="bottom" secondItem="PT8-lK-Ddj" secondAttribute="bottom" constant="10" id="MPS-vX-iS2"/>
+                            <constraint firstItem="aF6-cB-e9o" firstAttribute="leading" secondItem="oZF-4s-1zW" secondAttribute="leading" id="Nf9-bY-3N6"/>
+                            <constraint firstItem="6WC-wZ-Nhw" firstAttribute="leading" secondItem="YH4-6o-4tF" secondAttribute="leading" constant="45" id="cMp-y5-9Vr"/>
+                            <constraint firstAttribute="bottom" secondItem="aF6-cB-e9o" secondAttribute="bottom" id="qvu-pi-JAm"/>
+                            <constraint firstItem="6WC-wZ-Nhw" firstAttribute="top" secondItem="YH4-6o-4tF" secondAttribute="top" constant="10" id="ssU-Vs-bCJ"/>
+                            <constraint firstItem="aF6-cB-e9o" firstAttribute="top" secondItem="oZF-4s-1zW" secondAttribute="top" id="vLe-nD-eRc"/>
+                            <constraint firstItem="PT8-lK-Ddj" firstAttribute="centerX" secondItem="oZF-4s-1zW" secondAttribute="centerX" id="xq5-xV-EWM"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Yxn-CM-2Hs"/>
+                    <connections>
+                        <outlet property="emailTextField" destination="1wS-Ca-4vN" id="ijD-zj-Bvw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nrH-oY-zpo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1791" y="-171"/>
         </scene>
     </scenes>
     <resources>
+        <image name="BackButton" width="19" height="15.333333015441895"/>
+        <image name="BackgroundLogin" width="390" height="844"/>
         <image name="BackgroundRecognition" width="390" height="844"/>
         <image name="BackgroundWelcome" width="390" height="844"/>
         <image name="Get Started Button" width="222" height="54"/>
@@ -143,6 +234,9 @@
         <image name="WelcomeSlide" width="52" height="6"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray2Color">
+            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

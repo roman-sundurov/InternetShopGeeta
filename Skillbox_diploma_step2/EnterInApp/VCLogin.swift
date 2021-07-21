@@ -12,7 +12,7 @@ class VCLogin: UIViewController {
     
     //MARK: - объявление аутлетов
     
-    @IBOutlet var emailTextField: UITextField!
+    @IBOutlet var emailView: TextFieldView!
     
     
     //MARK: - делегаты и переменные
@@ -32,9 +32,11 @@ class VCLogin: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        emailTextField.layer.cornerRadius = 10
-        emailTextField.layer.borderColor = CGColor.init(red: 99, green: 66, blue: 232, alpha: 1)
         
+//        emailView.layer.cornerRadius = 8
+//        emailView.layer.borderColor = UIColor.init(named: "Purple")?.cgColor//CGColor.init(red: 0.39, green: 0.26, blue: 0.91, alpha: 1)
+////        emailTextField.layer.borderColor = UIColor.red.cgColor
+//        emailView.layer.borderWidth = 1
     }
     
 

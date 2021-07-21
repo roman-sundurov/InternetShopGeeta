@@ -4,19 +4,23 @@ PODS:
   - Realm/Headers (10.10.0)
   - RealmSwift (10.10.0):
     - Realm (= 10.10.0)
+  - SimpleCheckbox (2.1.0)
 
 DEPENDENCIES:
   - RealmSwift
+  - SimpleCheckbox
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - Realm
     - RealmSwift
+    - SimpleCheckbox
 
 SPEC CHECKSUMS:
   Realm: f501df41a4222c67850c77cf135d472192ecf294
   RealmSwift: c69aadfc7db0d60075178d037c2f34ada73d5201
+  SimpleCheckbox: ddcd433ab8c3a8f57300bebda13151a8f302c7f9
 
-PODFILE CHECKSUM: a8a1ccc2e9497bb65dcb74ed551702b3f35f663a
+PODFILE CHECKSUM: b41e08ed7119953a7d98b606b02db12a2b678811
 
 COCOAPODS: 1.10.1

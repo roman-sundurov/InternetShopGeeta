@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import SimpleCheckbox
+
 
 class VCLogin: UIViewController {
     
@@ -13,6 +15,7 @@ class VCLogin: UIViewController {
     //MARK: - объявление аутлетов
     
     @IBOutlet var emailView: TextFieldView!
+    @IBOutlet var rememberMeCheckbox: Checkbox!
     
     
     //MARK: - делегаты и переменные
@@ -20,6 +23,10 @@ class VCLogin: UIViewController {
     //MARK: - объекты
     
     //MARK: - переходы
+    
+    @IBAction func buttonCloseLoginScreen(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
     
     //MARK: - клики
     
@@ -31,6 +38,14 @@ class VCLogin: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        rememberMeCheckbox.checkmarkStyle = .tick
+        rememberMeCheckbox.borderLineWidth = 1
+        rememberMeCheckbox.checkedBorderColor = UIColor.gray
+        rememberMeCheckbox.uncheckedBorderColor = UIColor.gray
+        rememberMeCheckbox.borderStyle = .square
+        rememberMeCheckbox.checkmarkSize = 0.5
+        rememberMeCheckbox.checkmarkColor = UIColor(named: "Purple")
         
         
 //        emailView.layer.cornerRadius = 8

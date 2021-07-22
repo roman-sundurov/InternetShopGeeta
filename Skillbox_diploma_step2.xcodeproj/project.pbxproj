@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		47076DC226AA25ED002D8A65 /* VCRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47076DC126AA25ED002D8A65 /* VCRegister.swift */; };
 		4712BB1C26A310C5003701D5 /* VCRecognition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4712BB1B26A310C5003701D5 /* VCRecognition.swift */; };
 		472D946E2676AA0300482C20 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472D946D2676AA0300482C20 /* AppDelegate.swift */; };
 		472D94702676AA0300482C20 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472D946F2676AA0300482C20 /* SceneDelegate.swift */; };
@@ -72,6 +73,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		47076DC126AA25ED002D8A65 /* VCRegister.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCRegister.swift; sourceTree = "<group>"; };
 		4712BB1B26A310C5003701D5 /* VCRecognition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCRecognition.swift; sourceTree = "<group>"; };
 		472D946A2676AA0300482C20 /* Skillbox_diploma_step2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Skillbox_diploma_step2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		472D946D2676AA0300482C20 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -202,6 +204,7 @@
 				472D94712676AA0300482C20 /* VCWelcome.swift */,
 				4712BB1B26A310C5003701D5 /* VCRecognition.swift */,
 				4748E11426A75195004B8D88 /* VCLogin.swift */,
+				47076DC126AA25ED002D8A65 /* VCRegister.swift */,
 			);
 			path = EnterInApp;
 			sourceTree = "<group>";
@@ -458,6 +461,7 @@
 			files = (
 				4712BB1C26A310C5003701D5 /* VCRecognition.swift in Sources */,
 				472D94722676AA0300482C20 /* VCWelcome.swift in Sources */,
+				47076DC226AA25ED002D8A65 /* VCRegister.swift in Sources */,
 				472FCDBD26A840C20030B157 /* TextFieldView.swift in Sources */,
 				4748E11526A75195004B8D88 /* VCLogin.swift in Sources */,
 				472D946E2676AA0300482C20 /* AppDelegate.swift in Sources */,

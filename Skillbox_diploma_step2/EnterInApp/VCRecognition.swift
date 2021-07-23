@@ -23,6 +23,10 @@ class VCRecognition: UIViewController {
         performSegue(withIdentifier: "segueToVCLogin", sender: nil)
     }
     
+    @IBAction func buttonSegueToVCRegister(_ sender: Any) {
+        performSegue(withIdentifier: "segueToVCRegister", sender: nil)
+    }
+    
     
     //MARK: - клики
     

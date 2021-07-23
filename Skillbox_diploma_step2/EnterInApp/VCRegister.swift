@@ -9,6 +9,35 @@ import UIKit
 
 class VCRegister: UIViewController {
 
+    
+    //MARK: - объявление аутлетов
+    
+    @IBOutlet var emailView: TextFieldView!
+    
+    //MARK: - делегаты и переменные
+    
+    //MARK: - объекты
+    
+    //MARK: - переходы
+    
+    @IBAction func buttonCloseRegisterScreen(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func buttonSegueToVCMainCatalog(_ sender: Any) {
+        performSegue(withIdentifier: "segueToVCMainCatalog", sender: nil)
+    }
+    
+    
+    //MARK: - клики
+    
+    //MARK: - данные
+    
+    //MARK: - viewDidLoad
+    
+    //MARK: - additional protocols
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

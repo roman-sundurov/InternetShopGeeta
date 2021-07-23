@@ -28,6 +28,15 @@ class VCLogin: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func buttonSegueToVCMainCatalog(_ sender: Any) {
+        performSegue(withIdentifier: "segueToVCMainCatalog", sender: nil)
+    }
+    
+    @IBAction func buttonSegueToVCRegister(_ sender: Any) {
+        performSegue(withIdentifier: "segueToVCRegister", sender: nil)
+    }
+    
+    
     //MARK: - клики
     
     //MARK: - данные

@@ -19,6 +19,8 @@
 		472D94902676AA0600482C20 /* Skillbox_diploma_step2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472D948F2676AA0600482C20 /* Skillbox_diploma_step2UITests.swift */; };
 		472FCDBD26A840C20030B157 /* TextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472FCDBC26A840C20030B157 /* TextFieldView.swift */; };
 		4748E11526A75195004B8D88 /* VCLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4748E11426A75195004B8D88 /* VCLogin.swift */; };
+		4752A8F226AB5C00000E4AC5 /* VCMainCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4752A8F126AB5C00000E4AC5 /* VCMainCatalog.swift */; };
+		4752A8F526AB63D1000E4AC5 /* VCProfileSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4752A8F426AB63D1000E4AC5 /* VCProfileSlider.swift */; };
 		479A2F690C1F4A3EB05E4F42 /* Pods_Skillbox_diploma_step2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3B3F4D6B2F558717662E5D7 /* Pods_Skillbox_diploma_step2.framework */; };
 		47B2ABE926A76F5800526490 /* Lato-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47B2ABDF26A76F5700526490 /* Lato-BlackItalic.ttf */; };
 		47B2ABEA26A76F5800526490 /* Lato-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47B2ABDF26A76F5700526490 /* Lato-BlackItalic.ttf */; };
@@ -91,6 +93,8 @@
 		472D94912676AA0600482C20 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		472FCDBC26A840C20030B157 /* TextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TextFieldView.swift; path = Skillbox_diploma_step2/Elements/TextFieldView.swift; sourceTree = SOURCE_ROOT; };
 		4748E11426A75195004B8D88 /* VCLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCLogin.swift; sourceTree = "<group>"; };
+		4752A8F126AB5C00000E4AC5 /* VCMainCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCMainCatalog.swift; sourceTree = "<group>"; };
+		4752A8F426AB63D1000E4AC5 /* VCProfileSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCProfileSlider.swift; sourceTree = "<group>"; };
 		47B2ABDF26A76F5700526490 /* Lato-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-BlackItalic.ttf"; sourceTree = "<group>"; };
 		47B2ABE026A76F5700526490 /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
 		47B2ABE126A76F5800526490 /* Lato-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Italic.ttf"; sourceTree = "<group>"; };
@@ -164,6 +168,8 @@
 				472D946F2676AA0300482C20 /* SceneDelegate.swift */,
 				472D94732676AA0300482C20 /* Main.storyboard */,
 				4748E11626A751A7004B8D88 /* EnterInApp */,
+				4752A8F026AB5BD4000E4AC5 /* CatalogsScreens */,
+				4752A8F326AB632B000E4AC5 /* ProfilesScreens */,
 				472D94762676AA0500482C20 /* Assets.xcassets */,
 				47B2ABDE26A76F4A00526490 /* Fonts */,
 				472D94782676AA0500482C20 /* LaunchScreen.storyboard */,
@@ -207,6 +213,22 @@
 				47076DC126AA25ED002D8A65 /* VCRegister.swift */,
 			);
 			path = EnterInApp;
+			sourceTree = "<group>";
+		};
+		4752A8F026AB5BD4000E4AC5 /* CatalogsScreens */ = {
+			isa = PBXGroup;
+			children = (
+				4752A8F126AB5C00000E4AC5 /* VCMainCatalog.swift */,
+			);
+			path = CatalogsScreens;
+			sourceTree = "<group>";
+		};
+		4752A8F326AB632B000E4AC5 /* ProfilesScreens */ = {
+			isa = PBXGroup;
+			children = (
+				4752A8F426AB63D1000E4AC5 /* VCProfileSlider.swift */,
+			);
+			path = ProfilesScreens;
 			sourceTree = "<group>";
 		};
 		47B2ABDD26A76F4700526490 /* Assets */ = {
@@ -459,6 +481,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4752A8F526AB63D1000E4AC5 /* VCProfileSlider.swift in Sources */,
 				4712BB1C26A310C5003701D5 /* VCRecognition.swift in Sources */,
 				472D94722676AA0300482C20 /* VCWelcome.swift in Sources */,
 				47076DC226AA25ED002D8A65 /* VCRegister.swift in Sources */,
@@ -466,6 +489,7 @@
 				4748E11526A75195004B8D88 /* VCLogin.swift in Sources */,
 				472D946E2676AA0300482C20 /* AppDelegate.swift in Sources */,
 				472D94702676AA0300482C20 /* SceneDelegate.swift in Sources */,
+				4752A8F226AB5C00000E4AC5 /* VCMainCatalog.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

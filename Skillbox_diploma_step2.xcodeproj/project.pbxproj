@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -21,7 +21,9 @@
 		4748E11526A75195004B8D88 /* VCLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4748E11426A75195004B8D88 /* VCLogin.swift */; };
 		4752A8F226AB5C00000E4AC5 /* VCMainCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4752A8F126AB5C00000E4AC5 /* VCMainCatalog.swift */; };
 		4752A8F526AB63D1000E4AC5 /* VCProfileSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4752A8F426AB63D1000E4AC5 /* VCProfileSlider.swift */; };
-		479A2F690C1F4A3EB05E4F42 /* Pods_Skillbox_diploma_step2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3B3F4D6B2F558717662E5D7 /* Pods_Skillbox_diploma_step2.framework */; };
+		4784BF5126B5820500BB958D /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 4784BF5026B5820500BB958D /* Realm */; };
+		4784BF5326B5820500BB958D /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4784BF5226B5820500BB958D /* RealmSwift */; };
+		4784BF5626B5838500BB958D /* SimpleCheckbox in Frameworks */ = {isa = PBXBuildFile; productRef = 4784BF5526B5838500BB958D /* SimpleCheckbox */; };
 		47B2ABE926A76F5800526490 /* Lato-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47B2ABDF26A76F5700526490 /* Lato-BlackItalic.ttf */; };
 		47B2ABEA26A76F5800526490 /* Lato-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47B2ABDF26A76F5700526490 /* Lato-BlackItalic.ttf */; };
 		47B2ABEB26A76F5800526490 /* Lato-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47B2ABDF26A76F5700526490 /* Lato-BlackItalic.ttf */; };
@@ -106,9 +108,6 @@
 		47B2ABE726A76F5800526490 /* Lato-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Black.ttf"; sourceTree = "<group>"; };
 		47B2ABE826A76F5800526490 /* Lato-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Thin.ttf"; sourceTree = "<group>"; };
 		47B2AC0726A76F5E00526490 /* OFL.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OFL.txt; sourceTree = "<group>"; };
-		CD7879DC8B9E07C9B983AD51 /* Pods-Skillbox_diploma_step2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Skillbox_diploma_step2.debug.xcconfig"; path = "Target Support Files/Pods-Skillbox_diploma_step2/Pods-Skillbox_diploma_step2.debug.xcconfig"; sourceTree = "<group>"; };
-		DBD2A90BE7FE77FC8960CE06 /* Pods-Skillbox_diploma_step2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Skillbox_diploma_step2.release.xcconfig"; path = "Target Support Files/Pods-Skillbox_diploma_step2/Pods-Skillbox_diploma_step2.release.xcconfig"; sourceTree = "<group>"; };
-		F3B3F4D6B2F558717662E5D7 /* Pods_Skillbox_diploma_step2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Skillbox_diploma_step2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,7 +115,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				479A2F690C1F4A3EB05E4F42 /* Pods_Skillbox_diploma_step2.framework in Frameworks */,
+				4784BF5326B5820500BB958D /* RealmSwift in Frameworks */,
+				4784BF5626B5838500BB958D /* SimpleCheckbox in Frameworks */,
+				4784BF5126B5820500BB958D /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -144,8 +145,6 @@
 				472D94832676AA0600482C20 /* Skillbox_diploma_step2Tests */,
 				472D948E2676AA0600482C20 /* Skillbox_diploma_step2UITests */,
 				472D946B2676AA0300482C20 /* Products */,
-				C70C62CE612C2EB850C5BCD4 /* Pods */,
-				808B4EAAD620915A117D6CAC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -257,23 +256,6 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		808B4EAAD620915A117D6CAC /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				F3B3F4D6B2F558717662E5D7 /* Pods_Skillbox_diploma_step2.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		C70C62CE612C2EB850C5BCD4 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				CD7879DC8B9E07C9B983AD51 /* Pods-Skillbox_diploma_step2.debug.xcconfig */,
-				DBD2A90BE7FE77FC8960CE06 /* Pods-Skillbox_diploma_step2.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -281,17 +263,20 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 472D94942676AA0600482C20 /* Build configuration list for PBXNativeTarget "Skillbox_diploma_step2" */;
 			buildPhases = (
-				088276CE0DA18A9DA5851581 /* [CP] Check Pods Manifest.lock */,
 				472D94662676AA0300482C20 /* Sources */,
 				472D94672676AA0300482C20 /* Frameworks */,
 				472D94682676AA0300482C20 /* Resources */,
-				D213515E8F46DC0F7C6E80D2 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = Skillbox_diploma_step2;
+			packageProductDependencies = (
+				4784BF5026B5820500BB958D /* Realm */,
+				4784BF5226B5820500BB958D /* RealmSwift */,
+				4784BF5526B5838500BB958D /* SimpleCheckbox */,
+			);
 			productName = Skillbox_diploma_step2;
 			productReference = 472D946A2676AA0300482C20 /* Skillbox_diploma_step2.app */;
 			productType = "com.apple.product-type.application";
@@ -363,6 +348,10 @@
 				Base,
 			);
 			mainGroup = 472D94612676AA0300482C20;
+			packageReferences = (
+				4784BF4F26B5820500BB958D /* XCRemoteSwiftPackageReference "realm-cocoa" */,
+				4784BF5426B5838500BB958D /* XCRemoteSwiftPackageReference "SimpleCheckbox" */,
+			);
 			productRefGroup = 472D946B2676AA0300482C20 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -433,48 +422,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		088276CE0DA18A9DA5851581 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Skillbox_diploma_step2-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D213515E8F46DC0F7C6E80D2 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Skillbox_diploma_step2/Pods-Skillbox_diploma_step2-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Skillbox_diploma_step2/Pods-Skillbox_diploma_step2-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Skillbox_diploma_step2/Pods-Skillbox_diploma_step2-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		472D94662676AA0300482C20 /* Sources */ = {
@@ -662,7 +609,6 @@
 		};
 		472D94952676AA0600482C20 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CD7879DC8B9E07C9B983AD51 /* Pods-Skillbox_diploma_step2.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -682,7 +628,6 @@
 		};
 		472D94962676AA0600482C20 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DBD2A90BE7FE77FC8960CE06 /* Pods-Skillbox_diploma_step2.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -824,6 +769,43 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		4784BF4F26B5820500BB958D /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-cocoa.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.11.0;
+			};
+		};
+		4784BF5426B5838500BB958D /* XCRemoteSwiftPackageReference "SimpleCheckbox" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/BeauNouvelle/SimpleCheckbox.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.2.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4784BF5026B5820500BB958D /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4784BF4F26B5820500BB958D /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			productName = Realm;
+		};
+		4784BF5226B5820500BB958D /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4784BF4F26B5820500BB958D /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			productName = RealmSwift;
+		};
+		4784BF5526B5838500BB958D /* SimpleCheckbox */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4784BF5426B5838500BB958D /* XCRemoteSwiftPackageReference "SimpleCheckbox" */;
+			productName = SimpleCheckbox;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 472D94622676AA0300482C20 /* Project object */;
 }

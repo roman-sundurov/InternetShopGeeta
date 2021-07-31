@@ -15,6 +15,7 @@ class VCProfileSlider: UIViewController {
     
     @IBOutlet var firstViewProfileSlider: UIView!
     @IBOutlet var accountImage: UIImageView!
+
     
     
     //MARK: - делегаты и переменные
@@ -46,12 +47,12 @@ class VCProfileSlider: UIViewController {
         layer0.position = firstViewProfileSlider.center
         firstViewProfileSlider.layer.addSublayer(layer0)
         
-        
         accountImage.layer.cornerRadius = 30
+        accountImage.layer.borderWidth = 3
+        accountImage.layer.borderColor = UIColor.white.cgColor
         accountImage.clipsToBounds = true
         accountImage.backgroundColor = .white
 
-        
         
     }
     

@@ -23,7 +23,6 @@
 		4752A8F526AB63D1000E4AC5 /* VCProfileSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4752A8F426AB63D1000E4AC5 /* VCProfileSlider.swift */; };
 		4784BF5126B5820500BB958D /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 4784BF5026B5820500BB958D /* Realm */; };
 		4784BF5326B5820500BB958D /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4784BF5226B5820500BB958D /* RealmSwift */; };
-		4784BF5626B5838500BB958D /* SimpleCheckbox in Frameworks */ = {isa = PBXBuildFile; productRef = 4784BF5526B5838500BB958D /* SimpleCheckbox */; };
 		47B2ABE926A76F5800526490 /* Lato-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47B2ABDF26A76F5700526490 /* Lato-BlackItalic.ttf */; };
 		47B2ABEA26A76F5800526490 /* Lato-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47B2ABDF26A76F5700526490 /* Lato-BlackItalic.ttf */; };
 		47B2ABEB26A76F5800526490 /* Lato-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47B2ABDF26A76F5700526490 /* Lato-BlackItalic.ttf */; };
@@ -57,6 +56,7 @@
 		47B2AC0826A76F5E00526490 /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 47B2AC0726A76F5E00526490 /* OFL.txt */; };
 		47B2AC0926A76F5E00526490 /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 47B2AC0726A76F5E00526490 /* OFL.txt */; };
 		47B2AC0A26A76F5E00526490 /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 47B2AC0726A76F5E00526490 /* OFL.txt */; };
+		47FB692326B5F40700D47397 /* SimpleCheckbox in Frameworks */ = {isa = PBXBuildFile; productRef = 47FB692226B5F40700D47397 /* SimpleCheckbox */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -116,7 +116,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4784BF5326B5820500BB958D /* RealmSwift in Frameworks */,
-				4784BF5626B5838500BB958D /* SimpleCheckbox in Frameworks */,
+				47FB692326B5F40700D47397 /* SimpleCheckbox in Frameworks */,
 				4784BF5126B5820500BB958D /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -275,7 +275,7 @@
 			packageProductDependencies = (
 				4784BF5026B5820500BB958D /* Realm */,
 				4784BF5226B5820500BB958D /* RealmSwift */,
-				4784BF5526B5838500BB958D /* SimpleCheckbox */,
+				47FB692226B5F40700D47397 /* SimpleCheckbox */,
 			);
 			productName = Skillbox_diploma_step2;
 			productReference = 472D946A2676AA0300482C20 /* Skillbox_diploma_step2.app */;
@@ -350,7 +350,7 @@
 			mainGroup = 472D94612676AA0300482C20;
 			packageReferences = (
 				4784BF4F26B5820500BB958D /* XCRemoteSwiftPackageReference "realm-cocoa" */,
-				4784BF5426B5838500BB958D /* XCRemoteSwiftPackageReference "SimpleCheckbox" */,
+				47FB692126B5F40700D47397 /* XCRemoteSwiftPackageReference "SimpleCheckbox" */,
 			);
 			productRefGroup = 472D946B2676AA0300482C20 /* Products */;
 			projectDirPath = "";
@@ -779,7 +779,7 @@
 				minimumVersion = 10.11.0;
 			};
 		};
-		4784BF5426B5838500BB958D /* XCRemoteSwiftPackageReference "SimpleCheckbox" */ = {
+		47FB692126B5F40700D47397 /* XCRemoteSwiftPackageReference "SimpleCheckbox" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/BeauNouvelle/SimpleCheckbox.git";
 			requirement = {
@@ -800,9 +800,9 @@
 			package = 4784BF4F26B5820500BB958D /* XCRemoteSwiftPackageReference "realm-cocoa" */;
 			productName = RealmSwift;
 		};
-		4784BF5526B5838500BB958D /* SimpleCheckbox */ = {
+		47FB692226B5F40700D47397 /* SimpleCheckbox */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4784BF5426B5838500BB958D /* XCRemoteSwiftPackageReference "SimpleCheckbox" */;
+			package = 47FB692126B5F40700D47397 /* XCRemoteSwiftPackageReference "SimpleCheckbox" */;
 			productName = SimpleCheckbox;
 		};
 /* End XCSwiftPackageProductDependency section */

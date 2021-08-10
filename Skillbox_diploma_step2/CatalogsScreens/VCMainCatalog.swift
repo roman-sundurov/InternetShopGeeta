@@ -16,17 +16,7 @@ class VCMainCatalog: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let edgePan = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(screenEdgeSwiped))
-        edgePan.edges = .right
         
-        view.addGestureRecognizer(edgePan)
-        
-    }
-    
-    @objc func screenEdgeSwiped(_ recognizer: UIScreenEdgePanGestureRecognizer) {
-        if recognizer.state == .recognized {
-            print("Screen edge swiped!")
-        }
     }
 
 }

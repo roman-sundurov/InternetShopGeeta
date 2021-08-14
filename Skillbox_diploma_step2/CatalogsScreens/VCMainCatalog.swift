@@ -25,14 +25,7 @@ class VCMainCatalog: UIViewController {
     
     //MARK: - переходы
     
-    //MARK: - клики
-    
-    //MARK: - данные
-    
-    //MARK: - viewDidLoad
-    
-    //MARK: - additional protocols
-    
+    //MARK: - клики, жесты
     
     @IBAction func handlerButtonTapGesture(_ gesture: UITapGestureRecognizer) {
 //        if gesture.state == UIGestureRecognizer.State.ended {
@@ -53,7 +46,7 @@ class VCMainCatalog: UIViewController {
         guard let gestureView = gesture.view else {
           return
         }
-        if gestureView.frame.origin.x + translation.x >= UIScreen.main.bounds.width - 255 && gestureView.frame.origin.x + translation.x <= UIScreen.main.bounds.width - gesture.view!.frame.size.width {
+        if gestureView.frame.origin.x + translation.x >= UIScreen.main.bounds.width - gesture.view!.frame.size.width - 255 && gestureView.frame.origin.x + translation.x <= UIScreen.main.bounds.width - gesture.view!.frame.size.width {
             gestureView.center = CGPoint(
               x: gestureView.center.x + translation.x,
               y: gestureView.center.y
@@ -62,14 +55,15 @@ class VCMainCatalog: UIViewController {
                 x: slideProfileMenu.center.x + translation.x,
                 y: slideProfileMenu.center.y
               )
-
         }
         
-        // 3
-        gesture.setTranslation(.zero, in: view)
-        
         if gesture.state == .ended {
-            if gestureView.frame.origin.x + translation.x >= UIScreen.main.bounds.width - 255/2 {
+            print("gestureView.frame.origin.x= \(gestureView.frame.origin.x)")
+            print("UIScreen.main.bounds.width - 255/2 = \(UIScreen.main.bounds.width - (255/2))")
+            print("slideProfileMenu.frame.origin.x= \(slideProfileMenu.frame.origin.x)")
+            print("translation.x= \(translation.x)")
+            
+            if slideProfileMenu.frame.origin.x >= UIScreen.main.bounds.width - 255 / 2 {
                 print("111")
                 UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
                     gestureView.frame.origin.x = UIScreen.main.bounds.width - gesture.view!.frame.size.width
@@ -82,15 +76,23 @@ class VCMainCatalog: UIViewController {
                     gestureView.frame.origin.x = UIScreen.main.bounds.width - gesture.view!.frame.size.width - 255
                     self.slideProfileMenu.frame.origin.x = UIScreen.main.bounds.width - 255
                 })
-
             }
-            return
         }
+        
+        gesture.setTranslation(.zero, in: view)
         
         guard gesture.state == .ended else {
             return
         }
     }
+    
+    
+    //MARK: - данные
+    
+    //MARK: - viewDidLoad
+    
+    //MARK: - additional protocols
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -28,17 +28,10 @@ class VCMainCatalog: UIViewController {
     //MARK: - клики, жесты
     
     @IBAction func handlerButtonTapGesture(_ gesture: UITapGestureRecognizer) {
-//        if gesture.state == UIGestureRecognizer.State.ended {
-//            print("Tap menu ended")
-//            let pointOfTap = gesture.location(in: self.view)
-//            if containerBottomOperationScreen1.frame.contains(pointOfTap) {
-//                print("Tap inside Container")
-//            }
-//            else {
-//                print("Tap outside Container")
-//                actionsOperationsClosePopUpScreen1()
-//            }
-//        }
+        if gesture.state == .ended {
+            print("buttonTapp")
+            slideProfileMenuPushed(gesture: gesture, gestureView: menuButtonView, isTap: true)
+        }
     }
     
     @IBAction func handlerMenuButtonHorizonGesture(_ gesture: UIPanGestureRecognizer) {
@@ -58,25 +51,12 @@ class VCMainCatalog: UIViewController {
         }
         
         if gesture.state == .ended {
-            print("gestureView.frame.origin.x= \(gestureView.frame.origin.x)")
-            print("UIScreen.main.bounds.width - 255/2 = \(UIScreen.main.bounds.width - (255/2))")
-            print("slideProfileMenu.frame.origin.x= \(slideProfileMenu.frame.origin.x)")
-            print("translation.x= \(translation.x)")
+//            print("gestureView.frame.origin.x= \(gestureView.frame.origin.x)")
+//            print("UIScreen.main.bounds.width - 255/2 = \(UIScreen.main.bounds.width - (255/2))")
+//            print("slideProfileMenu.frame.origin.x= \(slideProfileMenu.frame.origin.x)")
+//            print("translation.x= \(translation.x)")
             
-            if slideProfileMenu.frame.origin.x >= UIScreen.main.bounds.width - 255 / 2 {
-                print("111")
-                UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
-                    gestureView.frame.origin.x = UIScreen.main.bounds.width - gesture.view!.frame.size.width
-                    self.slideProfileMenu.frame.origin.x = UIScreen.main.bounds.width
-                })
-            }
-            else {
-                print("222")
-                UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
-                    gestureView.frame.origin.x = UIScreen.main.bounds.width - gesture.view!.frame.size.width - 255
-                    self.slideProfileMenu.frame.origin.x = UIScreen.main.bounds.width - 255
-                })
-            }
+            slideProfileMenuPushed(gesture: gesture, gestureView: gestureView, isTap: false)
         }
         
         gesture.setTranslation(.zero, in: view)
@@ -84,6 +64,41 @@ class VCMainCatalog: UIViewController {
         guard gesture.state == .ended else {
             return
         }
+    }
+    
+    
+    func slideProfileMenuPushed(gesture: UIGestureRecognizer, gestureView: UIView, isTap: Bool) {
+        if slideProfileMenu.frame.origin.x >= UIScreen.main.bounds.width - 255 / 2 {
+            if isTap == true {
+                slideOpen()
+            } else {
+                slideClose()
+            }
+        }
+        else {
+            if isTap == true {
+                slideClose()
+            } else {
+                slideOpen()
+            }
+        }
+        
+        func slideClose() {
+            print("111")
+            UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
+                gestureView.frame.origin.x = UIScreen.main.bounds.width - gesture.view!.frame.size.width
+                self.slideProfileMenu.frame.origin.x = UIScreen.main.bounds.width
+            })
+        }
+        
+        func slideOpen() {
+            print("222")
+            UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
+                gestureView.frame.origin.x = UIScreen.main.bounds.width - gesture.view!.frame.size.width - 255
+                self.slideProfileMenu.frame.origin.x = UIScreen.main.bounds.width - 255
+            })
+        }
+        
     }
     
     

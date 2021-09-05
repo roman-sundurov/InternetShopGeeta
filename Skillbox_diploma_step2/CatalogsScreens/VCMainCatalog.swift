@@ -15,6 +15,7 @@ class VCMainCatalog: UIViewController {
     @IBOutlet var slideProfileMenu: UIView!
     @IBOutlet var menuButtonView: UIView!
     @IBOutlet var menuButtonHorizonGesture: UIPanGestureRecognizer!
+    @IBOutlet var catalogCollectionView: UICollectionView!
     
 
     //MARK: - делегаты и переменные
@@ -51,11 +52,6 @@ class VCMainCatalog: UIViewController {
         }
         
         if gesture.state == .ended {
-//            print("gestureView.frame.origin.x= \(gestureView.frame.origin.x)")
-//            print("UIScreen.main.bounds.width - 255/2 = \(UIScreen.main.bounds.width - (255/2))")
-//            print("slideProfileMenu.frame.origin.x= \(slideProfileMenu.frame.origin.x)")
-//            print("translation.x= \(translation.x)")
-            
             slideProfileMenuPushed(gesture: gesture, gestureView: gestureView, isTap: false)
         }
         
@@ -86,7 +82,7 @@ class VCMainCatalog: UIViewController {
         func slideClose() {
             print("111")
             UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
-                gestureView.frame.origin.x = UIScreen.main.bounds.width - gesture.view!.frame.size.width
+                gestureView.frame.origin.x = UIScreen.main.bounds.width - self.menuButtonView.frame.size.width
                 self.slideProfileMenu.frame.origin.x = UIScreen.main.bounds.width
             })
         }
@@ -94,7 +90,7 @@ class VCMainCatalog: UIViewController {
         func slideOpen() {
             print("222")
             UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
-                gestureView.frame.origin.x = UIScreen.main.bounds.width - gesture.view!.frame.size.width - 255
+                gestureView.frame.origin.x = UIScreen.main.bounds.width - self.menuButtonView.frame.size.width - 255
                 self.slideProfileMenu.frame.origin.x = UIScreen.main.bounds.width - 255
             })
         }
@@ -104,10 +100,30 @@ class VCMainCatalog: UIViewController {
     
     //MARK: - данные
     
+    var temporaryCategoryArray: [CatalogCategory] = []
+    
+    //Запись временных данных
+    func temporaryData() {
+        
+        var temporaryCategory = CatalogCategory()
+        temporaryCategory.name = "Аксессуары"
+        temporaryCategory.sortOrder = 29
+        temporaryCategory.image = "image/catalog/im2017/4.png"
+        temporaryCategory.iconImage = "image/catalog/style/modile/acc_cat.png"
+        temporaryCategory.iconImageActive = "image/catalog/style/modile/acc_cat_active_s.png"
+        
+        var temporaryCategory2 = CatalogCategory()
+        temporaryCategory2.name = "Женская"
+        temporaryCategory2.sortOrder = 11
+        temporaryCategory2.image = "image/catalog/im2017/1.png"
+        temporaryCategory2.iconImage = "image/catalog/style/modile/girl_cat.png"
+        temporaryCategory2.iconImageActive = "image/catalog/style/modile/girl_cat_active_s.png"
+        
+        temporaryCategoryArray.append(temporaryCategory)
+        temporaryCategoryArray.append(temporaryCategory2)
+    }
+    
     //MARK: - viewDidLoad
-    
-    //MARK: - additional protocols
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -118,8 +134,12 @@ class VCMainCatalog: UIViewController {
         menuButtonView.layer.borderColor = UIColor.clear.cgColor
         menuButtonView.clipsToBounds = true
 
-        
+        temporaryData()
+        print(temporaryCategoryArray)
         
     }
 
 }
+
+
+//MARK: - additional protocols

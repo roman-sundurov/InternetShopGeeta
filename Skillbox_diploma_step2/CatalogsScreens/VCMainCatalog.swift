@@ -22,6 +22,9 @@ class VCMainCatalog: UIViewController {
     
     var menuState: Bool = false
     
+    private let sectionInsets = UIEdgeInsets(top: 0.0, left: 15.0, bottom: 0.0, right: 15.0)
+    var itemsPerRow: CGFloat = 2
+    
     //MARK: - объекты
     
     //MARK: - переходы
@@ -143,3 +146,43 @@ class VCMainCatalog: UIViewController {
 
 
 //MARK: - additional protocols
+
+extension VCMainCatalog: UICollectionViewDataSource {
+  // 1
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+    return 1
+  }
+
+  // 2
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    return 4//temporaryCategoryArray.count
+  }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CatalogCell", for: indexPath) as! CatalogCollectionViewCell
+
+        cell.layer.cornerRadius = 30
+        cell.bottomView.clipsToBounds = true
+        cell.productImage.image = UIImage(data: try! Data(contentsOf: URL(string: "https://blackstarshop.ru/image/catalog/im2017/4.png")!))
+        cell.productImage.contentMode = .center
+        return cell
+  }
+}
+
+extension VCMainCatalog: UICollectionViewDelegateFlowLayout{
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+      let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
+      let availableWidth = view.frame.width - CGFloat(paddingSpace)
+      let widthPerItem = availableWidth / itemsPerRow
+
+        return CGSize(width: widthPerItem, height: widthPerItem * 1.5)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return sectionInsets
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+      return sectionInsets.left
+    }
+}

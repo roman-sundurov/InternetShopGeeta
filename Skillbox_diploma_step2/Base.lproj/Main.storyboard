@@ -382,25 +382,61 @@
                                 </connections>
                             </containerView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="4oF-mX-9Eb">
-                                <rect key="frame" x="10" y="267.66666666666669" width="370" height="532.33333333333326"/>
+                                <rect key="frame" x="0.0" y="267.66666666666669" width="390" height="532.33333333333326"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="hTz-ty-ILO">
-                                    <size key="itemSize" width="170" height="255"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="hTz-ty-ILO">
+                                    <size key="itemSize" width="170" height="280"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="v8w-Wt-piq">
-                                        <rect key="frame" x="0.0" y="0.0" width="170" height="255"/>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CatalogCell" id="v8w-Wt-piq" customClass="CatalogCollectionViewCell" customModule="Skillbox_diploma_step2" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="170" height="280"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="OSd-d5-isa">
-                                            <rect key="frame" x="0.0" y="0.0" width="170" height="255"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="hcW-ZK-YW8">
+                                            <rect key="frame" x="0.0" y="0.0" width="170" height="280"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="afJ-Ms-GM5">
+                                                    <rect key="frame" x="0.0" y="0.0" width="170" height="208"/>
+                                                    <subviews>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AddressButton" translatesAutoresizingMaskIntoConstraints="NO" id="AXM-A9-DdG">
+                                                            <rect key="frame" x="0.0" y="0.0" width="170" height="208"/>
+                                                            <color key="backgroundColor" systemColor="systemPurpleColor"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="170" id="cZb-Wc-0Cr"/>
+                                                                <constraint firstAttribute="height" constant="208" id="m2u-Vr-RJC"/>
+                                                            </constraints>
+                                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
+                                                        </imageView>
+                                                    </subviews>
+                                                    <color key="backgroundColor" name="SpecialGrey3"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="170" id="Hcg-j5-dUt"/>
+                                                        <constraint firstItem="AXM-A9-DdG" firstAttribute="centerY" secondItem="afJ-Ms-GM5" secondAttribute="centerY" id="KUt-u1-iB1"/>
+                                                        <constraint firstAttribute="height" constant="208" id="Oex-q0-vW3"/>
+                                                        <constraint firstItem="AXM-A9-DdG" firstAttribute="centerX" secondItem="afJ-Ms-GM5" secondAttribute="centerX" id="ZG7-1M-cxU"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstItem="afJ-Ms-GM5" firstAttribute="leading" secondItem="hcW-ZK-YW8" secondAttribute="leading" id="GRH-Qf-Lzh"/>
+                                                <constraint firstAttribute="trailing" secondItem="afJ-Ms-GM5" secondAttribute="trailing" id="LUj-yB-6s3"/>
+                                                <constraint firstItem="afJ-Ms-GM5" firstAttribute="top" secondItem="hcW-ZK-YW8" secondAttribute="top" id="Qi2-Ce-UxJ"/>
+                                            </constraints>
                                         </collectionViewCellContentView>
-                                        <color key="backgroundColor" name="Purple"/>
+                                        <connections>
+                                            <outlet property="bottomView" destination="afJ-Ms-GM5" id="YVi-3S-4t0"/>
+                                            <outlet property="productImage" destination="AXM-A9-DdG" id="3A8-Rn-osf"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="m1b-40-kqH" id="yxF-Ec-Qdn"/>
+                                    <outlet property="delegate" destination="m1b-40-kqH" id="bK8-8w-I08"/>
+                                </connections>
                             </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ykj-rp-rC1"/>
@@ -411,12 +447,12 @@
                             <constraint firstItem="0jP-lh-VGD" firstAttribute="top" secondItem="ykj-rp-rC1" secondAttribute="top" constant="30" id="4wG-N2-Fhg"/>
                             <constraint firstItem="4oF-mX-9Eb" firstAttribute="top" secondItem="rC6-jp-4t3" secondAttribute="bottom" constant="20" id="6Gi-Qb-ryB"/>
                             <constraint firstItem="rC6-jp-4t3" firstAttribute="top" secondItem="zKX-Rc-OEh" secondAttribute="bottom" constant="20" id="8tT-3h-HvT"/>
-                            <constraint firstItem="4oF-mX-9Eb" firstAttribute="leading" secondItem="ykj-rp-rC1" secondAttribute="leading" constant="10" id="98T-9R-OA7"/>
+                            <constraint firstItem="4oF-mX-9Eb" firstAttribute="leading" secondItem="ykj-rp-rC1" secondAttribute="leading" id="98T-9R-OA7"/>
                             <constraint firstItem="zKX-Rc-OEh" firstAttribute="centerX" secondItem="KYk-yT-Poi" secondAttribute="centerX" id="C2f-Jn-X6a"/>
                             <constraint firstItem="rC6-jp-4t3" firstAttribute="leading" secondItem="ykj-rp-rC1" secondAttribute="leading" constant="25" id="I4r-MT-o3S"/>
                             <constraint firstItem="qUz-fO-Fha" firstAttribute="centerY" secondItem="Toe-nc-him" secondAttribute="centerY" id="MJD-UK-Hfw"/>
                             <constraint firstItem="0jP-lh-VGD" firstAttribute="leading" secondItem="ykj-rp-rC1" secondAttribute="leading" constant="25" id="R0j-yv-Mhg"/>
-                            <constraint firstItem="lTI-t6-02T" firstAttribute="leading" secondItem="4oF-mX-9Eb" secondAttribute="trailing" constant="10" id="ScX-2K-X1G"/>
+                            <constraint firstItem="lTI-t6-02T" firstAttribute="leading" secondItem="4oF-mX-9Eb" secondAttribute="trailing" id="ScX-2K-X1G"/>
                             <constraint firstItem="lTI-t6-02T" firstAttribute="leading" secondItem="rC6-jp-4t3" secondAttribute="trailing" constant="25" id="b7f-9H-R9X"/>
                             <constraint firstItem="zKX-Rc-OEh" firstAttribute="top" secondItem="qUz-fO-Fha" secondAttribute="bottom" constant="20" id="h7S-Q2-7dN"/>
                             <constraint firstAttribute="trailing" secondItem="qUz-fO-Fha" secondAttribute="trailing" id="kuQ-on-C7A"/>
@@ -1544,9 +1580,10 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="Vdd-Pl-HZw"/>
-        <segue reference="mbD-Lw-yiK"/>
+        <segue reference="pLl-hW-0PW"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="AddressButton" width="19" height="22.333333969116211"/>
         <image name="BackButton" width="19" height="15.333333015441895"/>
         <image name="BackgroundLogin" width="390" height="844"/>
         <image name="BackgroundRecognition" width="390" height="844"/>
@@ -1566,7 +1603,7 @@
         <image name="Log In Button" width="222" height="54"/>
         <image name="LogInButton" width="324" height="54"/>
         <image name="LogOut" width="20.333333969116211" height="20.333333969116211"/>
-        <image name="Logo" width="305" height="77.666664123535156"/>
+        <image name="Logo" width="71" height="20"/>
         <image name="Menu" width="37" height="24"/>
         <image name="Notification" width="22.333333969116211" height="24.333333969116211"/>
         <image name="Or_group" width="315" height="20"/>
@@ -1588,6 +1625,9 @@
         <namedColor name="SpecialGrey2">
             <color red="0.63137257099151611" green="0.63137257099151611" blue="0.63137257099151611" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <namedColor name="SpecialGrey3">
+            <color red="0.94509803921568625" green="0.95686274509803926" blue="0.98431372549019602" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="SpecialWhite">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -1605,6 +1645,9 @@
         </systemColor>
         <systemColor name="systemPinkColor">
             <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemPurpleColor">
+            <color red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -161,10 +161,10 @@ extension VCMainCatalog: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CatalogCell", for: indexPath) as! CatalogCollectionViewCell
 
-        cell.layer.cornerRadius = 30
+        cell.bottomView.layer.cornerRadius = 30
         cell.bottomView.clipsToBounds = true
         cell.productImage.image = UIImage(data: try! Data(contentsOf: URL(string: "https://blackstarshop.ru/image/catalog/im2017/4.png")!))
-        cell.productImage.contentMode = .center
+//        cell.productImage.contentMode = .center
         return cell
   }
 }

@@ -155,7 +155,7 @@ extension VCMainCatalog: UICollectionViewDataSource {
 
   // 2
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return 4//temporaryCategoryArray.count
+    return 5//temporaryCategoryArray.count
   }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -163,26 +163,116 @@ extension VCMainCatalog: UICollectionViewDataSource {
 
         cell.bottomView.layer.cornerRadius = 30
         cell.bottomView.clipsToBounds = true
-        cell.productImage.image = UIImage(data: try! Data(contentsOf: URL(string: "https://blackstarshop.ru/image/catalog/im2017/4.png")!))
-//        cell.productImage.contentMode = .center
+        cell.productImage.image = UIImage(data: try! Data(contentsOf: URL(string: "https://blackstarshop.ru/image/catalog/im2017/4.png")!))?.trim()
+        print("cell.productImage.frame.size.width= \(cell.productImage.frame.size.width)")
+        
+        let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
+        let availableWidth = view.frame.width - CGFloat(paddingSpace)
+        let widthPerItem = availableWidth / itemsPerRow
+        cell.widthConstraint.constant = widthPerItem
+        cell.heightConstraint.constant = widthPerItem * 1.3
+        
         return cell
   }
 }
 
 extension VCMainCatalog: UICollectionViewDelegateFlowLayout{
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-      let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
-      let availableWidth = view.frame.width - CGFloat(paddingSpace)
-      let widthPerItem = availableWidth / itemsPerRow
-
-        return CGSize(width: widthPerItem, height: widthPerItem * 1.5)
-    }
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//      let paddingSpace = CGFloat(45.0) * (itemsPerRow + 1)
+//      let availableWidth = view.frame.width - CGFloat(paddingSpace)
+//      let widthPerItem = availableWidth / itemsPerRow
+//        print("widthPerItem= \(widthPerItem)")
+//        return CGSize(width: widthPerItem, height: widthPerItem * 1.5)
+//    }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return sectionInsets
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-      return sectionInsets.left
+        return sectionInsets.left * 1.5
+    }
+}
+
+
+extension UIImage {
+
+    func trim() -> UIImage {
+        let newRect = self.cropRect
+        if let imageRef = self.cgImage!.cropping(to: newRect) {
+            return UIImage(cgImage: imageRef)
+        }
+        return self
+    }
+
+    var cropRect: CGRect {
+            guard let cgImage = self.cgImage,
+                let context = createARGBBitmapContextFromImage(inImage: cgImage) else {
+                    return CGRect.zero
+            }
+
+            let height = CGFloat(cgImage.height)
+            let width = CGFloat(cgImage.width)
+            let rect = CGRect(x: 0, y: 0, width: width, height: height)
+            context.draw(cgImage, in: rect)
+
+            guard let data = context.data?.assumingMemoryBound(to: UInt8.self) else {
+                return CGRect.zero
+            }
+
+            var lowX = width
+            var lowY = height
+            var highX: CGFloat = 0
+            var highY: CGFloat = 0
+            let heightInt = Int(height)
+            let widthInt = Int(width)
+
+            // Filter through data and look for non-transparent pixels.
+            for y in 0 ..< heightInt {
+                let y = CGFloat(y)
+
+                for x in 0 ..< widthInt {
+                    let x = CGFloat(x)
+                    let pixelIndex = (width * y + x) * 4 /* 4 for A, R, G, B */
+
+                    if data[Int(pixelIndex)] == 0 { continue } // crop transparent
+
+                    if data[Int(pixelIndex+1)] > 0xE0 && data[Int(pixelIndex+2)] > 0xE0 && data[Int(pixelIndex+3)] > 0xE0 { continue } // crop white
+
+                    lowX = min(x, lowX)
+                    highX = max(x, highX)
+
+                    lowY = min(y, lowY)
+                    highY = max(y, highY)
+                }
+            }
+
+            return CGRect(x: lowX, y: lowY, width: highX - lowX, height: highY - lowY)
+        }
+
+    func createARGBBitmapContextFromImage(inImage: CGImage) -> CGContext? {
+
+        let width = inImage.width
+        let height = inImage.height
+
+        let bitmapBytesPerRow = width * 4
+        let bitmapByteCount = bitmapBytesPerRow * height
+
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
+
+        let bitmapData = malloc(bitmapByteCount)
+        if bitmapData == nil {
+            return nil
+        }
+
+        let context = CGContext (data: bitmapData,
+                                 width: width,
+                                 height: height,
+                                 bitsPerComponent: 8,      // bits per component
+            bytesPerRow: bitmapBytesPerRow,
+            space: colorSpace,
+            bitmapInfo: CGImageAlphaInfo.premultipliedFirst.rawValue)
+
+        return context
     }
 }

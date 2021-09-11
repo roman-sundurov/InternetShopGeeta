@@ -11,5 +11,7 @@ class CatalogCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet var productImage: UIImageView!
     @IBOutlet var bottomView: UIView!
+    @IBOutlet var widthConstraint: NSLayoutConstraint!
+    @IBOutlet var heightConstraint: NSLayoutConstraint!
     
 }

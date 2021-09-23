@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Alamofire
+
 
 class VCMainCatalog: UIViewController {
     
@@ -103,28 +105,28 @@ class VCMainCatalog: UIViewController {
     
     //MARK: - данные
     
-    var temporaryCategoryArray: [CatalogCategory] = []
-    
-    //Запись временных данных
-    func temporaryData() {
-        
-        var temporaryCategory = CatalogCategory()
-        temporaryCategory.name = "Аксессуары"
-        temporaryCategory.sortOrder = 29
-        temporaryCategory.image = "image/catalog/im2017/4.png"
-        temporaryCategory.iconImage = "image/catalog/style/modile/acc_cat.png"
-        temporaryCategory.iconImageActive = "image/catalog/style/modile/acc_cat_active_s.png"
-        
-        var temporaryCategory2 = CatalogCategory()
-        temporaryCategory2.name = "Женская"
-        temporaryCategory2.sortOrder = 11
-        temporaryCategory2.image = "image/catalog/im2017/1.png"
-        temporaryCategory2.iconImage = "image/catalog/style/modile/girl_cat.png"
-        temporaryCategory2.iconImageActive = "image/catalog/style/modile/girl_cat_active_s.png"
-        
-        temporaryCategoryArray.append(temporaryCategory)
-        temporaryCategoryArray.append(temporaryCategory2)
-    }
+//    var temporaryCategoryArray: [CatalogCategory] = []
+//
+//    //Запись временных данных
+//    func temporaryData() {
+//
+//        var temporaryCategory = CatalogCategory()
+//        temporaryCategory.name = "Аксессуары"
+//        temporaryCategory.sortOrder = 29
+//        temporaryCategory.image = "image/catalog/im2017/4.png"
+//        temporaryCategory.iconImage = "image/catalog/style/modile/acc_cat.png"
+//        temporaryCategory.iconImageActive = "image/catalog/style/modile/acc_cat_active_s.png"
+//
+//        var temporaryCategory2 = CatalogCategory()
+//        temporaryCategory2.name = "Женская"
+//        temporaryCategory2.sortOrder = 11
+//        temporaryCategory2.image = "image/catalog/im2017/1.png"
+//        temporaryCategory2.iconImage = "image/catalog/style/modile/girl_cat.png"
+//        temporaryCategory2.iconImageActive = "image/catalog/style/modile/girl_cat_active_s.png"
+//
+//        temporaryCategoryArray.append(temporaryCategory)
+//        temporaryCategoryArray.append(temporaryCategory2)
+//    }
     
     //MARK: - viewDidLoad
     
@@ -137,8 +139,9 @@ class VCMainCatalog: UIViewController {
         menuButtonView.layer.borderColor = UIColor.clear.cgColor
         menuButtonView.clipsToBounds = true
 
-        temporaryData()
-        print(temporaryCategoryArray)
+//        temporaryData()
+//        print(temporaryCategoryArray)
+        requestData()
         
     }
 
@@ -164,7 +167,7 @@ extension VCMainCatalog: UICollectionViewDataSource {
         cell.bottomView.layer.cornerRadius = 30
         cell.bottomView.clipsToBounds = true
         cell.productImage.image = UIImage(data: try! Data(contentsOf: URL(string: "https://blackstarshop.ru/image/catalog/im2017/4.png")!))?.trim()
-        print("cell.productImage.frame.size.width= \(cell.productImage.frame.size.width)")
+//        print("cell.productImage.frame.size.width= \(cell.productImage.frame.size.width)")
         
         let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
         let availableWidth = view.frame.width - CGFloat(paddingSpace)
@@ -275,4 +278,19 @@ extension UIImage {
 
         return context
     }
+}
+
+
+extension VCMainCatalog {
+    
+    func requestData() {
+        let request = AF.request("https://blackstarshop.ru/index.php?route=api/v1/categories")
+        request.responseDecodable(of: MainCategories.self) { (response) in
+          guard let category = response.value else { return }
+            print("start")
+            print(category.self)
+        }
+
+    }
+    
 }

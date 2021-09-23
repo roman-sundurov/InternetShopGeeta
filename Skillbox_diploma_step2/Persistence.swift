@@ -8,14 +8,6 @@
 import Foundation
 import RealmSwift
 
-class CatalogCategory: Object{
-    @objc dynamic var name: String = ""
-    @objc dynamic var sortOrder: Int = 0
-    @objc dynamic var image: String = ""
-    @objc dynamic var iconImage: String = ""
-    @objc dynamic var iconImageActive: String = ""
-    var subCategories = List<CatalogSubCategory>()
-}
 
 class CatalogSubCategory: Object{
     @objc dynamic var id: Int = 0
@@ -29,16 +21,16 @@ class Persistence{
     static let shared = Persistence()
     private let realm = try! Realm()
     
-    func addCatalogCategory(name: String, sortOrder: Int, image: String, iconImage: String, iconImageActive: String) {
-        let catalogCategory = CatalogCategory()
-        catalogCategory.name = name
-        catalogCategory.sortOrder = sortOrder
-        catalogCategory.image = image
-        catalogCategory.iconImage = iconImage
-        catalogCategory.iconImageActive = iconImageActive
-        try! realm.write{
-            realm.add(catalogCategory)
-        }
-    }
+//    func addCatalogCategory(name: String, sortOrder: Int, image: String, iconImage: String, iconImageActive: String) {
+//        let catalogCategory = CatalogCategory()
+//        catalogCategory.name = name
+//        catalogCategory.sortOrder = sortOrder
+//        catalogCategory.image = image
+//        catalogCategory.iconImage = iconImage
+//        catalogCategory.iconImageActive = iconImageActive
+//        try! realm.write{
+//            realm.add(catalogCategory)
+//        }
+//    }
     
 }

@@ -7,6 +7,7 @@
 
 import UIKit
 import Alamofire
+import JGProgressHUD
 
 
 class VCMainCatalog: UIViewController {
@@ -23,11 +24,15 @@ class VCMainCatalog: UIViewController {
     //MARK: - делегаты и переменные
     
     var menuState: Bool = false
+    var categories: [CategoriesForCatalog] = []
     
     private let sectionInsets = UIEdgeInsets(top: 0.0, left: 15.0, bottom: 0.0, right: 15.0)
     var itemsPerRow: CGFloat = 2
     
     //MARK: - объекты
+    
+    let hud = JGProgressHUD()
+    
     
     //MARK: - переходы
     
@@ -105,28 +110,33 @@ class VCMainCatalog: UIViewController {
     
     //MARK: - данные
     
-//    var temporaryCategoryArray: [CatalogCategory] = []
-//
-//    //Запись временных данных
-//    func temporaryData() {
-//
-//        var temporaryCategory = CatalogCategory()
-//        temporaryCategory.name = "Аксессуары"
-//        temporaryCategory.sortOrder = 29
-//        temporaryCategory.image = "image/catalog/im2017/4.png"
-//        temporaryCategory.iconImage = "image/catalog/style/modile/acc_cat.png"
-//        temporaryCategory.iconImageActive = "image/catalog/style/modile/acc_cat_active_s.png"
-//
-//        var temporaryCategory2 = CatalogCategory()
-//        temporaryCategory2.name = "Женская"
-//        temporaryCategory2.sortOrder = 11
-//        temporaryCategory2.image = "image/catalog/im2017/1.png"
-//        temporaryCategory2.iconImage = "image/catalog/style/modile/girl_cat.png"
-//        temporaryCategory2.iconImageActive = "image/catalog/style/modile/girl_cat_active_s.png"
-//
-//        temporaryCategoryArray.append(temporaryCategory)
-//        temporaryCategoryArray.append(temporaryCategory2)
-//    }
+    func requestData() {
+        var categories: [CategoriesForCatalog] = []
+        let request = AF.request("https://blackstarshop.ru/index.php?route=api/v1/categories")
+        hud.show(in: self.view)
+        request.responseJSON(completionHandler: { response in
+            if let object = response.value, let jsonDict = object as? NSDictionary {
+                    for (index, data) in jsonDict where data is NSDictionary{
+                            print("index= \(index)")
+                        if let category = CategoriesForCatalog(data: data as! NSDictionary) {
+                            categories.append(category)
+                        }
+                    }
+                AllCategories.instance.categoriesArray = categories
+                AllCategories.instance.showCategories()
+                }
+            })
+        hud.dismiss(afterDelay: 3.0)
+    }
+    
+    //MARK: - screen update
+    
+    func mainCatalogCollectionUpdate() {
+
+        
+
+    }
+
     
     //MARK: - viewDidLoad
     
@@ -138,13 +148,12 @@ class VCMainCatalog: UIViewController {
         menuButtonView.layer.borderWidth = 0
         menuButtonView.layer.borderColor = UIColor.clear.cgColor
         menuButtonView.clipsToBounds = true
-
-//        temporaryData()
-//        print(temporaryCategoryArray)
+        
+        hud.textLabel.text = "Loading"
         requestData()
         
-    }
-
+        }
+    
 }
 
 
@@ -278,19 +287,7 @@ extension UIImage {
 
         return context
     }
+
 }
 
 
-extension VCMainCatalog {
-    
-    func requestData() {
-        let request = AF.request("https://blackstarshop.ru/index.php?route=api/v1/categories")
-        request.responseDecodable(of: MainCategories.self) { (response) in
-          guard let category = response.value else { return }
-            print("start")
-            print(category.self)
-        }
-
-    }
-    
-}

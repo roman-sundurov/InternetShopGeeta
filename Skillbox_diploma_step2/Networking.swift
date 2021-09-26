@@ -36,6 +36,8 @@ class CategoriesForCatalog {
     let image: String
     let iconImage: String
     let iconImageActive: String
+    let imageUIImage: UIImage?
+    
     
     init?(data: NSDictionary) {
         guard let name = data["name"] as? String,
@@ -50,6 +52,7 @@ class CategoriesForCatalog {
         self.image = image
         self.iconImage = iconImage
         self.iconImageActive = iconImageActive
+        self.imageUIImage = UIImage(data: try! Data(contentsOf: URL(string: "https://blackstarshop.ru/\(image)")!))?.trim()
     }
     
 }

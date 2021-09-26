@@ -8,6 +8,7 @@
 import UIKit
 import Alamofire
 import JGProgressHUD
+import SwiftUI
 
 
 class VCMainCatalog: UIViewController {
@@ -124,16 +125,18 @@ class VCMainCatalog: UIViewController {
                     }
                 AllCategories.instance.categoriesArray = categories
                 AllCategories.instance.showCategories()
+                self.mainCatalogCollectionUpdate()
+                self.hud.dismiss(animated: true)
                 }
             })
-        hud.dismiss(afterDelay: 3.0)
+//        hud.dismiss(afterDelay: 5.0)
     }
     
     //MARK: - screen update
     
     func mainCatalogCollectionUpdate() {
-
         
+        catalogCollectionView.reloadData()
 
     }
 
@@ -167,7 +170,7 @@ extension VCMainCatalog: UICollectionViewDataSource {
 
   // 2
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return 5//temporaryCategoryArray.count
+        return AllCategories.instance.categoriesArray.count
   }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -175,8 +178,8 @@ extension VCMainCatalog: UICollectionViewDataSource {
 
         cell.bottomView.layer.cornerRadius = 30
         cell.bottomView.clipsToBounds = true
-        cell.productImage.image = UIImage(data: try! Data(contentsOf: URL(string: "https://blackstarshop.ru/image/catalog/im2017/4.png")!))?.trim()
-//        print("cell.productImage.frame.size.width= \(cell.productImage.frame.size.width)")
+        cell.productImage.image = AllCategories.instance.categoriesArray[indexPath.row].imageUIImage//?.trim()
+        print("imagePrint= \(AllCategories.instance.categoriesArray[indexPath.row].image)")
         
         let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
         let availableWidth = view.frame.width - CGFloat(paddingSpace)

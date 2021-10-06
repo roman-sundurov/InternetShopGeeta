@@ -25,9 +25,9 @@ class AllCategories{
         print("finish")
     
     }
-
     
 }
+
 
 class CategoriesForCatalog {
     
@@ -37,6 +37,7 @@ class CategoriesForCatalog {
     let iconImage: String
     let iconImageActive: String
     let imageUIImage: UIImage?
+    var goods: [GoodsOfCategory]?
     
     
     init?(data: NSDictionary) {
@@ -53,6 +54,57 @@ class CategoriesForCatalog {
         self.iconImage = iconImage
         self.iconImageActive = iconImageActive
         self.imageUIImage = UIImage(data: try! Data(contentsOf: URL(string: "https://blackstarshop.ru/\(image)")!))?.trim()
+    }
+    
+}
+
+
+class Subcategories {
+    
+//    let keyID: String
+    let id: Int
+    let iconImage: String
+    let sortOrder: Int
+    let name: String
+    let type: String
+    
+    init?(data: NSDictionary) {
+        guard let id = data["id"] as? Int,
+        let iconImage = data["iconImage"] as? String,
+        let sortOrder = data["sortOrder"] as? String,
+        let name = data["name"] as? String,
+        let type = data["type"]  as? String else {
+            return nil
+        }
+        self.id = id
+        self.iconImage = iconImage
+        self.sortOrder = sortOrder
+        self.name = name
+        self.typ = type
+    }
+    
+}
+
+
+class GoodsOfCategory {
+    
+//    let keyID: String
+    let name: String
+    let englishName: String
+    let article: String
+    let description: String
+    
+    init?(data: NSDictionary) {
+        guard let name = data["name"] as? String,
+        let englishName = data["englishName"] as? String,
+        let article = data["article"] as? String,
+        let description = data["description"] as? String else {
+            return nil
+        }
+        self.name = name
+        self.englishName = englishName
+        self.article = article
+        self.description = description
     }
     
 }

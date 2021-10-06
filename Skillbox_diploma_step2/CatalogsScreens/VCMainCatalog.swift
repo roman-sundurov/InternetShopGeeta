@@ -19,7 +19,7 @@ class VCMainCatalog: UIViewController {
     @IBOutlet var slideProfileMenu: UIView!
     @IBOutlet var menuButtonView: UIView!
     @IBOutlet var menuButtonHorizonGesture: UIPanGestureRecognizer!
-    @IBOutlet var catalogCollectionView: UICollectionView!
+    @IBOutlet var catalogCategriesCollectionView: UICollectionView!
     
 
     //MARK: - делегаты и переменные
@@ -36,6 +36,11 @@ class VCMainCatalog: UIViewController {
     
     
     //MARK: - переходы
+    
+    func tapCategoryToGoods(tag: Int){
+        print("tapCategoryToGoods!: \(tag)")
+    }
+    
     
     //MARK: - клики, жесты
     
@@ -111,7 +116,7 @@ class VCMainCatalog: UIViewController {
     
     //MARK: - данные
     
-    func requestData() {
+    func requestCategoriesData() {
         var categories: [CategoriesForCatalog] = []
         let request = AF.request("https://blackstarshop.ru/index.php?route=api/v1/categories")
         hud.show(in: self.view)
@@ -120,7 +125,9 @@ class VCMainCatalog: UIViewController {
                     for (index, data) in jsonDict where data is NSDictionary{
                             print("index= \(index)")
                         if let category = CategoriesForCatalog(data: data as! NSDictionary) {
-                            categories.append(category)
+                            if category.image != "" {
+                                categories.append(category)
+                            }
                         }
                     }
                 AllCategories.instance.categoriesArray = categories
@@ -129,14 +136,36 @@ class VCMainCatalog: UIViewController {
                 self.hud.dismiss(animated: true)
                 }
             })
-//        hud.dismiss(afterDelay: 5.0)
     }
+    
+//    func requestGoodsData(idOfCategory: Int) {
+//        var goods: [GoodsOfCategory] = []
+//        let request = AF.request("https://blackstarshop.ru/index.php?route=api/v1/products&cat_id=\(idOfCategory)")
+//        hud.show(in: self.view)
+//        request.responseJSON(completionHandler: { response in
+//            if let object = response.value, let jsonDict = object as? NSDictionary {
+//                    for (index, data) in jsonDict where data is NSDictionary{
+//                            print("index= \(index)")
+//                        if let good = CategoriesForCatalog(data: data as! NSDictionary) {
+//                            if good.image != "" {
+//                                goods.append(good)
+//                            }
+//                        }
+//                    }
+//                AllCategories.instance.categoriesArray = categories
+//                AllCategories.instance.showCategories()
+//                self.mainCatalogCollectionUpdate()
+//                self.hud.dismiss(animated: true)
+//                }
+//            })
+//    }
+    
     
     //MARK: - screen update
     
     func mainCatalogCollectionUpdate() {
         
-        catalogCollectionView.reloadData()
+        catalogCategriesCollectionView.reloadData()
 
     }
 
@@ -153,7 +182,7 @@ class VCMainCatalog: UIViewController {
         menuButtonView.clipsToBounds = true
         
         hud.textLabel.text = "Loading"
-        requestData()
+        requestCategoriesData()
         
         }
     
@@ -170,22 +199,35 @@ extension VCMainCatalog: UICollectionViewDataSource {
 
   // 2
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return AllCategories.instance.categoriesArray.count
+        if collectionView == catalogCategriesCollectionView {
+            return AllCategories.instance.categoriesArray.count
+        }
+//        if collectionView == catalogGoodsCollectionView {
+//            return AllCategories.instance.categoriesArray.count
+//        }
+        return 0
+        
   }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CatalogCell", for: indexPath) as! CatalogCollectionViewCell
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as! catalogCategriesCollectionViewCell
 
         cell.bottomView.layer.cornerRadius = 30
         cell.bottomView.clipsToBounds = true
+        
         cell.productImage.image = AllCategories.instance.categoriesArray[indexPath.row].imageUIImage//?.trim()
         print("imagePrint= \(AllCategories.instance.categoriesArray[indexPath.row].image)")
+        cell.nameCategory.text = AllCategories.instance.categoriesArray[indexPath.row].name
         
         let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
         let availableWidth = view.frame.width - CGFloat(paddingSpace)
         let widthPerItem = availableWidth / itemsPerRow
         cell.widthConstraint.constant = widthPerItem
         cell.heightConstraint.constant = widthPerItem * 1.3
+        cell.startCell(tag: indexPath.row, action: {
+            self.tapCategoryToGoods(tag: 111)
+        } )
         
         return cell
   }

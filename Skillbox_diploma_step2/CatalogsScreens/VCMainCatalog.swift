@@ -122,11 +122,16 @@ class VCMainCatalog: UIViewController {
         hud.show(in: self.view)
         request.responseJSON(completionHandler: { response in
             if let object = response.value, let jsonDict = object as? NSDictionary {
+//                print("jsonDict= \(jsonDict)")
                     for (index, data) in jsonDict where data is NSDictionary{
                             print("index= \(index)")
                         if let category = CategoriesForCatalog(data: data as! NSDictionary) {
+                            print("111")
                             if category.image != "" {
+                                print("222")
+                                category.id = index as? String ?? ""
                                 categories.append(category)
+//                                print("\(category.id)")
                             }
                         }
                     }
@@ -134,9 +139,36 @@ class VCMainCatalog: UIViewController {
                 AllCategories.instance.showCategories()
                 self.mainCatalogCollectionUpdate()
                 self.hud.dismiss(animated: true)
+                print("categories= \(categories)")
                 }
             })
     }
+    
+    
+//    func requestSubcategoriesData() {
+//        var subCategories: [Subcategories] = []
+//        let request = AF.request("https://blackstarshop.ru/index.php?route=api/v1/categories")
+//        hud.show(in: self.view)
+//        request.responseJSON(completionHandler: { response in
+//            if let object = response.value, let jsonDict = object as? NSDictionary {
+//                    for (index, data) in jsonDict where data is NSDictionary{
+//                            print("index= \(index)")
+//                        if let category = CategoriesForCatalog(data: data as! NSDictionary) {
+//                            if category.image != "" {
+//                                category.id = index as? String ?? ""
+//                                print("index= \(index)")
+//                                categories.append(subCategories)
+//                            }
+//                        }
+//                    }
+//                AllCategories.instance.categoriesArray = subCategories
+//                AllCategories.instance.showCategories()
+//                self.mainCatalogCollectionUpdate()
+//                self.hud.dismiss(animated: true)
+//                }
+//            })
+//    }
+    
     
 //    func requestGoodsData(idOfCategory: Int) {
 //        var goods: [GoodsOfCategory] = []
@@ -226,7 +258,7 @@ extension VCMainCatalog: UICollectionViewDataSource {
         cell.widthConstraint.constant = widthPerItem
         cell.heightConstraint.constant = widthPerItem * 1.3
         cell.startCell(tag: indexPath.row, action: {
-            self.tapCategoryToGoods(tag: 111)
+            self.tapCategoryToGoods(tag: AllCategories.instance.categoriesArray[indexPath.row].sortOrder)
         } )
         
         return cell

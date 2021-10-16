@@ -9,20 +9,25 @@ import Foundation
 import Alamofire
 import UIKit
 
-class AllCategories{
+class CatalogData{
     
-    static let instance = AllCategories()
+    static let instance = CatalogData()
     
     var categoriesArray: [CategoriesForCatalog] = []
+    
+    var activeCatalogMode: String = "catalog" // catalog/subcategories/product
+    var activeCatalogCategory: Int = 0
+    var activeCatalogSubCategory: Int = 0
+    var activeCatalogProduct: Int = 0
     
     
     func showCategories() {
     
         print("start")
-        print(AllCategories.instance.categoriesArray.count)
-        print(AllCategories.instance.categoriesArray)
-//        print("[0].image= \(AllCategories.instance.categoriesArray[0].image)")
-//        print("[0].subCategories=  \(AllCategories.instance.categoriesArray[0].subCategories)")
+        print(CatalogData.instance.categoriesArray.count)
+        print(CatalogData.instance.categoriesArray)
+        print("[0].name= \(CatalogData.instance.categoriesArray[0].subCategories[0].name)")
+        print("[0].id= \(CatalogData.instance.categoriesArray[0].subCategories[0].id)")
         print("finish")
     
     }
@@ -32,14 +37,14 @@ class AllCategories{
 
 class CategoriesForCatalog {
     
-    var id: String = ""
+    var id: Int = 0
     let name: String
     let sortOrder: Int
     let image: String
     let iconImage: String
     let iconImageActive: String
     let imageUIImage: UIImage?
-//    let subCategories: [SubCategories]?
+    let subCategories: [SubCategories]
     
     
     init?(data: NSDictionary) {
@@ -57,29 +62,35 @@ class CategoriesForCatalog {
         self.iconImage = iconImage
         self.iconImageActive = iconImageActive
         self.imageUIImage = UIImage(data: try! Data(contentsOf: URL(string: "https://blackstarshop.ru/\(image)")!))?.trim()
-        
-//        print("subCategories111= \(subCategories)")
         var subCategories2: [SubCategories] = []
         for value in subCategories {
-            print("data222= \(value)")
-//            print("data in subCategories= \(key)-----\(value)")
-//            print("data in subCategories2= \(data as! NSDictionary)")
             if let subCategories3 = SubCategories(data: value) {
                 subCategories2.append(subCategories3)
-                print("subCategories3= \(subCategories3.iconImage)")
+//                print("subCategories3= \(subCategories3.name)")
             }
         }
+        self.subCategories = subCategories2
         
     }
     
 }
 
 
-class SubCategories {
+class SubCategories: Equatable {
+    
+    static func == (lhs: SubCategories, rhs: SubCategories) -> Bool {
+        if lhs == rhs {
+            return true
+        } else {
+            return false
+        }
+    }
+    
     
 //    let keyID: String
     let id: Int
     let iconImage: String
+    let imageUIImage: UIImage?
 //    let sortOrder: Int
     let name: String
 //    let type: String
@@ -95,6 +106,7 @@ class SubCategories {
         }
         self.id = id
         self.iconImage = iconImage
+        self.imageUIImage = UIImage(data: try! Data(contentsOf: URL(string: "https://blackstarshop.ru/\(iconImage)")!))?.trim()
 //        self.sortOrder = sortOrder
         self.name = name
 //        self.type = type

@@ -44,7 +44,7 @@ class CategoriesForCatalog {
     let iconImage: String
     let iconImageActive: String
     let imageUIImage: UIImage?
-    let subCategories: [SubCategories]
+    var subCategories: [SubCategories]
     
     
     init?(data: NSDictionary) {
@@ -78,38 +78,27 @@ class CategoriesForCatalog {
 
 class SubCategories: Equatable {
     
-    static func == (lhs: SubCategories, rhs: SubCategories) -> Bool {
-        if lhs == rhs {
-            return true
-        } else {
-            return false
-        }
-    }
+    static func == (lhs: SubCategories, rhs: SubCategories) -> Bool { return lhs == rhs }
     
     
-//    let keyID: String
     let id: Int
     let iconImage: String
-    let imageUIImage: UIImage?
-//    let sortOrder: Int
+    let iconUIImage: UIImage?
     let name: String
-//    let type: String
-//    var goodsOfCategory: [GoodsOfCategory]?
+    var goodsOfCategory: [GoodsOfCategory] = []
     
     init?(data: NSDictionary) {
         guard let id = data["id"] as? Int ?? Int(data["id"] as! String),
         let iconImage = data["iconImage"] as? String,
         let sortOrder = data["sortOrder"] as? Int ?? Int(data["sortOrder"] as! String),
         let name = data["name"] as? String else {
-//        let type = data["type"]  as? String else {
             return nil
         }
         self.id = id
         self.iconImage = iconImage
-        self.imageUIImage = UIImage(data: try! Data(contentsOf: URL(string: "https://blackstarshop.ru/\(iconImage)")!))?.trim()
-//        self.sortOrder = sortOrder
+        self.iconUIImage = UIImage(data: try! Data(contentsOf: URL(string: "https://blackstarshop.ru/\(iconImage)")!))?.trim()
         self.name = name
-//        self.type = type
+//        self.goodsOfCategory = CatalogData.instance.requestGoodsData(idOfSubCategory: self.id)
     }
     
 }
@@ -117,13 +106,12 @@ class SubCategories: Equatable {
 
 class GoodsOfCategory {
     
-//    let keyID: String
     let name: String
     let englishName: String
     let article: String
     let description: String
-    let mainImage: String
-    let imageUIImage: UIImage?
+    let goodsImage: String
+    let goodsUIImage: UIImage?
     
     init?(data: NSDictionary) {
         guard let name = data["name"] as? String,
@@ -137,8 +125,81 @@ class GoodsOfCategory {
         self.englishName = englishName
         self.article = article
         self.description = description
-        self.mainImage = mainImage
-        self.imageUIImage = UIImage(data: try! Data(contentsOf: URL(string: "https://blackstarshop.ru/\(mainImage)")!))?.trim()
+        self.goodsImage = mainImage
+        self.goodsUIImage = UIImage(data: try! Data(contentsOf: URL(string: "https://blackstarshop.ru/\(mainImage)")!))?.trim()
     }
     
+}
+
+
+extension CatalogData {
+    
+    func requestCategoriesData() {
+        var categories: [CategoriesForCatalog] = []
+        let request = AF.request("https://blackstarshop.ru/index.php?route=api/v1/categories")
+        VCDelegateArray.instance.VCMainCatalogDelegate!.hudAppear()
+        request.responseJSON(completionHandler: { response in
+            if let object = response.value, let jsonDict = object as? NSDictionary {
+//                print("jsonDict= \(jsonDict)")
+                    for (index, data) in jsonDict where data is NSDictionary{
+                            print("index= \(index)")
+                        if let category = CategoriesForCatalog(data: data as! NSDictionary) {
+                            print("111")
+                            if category.image != "" && category.subCategories != [] {
+                                category.subCategories.removeAll{ value in return value.iconImage == ""}
+                                category.id = index as? Int ?? Int(index as! String) ?? 0
+                                categories.append(category)
+//                                print("\(category.id)")
+                            }
+                        }
+                    }
+                CatalogData.instance.categoriesArray = categories
+                CatalogData.instance.showCategories()
+                VCDelegateArray.instance.VCMainCatalogDelegate!.mainCatalogCollectionUpdate()
+                VCDelegateArray.instance.VCMainCatalogDelegate!.hudDisapper()
+                print("categories= \(categories)")
+                }
+            })
+    }
+    
+    
+    func requestGoodsData() {
+        let idOfCategory = CatalogData.instance.activeCatalogCategory
+        let idOfSubCategory = CatalogData.instance.activeCatalogSubCategory
+//        print("idOfSubCategory= \(idOfSubCategory)")
+        let tempA: Int = CatalogData.instance.categoriesArray.firstIndex(where: { $0.sortOrder == idOfCategory })!
+        let tempB: Int = CatalogData.instance.categoriesArray[tempA].subCategories.firstIndex(where: { $0.id == CatalogData.instance.activeCatalogSubCategory })!
+        print("111_idOfCategory= \(idOfCategory)")
+        print("111_idOfSubCategory= \(idOfSubCategory)")
+        print("111_activeCatalogCategory= \(CatalogData.instance.activeCatalogCategory)")
+        print("111_activeCatalogSubCategory= \(CatalogData.instance.activeCatalogSubCategory)")
+        print("222_subcategoryname = \(CatalogData.instance.categoriesArray[tempA].subCategories[tempB].name)")
+        
+        var goods: [GoodsOfCategory] = []
+        let request = AF.request("https://blackstarshop.ru/index.php?route=api/v1/products&cat_id=\(idOfSubCategory)")
+        VCDelegateArray.instance.VCMainCatalogDelegate!.hudAppear()
+        request.responseJSON(completionHandler: { response in
+            if let object = response.value, let jsonDict = object as? NSDictionary {
+                print("jsonDict= \(jsonDict)")
+                    for (index, data) in jsonDict where data is NSDictionary{
+                            print("index= \(index)")
+                        if let product = GoodsOfCategory(data: data as! NSDictionary) {
+                            print("777")
+                            if product.goodsImage != "" {
+                                goods.append(product)
+                                print("\(product) is add to goods")
+                            }
+                        }
+                    }
+                print("goods1= \(goods)")
+                print("jsonDict.count= \(jsonDict.count)")
+                print("goods.count= \(goods.count)")
+                CatalogData.instance.categoriesArray[tempA].subCategories[tempB].goodsOfCategory = goods
+                VCDelegateArray.instance.VCMainCatalogDelegate!.mainCatalogCollectionUpdate()
+                VCDelegateArray.instance.VCMainCatalogDelegate!.hudDisapper()
+                }
+            })
+        print("goods2= \(goods)")
+    }
+
 }

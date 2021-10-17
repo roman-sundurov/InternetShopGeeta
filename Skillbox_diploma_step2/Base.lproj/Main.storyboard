@@ -332,6 +332,9 @@
                                             <constraint firstAttribute="height" constant="24" id="feb-D5-kk9"/>
                                         </constraints>
                                         <state key="normal" backgroundImage="BackButtonBlack"/>
+                                        <connections>
+                                            <action selector="catalogBackButtonAction:" destination="m1b-40-kqH" eventType="touchUpInside" id="9EY-v8-SHC"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <gestureRecognizers/>
@@ -1567,7 +1570,7 @@
                                         </constraints>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nhn-yb-jeT">
-                                        <rect key="frame" x="69" y="10.666666666666657" width="141" height="43"/>
+                                        <rect key="frame" x="69" y="10.333333333333339" width="141" height="43.666666666666657"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GJ2-C2-CkJ">
                                                 <rect key="frame" x="0.0" y="0.0" width="48.666666666666664" height="21.666666666666668"/>
@@ -1576,7 +1579,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vK5-5P-uaM">
-                                                <rect key="frame" x="55.666666666666657" y="2.6666666666666856" width="16" height="16"/>
+                                                <rect key="frame" x="55.666666666666657" y="2.6666666666666572" width="16" height="16"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="16" id="Ylb-dD-HvY"/>
                                                     <constraint firstAttribute="height" constant="16" id="fx8-gg-fc9"/>
@@ -1584,7 +1587,7 @@
                                                 <state key="normal" backgroundImage="EditButton"/>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" text="email" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Qu-cK-Qat">
-                                                <rect key="frame" x="0.0" y="26.666666666666686" width="146" height="16.333333333333329"/>
+                                                <rect key="frame" x="0.0" y="26.666666666666657" width="146" height="17"/>
                                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="14"/>
                                                 <color key="textColor" name="SpecialGrey1"/>
                                                 <nil key="highlightedColor"/>
@@ -1739,7 +1742,7 @@
         <image name="Log In Button" width="222" height="54"/>
         <image name="LogInButton" width="324" height="54"/>
         <image name="LogOut" width="20.333333969116211" height="20.333333969116211"/>
-        <image name="Logo" width="305" height="77.666664123535156"/>
+        <image name="Logo" width="71" height="20"/>
         <image name="Menu" width="37" height="24"/>
         <image name="Notification" width="22.333333969116211" height="24.333333969116211"/>
         <image name="Or_group" width="315" height="20"/>

@@ -8,6 +8,13 @@
 import Foundation
 import RealmSwift
 
+class VCDelegateArray {
+    static let instance = VCDelegateArray()
+    
+    var VCMainCatalogDelegate: VCMainCatalog? = nil
+    
+}
+
 
 class CatalogSubCategory: Object{
     @objc dynamic var id: Int = 0

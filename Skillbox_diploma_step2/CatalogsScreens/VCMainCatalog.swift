@@ -198,8 +198,6 @@ extension VCMainCatalog: UICollectionViewDataSource {
                 let tempA: Int = CatalogData.instance.categoriesArray.firstIndex(where: { $0.sortOrder == CatalogData.instance.activeCatalogCategory })!
                 print("555.count= \(CatalogData.instance.categoriesArray[tempA].subCategories.count)")
                 return CatalogData.instance.categoriesArray[tempA].subCategories.count
-                
-                return 0
             case "product":
                 print("666")
                 let tempA: Int = CatalogData.instance.categoriesArray.firstIndex(where: { $0.sortOrder == CatalogData.instance.activeCatalogCategory })!
@@ -208,9 +206,8 @@ extension VCMainCatalog: UICollectionViewDataSource {
 
                 print("666.count = \(CatalogData.instance.categoriesArray[tempA].subCategories[tempB].goodsOfCategory.count)")
                 return CatalogData.instance.categoriesArray[tempA].subCategories[tempB].goodsOfCategory.count
-
-            default:
-                return 0
+                default:
+                    return 0
         }
         
   }
@@ -218,28 +215,29 @@ extension VCMainCatalog: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         print("4444")
         
-        var cell: catalogCategriesCollectionViewCell?
+        var cellCat: catalogCategriesCollectionViewCell?
+        var cellProd: catalogGoodsCollectionViewCell?
         
         
         switch CatalogData.instance.activeCatalogMode {
             case "catalog":
-                cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as? catalogCategriesCollectionViewCell
-                cell!.productImage.image = CatalogData.instance.categoriesArray[indexPath.row].imageUIImage//?.trim()
+//                var cell: catalogCategriesCollectionViewCell?
+                cellCat = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as? catalogCategriesCollectionViewCell
+                cellCat!.categoryImage.image = CatalogData.instance.categoriesArray[indexPath.row].imageUIImage//?.trim()
                 print("imagePrint_catalog= \(CatalogData.instance.categoriesArray[indexPath.row].image)")
-                cell!.nameCategory.text = CatalogData.instance.categoriesArray[indexPath.row].name
+                cellCat!.nameCategory.text = CatalogData.instance.categoriesArray[indexPath.row].name
             
             case "subcategories":
                 for data in CatalogData.instance.categoriesArray {
                     if data.sortOrder == CatalogData.instance.activeCatalogCategory {
-                        cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as? catalogCategriesCollectionViewCell
-                        cell!.productImage.image = data.subCategories[indexPath.row].iconUIImage //?.trim()
+                        cellCat = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as? catalogCategriesCollectionViewCell
+                        cellCat!.categoryImage.image = data.subCategories[indexPath.row].iconUIImage //?.trim()
 //                        CatalogData.instance.activeCatalogMode
-                        cell!.nameCategory.text = data.subCategories[indexPath.row].name
+                        cellCat!.nameCategory.text = data.subCategories[indexPath.row].name
                         print("name_subcategories= \(data.subCategories[indexPath.row].name)")
                         break
                     }
                 }
-                
             case "product":
                 print("product case in CollectionView indexPath.row= \(indexPath.row)")
                 let idOfCategory = CatalogData.instance.activeCatalogCategory
@@ -247,45 +245,63 @@ extension VCMainCatalog: UICollectionViewDataSource {
                 let tempA: Int = CatalogData.instance.categoriesArray.firstIndex(where: { $0.sortOrder == idOfCategory })!
                 let tempB: Int = CatalogData.instance.categoriesArray[tempA].subCategories.firstIndex(where: { $0.id == CatalogData.instance.activeCatalogSubCategory })!
                 
-                        cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GoodsCell", for: indexPath) as? catalogCategriesCollectionViewCell
-                        cell!.productImage.image = CatalogData.instance.categoriesArray[tempA].subCategories[tempB].goodsOfCategory[indexPath.row].goodsUIImage //?.trim()
+                cellProd = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductCell", for: indexPath) as? catalogGoodsCollectionViewCell
+                cellProd!.productImage.image = CatalogData.instance.categoriesArray[tempA].subCategories[tempB].goodsOfCategory[indexPath.row].goodsUIImage //?.trim()
 //                        CatalogData.instance.activeCatalogMode
-                        cell!.nameCategory.text = CatalogData.instance.categoriesArray[tempA].subCategories[tempB].goodsOfCategory[indexPath.row].name
+                cellProd!.nameProduct.text = CatalogData.instance.categoriesArray[tempA].subCategories[tempB].goodsOfCategory[indexPath.row].name
+                cellProd!.priceProduct.text = String(CatalogData.instance.categoriesArray[tempA].subCategories[tempB].goodsOfCategory[indexPath.row].price)
                 print("name_subcategories= \(CatalogData.instance.categoriesArray[tempA].subCategories[tempB].name)")
                         break
                 
             default:
-                    cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GoodsCell", for: indexPath) as? catalogCategriesCollectionViewCell
+                print("default111")
+                cellCat = collectionView.dequeueReusableCell(withReuseIdentifier: "GoodsCell", for: indexPath) as? catalogCategriesCollectionViewCell
         }
-
-        cell!.bottomView.layer.cornerRadius = 30
-        cell!.bottomView.clipsToBounds = true
         
-        let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
-        let availableWidth = view.frame.width - CGFloat(paddingSpace)
-        let widthPerItem = availableWidth / itemsPerRow
-        cell!.widthConstraint.constant = widthPerItem
-        cell!.heightConstraint.constant = widthPerItem * 1.3
+        switch CatalogData.instance.activeCatalogMode {
+            case "catalog", "subcategories":
+                cellCat!.upperView.layer.cornerRadius = 30
+                cellCat!.upperView.clipsToBounds = true
+                
+                let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
+                let availableWidth = view.frame.width - CGFloat(paddingSpace)
+                let widthPerItem = availableWidth / itemsPerRow
+                cellCat!.widthConstraint.constant = widthPerItem
+                cellCat!.heightConstraint.constant = widthPerItem * 1.3
+            case "product":
+                cellProd!.upperView.layer.cornerRadius = 30
+                cellProd!.upperView.clipsToBounds = true
+                
+                let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
+                let availableWidth = view.frame.width - CGFloat(paddingSpace)
+                let widthPerItem = availableWidth / itemsPerRow
+                cellProd!.widthConstraint.constant = widthPerItem
+                cellProd!.heightConstraint.constant = widthPerItem * 1.3
+            default:
+                print("default111")
+                cellCat = collectionView.dequeueReusableCell(withReuseIdentifier: "GoodsCell", for: indexPath) as? catalogCategriesCollectionViewCell
+        }
         
         switch CatalogData.instance.activeCatalogMode {
             case "catalog":
-                cell!.startCell(tag: indexPath.row, action: {
+                cellCat!.startCell(tag: indexPath.row, action: {
                     CatalogData.instance.activeCatalogCategory = CatalogData.instance.categoriesArray[indexPath.row].sortOrder
                     self.tapToCVCell()
                 } )
+                return cellCat!
             case "subcategories":
-                cell!.startCell(tag: indexPath.row, action: {
+                cellCat!.startCell(tag: indexPath.row, action: {
                     let tempA: Int = CatalogData.instance.categoriesArray.firstIndex(where: { $0.sortOrder == CatalogData.instance.activeCatalogCategory } )!
-                    
                     CatalogData.instance.activeCatalogSubCategory = CatalogData.instance.categoriesArray[tempA].subCategories[indexPath.row].id
-                    
                     CatalogData.instance.requestGoodsData()
                     self.tapToCVCell()
                 } )
-            default: break
+                return cellCat!
+            default:
+                return cellProd!
         }
         
-        return cell!
+//        return cell!
   }
 }
 

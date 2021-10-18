@@ -9,12 +9,11 @@ import UIKit
 
 class catalogCategriesCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet var productImage: UIImageView!
-    @IBOutlet var bottomView: UIView!
+    @IBOutlet var categoryImage: UIImageView!
+    @IBOutlet var upperView: UIView!
     @IBOutlet var widthConstraint: NSLayoutConstraint!
     @IBOutlet var heightConstraint: NSLayoutConstraint!
     @IBOutlet var nameCategory: UILabel!
-    @IBOutlet var priceCategory: UILabel!
     
     var specialTag: Int = 0
     var actionFromStartCellClosere: (() -> Void)?

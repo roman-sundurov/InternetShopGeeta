@@ -112,19 +112,22 @@ class GoodsOfCategory {
     let description: String
     let goodsImage: String
     let goodsUIImage: UIImage?
+    let price: Int
     
     init?(data: NSDictionary) {
         guard let name = data["name"] as? String,
-        let englishName = data["englishName"] as? String,
-        let article = data["article"] as? String,
-        let description = data["description"] as? String,
-        let mainImage = data["mainImage"] as? String else {
-            return nil
+            let englishName = data["englishName"] as? String,
+              let article = data["article"] as? String,
+              let description = data["description"] as? String,
+              let price = data["price"] as? Int ?? Int(data["price"] as! String),
+              let mainImage = data["mainImage"] as? String else {
+                  return nil
         }
         self.name = name
         self.englishName = englishName
         self.article = article
         self.description = description
+        self.price = price
         self.goodsImage = mainImage
         self.goodsUIImage = UIImage(data: try! Data(contentsOf: URL(string: "https://blackstarshop.ru/\(mainImage)")!))?.trim()
     }

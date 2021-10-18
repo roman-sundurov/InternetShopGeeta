@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		47076DC226AA25ED002D8A65 /* VCRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47076DC126AA25ED002D8A65 /* VCRegister.swift */; };
+		470C001F271C469800D18353 /* catalogGoodsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470C001E271C469800D18353 /* catalogGoodsCollectionViewCell.swift */; };
 		4712BB1C26A310C5003701D5 /* VCRecognition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4712BB1B26A310C5003701D5 /* VCRecognition.swift */; };
 		471C640926FF88A90063C5B3 /* JGProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 471C640826FF88A90063C5B3 /* JGProgressHUD */; };
 		472D946E2676AA0300482C20 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472D946D2676AA0300482C20 /* AppDelegate.swift */; };
@@ -83,6 +84,7 @@
 
 /* Begin PBXFileReference section */
 		47076DC126AA25ED002D8A65 /* VCRegister.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCRegister.swift; sourceTree = "<group>"; };
+		470C001E271C469800D18353 /* catalogGoodsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = catalogGoodsCollectionViewCell.swift; sourceTree = "<group>"; };
 		4712BB1B26A310C5003701D5 /* VCRecognition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCRecognition.swift; sourceTree = "<group>"; };
 		472D946A2676AA0300482C20 /* Skillbox_diploma_step2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Skillbox_diploma_step2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		472D946D2676AA0300482C20 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -231,6 +233,7 @@
 			children = (
 				4752A8F126AB5C00000E4AC5 /* VCMainCatalog.swift */,
 				479771F226E5F5F6006B0EFE /* catalogCategriesCollectionViewCell.swift */,
+				470C001E271C469800D18353 /* catalogGoodsCollectionViewCell.swift */,
 			);
 			path = CatalogsScreens;
 			sourceTree = "<group>";
@@ -457,6 +460,7 @@
 				472D94702676AA0300482C20 /* SceneDelegate.swift in Sources */,
 				4752A8F226AB5C00000E4AC5 /* VCMainCatalog.swift in Sources */,
 				479771F126E579C1006B0EFE /* Persistence.swift in Sources */,
+				470C001F271C469800D18353 /* catalogGoodsCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

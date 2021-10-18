@@ -8,10 +8,15 @@
 import Foundation
 import RealmSwift
 
-class VCDelegateArray {
-    static let instance = VCDelegateArray()
+class AppActualData {
+    static let instance = AppActualData()
     
     var VCMainCatalogDelegate: VCMainCatalog? = nil
+    
+    var activeCatalogMode: String = "catalog" // catalog/subcategories/product
+    var activeCatalogCategory: Int = 0
+    var activeCatalogSubCategory: Int = 0
+    var activeCatalogProduct: Int = 0
     
 }
 

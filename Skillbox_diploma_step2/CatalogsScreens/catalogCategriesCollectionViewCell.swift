@@ -16,7 +16,7 @@ class catalogCategriesCollectionViewCell: UICollectionViewCell {
     @IBOutlet var nameCategory: UILabel!
     
     var specialTag: Int = 0
-    var actionFromStartCellClosere: (() -> Void)?
+    var actionFromStartCellClosere: ( () -> Void )?
     
     @objc func gestureAction(tag: Int) {
         actionFromStartCellClosere!()

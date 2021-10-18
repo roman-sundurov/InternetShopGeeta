@@ -16,4 +16,15 @@ class catalogGoodsCollectionViewCell: UICollectionViewCell {
     @IBOutlet var priceProduct: UILabel!
     @IBOutlet var nameProduct: UILabel!
     
+    
+    func startCell(tag: Int, action: @escaping () -> Void ) {
+        
+//        priceProduct.text = String(format: "%.2f", delegateScreen1!.returnDataArrayOfOperations()[specVar].amount)
+        
+//        specialTag = tag
+//        actionFromStartCellClosere = action
+//        let gesture = UITapGestureRecognizer(target: self, action: #selector(gestureAction(tag:) ))
+//        self.addGestureRecognizer(gesture)
+    }
+    
 }

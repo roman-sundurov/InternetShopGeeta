@@ -15,10 +15,10 @@ class CatalogData{
     
     var categoriesArray: [CategoriesForCatalog] = []
     
-    var activeCatalogMode: String = "catalog" // catalog/subcategories/product
-    var activeCatalogCategory: Int = 0
-    var activeCatalogSubCategory: Int = 0
-    var activeCatalogProduct: Int = 0
+//    var activeCatalogMode: String = "catalog" // catalog/subcategories/product
+//    var activeCatalogCategory: Int = 0
+//    var activeCatalogSubCategory: Int = 0
+//    var activeCatalogProduct: Int = 0
     
     
     func showCategories() {
@@ -112,14 +112,14 @@ class GoodsOfCategory {
     let description: String
     let goodsImage: String
     let goodsUIImage: UIImage?
-    let price: Int
+    let price: Double
     
     init?(data: NSDictionary) {
         guard let name = data["name"] as? String,
             let englishName = data["englishName"] as? String,
               let article = data["article"] as? String,
               let description = data["description"] as? String,
-              let price = data["price"] as? Int ?? Int(data["price"] as! String),
+              let price = data["price"] as? Double ?? Double(data["price"] as! String),
               let mainImage = data["mainImage"] as? String else {
                   return nil
         }
@@ -127,6 +127,7 @@ class GoodsOfCategory {
         self.englishName = englishName
         self.article = article
         self.description = description
+        print("Special Price= \(price)")
         self.price = price
         self.goodsImage = mainImage
         self.goodsUIImage = UIImage(data: try! Data(contentsOf: URL(string: "https://blackstarshop.ru/\(mainImage)")!))?.trim()
@@ -140,7 +141,7 @@ extension CatalogData {
     func requestCategoriesData() {
         var categories: [CategoriesForCatalog] = []
         let request = AF.request("https://blackstarshop.ru/index.php?route=api/v1/categories")
-        VCDelegateArray.instance.VCMainCatalogDelegate!.hudAppear()
+        AppActualData.instance.VCMainCatalogDelegate!.hudAppear()
         request.responseJSON(completionHandler: { response in
             if let object = response.value, let jsonDict = object as? NSDictionary {
 //                print("jsonDict= \(jsonDict)")
@@ -158,8 +159,8 @@ extension CatalogData {
                     }
                 CatalogData.instance.categoriesArray = categories
                 CatalogData.instance.showCategories()
-                VCDelegateArray.instance.VCMainCatalogDelegate!.mainCatalogCollectionUpdate()
-                VCDelegateArray.instance.VCMainCatalogDelegate!.hudDisapper()
+                AppActualData.instance.VCMainCatalogDelegate!.mainCatalogCollectionUpdate()
+                AppActualData.instance.VCMainCatalogDelegate!.hudDisapper()
                 print("categories= \(categories)")
                 }
             })
@@ -167,20 +168,20 @@ extension CatalogData {
     
     
     func requestGoodsData() {
-        let idOfCategory = CatalogData.instance.activeCatalogCategory
-        let idOfSubCategory = CatalogData.instance.activeCatalogSubCategory
+        let idOfCategory = AppActualData.instance.activeCatalogCategory
+        let idOfSubCategory = AppActualData.instance.activeCatalogSubCategory
 //        print("idOfSubCategory= \(idOfSubCategory)")
         let tempA: Int = CatalogData.instance.categoriesArray.firstIndex(where: { $0.sortOrder == idOfCategory })!
-        let tempB: Int = CatalogData.instance.categoriesArray[tempA].subCategories.firstIndex(where: { $0.id == CatalogData.instance.activeCatalogSubCategory })!
+        let tempB: Int = CatalogData.instance.categoriesArray[tempA].subCategories.firstIndex(where: { $0.id == AppActualData.instance.activeCatalogSubCategory })!
         print("111_idOfCategory= \(idOfCategory)")
         print("111_idOfSubCategory= \(idOfSubCategory)")
-        print("111_activeCatalogCategory= \(CatalogData.instance.activeCatalogCategory)")
-        print("111_activeCatalogSubCategory= \(CatalogData.instance.activeCatalogSubCategory)")
+        print("111_activeCatalogCategory= \(AppActualData.instance.activeCatalogCategory)")
+        print("111_activeCatalogSubCategory= \(AppActualData.instance.activeCatalogSubCategory)")
         print("222_subcategoryname = \(CatalogData.instance.categoriesArray[tempA].subCategories[tempB].name)")
         
         var goods: [GoodsOfCategory] = []
         let request = AF.request("https://blackstarshop.ru/index.php?route=api/v1/products&cat_id=\(idOfSubCategory)")
-        VCDelegateArray.instance.VCMainCatalogDelegate!.hudAppear()
+        AppActualData.instance.VCMainCatalogDelegate!.hudAppear()
         request.responseJSON(completionHandler: { response in
             if let object = response.value, let jsonDict = object as? NSDictionary {
                 print("jsonDict= \(jsonDict)")
@@ -198,8 +199,8 @@ extension CatalogData {
                 print("jsonDict.count= \(jsonDict.count)")
                 print("goods.count= \(goods.count)")
                 CatalogData.instance.categoriesArray[tempA].subCategories[tempB].goodsOfCategory = goods
-                VCDelegateArray.instance.VCMainCatalogDelegate!.mainCatalogCollectionUpdate()
-                VCDelegateArray.instance.VCMainCatalogDelegate!.hudDisapper()
+                AppActualData.instance.VCMainCatalogDelegate!.mainCatalogCollectionUpdate()
+                AppActualData.instance.VCMainCatalogDelegate!.hudDisapper()
                 }
             })
         print("goods2= \(goods)")

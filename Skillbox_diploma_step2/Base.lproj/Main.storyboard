@@ -151,7 +151,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="3CG-ov-f7W">
                                         <rect key="frame" x="10" y="0.0" width="360" height="28"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6lX-gB-vtS" userLabel="buttonPopular">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6lX-gB-vtS" userLabel="buttonCategories">
                                                 <rect key="frame" x="0.0" y="0.0" width="90" height="28"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Categories" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yS0-tp-yyN">
@@ -160,7 +160,7 @@
                                                             <constraint firstAttribute="height" constant="18" id="xx3-ox-3FJ"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="17"/>
-                                                        <color key="textColor" name="SpecialGrey2"/>
+                                                        <color key="textColor" name="Purple"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
@@ -172,6 +172,9 @@
                                                     <constraint firstAttribute="width" constant="90" id="bXF-HE-GX8"/>
                                                     <constraint firstItem="yS0-tp-yyN" firstAttribute="leading" secondItem="6lX-gB-vtS" secondAttribute="leading" id="fUn-um-8Pn"/>
                                                 </constraints>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="Av1-1T-ZsK" appends="YES" id="6Mh-In-8DR"/>
+                                                </connections>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DwA-0g-Ccg" userLabel="buttonMens">
                                                 <rect key="frame" x="90" y="0.0" width="90" height="28"/>
@@ -194,6 +197,9 @@
                                                     <constraint firstAttribute="width" constant="90" id="GM8-eT-bp8"/>
                                                     <constraint firstAttribute="trailing" secondItem="4ZH-SD-aor" secondAttribute="trailing" id="qdy-u9-mam"/>
                                                 </constraints>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="GtY-Tv-imU" appends="YES" id="tmI-7E-4Cz"/>
+                                                </connections>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X0k-4J-3tm" userLabel="buttonWomens">
                                                 <rect key="frame" x="180" y="0.0" width="90" height="28"/>
@@ -216,6 +222,9 @@
                                                     <constraint firstAttribute="trailing" secondItem="NNa-Xq-554" secondAttribute="trailing" id="ji7-3t-Ac0"/>
                                                     <constraint firstItem="NNa-Xq-554" firstAttribute="top" secondItem="X0k-4J-3tm" secondAttribute="top" id="n2x-CW-fIC"/>
                                                 </constraints>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="F2j-Cl-wtd" appends="YES" id="d0m-cO-fAL"/>
+                                                </connections>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dxN-Sx-Fyk" userLabel="buttonSale">
                                                 <rect key="frame" x="270" y="0.0" width="90" height="28"/>
@@ -238,6 +247,9 @@
                                                     <constraint firstItem="sRo-bt-K4u" firstAttribute="top" secondItem="dxN-Sx-Fyk" secondAttribute="top" id="Rnn-As-2I7"/>
                                                     <constraint firstAttribute="trailing" secondItem="sRo-bt-K4u" secondAttribute="trailing" id="bbi-y6-9nb"/>
                                                 </constraints>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="eQv-za-fu8" appends="YES" id="VPH-Lv-5qU"/>
+                                                </connections>
                                             </view>
                                         </subviews>
                                         <constraints>
@@ -248,7 +260,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Glq-Xy-59q" userLabel="strip2">
                                         <rect key="frame" x="10" y="34" width="90" height="3"/>
                                         <viewLayoutGuide key="safeArea" id="0Yn-Q9-zRX"/>
-                                        <color key="backgroundColor" systemColor="systemRedColor"/>
+                                        <color key="backgroundColor" name="Purple"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="90" id="Y0s-mO-p9R"/>
                                             <constraint firstAttribute="height" constant="3" id="taf-s3-BmC"/>
@@ -256,7 +268,7 @@
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9bK-PI-lvj" userLabel="strip">
                                         <rect key="frame" x="10" y="37" width="370" height="1"/>
-                                        <color key="backgroundColor" systemColor="systemBlueColor"/>
+                                        <color key="backgroundColor" name="Purple"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="B29-FG-8SE"/>
                                             <constraint firstAttribute="width" constant="370" id="giu-V6-Ak5"/>
@@ -616,6 +628,26 @@
                 <tapGestureRecognizer id="efR-fc-S5P">
                     <connections>
                         <action selector="handlerButtonTapGesture:" destination="m1b-40-kqH" id="4bc-MY-pEA"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="Av1-1T-ZsK">
+                    <connections>
+                        <action selector="buttonCategoriesGesture:" destination="m1b-40-kqH" id="YR5-8y-8DQ"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="GtY-Tv-imU">
+                    <connections>
+                        <action selector="buttonMensGesture:" destination="m1b-40-kqH" id="51N-IW-Pux"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="F2j-Cl-wtd">
+                    <connections>
+                        <action selector="buttonWomensGesture:" destination="m1b-40-kqH" id="SEf-FW-uTj"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="eQv-za-fu8">
+                    <connections>
+                        <action selector="buttonSaleGesture:" destination="m1b-40-kqH" id="tuL-Kp-2sv"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -1768,9 +1800,6 @@
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
-        <systemColor name="systemBlueColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
         <systemColor name="systemGray2Color">
             <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
@@ -1779,9 +1808,6 @@
         </systemColor>
         <systemColor name="systemPinkColor">
             <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemTealColor">
             <color red="0.18823529411764706" green="0.69019607843137254" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

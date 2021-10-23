@@ -20,6 +20,16 @@ class VCMainCatalog: UIViewController {
     @IBOutlet var menuButtonView: UIView!
     @IBOutlet var menuButtonHorizonGesture: UIPanGestureRecognizer!
     @IBOutlet var catalogCategriesCollectionView: UICollectionView!
+    @IBOutlet var constraintSecondMenuStrip2: NSLayoutConstraint!
+    @IBOutlet var buttonSecondMenuCategories: UIView!
+    @IBOutlet var buttonSecondMenuMens: UIView!
+    @IBOutlet var buttonSecondMenuWomens: UIView!
+    @IBOutlet var buttonSecondMenuSale: UIView!
+    @IBOutlet var labelCategories: UILabel!
+    @IBOutlet var labelMens: UILabel!
+    @IBOutlet var labelWomens: UILabel!
+    @IBOutlet var labelSales: UILabel!
+    @IBOutlet var secondMenuStrip2: UIView!
     
 
     //MARK: - делегаты и переменные
@@ -39,6 +49,17 @@ class VCMainCatalog: UIViewController {
     func tapToCVCell(){
         if AppActualData.instance.activeCatalogMode == "catalog" {
             AppActualData.instance.activeCatalogMode = "subcategories"
+            switch AppActualData.instance.activeCatalogCategory {
+                case 0:
+                    borderLineForSecondMenu(button: 2)
+                case 11:
+                    borderLineForSecondMenu(button: 3)
+                case 99:
+                    borderLineForSecondMenu(button: 4)
+                default:
+                    print("hideSecondMenu")
+                    hideSecondMenu()
+            }
         } else if AppActualData.instance.activeCatalogMode == "subcategories" {
             AppActualData.instance.activeCatalogMode = "product"
         }
@@ -46,6 +67,87 @@ class VCMainCatalog: UIViewController {
         self.view.layoutIfNeeded()
     }
     
+    
+    //MARK: - анимация верхнего меню
+    
+    func changeModeIntoSecondMenu(activeMode: String, categoriesID: Int) {
+        AppActualData.instance.activeCatalogMode = activeMode
+        AppActualData.instance.activeCatalogCategory = categoriesID
+        mainCatalogCollectionUpdate()
+    }
+    
+    
+    func borderLineForSecondMenu(button: Int) {
+        UIView.animate(withDuration: 2.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
+            switch button {
+            case 1:
+                    self.constraintSecondMenuStrip2.constant = self.buttonSecondMenuCategories.frame.origin.x + 10
+                    self.secondMenuHighliter(specifyLabel: self.labelCategories)
+                print("borderLineForMenu 1")
+            case 2:
+                self.constraintSecondMenuStrip2.constant = self.buttonSecondMenuMens.frame.origin.x + 10
+                print("borderLineForMenu 2")
+                    self.secondMenuHighliter(specifyLabel: self.labelMens)
+            case 3:
+                    self.constraintSecondMenuStrip2.constant = self.buttonSecondMenuWomens.frame.origin.x + 10
+                    self.secondMenuHighliter(specifyLabel: self.labelWomens)
+                print("borderLineForMenu 3")
+            case 4:
+                    self.constraintSecondMenuStrip2.constant = self.buttonSecondMenuSale.frame.origin.x + 10
+                    self.secondMenuHighliter(specifyLabel: self.labelSales)
+                print("borderLineForMenu 4")
+            default:
+                print("Error with borderLineForMenu")
+            }
+        }, completion: {isCompleted in })
+    }
+    
+    
+    func secondMenuHighliter(specifyLabel: UILabel?){
+        if specifyLabel == nil {
+            secondMenuStrip2.isHidden = true
+        } else {
+            secondMenuStrip2.isHidden = false
+        }
+        switch specifyLabel {
+        case labelCategories:
+                labelCategories.textColor = UIColor.init(named: "Purple")
+                labelMens.textColor = UIColor.init(named: "SpecialGrey2")
+                labelWomens.textColor = UIColor.init(named: "SpecialGrey2")
+                labelSales.textColor = UIColor.init(named: "SpecialGrey2")
+            print("111")
+        case labelMens:
+                labelCategories.textColor = UIColor.init(named: "SpecialGrey2")
+                labelMens.textColor = UIColor.init(named: "Purple")
+                labelWomens.textColor = UIColor.init(named: "SpecialGrey2")
+                labelSales.textColor = UIColor.init(named: "SpecialGrey2")
+            print("222")
+        case labelWomens:
+                labelCategories.textColor = UIColor.init(named: "SpecialGrey2")
+                labelMens.textColor = UIColor.init(named: "SpecialGrey2")
+                labelWomens.textColor = UIColor.init(named: "Purple")
+                labelSales.textColor = UIColor.init(named: "SpecialGrey2")
+            print("333")
+        case labelSales:
+                labelCategories.textColor = UIColor.init(named: "SpecialGrey2")
+                labelMens.textColor = UIColor.init(named: "SpecialGrey2")
+                labelWomens.textColor = UIColor.init(named: "SpecialGrey2")
+                labelSales.textColor = UIColor.init(named: "Purple")
+            print("444")
+        default:
+            print("SecondMenu is hided")
+                labelCategories.textColor = UIColor.init(named: "SpecialGrey2")
+                labelMens.textColor = UIColor.init(named: "SpecialGrey2")
+                labelWomens.textColor = UIColor.init(named: "SpecialGrey2")
+                labelSales.textColor = UIColor.init(named: "SpecialGrey2")
+        }
+    }
+    
+    
+    func hideSecondMenu() {
+        secondMenuHighliter(specifyLabel: nil)
+    }
+
     
     //MARK: - клики, жесты
     
@@ -122,24 +224,44 @@ class VCMainCatalog: UIViewController {
     @IBAction func catalogBackButtonAction(_ sender: Any) {
         if AppActualData.instance.activeCatalogMode == "subcategories" {
             AppActualData.instance.activeCatalogMode = "catalog"
+            buttonCategoriesGesture(nil)
         } else if AppActualData.instance.activeCatalogMode == "product" {
             AppActualData.instance.activeCatalogMode = "subcategories"
+            switch AppActualData.instance.activeCatalogCategory {
+                case 0:
+                    buttonMensGesture(nil)
+                case 11:
+                    buttonWomensGesture(nil)
+                case 99:
+                    buttonSaleGesture(nil)
+                default:
+                    hideSecondMenu()
+            }
         }
         mainCatalogCollectionUpdate()
         self.view.layoutIfNeeded()
     }
     
     
-    @IBAction func buttonCategoriesGesture(_ sender: Any) {
+    @IBAction func buttonCategoriesGesture(_ sender: Any?) {
+        borderLineForSecondMenu(button: 1)
+        AppActualData.instance.activeCatalogMode = "catalog"
+        mainCatalogCollectionUpdate()
     }
     
-    @IBAction func buttonMensGesture(_ sender: Any) {
+    @IBAction func buttonMensGesture(_ sender: Any?) {
+        borderLineForSecondMenu(button: 2)
+        changeModeIntoSecondMenu(activeMode: "subcategories", categoriesID: 0)
     }
     
-    @IBAction func buttonWomensGesture(_ sender: Any) {
+    @IBAction func buttonWomensGesture(_ sender: Any?) {
+        borderLineForSecondMenu(button: 3)
+        changeModeIntoSecondMenu(activeMode: "subcategories", categoriesID: 11)
     }
     
-    @IBAction func buttonSaleGesture(_ sender: Any) {
+    @IBAction func buttonSaleGesture(_ sender: Any?) {
+        borderLineForSecondMenu(button: 4)
+        changeModeIntoSecondMenu(activeMode: "subcategories", categoriesID: 99)
     }
     
     
@@ -242,6 +364,7 @@ extension VCMainCatalog: UICollectionViewDataSource {
             case "subcategories":
                 for data in CatalogData.instance.categoriesArray {
                     if data.sortOrder == AppActualData.instance.activeCatalogCategory {
+                        print("AppActualData.instance.activeCatalogCategory222= \(AppActualData.instance.activeCatalogCategory)")
                         cellCat = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as? catalogCategriesCollectionViewCell
                         cellCat!.categoryImage.image = data.subCategories[indexPath.row].iconUIImage //?.trim()
 //                        CatalogData.instance.activeCatalogMode
@@ -293,14 +416,42 @@ extension VCMainCatalog: UICollectionViewDataSource {
         
         switch AppActualData.instance.activeCatalogMode {
             case "catalog":
+//
+//                //Управление вторым меню
+//                borderLineForSecondMenu(button: 1)
+//                AppActualData.instance.activeCatalogMode = "catalog"
+//
+                
                 cellCat!.startCell(tag: indexPath.row, action: {
                     AppActualData.instance.activeCatalogCategory = CatalogData.instance.categoriesArray[indexPath.row].sortOrder
                     self.tapToCVCell()
                 } )
                 return cellCat!
             case "subcategories":
+                
+//                    //Управление вторым меню
+//                    borderLineForSecondMenu(button: 1)
+//                    AppActualData.instance.activeCatalogMode = "catalog"
+//                switch AppActualData.instance.activeCatalogSubCategory {
+//                    case 0:
+//                        borderLineForSecondMenu(button: 2)
+//                        changeSecondsMenuMode(activeMode: "subcategories", categoriesID: 0)
+//                    case 11:
+//                        borderLineForSecondMenu(button: 3)
+//                        changeSecondsMenuMode(activeMode: "subcategories", categoriesID: 11)
+//                    case 99:
+//                        borderLineForSecondMenu(button: 4)
+//                        changeSecondsMenuMode(activeMode: "subcategories", categoriesID: 99)
+//                    default:
+//                        hideSecondMenu()
+//                }
+
                 cellCat!.startCell(tag: indexPath.row, action: {
                     let tempA: Int = CatalogData.instance.categoriesArray.firstIndex(where: { $0.sortOrder == AppActualData.instance.activeCatalogCategory } )!
+                    print("tempA333= \(tempA)")
+                    print("indexPath.row333= \(indexPath.row)")
+                    print("CatalogData.instance.categoriesArray[tempA].subCategories.count333= \(CatalogData.instance.categoriesArray[tempA].subCategories.count)")
+                    
                     AppActualData.instance.activeCatalogSubCategory = CatalogData.instance.categoriesArray[tempA].subCategories[indexPath.row].id
                     CatalogData.instance.requestGoodsData()
                     self.tapToCVCell()

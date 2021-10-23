@@ -267,11 +267,10 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9bK-PI-lvj" userLabel="strip">
-                                        <rect key="frame" x="10" y="37" width="370" height="1"/>
+                                        <rect key="frame" x="10" y="37" width="360" height="1"/>
                                         <color key="backgroundColor" name="Purple"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="B29-FG-8SE"/>
-                                            <constraint firstAttribute="width" constant="370" id="giu-V6-Ak5"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -280,6 +279,7 @@
                                     <constraint firstItem="3CG-ov-f7W" firstAttribute="top" secondItem="zKX-Rc-OEh" secondAttribute="top" id="Pv7-mv-tmo"/>
                                     <constraint firstItem="Glq-Xy-59q" firstAttribute="leading" secondItem="zKX-Rc-OEh" secondAttribute="leading" constant="10" id="Qgu-Xo-kfF"/>
                                     <constraint firstItem="3CG-ov-f7W" firstAttribute="leading" secondItem="zKX-Rc-OEh" secondAttribute="leading" constant="10" id="YDA-Qh-vKh"/>
+                                    <constraint firstAttribute="trailing" secondItem="9bK-PI-lvj" secondAttribute="trailing" constant="10" id="epX-nt-psM"/>
                                     <constraint firstItem="9bK-PI-lvj" firstAttribute="top" secondItem="Glq-Xy-59q" secondAttribute="bottom" id="jco-tx-4Uk"/>
                                     <constraint firstItem="Glq-Xy-59q" firstAttribute="top" secondItem="3CG-ov-f7W" secondAttribute="bottom" constant="6" id="m3L-pf-KcL"/>
                                     <constraint firstAttribute="trailing" secondItem="3CG-ov-f7W" secondAttribute="trailing" constant="10" id="rx4-tz-Kij"/>
@@ -608,9 +608,19 @@
                     </view>
                     <navigationItem key="navigationItem" id="nZR-js-JkT"/>
                     <connections>
+                        <outlet property="buttonSecondMenuCategories" destination="6lX-gB-vtS" id="zLT-t6-5LU"/>
+                        <outlet property="buttonSecondMenuMens" destination="DwA-0g-Ccg" id="Kdf-5h-Aaw"/>
+                        <outlet property="buttonSecondMenuSale" destination="dxN-Sx-Fyk" id="Bwk-9Z-EvC"/>
+                        <outlet property="buttonSecondMenuWomens" destination="X0k-4J-3tm" id="DRb-As-n9J"/>
                         <outlet property="catalogCategriesCollectionView" destination="4oF-mX-9Eb" id="DBj-fr-Nf1"/>
+                        <outlet property="constraintSecondMenuStrip2" destination="Qgu-Xo-kfF" id="RWl-zU-Xoc"/>
+                        <outlet property="labelCategories" destination="yS0-tp-yyN" id="d56-bP-bgf"/>
+                        <outlet property="labelMens" destination="4ZH-SD-aor" id="yXO-Ve-VpR"/>
+                        <outlet property="labelSales" destination="sRo-bt-K4u" id="vJh-po-aE1"/>
+                        <outlet property="labelWomens" destination="NNa-Xq-554" id="MYd-XB-E9L"/>
                         <outlet property="menuButtonHorizonGesture" destination="vXn-zq-4jz" id="Uwo-cQ-oeE"/>
                         <outlet property="menuButtonView" destination="qUz-fO-Fha" id="ckz-Bb-jbw"/>
+                        <outlet property="secondMenuStrip2" destination="Glq-Xy-59q" id="qzY-UB-ogE"/>
                         <outlet property="slideProfileMenu" destination="lTI-t6-02T" id="pWf-dE-vUe"/>
                     </connections>
                 </viewController>
@@ -1767,7 +1777,7 @@
         <image name="Log In Button" width="222" height="54"/>
         <image name="LogInButton" width="324" height="54"/>
         <image name="LogOut" width="20.333333969116211" height="20.333333969116211"/>
-        <image name="Logo" width="71" height="20"/>
+        <image name="Logo" width="305" height="77.666664123535156"/>
         <image name="Menu" width="37" height="24"/>
         <image name="Notification" width="22.333333969116211" height="24.333333969116211"/>
         <image name="Or_group" width="315" height="20"/>

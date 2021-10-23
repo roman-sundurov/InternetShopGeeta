@@ -15,11 +15,6 @@ class CatalogData{
     
     var categoriesArray: [CategoriesForCatalog] = []
     
-//    var activeCatalogMode: String = "catalog" // catalog/subcategories/product
-//    var activeCatalogCategory: Int = 0
-//    var activeCatalogSubCategory: Int = 0
-//    var activeCatalogProduct: Int = 0
-    
     
     func showCategories() {
     

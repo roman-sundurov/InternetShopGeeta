@@ -67,6 +67,11 @@ class VCMainCatalog: UIViewController {
         self.view.layoutIfNeeded()
     }
     
+    func buttonSegueToVCRecognition() {
+        performSegue(withIdentifier: "segueToVCCatalogGoods", sender: nil)
+    }
+
+    
     
     //MARK: - анимация верхнего меню
     
@@ -416,41 +421,17 @@ extension VCMainCatalog: UICollectionViewDataSource {
         
         switch AppActualData.instance.activeCatalogMode {
             case "catalog":
-//
-//                //Управление вторым меню
-//                borderLineForSecondMenu(button: 1)
-//                AppActualData.instance.activeCatalogMode = "catalog"
-//
-                
                 cellCat!.startCell(tag: indexPath.row, action: {
                     AppActualData.instance.activeCatalogCategory = CatalogData.instance.categoriesArray[indexPath.row].sortOrder
                     self.tapToCVCell()
                 } )
                 return cellCat!
             case "subcategories":
-                
-//                    //Управление вторым меню
-//                    borderLineForSecondMenu(button: 1)
-//                    AppActualData.instance.activeCatalogMode = "catalog"
-//                switch AppActualData.instance.activeCatalogSubCategory {
-//                    case 0:
-//                        borderLineForSecondMenu(button: 2)
-//                        changeSecondsMenuMode(activeMode: "subcategories", categoriesID: 0)
-//                    case 11:
-//                        borderLineForSecondMenu(button: 3)
-//                        changeSecondsMenuMode(activeMode: "subcategories", categoriesID: 11)
-//                    case 99:
-//                        borderLineForSecondMenu(button: 4)
-//                        changeSecondsMenuMode(activeMode: "subcategories", categoriesID: 99)
-//                    default:
-//                        hideSecondMenu()
-//                }
-
                 cellCat!.startCell(tag: indexPath.row, action: {
                     let tempA: Int = CatalogData.instance.categoriesArray.firstIndex(where: { $0.sortOrder == AppActualData.instance.activeCatalogCategory } )!
-                    print("tempA333= \(tempA)")
-                    print("indexPath.row333= \(indexPath.row)")
-                    print("CatalogData.instance.categoriesArray[tempA].subCategories.count333= \(CatalogData.instance.categoriesArray[tempA].subCategories.count)")
+//                    print("tempA333= \(tempA)")
+//                    print("indexPath.row333= \(indexPath.row)")
+//                    print("CatalogData.instance.categoriesArray[tempA].subCategories.count333= \(CatalogData.instance.categoriesArray[tempA].subCategories.count)")
                     
                     AppActualData.instance.activeCatalogSubCategory = CatalogData.instance.categoriesArray[tempA].subCategories[indexPath.row].id
                     CatalogData.instance.requestGoodsData()
@@ -458,7 +439,9 @@ extension VCMainCatalog: UICollectionViewDataSource {
                 } )
                 return cellCat!
             default:
-                cellProd!.startCell(tag: indexPath.row, action: {} )
+                cellProd!.startCell(tag: indexPath.row, action: {
+                    self.buttonSegueToVCRecognition()
+                } )
                 return cellProd!
         }
         

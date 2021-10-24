@@ -20,6 +20,7 @@
 		472D94852676AA0600482C20 /* Skillbox_diploma_step2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472D94842676AA0600482C20 /* Skillbox_diploma_step2Tests.swift */; };
 		472D94902676AA0600482C20 /* Skillbox_diploma_step2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472D948F2676AA0600482C20 /* Skillbox_diploma_step2UITests.swift */; };
 		472FCDBD26A840C20030B157 /* TextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472FCDBC26A840C20030B157 /* TextFieldView.swift */; };
+		4748BB342724C92300AB8B86 /* VCCatalogGoods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4748BB332724C92300AB8B86 /* VCCatalogGoods.swift */; };
 		4748E11526A75195004B8D88 /* VCLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4748E11426A75195004B8D88 /* VCLogin.swift */; };
 		4752A8F226AB5C00000E4AC5 /* VCMainCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4752A8F126AB5C00000E4AC5 /* VCMainCatalog.swift */; };
 		4752A8F526AB63D1000E4AC5 /* VCProfileSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4752A8F426AB63D1000E4AC5 /* VCProfileSlider.swift */; };
@@ -101,6 +102,7 @@
 		472D948F2676AA0600482C20 /* Skillbox_diploma_step2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Skillbox_diploma_step2UITests.swift; sourceTree = "<group>"; };
 		472D94912676AA0600482C20 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		472FCDBC26A840C20030B157 /* TextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TextFieldView.swift; path = Skillbox_diploma_step2/Elements/TextFieldView.swift; sourceTree = SOURCE_ROOT; };
+		4748BB332724C92300AB8B86 /* VCCatalogGoods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCCatalogGoods.swift; sourceTree = "<group>"; };
 		4748E11426A75195004B8D88 /* VCLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCLogin.swift; sourceTree = "<group>"; };
 		4752A8F126AB5C00000E4AC5 /* VCMainCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCMainCatalog.swift; sourceTree = "<group>"; };
 		4752A8F426AB63D1000E4AC5 /* VCProfileSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCProfileSlider.swift; sourceTree = "<group>"; };
@@ -232,6 +234,7 @@
 			isa = PBXGroup;
 			children = (
 				4752A8F126AB5C00000E4AC5 /* VCMainCatalog.swift */,
+				4748BB332724C92300AB8B86 /* VCCatalogGoods.swift */,
 				479771F226E5F5F6006B0EFE /* catalogCategriesCollectionViewCell.swift */,
 				470C001E271C469800D18353 /* catalogGoodsCollectionViewCell.swift */,
 			);
@@ -451,6 +454,7 @@
 				4752A8F526AB63D1000E4AC5 /* VCProfileSlider.swift in Sources */,
 				4712BB1C26A310C5003701D5 /* VCRecognition.swift in Sources */,
 				479771F326E5F5F6006B0EFE /* catalogCategriesCollectionViewCell.swift in Sources */,
+				4748BB342724C92300AB8B86 /* VCCatalogGoods.swift in Sources */,
 				47AA7F7C26F7E86E00F26DDC /* Networking.swift in Sources */,
 				472D94722676AA0300482C20 /* VCWelcome.swift in Sources */,
 				47076DC226AA25ED002D8A65 /* VCRegister.swift in Sources */,

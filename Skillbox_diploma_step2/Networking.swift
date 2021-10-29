@@ -85,7 +85,7 @@ class SubCategories: Equatable {
     init?(data: NSDictionary) {
         guard let id = data["id"] as? Int ?? Int(data["id"] as! String),
         let iconImage = data["iconImage"] as? String,
-        let sortOrder = data["sortOrder"] as? Int ?? Int(data["sortOrder"] as! String),
+//        let sortOrder = data["sortOrder"] as? Int ?? Int(data["sortOrder"] as! String),
         let name = data["name"] as? String else {
             return nil
         }
@@ -103,6 +103,7 @@ class GoodsOfCategory {
     
     let name: String
     let englishName: String
+    let sortOrder: Int
     let article: String
     let description: String
     let goodsImage: String
@@ -112,6 +113,7 @@ class GoodsOfCategory {
     init?(data: NSDictionary) {
         guard let name = data["name"] as? String,
             let englishName = data["englishName"] as? String,
+              let sortOrder = data["sortOrder"] as? String,
               let article = data["article"] as? String,
               let description = data["description"] as? String,
               let price = data["price"] as? Double ?? Double(data["price"] as! String),
@@ -120,6 +122,7 @@ class GoodsOfCategory {
         }
         self.name = name
         self.englishName = englishName
+        self.sortOrder = Int(sortOrder) ?? 0
         self.article = article
         self.description = description
         print("Special Price= \(price)")

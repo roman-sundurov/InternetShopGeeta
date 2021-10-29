@@ -15,7 +15,7 @@ class catalogGoodsCollectionViewCell: UICollectionViewCell {
     @IBOutlet var heightConstraint: NSLayoutConstraint!
     @IBOutlet var priceProduct: UILabel!
     @IBOutlet var nameProduct: UILabel!
-    
+//    
     var actionFromStartCellClosere: ( () -> Void )?
     
     @objc func gestureAction(tag: Int) {

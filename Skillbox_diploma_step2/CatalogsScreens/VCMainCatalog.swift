@@ -67,7 +67,7 @@ class VCMainCatalog: UIViewController {
         self.view.layoutIfNeeded()
     }
     
-    func buttonSegueToVCRecognition() {
+    func buttonSegueToVCCatalogGoods() {
         performSegue(withIdentifier: "segueToVCCatalogGoods", sender: nil)
     }
 
@@ -429,9 +429,6 @@ extension VCMainCatalog: UICollectionViewDataSource {
             case "subcategories":
                 cellCat!.startCell(tag: indexPath.row, action: {
                     let tempA: Int = CatalogData.instance.categoriesArray.firstIndex(where: { $0.sortOrder == AppActualData.instance.activeCatalogCategory } )!
-//                    print("tempA333= \(tempA)")
-//                    print("indexPath.row333= \(indexPath.row)")
-//                    print("CatalogData.instance.categoriesArray[tempA].subCategories.count333= \(CatalogData.instance.categoriesArray[tempA].subCategories.count)")
                     
                     AppActualData.instance.activeCatalogSubCategory = CatalogData.instance.categoriesArray[tempA].subCategories[indexPath.row].id
                     CatalogData.instance.requestGoodsData()
@@ -440,7 +437,14 @@ extension VCMainCatalog: UICollectionViewDataSource {
                 return cellCat!
             default:
                 cellProd!.startCell(tag: indexPath.row, action: {
-                    self.buttonSegueToVCRecognition()
+                    
+                    let tempA: Int = CatalogData.instance.categoriesArray.firstIndex(where: { $0.sortOrder == AppActualData.instance.activeCatalogCategory } )!
+                    let tempB: Int = CatalogData.instance.categoriesArray[tempA].subCategories.firstIndex(where: { $0.id == AppActualData.instance.activeCatalogSubCategory })!
+                    
+                    AppActualData.instance.activeCatalogProduct = CatalogData.instance.categoriesArray[tempA].subCategories[tempB].goodsOfCategory[indexPath.row].sortOrder
+                    self.tapToCVCell()
+                    self.buttonSegueToVCCatalogGoods()
+                    
                 } )
                 return cellProd!
         }

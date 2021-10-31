@@ -14,6 +14,8 @@ class VCProfileSlider: UIViewController {
     //MARK: - объявление аутлетов
     
     @IBOutlet var accountImage: UIImageView!
+    @IBOutlet var lableName: UILabel!
+    @IBOutlet var labelEmail: UILabel!
     
     
     
@@ -25,7 +27,17 @@ class VCProfileSlider: UIViewController {
     
     //MARK: - клики
     
+    @IBAction func gestureLogOut(_ sender: Any) {
+        AppSystemData.instance.VCMainCatalogDelegate?.logOut()
+    }
+    
+    
     //MARK: - данные
+    
+    func updateScreenData() {
+        lableName.text = Persistence.shared.getAllObjectPersonalData().first?.name
+        labelEmail.text = Persistence.shared.getAllObjectPersonalData().first?.email
+    }
 
     //MARK: - viewDidLoad
     
@@ -37,6 +49,8 @@ class VCProfileSlider: UIViewController {
         accountImage.layer.borderColor = UIColor.white.cgColor
         accountImage.clipsToBounds = true
         accountImage.backgroundColor = .white
+        
+        updateScreenData()
         
     }
     

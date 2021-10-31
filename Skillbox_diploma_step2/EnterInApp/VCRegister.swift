@@ -69,8 +69,9 @@ class VCRegister: UIViewController {
 
         if imageFullNameError.isHidden, imageEmailError.isHidden, imagePasswordError.isHidden == true {
             print("Registration approved")
-            Persistence.shared.addNewUser(fullName: textFieldFullName.text!, email: textFieldEmail.text!, password: textFieldPassword.text!)
-            AppActualData.instance.setActualUser(userEmail: textFieldEmail.text!)
+            print("666")
+            Persistence.shared.activateNewUser(fullName: textFieldFullName.text!, email: textFieldEmail.text!, password: textFieldPassword.text!)
+            print("777")
             performSegue(withIdentifier: "segueToVCMainCatalog", sender: nil)
         }
     }
@@ -84,6 +85,12 @@ class VCRegister: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print("Persistence.shared.printAllObject()_1= \(Persistence.shared.getAllObjectPersonalData())")
+        
+//        for n in PersonalData {
+//            print("PersonalData= \(n)")
+//        }
 
         // Do any additional setup after loading the view.
     }

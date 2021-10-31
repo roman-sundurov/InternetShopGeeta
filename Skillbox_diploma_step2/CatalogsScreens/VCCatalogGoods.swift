@@ -97,9 +97,9 @@ class VCCatalogGoods: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let tempA: Int = CatalogData.instance.categoriesArray.firstIndex(where: { $0.sortOrder == AppActualData.instance.activeCatalogCategory })!
-        let tempB: Int = CatalogData.instance.categoriesArray[tempA].subCategories.firstIndex(where: { $0.id == AppActualData.instance.activeCatalogSubCategory })!
-        let tempC: Int = CatalogData.instance.categoriesArray[tempA].subCategories[tempB].goodsOfCategory.firstIndex(where: { $0.sortOrder == AppActualData.instance.activeCatalogProduct })!
+        let tempA: Int = CatalogData.instance.categoriesArray.firstIndex(where: { $0.sortOrder == AppSystemData.instance.activeCatalogCategory })!
+        let tempB: Int = CatalogData.instance.categoriesArray[tempA].subCategories.firstIndex(where: { $0.id == AppSystemData.instance.activeCatalogSubCategory })!
+        let tempC: Int = CatalogData.instance.categoriesArray[tempA].subCategories[tempB].goodsOfCategory.firstIndex(where: { $0.sortOrder == AppSystemData.instance.activeCatalogProduct })!
         let specificGood = CatalogData.instance.categoriesArray[tempA].subCategories[tempB].goodsOfCategory[tempC]
        
         labelNameOfCategory.text = CatalogData.instance.categoriesArray[tempA].name

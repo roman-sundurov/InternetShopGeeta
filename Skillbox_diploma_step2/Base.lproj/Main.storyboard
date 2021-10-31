@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="kxM-Ru-tmL">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -77,6 +77,7 @@
                     <connections>
                         <outlet property="buttonSegueToVCRecognition" destination="LHN-Gc-CSk" id="VQ2-cg-h5R"/>
                         <segue destination="ljf-he-QsI" kind="presentation" identifier="segueToVCRecognition" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="32S-5W-Tme"/>
+                        <segue destination="m1b-40-kqH" kind="presentation" identifier="segueToVCMainCatalog" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="wcC-kN-wgO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -86,7 +87,7 @@
         <!--Main Catalog-->
         <scene sceneID="53n-T8-597">
             <objects>
-                <viewController id="m1b-40-kqH" customClass="VCMainCatalog" customModule="Skillbox_diploma_step2" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainCatalog" id="m1b-40-kqH" customClass="VCMainCatalog" customModule="Skillbox_diploma_step2" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="KYk-yT-Poi">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -623,6 +624,7 @@
                         <outlet property="secondMenuStrip2" destination="Glq-Xy-59q" id="qzY-UB-ogE"/>
                         <outlet property="slideProfileMenu" destination="lTI-t6-02T" id="pWf-dE-vUe"/>
                         <segue destination="hb6-fT-t5E" kind="presentation" identifier="segueToVCCatalogGoods" modalPresentationStyle="fullScreen" id="vQl-h3-7y5"/>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="segueToVCWelcome" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="EIv-eB-LWm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lA1-B6-yrk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1227,10 +1229,10 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9ZP-Wj-k2m" customClass="TextFieldView" customModule="Skillbox_diploma_step2" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="27" width="324" height="50"/>
                                                 <subviews>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Your Full Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ynE-oa-Ukr">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Your Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ynE-oa-Ukr">
                                                         <rect key="frame" x="39" y="0.0" width="241" height="50"/>
                                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" textContentType="email"/>
+                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" textContentType="name"/>
                                                     </textField>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PersonIcon" translatesAutoresizingMaskIntoConstraints="NO" id="GCl-Je-y3c">
                                                         <rect key="frame" x="10" y="13" width="24" height="24"/>
@@ -1981,7 +1983,7 @@
                                                 </constraints>
                                                 <state key="normal" backgroundImage="EditButton"/>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" text="email" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Qu-cK-Qat">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" text="email" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Qu-cK-Qat">
                                                 <rect key="frame" x="0.0" y="26.666666666666657" width="146" height="17"/>
                                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="14"/>
                                                 <color key="textColor" name="SpecialGrey1"/>
@@ -2038,6 +2040,7 @@
                                     </label>
                                 </subviews>
                                 <viewLayoutGuide key="safeArea" id="oT5-N8-ocC"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstItem="PA7-7c-gaP" firstAttribute="top" secondItem="Y7m-61-3Ao" secondAttribute="top" id="DOe-QN-gWj"/>
                                     <constraint firstItem="PA7-7c-gaP" firstAttribute="leading" secondItem="Y7m-61-3Ao" secondAttribute="leading" id="O6y-cw-nsp"/>
@@ -2048,6 +2051,9 @@
                                     <constraint firstAttribute="trailing" secondItem="eYX-46-dBo" secondAttribute="trailing" constant="5" id="tYM-Hp-ZZc"/>
                                     <constraint firstAttribute="height" priority="999" constant="24" id="wHV-KG-Y75"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="9wB-hI-4Wg" appends="YES" id="qac-3a-49h"/>
+                                </connections>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="apO-kQ-67M"/>
@@ -2073,48 +2079,23 @@
                     </view>
                     <connections>
                         <outlet property="accountImage" destination="0bi-b1-VTR" id="bCm-xY-7om"/>
+                        <outlet property="labelEmail" destination="1Qu-cK-Qat" id="uAX-bw-6Hd"/>
+                        <outlet property="lableName" destination="GJ2-C2-CkJ" id="yW9-H9-urm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zU8-TG-MC1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <view contentMode="scaleToFill" id="I9B-zv-dS9">
-                    <rect key="frame" x="0.0" y="0.0" width="255" height="24"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LjY-We-YlD">
-                            <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="24" id="rfE-xR-ioW"/>
-                                <constraint firstAttribute="width" constant="24" id="zBj-uJ-OU0"/>
-                            </constraints>
-                            <state key="normal" backgroundImage="OrdersButton"/>
-                        </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" text="Orders" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MVF-8U-wcs">
-                            <rect key="frame" x="39" y="1.6666666666666661" width="211" height="21"/>
-                            <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="18"/>
-                            <color key="textColor" name="SpecialWhite"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                    </subviews>
-                    <viewLayoutGuide key="safeArea" id="9DB-Jc-ael"/>
-                    <color key="backgroundColor" systemColor="systemPinkColor"/>
-                    <constraints>
-                        <constraint firstItem="MVF-8U-wcs" firstAttribute="centerY" secondItem="LjY-We-YlD" secondAttribute="centerY" id="9B2-w7-5aT"/>
-                        <constraint firstAttribute="height" priority="999" constant="24" id="KB0-cn-JZS"/>
-                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="LjY-We-YlD" secondAttribute="bottom" id="SHE-kf-pbd"/>
-                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="MVF-8U-wcs" secondAttribute="bottom" id="Tvh-TK-D4d"/>
-                        <constraint firstItem="LjY-We-YlD" firstAttribute="top" secondItem="I9B-zv-dS9" secondAttribute="top" id="VgB-oO-x8E"/>
-                        <constraint firstItem="LjY-We-YlD" firstAttribute="leading" secondItem="I9B-zv-dS9" secondAttribute="leading" id="YxD-W2-U4i"/>
-                        <constraint firstAttribute="trailing" secondItem="MVF-8U-wcs" secondAttribute="trailing" constant="5" id="a1j-eM-o1W"/>
-                        <constraint firstItem="MVF-8U-wcs" firstAttribute="leading" secondItem="LjY-We-YlD" secondAttribute="trailing" constant="15" id="t93-Qf-hzH"/>
-                    </constraints>
-                </view>
+                <tapGestureRecognizer id="9wB-hI-4Wg">
+                    <connections>
+                        <action selector="gestureLogOut:" destination="gOM-Kz-RQZ" id="3XA-sU-FJH"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="3699" y="285"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="Vdd-Pl-HZw"/>
-        <segue reference="WeL-0E-wdd"/>
+        <segue reference="wcC-kN-wgO"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="AddToCart" width="354" height="54"/>
@@ -2189,9 +2170,6 @@
         </systemColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemPinkColor">
-            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemTealColor">
             <color red="0.18823529411764706" green="0.69019607843137254" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

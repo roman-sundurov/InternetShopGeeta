@@ -46,10 +46,16 @@ class VCMainCatalog: UIViewController {
     
     //MARK: - переходы
     
+    func logOut() {
+        Persistence.shared.deleteUser()
+        performSegue(withIdentifier: "segueToVCWelcome", sender: nil)
+    }
+    
+    
     func tapToCVCell(){
-        if AppActualData.instance.activeCatalogMode == "catalog" {
-            AppActualData.instance.activeCatalogMode = "subcategories"
-            switch AppActualData.instance.activeCatalogCategory {
+        if AppSystemData.instance.activeCatalogMode == "catalog" {
+            AppSystemData.instance.activeCatalogMode = "subcategories"
+            switch AppSystemData.instance.activeCatalogCategory {
                 case 0:
                     borderLineForSecondMenu(button: 2)
                 case 11:
@@ -60,8 +66,8 @@ class VCMainCatalog: UIViewController {
                     print("hideSecondMenu")
                     hideSecondMenu()
             }
-        } else if AppActualData.instance.activeCatalogMode == "subcategories" {
-            AppActualData.instance.activeCatalogMode = "product"
+        } else if AppSystemData.instance.activeCatalogMode == "subcategories" {
+            AppSystemData.instance.activeCatalogMode = "product"
         }
         mainCatalogCollectionUpdate()
         self.view.layoutIfNeeded()
@@ -76,8 +82,8 @@ class VCMainCatalog: UIViewController {
     //MARK: - анимация верхнего меню
     
     func changeModeIntoSecondMenu(activeMode: String, categoriesID: Int) {
-        AppActualData.instance.activeCatalogMode = activeMode
-        AppActualData.instance.activeCatalogCategory = categoriesID
+        AppSystemData.instance.activeCatalogMode = activeMode
+        AppSystemData.instance.activeCatalogCategory = categoriesID
         mainCatalogCollectionUpdate()
     }
     
@@ -227,12 +233,12 @@ class VCMainCatalog: UIViewController {
     
     
     @IBAction func catalogBackButtonAction(_ sender: Any) {
-        if AppActualData.instance.activeCatalogMode == "subcategories" {
-            AppActualData.instance.activeCatalogMode = "catalog"
+        if AppSystemData.instance.activeCatalogMode == "subcategories" {
+            AppSystemData.instance.activeCatalogMode = "catalog"
             buttonCategoriesGesture(nil)
-        } else if AppActualData.instance.activeCatalogMode == "product" {
-            AppActualData.instance.activeCatalogMode = "subcategories"
-            switch AppActualData.instance.activeCatalogCategory {
+        } else if AppSystemData.instance.activeCatalogMode == "product" {
+            AppSystemData.instance.activeCatalogMode = "subcategories"
+            switch AppSystemData.instance.activeCatalogCategory {
                 case 0:
                     buttonMensGesture(nil)
                 case 11:
@@ -250,7 +256,7 @@ class VCMainCatalog: UIViewController {
     
     @IBAction func buttonCategoriesGesture(_ sender: Any?) {
         borderLineForSecondMenu(button: 1)
-        AppActualData.instance.activeCatalogMode = "catalog"
+        AppSystemData.instance.activeCatalogMode = "catalog"
         mainCatalogCollectionUpdate()
     }
     
@@ -271,11 +277,6 @@ class VCMainCatalog: UIViewController {
     
     
     //MARK: - данные
-
-    func printPersonalData() {
-        let personalData = AppActualData.instance.getActualUser()
-        print("personalData_Email= \(personalData?.email)")
-    }
     
     
     //MARK: - screen update
@@ -298,7 +299,7 @@ class VCMainCatalog: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        AppActualData.instance.VCMainCatalogDelegate = self
+        AppSystemData.instance.VCMainCatalogDelegate = self
         
         menuButtonView.layer.cornerRadius = 8
         menuButtonView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
@@ -308,7 +309,9 @@ class VCMainCatalog: UIViewController {
         
         hud.textLabel.text = "Loading"
         CatalogData.instance.requestCategoriesData()
-        AppActualData.instance.activeCatalogMode = "catalog"
+        AppSystemData.instance.activeCatalogMode = "catalog"
+        
+        print("Persistence.shared.printAllObject()_2= \(Persistence.shared.getAllObjectPersonalData())")
         
         }
     
@@ -326,26 +329,26 @@ extension VCMainCatalog: UICollectionViewDataSource {
   // 2
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        print("AppActualData.instance.activeCatalogMode= \(AppActualData.instance.activeCatalogMode)")
+        print("AppActualData.instance.activeCatalogMode= \(AppSystemData.instance.activeCatalogMode)")
         print("3333")
-        print("AppActualData.instance.activeCatalogMode= \(AppActualData.instance.activeCatalogMode)")
-        print("AppActualData.instance.activeCatalogCategory= \(AppActualData.instance.activeCatalogCategory)")
-        print("AppActualData.instance.activeCatalogSubCategory= \(AppActualData.instance.activeCatalogSubCategory)")
+        print("AppActualData.instance.activeCatalogMode= \(AppSystemData.instance.activeCatalogMode)")
+        print("AppActualData.instance.activeCatalogCategory= \(AppSystemData.instance.activeCatalogCategory)")
+        print("AppActualData.instance.activeCatalogSubCategory= \(AppSystemData.instance.activeCatalogSubCategory)")
 
         
-        switch AppActualData.instance.activeCatalogMode {
+        switch AppSystemData.instance.activeCatalogMode {
             case "catalog":
                 print("444.count= \(CatalogData.instance.categoriesArray.count)")
                 return CatalogData.instance.categoriesArray.count
             case "subcategories":
                 print("555")
-                let tempA: Int = CatalogData.instance.categoriesArray.firstIndex(where: { $0.sortOrder == AppActualData.instance.activeCatalogCategory })!
+                let tempA: Int = CatalogData.instance.categoriesArray.firstIndex(where: { $0.sortOrder == AppSystemData.instance.activeCatalogCategory })!
                 print("555.count= \(CatalogData.instance.categoriesArray[tempA].subCategories.count)")
                 return CatalogData.instance.categoriesArray[tempA].subCategories.count
             case "product":
                 print("666")
-                let tempA: Int = CatalogData.instance.categoriesArray.firstIndex(where: { $0.sortOrder == AppActualData.instance.activeCatalogCategory })!
-                let tempB: Int = CatalogData.instance.categoriesArray[tempA].subCategories.firstIndex(where: { $0.id == AppActualData.instance.activeCatalogSubCategory })!
+                let tempA: Int = CatalogData.instance.categoriesArray.firstIndex(where: { $0.sortOrder == AppSystemData.instance.activeCatalogCategory })!
+                let tempB: Int = CatalogData.instance.categoriesArray[tempA].subCategories.firstIndex(where: { $0.id == AppSystemData.instance.activeCatalogSubCategory })!
                 print("222_subcategoryname = \(CatalogData.instance.categoriesArray[tempA].subCategories[tempB].name)")
 
                 print("666.count = \(CatalogData.instance.categoriesArray[tempA].subCategories[tempB].goodsOfCategory.count)")
@@ -363,7 +366,7 @@ extension VCMainCatalog: UICollectionViewDataSource {
         var cellProd: catalogGoodsCollectionViewCell?
         
         
-        switch AppActualData.instance.activeCatalogMode {
+        switch AppSystemData.instance.activeCatalogMode {
             case "catalog":
                 cellCat = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as? catalogCategriesCollectionViewCell
                 cellCat!.categoryImage.image = CatalogData.instance.categoriesArray[indexPath.row].imageUIImage//?.trim()
@@ -372,8 +375,8 @@ extension VCMainCatalog: UICollectionViewDataSource {
             
             case "subcategories":
                 for data in CatalogData.instance.categoriesArray {
-                    if data.sortOrder == AppActualData.instance.activeCatalogCategory {
-                        print("AppActualData.instance.activeCatalogCategory222= \(AppActualData.instance.activeCatalogCategory)")
+                    if data.sortOrder == AppSystemData.instance.activeCatalogCategory {
+                        print("AppActualData.instance.activeCatalogCategory222= \(AppSystemData.instance.activeCatalogCategory)")
                         cellCat = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as? catalogCategriesCollectionViewCell
                         cellCat!.categoryImage.image = data.subCategories[indexPath.row].iconUIImage //?.trim()
 //                        CatalogData.instance.activeCatalogMode
@@ -383,10 +386,10 @@ extension VCMainCatalog: UICollectionViewDataSource {
                 }
             case "product":
                 print("product case in CollectionView indexPath.row= \(indexPath.row)")
-                let idOfCategory = AppActualData.instance.activeCatalogCategory
-                let idOfSubCategory = AppActualData.instance.activeCatalogSubCategory
+                let idOfCategory = AppSystemData.instance.activeCatalogCategory
+                let idOfSubCategory = AppSystemData.instance.activeCatalogSubCategory
                 let tempA: Int = CatalogData.instance.categoriesArray.firstIndex(where: { $0.sortOrder == idOfCategory })!
-                let tempB: Int = CatalogData.instance.categoriesArray[tempA].subCategories.firstIndex(where: { $0.id == AppActualData.instance.activeCatalogSubCategory })!
+                let tempB: Int = CatalogData.instance.categoriesArray[tempA].subCategories.firstIndex(where: { $0.id == AppSystemData.instance.activeCatalogSubCategory })!
                 
                 cellProd = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductCell", for: indexPath) as? catalogGoodsCollectionViewCell
                 cellProd!.productImage.image = CatalogData.instance.categoriesArray[tempA].subCategories[tempB].goodsOfCategory[indexPath.row].goodsUIImage //?.trim()
@@ -399,7 +402,7 @@ extension VCMainCatalog: UICollectionViewDataSource {
                 cellCat = collectionView.dequeueReusableCell(withReuseIdentifier: "GoodsCell", for: indexPath) as? catalogCategriesCollectionViewCell
         }
         
-        switch AppActualData.instance.activeCatalogMode {
+        switch AppSystemData.instance.activeCatalogMode {
             case "catalog", "subcategories":
                 cellCat!.upperView.layer.cornerRadius = 30
                 cellCat!.upperView.clipsToBounds = true
@@ -423,18 +426,18 @@ extension VCMainCatalog: UICollectionViewDataSource {
                 cellCat = collectionView.dequeueReusableCell(withReuseIdentifier: "GoodsCell", for: indexPath) as? catalogCategriesCollectionViewCell
         }
         
-        switch AppActualData.instance.activeCatalogMode {
+        switch AppSystemData.instance.activeCatalogMode {
             case "catalog":
                 cellCat!.startCell(tag: indexPath.row, action: {
-                    AppActualData.instance.activeCatalogCategory = CatalogData.instance.categoriesArray[indexPath.row].sortOrder
+                    AppSystemData.instance.activeCatalogCategory = CatalogData.instance.categoriesArray[indexPath.row].sortOrder
                     self.tapToCVCell()
                 } )
                 return cellCat!
             case "subcategories":
                 cellCat!.startCell(tag: indexPath.row, action: {
-                    let tempA: Int = CatalogData.instance.categoriesArray.firstIndex(where: { $0.sortOrder == AppActualData.instance.activeCatalogCategory } )!
+                    let tempA: Int = CatalogData.instance.categoriesArray.firstIndex(where: { $0.sortOrder == AppSystemData.instance.activeCatalogCategory } )!
                     
-                    AppActualData.instance.activeCatalogSubCategory = CatalogData.instance.categoriesArray[tempA].subCategories[indexPath.row].id
+                    AppSystemData.instance.activeCatalogSubCategory = CatalogData.instance.categoriesArray[tempA].subCategories[indexPath.row].id
                     CatalogData.instance.requestGoodsData()
                     self.tapToCVCell()
                 } )
@@ -442,10 +445,10 @@ extension VCMainCatalog: UICollectionViewDataSource {
             default:
                 cellProd!.startCell(tag: indexPath.row, action: {
                     
-                    let tempA: Int = CatalogData.instance.categoriesArray.firstIndex(where: { $0.sortOrder == AppActualData.instance.activeCatalogCategory } )!
-                    let tempB: Int = CatalogData.instance.categoriesArray[tempA].subCategories.firstIndex(where: { $0.id == AppActualData.instance.activeCatalogSubCategory })!
+                    let tempA: Int = CatalogData.instance.categoriesArray.firstIndex(where: { $0.sortOrder == AppSystemData.instance.activeCatalogCategory } )!
+                    let tempB: Int = CatalogData.instance.categoriesArray[tempA].subCategories.firstIndex(where: { $0.id == AppSystemData.instance.activeCatalogSubCategory })!
                     
-                    AppActualData.instance.activeCatalogProduct = CatalogData.instance.categoriesArray[tempA].subCategories[tempB].goodsOfCategory[indexPath.row].sortOrder
+                    AppSystemData.instance.activeCatalogProduct = CatalogData.instance.categoriesArray[tempA].subCategories[tempB].goodsOfCategory[indexPath.row].sortOrder
                     self.tapToCVCell()
                     self.buttonSegueToVCCatalogGoods()
                     

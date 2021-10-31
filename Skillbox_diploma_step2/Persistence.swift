@@ -12,37 +12,45 @@ class AppActualData {
     static let instance = AppActualData()
     
     var VCMainCatalogDelegate: VCMainCatalog? = nil
-    
     var activeCatalogMode: String = "catalog" // catalog/subcategories/product
     var activeCatalogCategory: Int = 0
     var activeCatalogSubCategory: Int = 0
     var activeCatalogProduct: Int = 0
+    var actualUser: PersonalData?
+    
+    func setActualUser(userEmail: String) {
+        let particularUser = try! Realm().objects(PersonalData.self).filter("email == \(userEmail)")
+        print("particularUser= \(particularUser)")
+        actualUser = particularUser as? PersonalData
+    }
+    
+    func getActualUser() -> PersonalData? {
+        return actualUser
+    }
+
     
 }
 
 
-class CatalogSubCategory: Object{
-    @objc dynamic var id: Int = 0
-    @objc dynamic var iconImage: String = ""
-    @objc dynamic var sortOrder: Int = 0
-    @objc dynamic var name: String = ""
-    @objc dynamic var type: String = ""
+class PersonalData: Object {
+    @objc dynamic var fullName: String = ""
+    @objc dynamic var email: String = ""
+    @objc dynamic var password: String = ""
 }
+
 
 class Persistence{
     static let shared = Persistence()
     private let realm = try! Realm()
     
-//    func addCatalogCategory(name: String, sortOrder: Int, image: String, iconImage: String, iconImageActive: String) {
-//        let catalogCategory = CatalogCategory()
-//        catalogCategory.name = name
-//        catalogCategory.sortOrder = sortOrder
-//        catalogCategory.image = image
-//        catalogCategory.iconImage = iconImage
-//        catalogCategory.iconImageActive = iconImageActive
-//        try! realm.write{
-//            realm.add(catalogCategory)
-//        }
-//    }
+    func addNewUser(fullName: String, email: String, password: String) {
+        let newUser = PersonalData()
+        newUser.fullName = fullName
+        newUser.email = email
+        newUser.password = password
+        try! realm.write{
+            realm.add(newUser)
+        }
+    }
     
 }

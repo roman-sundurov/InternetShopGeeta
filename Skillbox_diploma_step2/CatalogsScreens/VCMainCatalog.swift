@@ -272,6 +272,10 @@ class VCMainCatalog: UIViewController {
     
     //MARK: - данные
 
+    func printPersonalData() {
+        let personalData = AppActualData.instance.getActualUser()
+        print("personalData_Email= \(personalData?.email)")
+    }
     
     
     //MARK: - screen update

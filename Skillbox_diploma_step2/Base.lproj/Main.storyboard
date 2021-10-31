@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="m1b-40-kqH">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="kxM-Ru-tmL">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -693,7 +693,7 @@
                                     <constraint firstAttribute="width" constant="222" id="odR-Hk-Nfy"/>
                                     <constraint firstAttribute="height" constant="54" id="sAa-9l-mJg"/>
                                 </constraints>
-                                <state key="normal" image="Register Button"/>
+                                <state key="normal" image="RegisterButton"/>
                                 <connections>
                                     <action selector="buttonSegueToVCRegister:" destination="ljf-he-QsI" eventType="touchUpInside" id="HPS-a1-mNd"/>
                                     <segue destination="kxM-Ru-tmL" kind="presentation" identifier="segueToVCRegister" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="Naa-Ty-BOh"/>
@@ -867,7 +867,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q6q-pQ-6NH">
                                         <rect key="frame" x="0.0" y="204" width="330" height="20"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IUY-Eb-vdt" customClass="Checkbox" customModule="SimpleCheckbox">
+                                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IUY-Eb-vdt" customClass="Checkbox" customModule="SimpleCheckbox">
                                                 <rect key="frame" x="10" y="0.0" width="20" height="20"/>
                                                 <color key="backgroundColor" systemColor="systemTealColor"/>
                                                 <constraints>
@@ -875,7 +875,7 @@
                                                     <constraint firstAttribute="width" constant="20" id="nXT-UA-SPe"/>
                                                 </constraints>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" text="Remember me" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T54-Jf-T7T">
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" text="Remember me" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T54-Jf-T7T">
                                                 <rect key="frame" x="35" y="1.6666666666666288" width="174" height="17"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="17" id="bry-bR-F7C"/>
@@ -1105,7 +1105,7 @@
                                                             <constraint firstAttribute="width" constant="24" id="nuM-mB-O0Z"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ErrorCircle" translatesAutoresizingMaskIntoConstraints="NO" id="QCn-Vl-fLM">
+                                                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ErrorCircle" translatesAutoresizingMaskIntoConstraints="NO" id="QCn-Vl-fLM">
                                                         <rect key="frame" x="285" y="13" width="24" height="24"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="24" id="5Oe-wI-pLp"/>
@@ -1157,7 +1157,7 @@
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q2d-NH-yXS">
                                                         <rect key="frame" x="39" y="0.0" width="241" height="50"/>
                                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" textContentType="password"/>
+                                                        <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                                     </textField>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EnvelopeIcon" translatesAutoresizingMaskIntoConstraints="NO" id="e2d-mG-Ey0">
                                                         <rect key="frame" x="10" y="13" width="24" height="24"/>
@@ -1166,7 +1166,7 @@
                                                             <constraint firstAttribute="width" constant="24" id="vHp-QD-8I7"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ErrorCircle" translatesAutoresizingMaskIntoConstraints="NO" id="AFs-0S-971">
+                                                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ErrorCircle" translatesAutoresizingMaskIntoConstraints="NO" id="AFs-0S-971">
                                                         <rect key="frame" x="285" y="13" width="24" height="24"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="24" id="1pu-dO-8zL"/>
@@ -1207,10 +1207,9 @@
                                             <constraint firstAttribute="height" constant="54" id="mNg-M3-4QH"/>
                                             <constraint firstAttribute="width" constant="324" id="nIC-ke-XFr"/>
                                         </constraints>
-                                        <state key="normal" image="LogInButton"/>
+                                        <state key="normal" image="RegisterButtonBig"/>
                                         <connections>
                                             <action selector="buttonSegueToVCMainCatalog:" destination="kxM-Ru-tmL" eventType="touchUpInside" id="lrt-Yg-pyN"/>
-                                            <segue destination="m1b-40-kqH" kind="presentation" identifier="segueToVCMainCatalog" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="pLl-hW-0PW"/>
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iKF-ux-h9Q">
@@ -1240,7 +1239,7 @@
                                                             <constraint firstAttribute="width" constant="24" id="v6n-nd-iVp"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ErrorCircle" translatesAutoresizingMaskIntoConstraints="NO" id="Bmx-7v-Rm2">
+                                                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ErrorCircle" translatesAutoresizingMaskIntoConstraints="NO" id="Bmx-7v-Rm2">
                                                         <rect key="frame" x="285" y="13" width="24" height="24"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="24" id="TY6-2A-QdG"/>
@@ -1345,12 +1344,18 @@
                     </view>
                     <navigationItem key="navigationItem" id="zMQ-S8-p2h"/>
                     <connections>
-                        <outlet property="emailView" destination="Pd2-oI-1hX" id="ZNd-UT-U9c"/>
+                        <outlet property="imageEmailError" destination="QCn-Vl-fLM" id="i1V-3u-fu9"/>
+                        <outlet property="imageFullNameError" destination="Bmx-7v-Rm2" id="Epm-VN-8MH"/>
+                        <outlet property="imagePasswordError" destination="AFs-0S-971" id="kVH-x9-pYI"/>
+                        <outlet property="textFieldEmail" destination="Ime-D9-lQD" id="92W-xM-Kty"/>
+                        <outlet property="textFieldFullName" destination="ynE-oa-Ukr" id="kG8-W8-FzC"/>
+                        <outlet property="textFieldPassword" destination="Q2d-NH-yXS" id="Pr8-Xo-MjA"/>
+                        <segue destination="m1b-40-kqH" kind="presentation" identifier="segueToVCMainCatalog" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="WeL-0E-wdd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xvM-FY-C65" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1965" y="235"/>
+            <point key="canvasLocation" x="1965" y="232"/>
         </scene>
         <!--Catalog Goods-->
         <scene sceneID="zhP-xx-yfu">
@@ -2109,7 +2114,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="Vdd-Pl-HZw"/>
-        <segue reference="pLl-hW-0PW"/>
+        <segue reference="WeL-0E-wdd"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="AddToCart" width="354" height="54"/>
@@ -2140,7 +2145,8 @@
         <image name="Or_group" width="315" height="20"/>
         <image name="OrdersButton" width="24" height="24"/>
         <image name="PersonIcon" width="25" height="26"/>
-        <image name="Register Button" width="222" height="54"/>
+        <image name="RegisterButton" width="222" height="54"/>
+        <image name="RegisterButtonBig" width="324" height="54"/>
         <image name="Search Icon" width="27.333333969116211" height="27.333333969116211"/>
         <image name="Share" width="46" height="46"/>
         <image name="Slice 1" width="255" height="844"/>

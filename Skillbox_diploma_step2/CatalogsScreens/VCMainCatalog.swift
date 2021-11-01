@@ -283,14 +283,17 @@ class VCMainCatalog: UIViewController {
     
     func mainCatalogCollectionUpdate() {
         catalogCategriesCollectionView.reloadData()
+        print("mainCatalogCollectionUpdate")
     }
     
     func hudAppear() {
         hud.show(in: self.view)
+        print("hudAppear")
     }
     
     func hudDisapper() {
         hud.dismiss(animated: true)
+        print("hudDisapper")
     }
 
     
@@ -300,6 +303,7 @@ class VCMainCatalog: UIViewController {
         super.viewDidLoad()
         
         AppSystemData.instance.VCMainCatalogDelegate = self
+        print("AppSystemData.instance.VCMainCatalogDelegate_222= \(AppSystemData.instance.VCMainCatalogDelegate)")
         
         menuButtonView.layer.cornerRadius = 8
         menuButtonView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]

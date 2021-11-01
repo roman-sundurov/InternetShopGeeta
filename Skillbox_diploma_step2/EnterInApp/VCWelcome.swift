@@ -21,7 +21,20 @@ class VCWelcome: UIViewController {
     
     @IBOutlet var buttonSegueToVCRecognition: UIButton!
     
-    override func viewWillLayoutSubviews() {
+//    override func viewWillLayoutSubviews() {
+//        if Persistence.shared.getAllObjectPersonalData().first?.email.isEmpty == false {
+//            performSegue(withIdentifier: "segueToVCMainCatalog", sender: nil)
+//            print("segueToVCMainCatalog Yes= \(Persistence.shared.getAllObjectPersonalData().first?.email)")
+//            print("email.isEmpty= \(Persistence.shared.getAllObjectPersonalData().first?.email.isEmpty)")
+//        } else {
+//            print("segueToVCMainCatalog No= \(Persistence.shared.getAllObjectPersonalData().first?.email)")
+//            print("email.isEmpty= \(Persistence.shared.getAllObjectPersonalData().first?.email.isEmpty)")
+//        }
+//    }
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+
         if Persistence.shared.getAllObjectPersonalData().first?.email.isEmpty == false {
             performSegue(withIdentifier: "segueToVCMainCatalog", sender: nil)
             print("segueToVCMainCatalog Yes= \(Persistence.shared.getAllObjectPersonalData().first?.email)")
@@ -30,25 +43,23 @@ class VCWelcome: UIViewController {
             print("segueToVCMainCatalog No= \(Persistence.shared.getAllObjectPersonalData().first?.email)")
             print("email.isEmpty= \(Persistence.shared.getAllObjectPersonalData().first?.email.isEmpty)")
         }
-    }
-    
-    
-    override func viewDidAppear(_ animated: Bool) {
-        
-//        if Persistence.shared.getAllObjectPersonalData().first?.email != "" {
-//            performSegue(withIdentifier: "segueToVCMainCatalog", sender: nil)
-//        } else {
-//            print("segueToVCMainCatalog No= \(Persistence.shared.getAllObjectPersonalData().first?.email)")
-//        }
 
     }
     
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
-    }
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//
+//        if Persistence.shared.getAllObjectPersonalData().first?.email.isEmpty == false {
+//            performSegue(withIdentifier: "segueToVCMainCatalog", sender: nil)
+//            print("segueToVCMainCatalog Yes= \(Persistence.shared.getAllObjectPersonalData().first?.email)")
+//            print("email.isEmpty= \(Persistence.shared.getAllObjectPersonalData().first?.email.isEmpty)")
+//        } else {
+//            print("segueToVCMainCatalog No= \(Persistence.shared.getAllObjectPersonalData().first?.email)")
+//            print("email.isEmpty= \(Persistence.shared.getAllObjectPersonalData().first?.email.isEmpty)")
+//        }
+//
+//    }
 
 
 }

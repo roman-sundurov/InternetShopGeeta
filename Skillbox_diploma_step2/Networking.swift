@@ -157,6 +157,9 @@ extension CatalogData {
                     }
                 CatalogData.instance.categoriesArray = categories
                 CatalogData.instance.showCategories()
+                
+                print("AppSystemData.instance.VCMainCatalogDelegate_333= \(AppSystemData.instance.VCMainCatalogDelegate)")
+                
                 AppSystemData.instance.VCMainCatalogDelegate!.mainCatalogCollectionUpdate()
                 AppSystemData.instance.VCMainCatalogDelegate!.hudDisapper()
                 print("categories= \(categories)")

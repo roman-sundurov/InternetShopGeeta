@@ -11,7 +11,7 @@ import RealmSwift
 class AppSystemData {
     static let instance = AppSystemData()
 
-    var VCMainCatalogDelegate: VCMainCatalog? = nil
+    var VCMainCatalogDelegate: VCMainCatalog?
     var activeCatalogMode: String = "catalog" // catalog/subcategories/product
     var activeCatalogCategory: Int = 0
     var activeCatalogSubCategory: Int = 0

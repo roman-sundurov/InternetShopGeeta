@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="527-8j-C8f">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -22,6 +22,35 @@
         </array>
     </customFonts>
     <scenes>
+        <!--Launch Screen-->
+        <scene sceneID="Z9u-UB-zK8">
+            <objects>
+                <viewController id="527-8j-C8f" customClass="VCLaunchScreen" customModule="Skillbox_diploma_step2" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="SL6-x2-Obr">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchScreen" translatesAutoresizingMaskIntoConstraints="NO" id="YkL-fT-Ght">
+                                <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="kHk-oc-KDj"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="YkL-fT-Ght" firstAttribute="top" secondItem="SL6-x2-Obr" secondAttribute="top" id="0fY-2d-z5H"/>
+                            <constraint firstItem="YkL-fT-Ght" firstAttribute="leading" secondItem="SL6-x2-Obr" secondAttribute="leading" id="11A-Hn-05e"/>
+                            <constraint firstItem="YkL-fT-Ght" firstAttribute="bottom" secondItem="SL6-x2-Obr" secondAttribute="bottom" id="Xe8-5t-LIF"/>
+                            <constraint firstItem="YkL-fT-Ght" firstAttribute="trailing" secondItem="SL6-x2-Obr" secondAttribute="trailing" id="sKo-RY-wYN"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="tQR-CR-vDb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QCf-o5-cBI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-729" y="-171"/>
+        </scene>
         <!--Welcome-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -2096,6 +2125,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="Vdd-Pl-HZw"/>
         <segue reference="wcC-kN-wgO"/>
+        <segue reference="tQR-CR-vDb"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="AddToCart" width="354" height="54"/>
@@ -2116,11 +2146,12 @@
         <image name="Full View" width="24" height="24"/>
         <image name="Get Started Button" width="222" height="54"/>
         <image name="Grid View" width="24" height="24"/>
+        <image name="LaunchScreen" width="390" height="844"/>
         <image name="LockIcon" width="24" height="24"/>
         <image name="Log In Button" width="222" height="54"/>
         <image name="LogInButton" width="324" height="54"/>
         <image name="LogOut" width="20.333333969116211" height="20.333333969116211"/>
-        <image name="Logo" width="305" height="77.666664123535156"/>
+        <image name="Logo" width="71" height="20"/>
         <image name="Menu" width="37" height="24"/>
         <image name="Notification" width="22.333333969116211" height="24.333333969116211"/>
         <image name="Or_group" width="315" height="20"/>

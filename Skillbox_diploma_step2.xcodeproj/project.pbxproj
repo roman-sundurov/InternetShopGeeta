@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		47076DC226AA25ED002D8A65 /* VCRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47076DC126AA25ED002D8A65 /* VCRegister.swift */; };
+		470B249F2739DED1001C060C /* VCLaunchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470B249E2739DED0001C060C /* VCLaunchScreen.swift */; };
 		470C001F271C469800D18353 /* catalogGoodsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470C001E271C469800D18353 /* catalogGoodsCollectionViewCell.swift */; };
 		4712BB1C26A310C5003701D5 /* VCRecognition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4712BB1B26A310C5003701D5 /* VCRecognition.swift */; };
 		471C640926FF88A90063C5B3 /* JGProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 471C640826FF88A90063C5B3 /* JGProgressHUD */; };
@@ -85,6 +86,7 @@
 
 /* Begin PBXFileReference section */
 		47076DC126AA25ED002D8A65 /* VCRegister.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCRegister.swift; sourceTree = "<group>"; };
+		470B249E2739DED0001C060C /* VCLaunchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCLaunchScreen.swift; sourceTree = "<group>"; };
 		470C001E271C469800D18353 /* catalogGoodsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = catalogGoodsCollectionViewCell.swift; sourceTree = "<group>"; };
 		4712BB1B26A310C5003701D5 /* VCRecognition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCRecognition.swift; sourceTree = "<group>"; };
 		472D946A2676AA0300482C20 /* Skillbox_diploma_step2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Skillbox_diploma_step2.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -152,6 +154,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		470B24A02739DEE1001C060C /* LaunchScreen */ = {
+			isa = PBXGroup;
+			children = (
+				472D94782676AA0500482C20 /* LaunchScreen.storyboard */,
+				470B249E2739DED0001C060C /* VCLaunchScreen.swift */,
+			);
+			path = LaunchScreen;
+			sourceTree = "<group>";
+		};
 		472D94612676AA0300482C20 = {
 			isa = PBXGroup;
 			children = (
@@ -187,7 +198,7 @@
 				4752A8F026AB5BD4000E4AC5 /* CatalogsScreens */,
 				4752A8F326AB632B000E4AC5 /* ProfilesScreens */,
 				472D94762676AA0500482C20 /* Assets.xcassets */,
-				472D94782676AA0500482C20 /* LaunchScreen.storyboard */,
+				470B24A02739DEE1001C060C /* LaunchScreen */,
 				472D947B2676AA0500482C20 /* Info.plist */,
 			);
 			path = Skillbox_diploma_step2;
@@ -464,6 +475,7 @@
 				472D94702676AA0300482C20 /* SceneDelegate.swift in Sources */,
 				4752A8F226AB5C00000E4AC5 /* VCMainCatalog.swift in Sources */,
 				479771F126E579C1006B0EFE /* Persistence.swift in Sources */,
+				470B249F2739DED1001C060C /* VCLaunchScreen.swift in Sources */,
 				470C001F271C469800D18353 /* catalogGoodsCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -640,6 +652,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6VWFU6AND8;
 				INFOPLIST_FILE = Skillbox_diploma_step2/Info.plist;
@@ -659,6 +672,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6VWFU6AND8;
 				INFOPLIST_FILE = Skillbox_diploma_step2/Info.plist;

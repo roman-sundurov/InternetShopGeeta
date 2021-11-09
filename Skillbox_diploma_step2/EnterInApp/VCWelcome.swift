@@ -33,22 +33,7 @@ class VCWelcome: UIViewController {
 //    }
     
     
-    override func viewDidAppear(_ animated: Bool) {
-
-        if Persistence.shared.getAllObjectPersonalData().first?.email.isEmpty == false {
-            performSegue(withIdentifier: "segueToVCMainCatalog", sender: nil)
-            print("segueToVCMainCatalog Yes= \(Persistence.shared.getAllObjectPersonalData().first?.email)")
-            print("email.isEmpty= \(Persistence.shared.getAllObjectPersonalData().first?.email.isEmpty)")
-        } else {
-            print("segueToVCMainCatalog No= \(Persistence.shared.getAllObjectPersonalData().first?.email)")
-            print("email.isEmpty= \(Persistence.shared.getAllObjectPersonalData().first?.email.isEmpty)")
-        }
-
-    }
-    
-    
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
+//    override func viewDidAppear(_ animated: Bool) {
 //
 //        if Persistence.shared.getAllObjectPersonalData().first?.email.isEmpty == false {
 //            performSegue(withIdentifier: "segueToVCMainCatalog", sender: nil)
@@ -60,6 +45,21 @@ class VCWelcome: UIViewController {
 //        }
 //
 //    }
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+//
+//        if Persistence.shared.getAllObjectPersonalData().first?.email.isEmpty == false {
+//            performSegue(withIdentifier: "segueToVCMainCatalog", sender: nil)
+//            print("segueToVCMainCatalog Yes= \(Persistence.shared.getAllObjectPersonalData().first?.email)")
+//            print("email.isEmpty= \(Persistence.shared.getAllObjectPersonalData().first?.email.isEmpty)")
+//        } else {
+//            print("segueToVCMainCatalog No= \(Persistence.shared.getAllObjectPersonalData().first?.email)")
+//            print("email.isEmpty= \(Persistence.shared.getAllObjectPersonalData().first?.email.isEmpty)")
+//        }
+//
+    }
 
 
 }

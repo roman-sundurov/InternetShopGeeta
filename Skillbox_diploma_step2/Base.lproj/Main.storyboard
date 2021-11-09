@@ -1837,11 +1837,14 @@
                                                                     <color key="textColor" name="SpecialGrey2"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CGy-b4-7ct">
-                                                                    <rect key="frame" x="99" y="0.0" width="60.666666666666686" height="21.666666666666668"/>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CGy-b4-7ct">
+                                                                    <rect key="frame" x="145" y="0.0" width="61" height="21.666666666666668"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tJy-Zw-cD2">
-                                                                            <rect key="frame" x="25" y="0.0" width="10.666666666666664" height="21.666666666666668"/>
+                                                                            <rect key="frame" x="25" y="0.0" width="11" height="21.666666666666668"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="width" constant="11" id="hFo-j6-gkI"/>
+                                                                            </constraints>
                                                                             <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="18"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
@@ -1855,7 +1858,7 @@
                                                                             <state key="normal" title="Button" image="minus"/>
                                                                         </button>
                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pui-ug-gxh">
-                                                                            <rect key="frame" x="43.666666666666657" y="6.3333333333333428" width="9" height="9"/>
+                                                                            <rect key="frame" x="44" y="6.3333333333333428" width="9" height="9"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" constant="9" id="4za-fn-VhN"/>
                                                                                 <constraint firstAttribute="height" constant="9" id="Sf0-eN-NUf"/>
@@ -1879,9 +1882,8 @@
                                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                             <constraints>
                                                                 <constraint firstItem="UUb-q2-eda" firstAttribute="centerY" secondItem="CGy-b4-7ct" secondAttribute="centerY" id="Ahu-G0-FaP"/>
-                                                                <constraint firstItem="CGy-b4-7ct" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="UUb-q2-eda" secondAttribute="trailing" constant="5" id="Ct6-i4-Py7"/>
+                                                                <constraint firstAttribute="trailing" secondItem="CGy-b4-7ct" secondAttribute="trailing" id="cJf-bG-Jbf"/>
                                                                 <constraint firstAttribute="bottom" secondItem="CGy-b4-7ct" secondAttribute="bottom" id="jr8-jQ-4x2"/>
-                                                                <constraint firstAttribute="trailing" secondItem="CGy-b4-7ct" secondAttribute="trailing" id="q3w-BV-Yqd"/>
                                                                 <constraint firstItem="UUb-q2-eda" firstAttribute="leading" secondItem="Pv9-jZ-w6b" secondAttribute="leading" id="w6q-fm-IYA"/>
                                                                 <constraint firstItem="CGy-b4-7ct" firstAttribute="top" secondItem="Pv9-jZ-w6b" secondAttribute="top" id="yQU-lr-Vkp"/>
                                                             </constraints>

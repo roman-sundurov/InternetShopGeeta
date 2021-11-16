@@ -152,6 +152,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KyC-zX-T19" userLabel="Cart">
                                                 <rect key="frame" x="44.333333333333314" y="0.0" width="26" height="24"/>
                                                 <state key="normal" backgroundImage="Cart icon"/>
+                                                <connections>
+                                                    <action selector="cartActionButton:" destination="m1b-40-kqH" eventType="touchUpInside" id="fde-Z4-bmb"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OdG-uB-gV4" userLabel="Favorite">
                                                 <rect key="frame" x="92.333333333333314" y="0.0" width="26" height="24"/>
@@ -662,7 +665,7 @@
                         <outlet property="slideProfileMenu" destination="lTI-t6-02T" id="pWf-dE-vUe"/>
                         <segue destination="hb6-fT-t5E" kind="presentation" identifier="segueToVCCatalogGoods" modalPresentationStyle="fullScreen" id="vQl-h3-7y5"/>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="segueToVCWelcome" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="EIv-eB-LWm"/>
-                        <segue destination="uDl-VA-6S8" kind="presentation" identifier="segueToVCCart" modalPresentationStyle="fullScreen" id="qDb-IQ-3kX"/>
+                        <segue destination="uDl-VA-6S8" kind="presentation" identifier="segueToVCCart" modalTransitionStyle="coverVertical" id="qDb-IQ-3kX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lA1-B6-yrk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1748,24 +1751,27 @@
             <objects>
                 <viewController id="uDl-VA-6S8" customClass="VCCart" customModule="Skillbox_diploma_step2" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="YyZ-NL-Xry">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tzk-tP-UA5" userLabel="BackButton">
-                                <rect key="frame" x="20" y="64" width="19" height="15"/>
+                                <rect key="frame" x="20" y="20" width="19" height="15"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="15" id="5xK-Rd-UhC"/>
                                     <constraint firstAttribute="width" constant="19" id="WNR-QO-MXl"/>
                                 </constraints>
                                 <state key="normal" backgroundImage="BackButtonBlack"/>
+                                <connections>
+                                    <action selector="buttonCloseCartScreen:" destination="uDl-VA-6S8" eventType="touchUpInside" id="oiM-x7-EeF"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Cart" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cgb-gc-Z0e">
-                                <rect key="frame" x="165.33333333333334" y="64" width="59.333333333333343" height="19.333333333333329"/>
+                                <rect key="frame" x="165.33333333333334" y="20" width="59.333333333333343" height="19.333333333333329"/>
                                 <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="16"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="TRm-eH-KlC">
-                                <rect key="frame" x="0.0" y="103.33333333333331" width="390" height="636.66666666666674"/>
+                                <rect key="frame" x="0.0" y="59.333333333333314" width="390" height="626.66666666666674"/>
                                 <color key="backgroundColor" red="0.38988393545150757" green="0.99129480123519897" blue="0.99937421083450317" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="EHp-R6-nEw">
                                     <size key="itemSize" width="350" height="140"/>
@@ -1915,17 +1921,17 @@
                                 </cells>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hCP-Te-7mT">
-                                <rect key="frame" x="0.0" y="740" width="390" height="104"/>
+                                <rect key="frame" x="0.0" y="686" width="390" height="104"/>
                                 <color key="backgroundColor" systemColor="systemBlueColor"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hhr-5S-WaB">
-                                <rect key="frame" x="18" y="760" width="354" height="54"/>
+                                <rect key="frame" x="18" y="706" width="354" height="54"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="354" id="fdi-3f-fOv"/>
                                     <constraint firstAttribute="height" constant="54" id="lDf-sy-OFx"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="AddToCart" title=""/>
+                                <buttonConfiguration key="configuration" style="plain" image="goToCheckButton" title=""/>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="hkU-aK-JLM"/>
@@ -1977,7 +1983,7 @@
                                                 </constraints>
                                                 <state key="normal" backgroundImage="OrdersButton"/>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" text="Orders" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lhg-yp-zaR">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" text="Cart" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lhg-yp-zaR">
                                                 <rect key="frame" x="39" y="3.6666666666666572" width="171" height="17"/>
                                                 <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="14"/>
                                                 <color key="textColor" name="SpecialWhite"/>
@@ -2340,7 +2346,11 @@
                         <action selector="gestureLogOut:" destination="gOM-Kz-RQZ" id="3XA-sU-FJH"/>
                     </connections>
                 </tapGestureRecognizer>
-                <tapGestureRecognizer id="f2k-ex-09n"/>
+                <tapGestureRecognizer id="f2k-ex-09n">
+                    <connections>
+                        <action selector="gestureGoCartScreen:" destination="gOM-Kz-RQZ" id="lQs-Cs-9fL"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="3599" y="264"/>
         </scene>
@@ -2377,7 +2387,7 @@
         <image name="Log In Button" width="222" height="54"/>
         <image name="LogInButton" width="324" height="54"/>
         <image name="LogOut" width="20.333333969116211" height="20.333333969116211"/>
-        <image name="Logo" width="305" height="77.666664123535156"/>
+        <image name="Logo" width="71" height="20"/>
         <image name="Menu" width="37" height="24"/>
         <image name="Notification" width="22.333333969116211" height="24.333333969116211"/>
         <image name="NotificationsButton" width="18.333333969116211" height="20.333333969116211"/>
@@ -2394,6 +2404,7 @@
         <image name="Slice 2" width="62" height="48"/>
         <image name="WelcomeSlide" width="52" height="6"/>
         <image name="WishlistButton" width="24" height="24"/>
+        <image name="goToCheckButton" width="354" height="54"/>
         <image name="goodHoodie" width="276" height="393"/>
         <image name="goodsToFavorite" width="22" height="20"/>
         <image name="lSizeEmpty" width="48" height="48"/>

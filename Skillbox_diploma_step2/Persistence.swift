@@ -25,6 +25,7 @@ class PersonalData: Object {
     @objc dynamic var name: String = ""
     @objc dynamic var email: String = ""
     @objc dynamic var password: String = ""
+//    @objc dynamic var cart: <GoodsOfCategory>
 }
 
 

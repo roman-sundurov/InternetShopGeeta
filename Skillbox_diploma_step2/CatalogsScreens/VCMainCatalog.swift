@@ -162,12 +162,19 @@ class VCMainCatalog: UIViewController {
     
     //MARK: - клики, жесты
     
+    
+    @IBAction func cartActionButton(_ sender: Any) {
+        performSegue(withIdentifier: "segueToVCCart", sender: nil)
+    }
+    
+    
     @IBAction func handlerButtonTapGesture(_ gesture: UITapGestureRecognizer) {
         if gesture.state == .ended {
             print("buttonTapp")
             slideProfileMenuPushed(gesture: gesture, gestureView: menuButtonView, isTap: true)
         }
     }
+    
     
     @IBAction func handlerMenuButtonHorizonGesture(_ gesture: UIPanGestureRecognizer) {
         let translation = gesture.translation(in: view)
@@ -196,7 +203,17 @@ class VCMainCatalog: UIViewController {
         }
     }
     
+    //Закрытие слайдера с профайлом без дополнительных сценариев
+    func slideSimpleClose() {
+        print("slideClose")
+        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
+            self.menuButtonView.frame.origin.x = UIScreen.main.bounds.width - self.menuButtonView.frame.size.width
+            self.slideProfileMenu.frame.origin.x = UIScreen.main.bounds.width
+        })
+    }
     
+    
+    //Открытие/закрытие слайдера с профайлом в зависимости от его метосположения
     func slideProfileMenuPushed(gesture: UIGestureRecognizer, gestureView: UIView, isTap: Bool) {
         if slideProfileMenu.frame.origin.x >= UIScreen.main.bounds.width - 255 / 2 {
             if isTap == true {

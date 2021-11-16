@@ -32,6 +32,12 @@ class VCProfileSlider: UIViewController {
     }
     
     
+    @IBAction func gestureGoCartScreen(_ sender: Any) {
+        AppSystemData.instance.VCMainCatalogDelegate!.slideSimpleClose()
+        AppSystemData.instance.VCMainCatalogDelegate!.performSegue(withIdentifier: "segueToVCCart", sender: nil)
+    }
+    
+    
     //MARK: - данные
     
     func updateScreenData() {

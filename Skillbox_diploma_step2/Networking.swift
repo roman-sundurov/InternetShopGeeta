@@ -7,6 +7,7 @@
 
 import Foundation
 import Alamofire
+import RealmSwift
 import UIKit
 
 class CatalogData{
@@ -105,10 +106,12 @@ class GoodsOfCategory {
     let englishName: String
     let sortOrder: Int
     let article: String
-    let description: String
+    let descriptionGoods: String
     let goodsImage: String
     let goodsUIImage: UIImage?
     let price: Double
+    var isFavorite: Bool?
+    var inCart: Bool?
     
     init?(data: NSDictionary) {
         guard let name = data["name"] as? String,
@@ -119,16 +122,18 @@ class GoodsOfCategory {
               let price = data["price"] as? Double ?? Double(data["price"] as! String),
               let mainImage = data["mainImage"] as? String else {
                   return nil
-        }
+              }
         self.name = name
         self.englishName = englishName
         self.sortOrder = Int(sortOrder) ?? 0
         self.article = article
-        self.description = description
+        self.descriptionGoods = description
         print("Special Price= \(price)")
         self.price = price
         self.goodsImage = mainImage
         self.goodsUIImage = UIImage(data: try! Data(contentsOf: URL(string: "https://blackstarshop.ru/\(mainImage)")!))?.trim()
+        //Проверка, имеется ли данный артикул в Realm в Избранном или в корзине.
+        self.isFavorite = !Persistence.shared.getAllObjectOfFavorite().filter("article == '\(article)'").isEmpty
     }
     
 }

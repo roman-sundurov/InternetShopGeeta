@@ -7,6 +7,7 @@
 
 import Foundation
 import RealmSwift
+import UIKit
 
 class AppSystemData {
     static let instance = AppSystemData()
@@ -25,8 +26,27 @@ class PersonalData: Object {
     @objc dynamic var name: String = ""
     @objc dynamic var email: String = ""
     @objc dynamic var password: String = ""
-//    @objc dynamic var cart: <GoodsOfCategory>
+//    var cart = List<CartGoods>()
+    var favorite = List<FavoriteGoods>()
 }
+
+
+class FavoriteGoods: Object{
+    @objc dynamic var name: String = ""
+    @objc dynamic var englishName: String = ""
+    @objc dynamic var sortOrder: Int = 0
+    @objc dynamic var article: String = ""
+    @objc dynamic var descriptionGoods: String = ""
+    @objc dynamic var goodsImage: String = ""
+    @objc dynamic var goodsUIImageData: NSData? = nil
+    @objc dynamic var price: Double = 0
+    @objc dynamic var isFavorite: Bool = false
+    @objc dynamic var inCart: Bool = false
+}
+
+
+//class CartGoods: Object {
+//}
 
 
 class Persistence{
@@ -61,4 +81,66 @@ class Persistence{
         }
     }
     
+    
+    //Сохранение/удаление избранных товаров
+    func addGoodsToFavorite(good: GoodsOfCategory) {
+        print("addGoodsToFavorite")
+        let favoriteGood = FavoriteGoods()
+        favoriteGood.englishName = good.englishName
+        favoriteGood.sortOrder = good.sortOrder
+        favoriteGood.article = good.article
+        favoriteGood.descriptionGoods = good.descriptionGoods
+        favoriteGood.goodsImage = good.goodsImage
+        favoriteGood.goodsUIImageData = good.goodsUIImage?.jpegData(compressionQuality: 1.0) as NSData?
+        favoriteGood.price = good.price
+        favoriteGood.inCart = good.inCart ?? false
+        try! realm.write {
+            realm.add(favoriteGood)
+        }
+    }
+
+    func deleteGoodsFromFavorite(article: String) {
+        print("deleteGoodsToFavorite, article= \(article)")
+        for n in Persistence.shared.getAllObjectOfFavorite() {
+            print("article= \(n.article), name= \(n.name)")
+        }
+        let objectForDeleting: FavoriteGoods? = realm.objects(FavoriteGoods.self).filter("article == '\(article)'").first
+        print("article= \(article), objectForDeleting.article= \(objectForDeleting)")
+        try! realm.write {
+            realm.delete(objectForDeleting!)
+        }
+    }
+
+
+
+//    //Сохранение/удаление товаров корзины
+//    func addGoodsToCart(good: CartGoods) {
+//        try! realm.write {
+//            realm.add(good)
+//        }
+//    }
+//
+//    func deleteGoodsFromCar(article: String) {
+//        let objectForDeleting = realm.objects(PersonalData.self).first!.cart.filter("article == \(article)")
+//        try! realm.write {
+//            realm.delete(objectForDeleting)
+//        }
+//    }
+
+
+
+//    func getAllObjectOfCart() -> Results<CartGoods> {
+//        try! realm.write{
+//            return realm.objects(CartGoods.self)
+//        }
+//    }
+
+
+    func getAllObjectOfFavorite() -> Results<FavoriteGoods> {
+        let allFavoriteGoods = realm.objects(FavoriteGoods.self)
+            return allFavoriteGoods
+    }
+    
 }
+
+

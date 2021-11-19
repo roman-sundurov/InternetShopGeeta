@@ -333,7 +333,14 @@ class VCMainCatalog: UIViewController {
         AppSystemData.instance.activeCatalogMode = "catalog"
         
         print("Persistence.shared.printAllObject()_2= \(Persistence.shared.getAllObjectPersonalData())")
-        
+        var dataName: String = ""
+        for n in Persistence.shared.getAllObjectOfFavorite() {
+            dataName += " + \(n.name)"
+            print("n.name= \(n.name)")
+            print("n= \(n)")
+        }
+        print("getAllObjectOfFavorite= \(dataName)")
+
         }
     
 }
@@ -411,18 +418,22 @@ extension VCMainCatalog: UICollectionViewDataSource {
                 let idOfSubCategory = AppSystemData.instance.activeCatalogSubCategory
                 let tempA: Int = CatalogData.instance.categoriesArray.firstIndex(where: { $0.sortOrder == idOfCategory })!
                 let tempB: Int = CatalogData.instance.categoriesArray[tempA].subCategories.firstIndex(where: { $0.id == AppSystemData.instance.activeCatalogSubCategory })!
+                let goodsData = CatalogData.instance.categoriesArray[tempA].subCategories[tempB].goodsOfCategory[indexPath.row]
                 
                 cellProd = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductCell", for: indexPath) as? catalogGoodsCollectionViewCell
-                cellProd!.productImage.image = CatalogData.instance.categoriesArray[tempA].subCategories[tempB].goodsOfCategory[indexPath.row].goodsUIImage //?.trim()
+                cellProd!.productImage.image = goodsData.goodsUIImage //?.trim()
 //                        CatalogData.instance.activeCatalogMode
-                cellProd!.nameProduct.text = CatalogData.instance.categoriesArray[tempA].subCategories[tempB].goodsOfCategory[indexPath.row].name
-                cellProd!.priceProduct.text = String(format: "$%.2f usd", CatalogData.instance.categoriesArray[tempA].subCategories[tempB].goodsOfCategory[indexPath.row].price)
+                cellProd!.nameProduct.text = goodsData.name
+                cellProd!.priceProduct.text = String(format: "$%.2f usd", goodsData.price)
+                cellProd!.favoriteButton.isSelected = goodsData.isFavorite!
+                cellProd?.dataOfCell = goodsData
                 print("name_subcategories= \(CatalogData.instance.categoriesArray[tempA].subCategories[tempB].name)")
             default:
                 print("default111")
-                cellCat = collectionView.dequeueReusableCell(withReuseIdentifier: "GoodsCell", for: indexPath) as? catalogCategriesCollectionViewCell
+                cellCat = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as? catalogCategriesCollectionViewCell
         }
         
+        //Set constraints
         switch AppSystemData.instance.activeCatalogMode {
             case "catalog", "subcategories":
                 cellCat!.upperView.layer.cornerRadius = 30
@@ -447,6 +458,7 @@ extension VCMainCatalog: UICollectionViewDataSource {
                 cellCat = collectionView.dequeueReusableCell(withReuseIdentifier: "GoodsCell", for: indexPath) as? catalogCategriesCollectionViewCell
         }
         
+        
         switch AppSystemData.instance.activeCatalogMode {
             case "catalog":
                 cellCat!.startCell(tag: indexPath.row, action: {
@@ -464,6 +476,7 @@ extension VCMainCatalog: UICollectionViewDataSource {
                 } )
                 return cellCat!
             default:
+                //Срабатывает если AppSystemData.instance.activeCatalogMode == "product"
                 cellProd!.startCell(tag: indexPath.row, action: {
                     
                     let tempA: Int = CatalogData.instance.categoriesArray.firstIndex(where: { $0.sortOrder == AppSystemData.instance.activeCatalogCategory } )!

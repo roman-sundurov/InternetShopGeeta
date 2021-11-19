@@ -106,7 +106,7 @@ class VCCatalogGoods: UIViewController {
         labelNameOfProduct.text = specificGood.name
         labelPrice.text = String(format: "$%.2f usd", specificGood.price)
         imageProduct.image = specificGood.goodsUIImage //?.trim()
-        labelDescription.text = specificGood.description
+        labelDescription.text = specificGood.descriptionGoods
 
         
         buttonSizeS.setImage(UIImage.init(named: "sSizePainted"), for: .selected)

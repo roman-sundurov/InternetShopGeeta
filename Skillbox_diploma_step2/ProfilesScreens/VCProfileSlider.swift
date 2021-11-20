@@ -37,6 +37,10 @@ class VCProfileSlider: UIViewController {
         AppSystemData.instance.VCMainCatalogDelegate!.performSegue(withIdentifier: "segueToVCCart", sender: nil)
     }
     
+    @IBAction func gestureGoFavoriteScreen(_ sender: Any) {
+//        AppSystemData.instance.VCMainCatalogDelegate!.slideSimpleClose()
+//        AppSystemData.instance.VCMainCatalogDelegate!.performSegue(withIdentifier: "segueToVCFavorite", sender: nil)
+    }
     
     //MARK: - данные
     

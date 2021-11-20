@@ -46,6 +46,12 @@ class VCMainCatalog: UIViewController {
     
     //MARK: - переходы
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? VCCatalogGoods, segue.identifier == "segueToVCCatalogGoods" {
+            //Something
+        }
+    }
+    
     func logOut() {
         Persistence.shared.deleteUser()
         performSegue(withIdentifier: "segueToVCWelcome", sender: nil)
@@ -72,6 +78,7 @@ class VCMainCatalog: UIViewController {
         mainCatalogCollectionUpdate()
         self.view.layoutIfNeeded()
     }
+    
     
     func buttonSegueToVCCatalogGoods() {
         performSegue(withIdentifier: "segueToVCCatalogGoods", sender: nil)
@@ -176,6 +183,7 @@ class VCMainCatalog: UIViewController {
     }
     
     
+    //Обработка горизонтального перемещения бокового меню
     @IBAction func handlerMenuButtonHorizonGesture(_ gesture: UIPanGestureRecognizer) {
         let translation = gesture.translation(in: view)
         guard let gestureView = gesture.view else {
@@ -202,6 +210,7 @@ class VCMainCatalog: UIViewController {
             return
         }
     }
+   
     
     //Закрытие слайдера с профайлом без дополнительных сценариев
     func slideSimpleClose() {
@@ -271,22 +280,29 @@ class VCMainCatalog: UIViewController {
     }
     
     
+    //Push "Categories" button in upper menu
     @IBAction func buttonCategoriesGesture(_ sender: Any?) {
         borderLineForSecondMenu(button: 1)
         AppSystemData.instance.activeCatalogMode = "catalog"
         mainCatalogCollectionUpdate()
     }
     
+    
+    //Push "Mens" button in upper menu
     @IBAction func buttonMensGesture(_ sender: Any?) {
         borderLineForSecondMenu(button: 2)
         changeModeIntoSecondMenu(activeMode: "subcategories", categoriesID: 0)
     }
     
+    
+    //Push "Womens" button in upper menu
     @IBAction func buttonWomensGesture(_ sender: Any?) {
         borderLineForSecondMenu(button: 3)
         changeModeIntoSecondMenu(activeMode: "subcategories", categoriesID: 11)
     }
     
+    
+    //Push "Sale" button in upper menu
     @IBAction func buttonSaleGesture(_ sender: Any?) {
         borderLineForSecondMenu(button: 4)
         changeModeIntoSecondMenu(activeMode: "subcategories", categoriesID: 99)
@@ -332,14 +348,25 @@ class VCMainCatalog: UIViewController {
         CatalogData.instance.requestCategoriesData()
         AppSystemData.instance.activeCatalogMode = "catalog"
         
+        
+        
         print("Persistence.shared.printAllObject()_2= \(Persistence.shared.getAllObjectPersonalData())")
         var dataName: String = ""
         for n in Persistence.shared.getAllObjectOfFavorite() {
             dataName += " + \(n.name)"
-            print("n.name= \(n.name)")
-            print("n= \(n)")
+            print("Favorite n.name= \(n.name)")
+            print("Favorite n= \(n)")
         }
         print("getAllObjectOfFavorite= \(dataName)")
+        
+        
+        var dataName2: String = ""
+        for n in Persistence.shared.getAllObjectOfCart() {
+            dataName += " + \(n.name)"
+            print("Cart n.name= \(n.name)")
+            print("Cart n= \(n)")
+        }
+        print("getAllObjectOfCart= \(dataName2)")
 
         }
     

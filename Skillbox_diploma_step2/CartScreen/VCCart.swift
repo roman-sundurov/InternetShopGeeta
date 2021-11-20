@@ -10,10 +10,19 @@ import UIKit
 class VCCart: UIViewController {
     
     
+    //MARK: - объявление аутлетов
+    
+    
+    
+    //MARK: - клики
+    
     @IBAction func buttonCloseCartScreen(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
     
+    
+    
+    //MARK: - viewDidLoad
     
     override func viewDidLoad() {
         super.viewDidLoad()

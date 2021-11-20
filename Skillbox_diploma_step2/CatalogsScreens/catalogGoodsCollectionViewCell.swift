@@ -39,8 +39,6 @@ class catalogGoodsCollectionViewCell: UICollectionViewCell {
             Persistence.shared.addGoodsToFavorite(good: dataOfCell!)
         }
 //        AppSystemData.instance.VCMainCatalogDelegate?.mainCatalogCollectionUpdate()
-        
-            
     }
     
     

@@ -1693,8 +1693,13 @@
                                             <constraint firstAttribute="height" constant="54" id="HZB-nY-RkL"/>
                                             <constraint firstAttribute="width" constant="354" id="UDf-ZT-shv"/>
                                         </constraints>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="AddToCart" title=""/>
+                                        <connections>
+                                            <action selector="toCartButtonAction:" destination="hb6-fT-t5E" eventType="touchUpInside" id="2PY-bp-6bj"/>
+                                            <action selector="toCartButtonAction:" destination="Ker-SI-tCP" eventType="touchUpInside" id="JZ0-2E-4fV"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -1744,11 +1749,13 @@
                         <outlet property="labelNameOfCategory" destination="i2C-5x-nHn" id="y6d-vq-CNH"/>
                         <outlet property="labelNameOfProduct" destination="Lbb-E5-dhz" id="u0X-9R-hat"/>
                         <outlet property="labelPrice" destination="lwE-fX-SSW" id="35f-Op-yQ9"/>
+                        <outlet property="toCartButton" destination="qF4-Db-UIo" id="FWV-mp-0Hd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="47U-kY-iqZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="Ker-SI-tCP" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="4268" y="-141"/>
+            <point key="canvasLocation" x="4263" y="-141"/>
         </scene>
         <!--Cart-->
         <scene sceneID="C7z-R6-WQx">
@@ -1799,7 +1806,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5yT-Rw-gWx">
-                                                    <rect key="frame" x="124" y="33" width="206" height="74"/>
+                                                    <rect key="frame" x="124" y="33.333333333333336" width="206" height="73.333333333333314"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qFp-pM-adP" userLabel="GoodsNameView">
                                                             <rect key="frame" x="0.0" y="0.0" width="206" height="37.333333333333336"/>
@@ -1815,7 +1822,7 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name of Category" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Td0-kh-Qel">
-                                                                    <rect key="frame" x="0.0" y="24.333333333333336" width="206" height="13"/>
+                                                                    <rect key="frame" x="0.0" y="24.333333333333329" width="206" height="13"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="13" id="5VL-2U-8fx"/>
                                                                     </constraints>
@@ -1836,10 +1843,10 @@
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pv9-jZ-w6b" userLabel="GoodsPriceView">
-                                                            <rect key="frame" x="0.0" y="52.333333333333329" width="206" height="21.666666666666671"/>
+                                                            <rect key="frame" x="0.0" y="52.333333333333336" width="206" height="21.000000000000007"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$40.00 usd" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UUb-q2-eda">
-                                                                    <rect key="frame" x="0.0" y="3" width="79" height="16"/>
+                                                                    <rect key="frame" x="0.0" y="2.6666666666666572" width="79" height="16"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="16" id="SqB-6i-Zv4"/>
                                                                     </constraints>
@@ -1848,10 +1855,10 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CGy-b4-7ct">
-                                                                    <rect key="frame" x="145" y="0.0" width="61" height="21.666666666666668"/>
+                                                                    <rect key="frame" x="145" y="0.0" width="61" height="21"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tJy-Zw-cD2">
-                                                                            <rect key="frame" x="25" y="0.0" width="11" height="21.666666666666668"/>
+                                                                            <rect key="frame" x="25" y="0.0" width="11" height="21"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" constant="11" id="hFo-j6-gkI"/>
                                                                             </constraints>
@@ -1859,7 +1866,7 @@
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ma2-SP-tc0">
-                                                                            <rect key="frame" x="8" y="10.333333333333343" width="9" height="1"/>
+                                                                            <rect key="frame" x="8" y="10" width="9" height="1"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" constant="9" id="XNq-R8-pu8"/>
                                                                                 <constraint firstAttribute="height" constant="1" id="ZXH-31-ahS"/>
@@ -1868,7 +1875,7 @@
                                                                             <state key="normal" title="Button" image="minus"/>
                                                                         </button>
                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pui-ug-gxh">
-                                                                            <rect key="frame" x="44" y="6.3333333333333428" width="9" height="9"/>
+                                                                            <rect key="frame" x="44" y="6" width="9" height="9"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" constant="9" id="4za-fn-VhN"/>
                                                                                 <constraint firstAttribute="height" constant="9" id="Sf0-eN-NUf"/>
@@ -1960,7 +1967,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tba-si-U1l" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2907.6923076923076" y="704.50236966824639"/>
+            <point key="canvasLocation" x="2908" y="879"/>
         </scene>
         <!--Profile Slider-->
         <scene sceneID="fvC-n8-KDu">
@@ -2027,6 +2034,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
+                                        <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstItem="Lrw-yk-yxL" firstAttribute="centerY" secondItem="liE-dy-Hwv" secondAttribute="centerY" id="6RO-65-nbS"/>
                                             <constraint firstAttribute="trailing" secondItem="Lrw-yk-yxL" secondAttribute="trailing" constant="5" id="CUx-PD-YhF"/>
@@ -2037,6 +2045,9 @@
                                             <constraint firstItem="liE-dy-Hwv" firstAttribute="leading" secondItem="oO0-vA-Eqs" secondAttribute="leading" id="nME-Dn-jEN"/>
                                             <constraint firstItem="liE-dy-Hwv" firstAttribute="top" secondItem="oO0-vA-Eqs" secondAttribute="top" id="vTJ-5e-2dj"/>
                                         </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="H7T-Qh-m1t" appends="YES" id="Wv8-3B-th6"/>
+                                        </connections>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="onX-qk-yUJ">
                                         <rect key="frame" x="0.0" y="122" width="215" height="24"/>
@@ -2355,6 +2366,11 @@
                         <action selector="gestureGoCartScreen:" destination="gOM-Kz-RQZ" id="lQs-Cs-9fL"/>
                     </connections>
                 </tapGestureRecognizer>
+                <tapGestureRecognizer id="H7T-Qh-m1t">
+                    <connections>
+                        <action selector="gestureGoFavoriteScreen:" destination="gOM-Kz-RQZ" id="Mpv-hr-9Da"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="3599" y="264"/>
         </scene>
@@ -2392,7 +2408,7 @@
         <image name="Log In Button" width="222" height="54"/>
         <image name="LogInButton" width="324" height="54"/>
         <image name="LogOut" width="20.333333969116211" height="20.333333969116211"/>
-        <image name="Logo" width="305" height="77.666664123535156"/>
+        <image name="Logo" width="71" height="20"/>
         <image name="Menu" width="37" height="24"/>
         <image name="Notification" width="22.333333969116211" height="24.333333969116211"/>
         <image name="NotificationsButton" width="18.333333969116211" height="20.333333969116211"/>

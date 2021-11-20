@@ -57,7 +57,7 @@ class CategoriesForCatalog {
         self.image = image
         self.iconImage = iconImage
         self.iconImageActive = iconImageActive
-        self.imageUIImage = UIImage(data: try! Data(contentsOf: URL(string: "https://blackstarshop.ru/\(image)")!))?.trim()
+        self.imageUIImage = UIImage(data: try! Data(contentsOf: URL(string: "https://blackstarshop.ru/\(image)")!)) //?.trim()
         var subCategories2: [SubCategories] = []
         for value in subCategories {
             if let subCategories3 = SubCategories(data: value) {
@@ -92,7 +92,7 @@ class SubCategories: Equatable {
         }
         self.id = id
         self.iconImage = iconImage
-        self.iconUIImage = UIImage(data: try! Data(contentsOf: URL(string: "https://blackstarshop.ru/\(iconImage)")!))?.trim()
+        self.iconUIImage = UIImage(data: try! Data(contentsOf: URL(string: "https://blackstarshop.ru/\(iconImage)")!)) //?.trim()
         self.name = name
 //        self.goodsOfCategory = CatalogData.instance.requestGoodsData(idOfSubCategory: self.id)
     }
@@ -112,6 +112,7 @@ class GoodsOfCategory {
     let price: Double
     var isFavorite: Bool?
     var inCart: Bool?
+    var sizeInCart: SizeOfGood?
     
     init?(data: NSDictionary) {
         guard let name = data["name"] as? String,
@@ -131,9 +132,20 @@ class GoodsOfCategory {
         print("Special Price= \(price)")
         self.price = price
         self.goodsImage = mainImage
-        self.goodsUIImage = UIImage(data: try! Data(contentsOf: URL(string: "https://blackstarshop.ru/\(mainImage)")!))?.trim()
+        self.goodsUIImage = UIImage(data: try! Data(contentsOf: URL(string: "https://blackstarshop.ru/\(mainImage)")!)) //?.trim()
         //Проверка, имеется ли данный артикул в Realm в Избранном или в корзине.
         self.isFavorite = !Persistence.shared.getAllObjectOfFavorite().filter("article == '\(article)'").isEmpty
+        self.inCart = !Persistence.shared.getAllObjectOfCart().filter("article == '\(article)'").isEmpty
+        if self.inCart == true {
+            self.sizeInCart = Persistence.shared.getAllObjectOfCart().filter("article == '\(article)'").first?.size
+        } else {
+            self.sizeInCart = SizeOfGood()
+            self.sizeInCart?.sSize = false
+            self.sizeInCart?.mSize = false
+            self.sizeInCart?.lSize = false
+            self.sizeInCart?.xlSize = false
+            self.sizeInCart?.xxlSize = false
+        }
     }
     
 }

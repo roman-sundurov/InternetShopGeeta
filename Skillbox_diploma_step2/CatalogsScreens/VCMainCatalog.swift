@@ -332,14 +332,25 @@ class VCMainCatalog: UIViewController {
         hud.dismiss(animated: true)
         print("hudDisapper")
     }
+    
+    
+    //MARK: - viewDidAppear
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        AppSystemData.instance.vcMainCatalogDelegate = self
+        CatalogData.instance.requestCategoriesData()
+        AppSystemData.instance.activeCatalogMode = "catalog"
+        print("viewDidAppear")
+    }
 
     
     //MARK: - viewDidLoad
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("viewDidLoad")
         
-        AppSystemData.instance.vcMainCatalogDelegate = self
+//        AppSystemData.instance.vcMainCatalogDelegate = self
         print("AppSystemData.instance.VCMainCatalogDelegate_222= \(AppSystemData.instance.vcMainCatalogDelegate)")
         
         menuButtonView.layer.cornerRadius = 8
@@ -349,8 +360,8 @@ class VCMainCatalog: UIViewController {
         menuButtonView.clipsToBounds = true
         
         hud.textLabel.text = "Loading"
-        CatalogData.instance.requestCategoriesData()
-        AppSystemData.instance.activeCatalogMode = "catalog"
+//        CatalogData.instance.requestCategoriesData()
+//        AppSystemData.instance.activeCatalogMode = "catalog"
         
         
         

@@ -97,7 +97,11 @@ class Persistence{
     func deleteUser() {
         print("deleteUser")
         try! realm.write{
+//            realm.delete(realm.objects(AppSystemData.self))
             realm.delete(realm.objects(PersonalData.self))
+            realm.delete(realm.objects(FavoriteGoods.self))
+            realm.delete(realm.objects(CartGoods.self))
+            realm.delete(realm.objects(SizeOfGood.self))
         }
     }
     

@@ -20,9 +20,12 @@ class VCRegister: UIViewController {
     @IBOutlet var imageEmailError: UIImageView!
     @IBOutlet var imagePasswordError: UIImageView!
     
-    //MARK: - делегаты и переменные
+    @IBOutlet var constraintSuperDownMenuBottom: NSLayoutConstraint!
+    
+        //MARK: - делегаты и переменные
     
     var checkForRegister: Bool = false
+    var keyboardHeight: CGFloat = 0 //хранит высоту клавиатуры
 
     
     //MARK: - переходы
@@ -31,8 +34,37 @@ class VCRegister: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-
     
+    //MARK: - анимация
+    
+    @objc func keyboardWillAppear(_ notification: Notification) {
+        print("keyboardWillAppear")
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue{
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            keyboardHeight = keyboardRectangle.height
+        }
+        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
+            if self.constraintSuperDownMenuBottom.constant == 0{
+                self.constraintSuperDownMenuBottom.constant = self.keyboardHeight - CGFloat.init(30)
+            }
+            self.view.layoutIfNeeded()
+        }, completion: {isCompleted in })
+    }
+
+
+    @objc func keyboardWillDisappear(_ notification: Notification) {
+        if keyboardHeight != 0{
+            print("keyboardWillDisappear")
+            keyboardHeight = 0
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
+                if self.constraintSuperDownMenuBottom.constant > 0 {
+                    self.constraintSuperDownMenuBottom.constant = CGFloat.init(0)
+                }
+                self.view.layoutIfNeeded()
+            }, completion: {isCompleted in })
+        }
+    }
+
     
     //MARK: - клики
     
@@ -80,6 +112,23 @@ class VCRegister: UIViewController {
     //MARK: - данные
     
     
+    //MARK: - viewWillAppear
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: UIResponder.keyboardWillShowNotification, object: nil)
+    }
+    
+    
+    //MARK: - viewWillDisappear
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    
     //MARK: - viewDidLoad
     
     
@@ -88,22 +137,6 @@ class VCRegister: UIViewController {
         
         print("Persistence.shared.printAllObject()_1= \(Persistence.shared.getAllObjectPersonalData())")
         
-//        for n in PersonalData {
-//            print("PersonalData= \(n)")
-//        }
-
-        // Do any additional setup after loading the view.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

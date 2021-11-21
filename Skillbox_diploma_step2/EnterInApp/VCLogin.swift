@@ -16,6 +16,7 @@ class VCLogin: UIViewController {
     
     @IBOutlet var emailView: TextFieldView!
     @IBOutlet var rememberMeCheckbox: Checkbox!
+    @IBOutlet var constraintSuperDownMenuBottom: NSLayoutConstraint!
     
     
     //MARK: - делегаты и переменные
@@ -73,42 +74,59 @@ class VCLogin: UIViewController {
     
     //MARK: - анимация
     
-//    @objc func keyboardWillAppear(_ notification: Notification) {
-//        print("keyboardWillAppear")
-//        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue{
-//            let keyboardRectangle = keyboardFrame.cgRectValue
-//            keyboardHeight = keyboardRectangle.height
-//        }
-//        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
-//            if self.constraintContainerBottomPoint.constant == 50{
-//                self.constraintContainerBottomPoint.constant = self.keyboardHeight + CGFloat.init(20)
-//            }
-//            self.view.layoutIfNeeded()
-//        }, completion: {isCompleted in })
-//    }
-//
-//
-//    @objc func keyboardWillDisappear(_ notification: Notification) {
-//        if keyboardHeight != 0{
-//            print("keyboardWillDisappear")
-//            keyboardHeight = 0
-//            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
-//                if self.constraintContainerBottomPoint.constant > 50 {
-//                    self.constraintContainerBottomPoint.constant = CGFloat.init(50)
-//                }
-//                self.view.layoutIfNeeded()
-//            }, completion: {isCompleted in })
-//        }
-//    }
+    @objc func keyboardWillAppear(_ notification: Notification) {
+        print("keyboardWillAppear")
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue{
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            keyboardHeight = keyboardRectangle.height
+        }
+        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
+            if self.constraintSuperDownMenuBottom.constant == 0{
+                self.constraintSuperDownMenuBottom.constant = self.keyboardHeight - CGFloat.init(30)
+            }
+            self.view.layoutIfNeeded()
+        }, completion: {isCompleted in })
+    }
+
+
+    @objc func keyboardWillDisappear(_ notification: Notification) {
+        if keyboardHeight != 0{
+            print("keyboardWillDisappear")
+            keyboardHeight = 0
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: {
+                if self.constraintSuperDownMenuBottom.constant > 0 {
+                    self.constraintSuperDownMenuBottom.constant = CGFloat.init(0)
+                }
+                self.view.layoutIfNeeded()
+            }, completion: {isCompleted in })
+        }
+    }
     
     
     //MARK: - клики
     
+    
     //MARK: - данные
     
-    //MARK: - viewDidLoad
     
-    //MARK: - additional protocols
+    //MARK: - viewWillAppear
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: UIResponder.keyboardWillShowNotification, object: nil)
+    }
+    
+    
+    //MARK: - viewWillDisappear
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    
+    //MARK: - viewDidLoad
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -124,15 +142,7 @@ class VCLogin: UIViewController {
         createAlertNotRegistration()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
+    //MARK: - additional protocols
 
 }

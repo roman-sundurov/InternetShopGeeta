@@ -47,7 +47,7 @@ class VCMainCatalog: UIViewController {
     //MARK: - переходы
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let vc = segue.destination as? VCCatalogGoods, segue.identifier == "segueToVCCatalogGoods" {
+        if let vc = segue.destination as? VCGoods, segue.identifier == "segueToVCCatalogGoods" {
             //Something
         }
     }
@@ -58,6 +58,7 @@ class VCMainCatalog: UIViewController {
     }
     
     
+    //Переключение верхнего меню
     func tapToCVCell(){
         if AppSystemData.instance.activeCatalogMode == "catalog" {
             AppSystemData.instance.activeCatalogMode = "subcategories"
@@ -335,8 +336,8 @@ class VCMainCatalog: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        AppSystemData.instance.VCMainCatalogDelegate = self
-        print("AppSystemData.instance.VCMainCatalogDelegate_222= \(AppSystemData.instance.VCMainCatalogDelegate)")
+        AppSystemData.instance.vcMainCatalogDelegate = self
+        print("AppSystemData.instance.VCMainCatalogDelegate_222= \(AppSystemData.instance.vcMainCatalogDelegate)")
         
         menuButtonView.layer.cornerRadius = 8
         menuButtonView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
@@ -362,7 +363,7 @@ class VCMainCatalog: UIViewController {
         
         var dataName2: String = ""
         for n in Persistence.shared.getAllObjectOfCart() {
-            dataName += " + \(n.name)"
+            dataName2 += " + \(n.name)"
             print("Cart n.name= \(n.name)")
             print("Cart n= \(n)")
         }
@@ -421,6 +422,7 @@ extension VCMainCatalog: UICollectionViewDataSource {
         var cellProd: catalogGoodsCollectionViewCell?
         
         
+        //Set cell's content
         switch AppSystemData.instance.activeCatalogMode {
             case "catalog":
                 cellCat = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as? catalogCategriesCollectionViewCell
@@ -486,6 +488,7 @@ extension VCMainCatalog: UICollectionViewDataSource {
         }
         
         
+        //Настройка Closures, которое срабатывает при клике на ячейку
         switch AppSystemData.instance.activeCatalogMode {
             case "catalog":
                 cellCat!.startCell(tag: indexPath.row, action: {

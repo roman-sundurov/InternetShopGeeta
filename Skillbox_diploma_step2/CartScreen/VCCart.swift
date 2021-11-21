@@ -11,6 +11,7 @@ class VCCart: UIViewController {
     
     
     //MARK: - объявление аутлетов
+    @IBOutlet var favoritesCollectionView: UICollectionView!
     
     
     
@@ -21,7 +22,6 @@ class VCCart: UIViewController {
     }
     
     
-    
     //MARK: - viewDidLoad
     
     override func viewDidLoad() {
@@ -30,15 +30,36 @@ class VCCart: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+}
 
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+//MARK: - additional protocols
+extension VCCart: UICollectionViewDataSource {
+    
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
     }
-    */
+    
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return Persistence.shared.getAllObjectOfCart().count
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
+        var specificGood: CartGoods? = Persistence.shared.getAllObjectOfCart()[indexPath.row]
+        
+        var cellOfCart: CartCollectionViewCell?
+        cellOfCart = collectionView.dequeueReusableCell(withReuseIdentifier: "productCell", for: indexPath) as? CartCollectionViewCell
+        
+        cellOfCart?.productImage.image = UIImage.init(data: specificGood!.goodsUIImageData as! Data)
+        cellOfCart?.nameLabel.text = specificGood?.name
+        cellOfCart?.priceLabel.text = String(format: "$%.2f usd", specificGood!.price)
+        
+        return cellOfCart!
+    }
+    
+    
 }

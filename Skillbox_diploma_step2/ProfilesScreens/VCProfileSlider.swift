@@ -28,13 +28,13 @@ class VCProfileSlider: UIViewController {
     //MARK: - клики
     
     @IBAction func gestureLogOut(_ sender: Any) {
-        AppSystemData.instance.VCMainCatalogDelegate?.logOut()
+        AppSystemData.instance.vcMainCatalogDelegate?.logOut()
     }
     
     
     @IBAction func gestureGoCartScreen(_ sender: Any) {
-        AppSystemData.instance.VCMainCatalogDelegate!.slideSimpleClose()
-        AppSystemData.instance.VCMainCatalogDelegate!.performSegue(withIdentifier: "segueToVCCart", sender: nil)
+        AppSystemData.instance.vcMainCatalogDelegate!.slideSimpleClose()
+        AppSystemData.instance.vcMainCatalogDelegate!.performSegue(withIdentifier: "segueToVCCart", sender: nil)
     }
     
     @IBAction func gestureGoFavoriteScreen(_ sender: Any) {

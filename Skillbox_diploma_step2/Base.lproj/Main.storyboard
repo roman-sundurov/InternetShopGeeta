@@ -1404,10 +1404,10 @@
             </objects>
             <point key="canvasLocation" x="1965" y="232"/>
         </scene>
-        <!--Catalog Goods-->
+        <!--Goods-->
         <scene sceneID="zhP-xx-yfu">
             <objects>
-                <viewController id="hb6-fT-t5E" customClass="VCCatalogGoods" customModule="Skillbox_diploma_step2" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="hb6-fT-t5E" customClass="VCGoods" customModule="Skillbox_diploma_step2" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="BHi-Ab-dZd">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1437,6 +1437,9 @@
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="Button" image="likeEmpty"/>
+                                <connections>
+                                    <action selector="favoriteButtonAction:" destination="hb6-fT-t5E" eventType="touchUpInside" id="LhX-if-MSR"/>
+                                </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LNa-I1-p0G">
                                 <rect key="frame" x="0.0" y="329" width="390" height="515"/>
@@ -1744,6 +1747,7 @@
                         <outlet property="buttonSizeS" destination="cHo-10-mDe" id="JSC-Kt-uMH"/>
                         <outlet property="buttonSizeXL" destination="0Ug-Tq-S4F" id="tgP-UG-dhE"/>
                         <outlet property="buttonSizeXXL" destination="XXg-Lx-PU8" id="1md-Be-MwD"/>
+                        <outlet property="favoriteButton" destination="0vX-1f-3an" id="Lcn-SQ-8al"/>
                         <outlet property="imageProduct" destination="pRy-DN-dZH" id="yZM-qn-B8f"/>
                         <outlet property="labelDescription" destination="pzl-ud-Udx" id="1i3-kc-JH9"/>
                         <outlet property="labelNameOfCategory" destination="i2C-5x-nHn" id="y6d-vq-CNH"/>
@@ -1784,14 +1788,14 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="TRm-eH-KlC">
                                 <rect key="frame" x="0.0" y="59.333333333333314" width="390" height="626.66666666666674"/>
                                 <color key="backgroundColor" red="0.38988393545150757" green="0.99129480123519897" blue="0.99937421083450317" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="EHp-R6-nEw">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="EHp-R6-nEw">
                                     <size key="itemSize" width="350" height="140"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="b7h-qD-fTG">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="productCell" id="b7h-qD-fTG" customClass="CartCollectionViewCell" customModule="Skillbox_diploma_step2" customModuleProvider="target">
                                         <rect key="frame" x="20" y="0.0" width="350" height="140"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="EaZ-Mu-lNT">
@@ -1928,8 +1932,18 @@
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="350" height="140"/>
+                                        <connections>
+                                            <outlet property="nameLabel" destination="QKY-3D-ip7" id="alg-nv-H5a"/>
+                                            <outlet property="nameOfCategoryLabel" destination="Td0-kh-Qel" id="WgK-ch-VDd"/>
+                                            <outlet property="priceLabel" destination="UUb-q2-eda" id="kkp-07-0qH"/>
+                                            <outlet property="productImage" destination="ZfD-LE-GEo" id="hjp-mh-cgh"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="uDl-VA-6S8" id="nvJ-j5-H0j"/>
+                                    <outlet property="delegate" destination="uDl-VA-6S8" id="eTq-J0-cfz"/>
+                                </connections>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hCP-Te-7mT">
                                 <rect key="frame" x="0.0" y="686" width="390" height="104"/>
@@ -1964,6 +1978,9 @@
                             <constraint firstItem="hCP-Te-7mT" firstAttribute="leading" secondItem="hkU-aK-JLM" secondAttribute="leading" id="zak-JX-MBY"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="favoritesCollectionView" destination="TRm-eH-KlC" id="L3s-T0-3kM"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tba-si-U1l" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -2377,8 +2394,8 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="Vdd-Pl-HZw"/>
-        <segue reference="mbD-Lw-yiK"/>
-        <segue reference="EIv-eB-LWm"/>
+        <segue reference="AYg-qH-NT3"/>
+        <segue reference="tQR-CR-vDb"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="AddToCart" width="354" height="54"/>

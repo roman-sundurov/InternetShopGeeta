@@ -57,7 +57,7 @@ class CategoriesForCatalog {
         self.image = image
         self.iconImage = iconImage
         self.iconImageActive = iconImageActive
-        self.imageUIImage = UIImage(data: try! Data(contentsOf: URL(string: "https://blackstarshop.ru/\(image)")!)) //?.trim()
+        self.imageUIImage = UIImage(data: try! Data(contentsOf: URL(string: "https://blackstarshop.ru/\(image)")!))?.trim()
         var subCategories2: [SubCategories] = []
         for value in subCategories {
             if let subCategories3 = SubCategories(data: value) {
@@ -92,7 +92,7 @@ class SubCategories: Equatable {
         }
         self.id = id
         self.iconImage = iconImage
-        self.iconUIImage = UIImage(data: try! Data(contentsOf: URL(string: "https://blackstarshop.ru/\(iconImage)")!)) //?.trim()
+        self.iconUIImage = UIImage(data: try! Data(contentsOf: URL(string: "https://blackstarshop.ru/\(iconImage)")!))?.trim()
         self.name = name
 //        self.goodsOfCategory = CatalogData.instance.requestGoodsData(idOfSubCategory: self.id)
     }
@@ -132,7 +132,7 @@ class GoodsOfCategory {
         print("Special Price= \(price)")
         self.price = price
         self.goodsImage = mainImage
-        self.goodsUIImage = UIImage(data: try! Data(contentsOf: URL(string: "https://blackstarshop.ru/\(mainImage)")!)) //?.trim()
+        self.goodsUIImage = UIImage(data: try! Data(contentsOf: URL(string: "https://blackstarshop.ru/\(mainImage)")!))?.trim()
         //Проверка, имеется ли данный артикул в Realm в Избранном или в корзине.
         self.isFavorite = !Persistence.shared.getAllObjectOfFavorite().filter("article == '\(article)'").isEmpty
         self.inCart = !Persistence.shared.getAllObjectOfCart().filter("article == '\(article)'").isEmpty
@@ -156,7 +156,7 @@ extension CatalogData {
     func requestCategoriesData() {
         var categories: [CategoriesForCatalog] = []
         let request = AF.request("https://blackstarshop.ru/index.php?route=api/v1/categories")
-        AppSystemData.instance.VCMainCatalogDelegate!.hudAppear()
+        AppSystemData.instance.vcMainCatalogDelegate!.hudAppear()
         request.responseJSON(completionHandler: { response in
             if let object = response.value, let jsonDict = object as? NSDictionary {
 //                print("jsonDict= \(jsonDict)")
@@ -175,10 +175,10 @@ extension CatalogData {
                 CatalogData.instance.categoriesArray = categories
                 CatalogData.instance.showCategories()
                 
-                print("AppSystemData.instance.VCMainCatalogDelegate_333= \(AppSystemData.instance.VCMainCatalogDelegate)")
+                print("AppSystemData.instance.VCMainCatalogDelegate_333= \(AppSystemData.instance.vcMainCatalogDelegate)")
                 
-                AppSystemData.instance.VCMainCatalogDelegate!.mainCatalogCollectionUpdate()
-                AppSystemData.instance.VCMainCatalogDelegate!.hudDisapper()
+                AppSystemData.instance.vcMainCatalogDelegate!.mainCatalogCollectionUpdate()
+                AppSystemData.instance.vcMainCatalogDelegate!.hudDisapper()
                 print("categories= \(categories)")
                 }
             })
@@ -199,7 +199,7 @@ extension CatalogData {
         
         var goods: [GoodsOfCategory] = []
         let request = AF.request("https://blackstarshop.ru/index.php?route=api/v1/products&cat_id=\(idOfSubCategory)")
-        AppSystemData.instance.VCMainCatalogDelegate!.hudAppear()
+        AppSystemData.instance.vcMainCatalogDelegate!.hudAppear()
         request.responseJSON(completionHandler: { response in
             if let object = response.value, let jsonDict = object as? NSDictionary {
                 print("jsonDict= \(jsonDict)")
@@ -217,8 +217,8 @@ extension CatalogData {
                 print("jsonDict.count= \(jsonDict.count)")
                 print("goods.count= \(goods.count)")
                 CatalogData.instance.categoriesArray[tempA].subCategories[tempB].goodsOfCategory = goods
-                AppSystemData.instance.VCMainCatalogDelegate!.mainCatalogCollectionUpdate()
-                AppSystemData.instance.VCMainCatalogDelegate!.hudDisapper()
+                AppSystemData.instance.vcMainCatalogDelegate!.mainCatalogCollectionUpdate()
+                AppSystemData.instance.vcMainCatalogDelegate!.hudDisapper()
                 }
             })
         print("goods2= \(goods)")

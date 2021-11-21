@@ -7,7 +7,7 @@
 
 import UIKit
 
-class VCCatalogGoods: UIViewController {
+class VCGoods: UIViewController {
     
     
         //MARK: - объявление аутлетов
@@ -25,6 +25,8 @@ class VCCatalogGoods: UIViewController {
     @IBOutlet var buttonSizeXXL: UIButton!
     @IBOutlet var toCartButton: UIButton!
     
+    @IBOutlet var favoriteButton: UIButton!
+    
     
     //MARK: - объекты
     
@@ -32,28 +34,44 @@ class VCCatalogGoods: UIViewController {
     var tempB: Int?
     var tempC: Int?
     var specificGood: GoodsOfCategory?
-    
     var sizeOfGood = SizeOfGood()
-    
+    let originCell = AppSystemData.instance.activeCatalogCell as? catalogGoodsCollectionViewCell
+        
     
     //MARK: - клики
+    
+    @IBAction func favoriteButtonAction(_ sender: Any) {
+        if favoriteButton.isSelected == true {
+            favoriteButton.isSelected = false
+            specificGood?.isFavorite = false
+            originCell?.favoriteButton.isSelected = false
+            print("VCGoods_favoriteButton.isSelected = false, good= \(specificGood?.name)")
+            Persistence.shared.deleteGoodsFromFavorite(article: specificGood!.article)
+        } else {
+            favoriteButton.isSelected = true
+            specificGood?.isFavorite = true
+            originCell?.favoriteButton.isSelected = true
+            print("VCGoods_favoriteButton.isSelected = true, good= \(specificGood?.name)")
+            Persistence.shared.addGoodsToFavorite(good: specificGood!)
+        }
+    }
+    
     
     @IBAction func toCartButtonAction(_ sender: Any) {
         if toCartButton.isSelected == true {
             toCartButton.isSelected = false
             self.specificGood!.inCart = false
 //            print("addGoodsToCart.isSelected = false, good= \(specificGood?.name)")
-//            Persistence.shared.deleteGoodsFromCart(article: specificGood!.article)
+            Persistence.shared.deleteGoodsFromCart(article: specificGood!.article)
             transformSizeToBought(statusInCart: false)
         } else {
             toCartButton.isSelected = true
             specificGood!.inCart = true
 //            specificGood?.sizeInCart? = sizeOfGood!
 //            print("addGoodsToCart.isSelected = true, good= \(specificGood?.name)")
-//            Persistence.shared.addGoodsToCart(good: specificGood!, size: sizeOfGood!)
+            Persistence.shared.addGoodsToCart(good: specificGood!, size: sizeOfGood)
             transformSizeToBought(statusInCart: true)
         }
-//        goodDataUpdate()
     }
     
     
@@ -201,6 +219,8 @@ class VCCatalogGoods: UIViewController {
         super.viewDidLoad()
         
         goodDataUpdate()
+        
+        favoriteButton.isSelected = originCell!.favoriteButton.isSelected
                
         labelNameOfCategory.text = CatalogData.instance.categoriesArray[tempA!].name
         labelNameOfProduct.text = specificGood!.name
@@ -216,6 +236,9 @@ class VCCatalogGoods: UIViewController {
         
         toCartButton.setImage(UIImage.init(named: "AlreadyInCart"), for: .selected)
         toCartButton.setImage(UIImage.init(named: "AddInCart"), for: .disabled)
+        
+        favoriteButton.setImage(UIImage.init(named: "likePainted"), for: .selected)
+        favoriteButton.setImage(UIImage.init(named: "likeEmpty"), for: .disabled)
         
     }
 

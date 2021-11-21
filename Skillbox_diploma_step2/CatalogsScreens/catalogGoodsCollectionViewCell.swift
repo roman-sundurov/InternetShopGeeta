@@ -50,6 +50,7 @@ class catalogGoodsCollectionViewCell: UICollectionViewCell {
     
     func startCell(tag: Int, action: @escaping () -> Void ) {
         
+        AppSystemData.instance.activeCatalogCell = self
         favoriteButton.setImage(UIImage.init(named: "goodsInFavorite"), for: .selected)
         favoriteButton.setImage(UIImage.init(named: "goodsNoFavorite"), for: .disabled)
         

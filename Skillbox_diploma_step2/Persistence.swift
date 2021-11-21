@@ -12,7 +12,8 @@ import UIKit
 class AppSystemData {
     static let instance = AppSystemData()
 
-    var VCMainCatalogDelegate: VCMainCatalog?
+    var vcMainCatalogDelegate: VCMainCatalog?
+    var activeCatalogCell: UICollectionViewCell?
     var activeCatalogMode: String = "catalog" // catalog/subcategories/product
     var activeCatalogCategory: Int = 0
     var activeCatalogSubCategory: Int = 0
@@ -112,6 +113,7 @@ class Persistence{
     func addGoodsToFavorite(good: GoodsOfCategory) {
         print("addGoodsToFavorite")
         let favoriteGood = FavoriteGoods()
+        favoriteGood.name = good.name
         favoriteGood.englishName = good.englishName
         favoriteGood.sortOrder = good.sortOrder
         favoriteGood.article = good.article
@@ -143,6 +145,7 @@ class Persistence{
     func addGoodsToCart(good: GoodsOfCategory, size: SizeOfGood) {
         print("addGoodsToCart")
         let cartGood = CartGoods()
+        cartGood.name = good.name
         cartGood.englishName = good.englishName
         cartGood.sortOrder = good.sortOrder
         cartGood.article = good.article

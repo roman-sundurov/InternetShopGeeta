@@ -22,6 +22,7 @@ class catalogGoodsCollectionViewCell: UICollectionViewCell {
     
     //MARK: - объекты
     var dataOfCell: GoodsOfCategory?
+    var cellIndexPath: IndexPath?
     
     
     //MARK: - клики
@@ -38,7 +39,6 @@ class catalogGoodsCollectionViewCell: UICollectionViewCell {
             print("favoriteButton.isSelected = true, good= \(dataOfCell?.name)")
             Persistence.shared.addGoodsToFavorite(good: dataOfCell!)
         }
-//        AppSystemData.instance.VCMainCatalogDelegate?.mainCatalogCollectionUpdate()
     }
     
     
@@ -48,9 +48,10 @@ class catalogGoodsCollectionViewCell: UICollectionViewCell {
         actionFromStartCellClosere!()
     }
     
-    func startCell(tag: Int, action: @escaping () -> Void ) {
+    func startCell(indexPath: IndexPath, action: @escaping () -> Void ) {
         
-        AppSystemData.instance.activeCatalogCell = self
+        cellIndexPath = indexPath
+        
         favoriteButton.setImage(UIImage.init(named: "goodsInFavorite"), for: .selected)
         favoriteButton.setImage(UIImage.init(named: "goodsNoFavorite"), for: .disabled)
         

@@ -11,7 +11,7 @@ class VCCart: UIViewController {
     
     
     //MARK: - объявление аутлетов
-    @IBOutlet var favoritesCollectionView: UICollectionView!
+    @IBOutlet var cartCollectionView: UICollectionView!
     
     
     
@@ -21,13 +21,19 @@ class VCCart: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
+        
+    //MARK: - данные
+    
+    func updateData() {
+        cartCollectionView.reloadData()
+    }
+    
     
     //MARK: - viewDidLoad
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        AppSystemData.instance.vcCart = self
     }
     
 }
@@ -35,7 +41,6 @@ class VCCart: UIViewController {
 
 //MARK: - additional protocols
 extension VCCart: UICollectionViewDataSource {
-    
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -54,9 +59,32 @@ extension VCCart: UICollectionViewDataSource {
         var cellOfCart: CartCollectionViewCell?
         cellOfCart = collectionView.dequeueReusableCell(withReuseIdentifier: "productCell", for: indexPath) as? CartCollectionViewCell
         
+        cellOfCart!.layer.cornerRadius = 30
+        cellOfCart!.clipsToBounds = true
+        
         cellOfCart?.productImage.image = UIImage.init(data: specificGood!.goodsUIImageData as! Data)
         cellOfCart?.nameLabel.text = specificGood?.name
         cellOfCart?.priceLabel.text = String(format: "$%.2f usd", specificGood!.price)
+        cellOfCart?.specificGood = specificGood
+        
+        if specificGood?.size?.sSize == true {
+            cellOfCart?.buttonSize.setImage(UIImage.init(named: "sSizeCart"), for: .normal)
+        }
+        if specificGood?.size?.mSize == true {
+            cellOfCart?.buttonSize.setImage(UIImage.init(named: "sSizeCart"), for: .normal)
+        }
+
+        if specificGood?.size?.lSize == true {
+            cellOfCart?.buttonSize.setImage(UIImage.init(named: "lSizePainted"), for: .normal)
+        }
+
+        if specificGood?.size?.xlSize == true {
+            cellOfCart?.buttonSize.setImage(UIImage.init(named: "xlSizePainted"), for: .normal)
+        }
+
+        if specificGood?.size?.xxlSize == true {
+            cellOfCart?.buttonSize.setImage(UIImage.init(named: "xxlSizePainted"), for: .normal)
+        }
         
         return cellOfCart!
     }

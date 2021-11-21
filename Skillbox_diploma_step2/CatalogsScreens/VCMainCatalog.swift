@@ -8,7 +8,10 @@
 import UIKit
 import Alamofire
 import JGProgressHUD
-import SwiftUI
+
+protocol VCMainCatalogProtocol {
+    func updateItemInCollectionView(indexPath: IndexPath, nameGood: String)
+}
 
 
 class VCMainCatalog: UIViewController {
@@ -450,11 +453,11 @@ extension VCMainCatalog: UICollectionViewDataSource {
                 let goodsData = CatalogData.instance.categoriesArray[tempA].subCategories[tempB].goodsOfCategory[indexPath.row]
                 
                 cellProd = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductCell", for: indexPath) as? catalogGoodsCollectionViewCell
-                cellProd!.productImage.image = goodsData.goodsUIImage //?.trim()
-//                        CatalogData.instance.activeCatalogMode
+                cellProd!.productImage.image = goodsData.goodsUIImage
                 cellProd!.nameProduct.text = goodsData.name
                 cellProd!.priceProduct.text = String(format: "$%.2f usd", goodsData.price)
                 cellProd!.favoriteButton.isSelected = goodsData.isFavorite!
+                print("cellProd!.favoriteButton.isSelected= \(cellProd!.favoriteButton.isSelected), name= \(cellProd?.nameProduct.text)")
                 cellProd?.dataOfCell = goodsData
                 print("name_subcategories= \(CatalogData.instance.categoriesArray[tempA].subCategories[tempB].name)")
             default:
@@ -507,7 +510,7 @@ extension VCMainCatalog: UICollectionViewDataSource {
                 return cellCat!
             default:
                 //Срабатывает если AppSystemData.instance.activeCatalogMode == "product"
-                cellProd!.startCell(tag: indexPath.row, action: {
+                cellProd!.startCell(indexPath: indexPath, action: {
                     
                     let tempA: Int = CatalogData.instance.categoriesArray.firstIndex(where: { $0.sortOrder == AppSystemData.instance.activeCatalogCategory } )!
                     let tempB: Int = CatalogData.instance.categoriesArray[tempA].subCategories.firstIndex(where: { $0.id == AppSystemData.instance.activeCatalogSubCategory })!
@@ -542,6 +545,16 @@ extension VCMainCatalog: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return sectionInsets.left * 1.5
     }
+}
+
+
+extension VCMainCatalog: VCMainCatalogProtocol {
+    func updateItemInCollectionView(indexPath: IndexPath, nameGood: String) {
+        catalogCategriesCollectionView.reloadItems(at: [indexPath])
+        self.view.layoutIfNeeded()
+        print("reloadItems, name= \(nameGood)")
+    }
+    
 }
 
 

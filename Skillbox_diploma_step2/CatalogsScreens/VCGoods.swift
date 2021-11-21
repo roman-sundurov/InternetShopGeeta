@@ -28,14 +28,13 @@ class VCGoods: UIViewController {
     @IBOutlet var favoriteButton: UIButton!
     
     
-    //MARK: - объекты
+        //MARK: - делегаты и переменные
     
     var tempA: Int?
     var tempB: Int?
     var tempC: Int?
     var specificGood: GoodsOfCategory?
     var sizeOfGood = SizeOfGood()
-    let originCell = AppSystemData.instance.activeCatalogCell as? catalogGoodsCollectionViewCell
         
     
     //MARK: - клики
@@ -43,16 +42,24 @@ class VCGoods: UIViewController {
     @IBAction func favoriteButtonAction(_ sender: Any) {
         if favoriteButton.isSelected == true {
             favoriteButton.isSelected = false
+            
             specificGood?.isFavorite = false
-            originCell?.favoriteButton.isSelected = false
-            print("VCGoods_favoriteButton.isSelected = false, good= \(specificGood?.name)")
+            
+            CatalogData.instance.categoriesArray[tempA!].subCategories[tempB!].goodsOfCategory[tempC!].isFavorite = false
             Persistence.shared.deleteGoodsFromFavorite(article: specificGood!.article)
+            AppSystemData.instance.vcMainCatalogDelegate!.catalogCategriesCollectionView.reloadData()
+            
+            print("VCGoods_favoriteButton.isSelected = false, good= \(specificGood?.name)")
         } else {
             favoriteButton.isSelected = true
+            
             specificGood?.isFavorite = true
-            originCell?.favoriteButton.isSelected = true
-            print("VCGoods_favoriteButton.isSelected = true, good= \(specificGood?.name)")
+            
+            CatalogData.instance.categoriesArray[tempA!].subCategories[tempB!].goodsOfCategory[tempC!].isFavorite = true
             Persistence.shared.addGoodsToFavorite(good: specificGood!)
+            AppSystemData.instance.vcMainCatalogDelegate!.catalogCategriesCollectionView.reloadData()
+            
+            print("VCGoods_favoriteButton.isSelected = true, good= \(specificGood?.name)")
         }
     }
     
@@ -78,6 +85,43 @@ class VCGoods: UIViewController {
     @IBAction func buttonCloseGoodsScreen(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
+    
+    
+    func sizeAlreadyInCart() {
+        print("sizeAlreadyInCart, specificGood?.sizeInCart?.sSize= \(specificGood?.sizeInCart?.sSize)")
+        if specificGood?.sizeInCart?.sSize == true {
+            buttonSizeS.setImage(UIImage.init(named: "sSizeBought"), for: .selected)
+            buttonSizeS.isSelected = true
+            print("sizeAlreadyInCart sizeInCart?.sSize")
+        }
+        
+        if specificGood?.sizeInCart?.mSize == true {
+            buttonSizeM.setImage(UIImage.init(named: "mSizeBought"), for: .selected)
+            buttonSizeM.isSelected = true
+            print("sizeAlreadyInCart sizeInCart?.mSize")
+        }
+
+        if specificGood?.sizeInCart?.lSize == true {
+            buttonSizeL.setImage(UIImage.init(named: "lSizeBought"), for: .selected)
+            buttonSizeL.isSelected = true
+            print("sizeAlreadyInCart sizeInCart?.lSize")
+        }
+
+        if specificGood?.sizeInCart?.xlSize == true {
+            buttonSizeXL.setImage(UIImage.init(named: "xlSizeBought"), for: .selected)
+            buttonSizeXL.isSelected = true
+            print("sizeAlreadyInCart sizeInCart?.xlSize")
+        }
+
+        if specificGood?.sizeInCart?.xxlSize == true {
+            buttonSizeXXL.setImage(UIImage.init(named: "xxlSizeBought"), for: .selected)
+            buttonSizeXXL.isSelected = true
+            print("sizeAlreadyInCart sizeInCart?.xxlSize")
+        }
+        toCartButton.isSelected = true
+        
+    }
+
 
     
     func transformSizeToBought(statusInCart: Bool) {
@@ -208,7 +252,7 @@ class VCGoods: UIViewController {
         specificGood = CatalogData.instance.categoriesArray[tempA!].subCategories[tempB!].goodsOfCategory[tempC!]
         sizeOfGood = specificGood!.sizeInCart!
         
-        print("specificGood?.name= \(specificGood?.name), specificGood?.inCart= \(specificGood?.inCart)")
+//        print("specificGood?.name= \(specificGood?.name), specificGood?.inCart= \(specificGood?.inCart)")
 
     }
     
@@ -218,9 +262,13 @@ class VCGoods: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tempA = CatalogData.instance.categoriesArray.firstIndex(where: { $0.sortOrder == AppSystemData.instance.activeCatalogCategory })!
+        tempB = CatalogData.instance.categoriesArray[tempA!].subCategories.firstIndex(where: { $0.id == AppSystemData.instance.activeCatalogSubCategory })!
+        tempC = CatalogData.instance.categoriesArray[tempA!].subCategories[tempB!].goodsOfCategory.firstIndex(where: { $0.sortOrder == AppSystemData.instance.activeCatalogProduct })!
+        
         goodDataUpdate()
         
-        favoriteButton.isSelected = originCell!.favoriteButton.isSelected
+        favoriteButton.isSelected = specificGood!.isFavorite ?? false
                
         labelNameOfCategory.text = CatalogData.instance.categoriesArray[tempA!].name
         labelNameOfProduct.text = specificGood!.name
@@ -239,6 +287,8 @@ class VCGoods: UIViewController {
         
         favoriteButton.setImage(UIImage.init(named: "likePainted"), for: .selected)
         favoriteButton.setImage(UIImage.init(named: "likeEmpty"), for: .disabled)
+        
+        specificGood!.inCart! ? sizeAlreadyInCart() : nil
         
     }
 

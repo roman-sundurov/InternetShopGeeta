@@ -16,6 +16,16 @@ class CartCollectionViewCell: UICollectionViewCell {
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var nameOfCategoryLabel: UILabel!
     @IBOutlet var priceLabel: UILabel!
+    @IBOutlet var buttonSize: UIButton!
     
+    var specificGood: CartGoods?
+    
+    
+    //MARK: - клики
+    
+    @IBAction func deleteProductButton(_ sender: Any) {
+        Persistence.shared.deleteGoodsFromCart(article: specificGood!.article)
+        AppSystemData.instance.vcCart?.updateData()
+    }
     
 }

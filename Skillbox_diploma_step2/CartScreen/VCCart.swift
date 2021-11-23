@@ -14,6 +14,13 @@ class VCCart: UIViewController {
     @IBOutlet var cartCollectionView: UICollectionView!
     
     
+    //MARK: - делегаты и переменные
+    private lazy var dataSource = makeDataSource()
+    private var sections = Persistence.shared.getAllObjectOfCart()
+    
+    typealias DataSource = UICollectionViewDiffableDataSource<CategoriesForCatalog, CartGoods>
+    typealias Snapshot = NSDiffableDataSourceSnapshot<CategoriesForCatalog, CartGoods>
+    
     
     //MARK: - клики
     
@@ -26,6 +33,42 @@ class VCCart: UIViewController {
     
     func updateData() {
         cartCollectionView.reloadData()
+    }
+    
+    
+    func makeDataSource() -> DataSource {
+        
+            let dataSource = DataSource(collectionView: collectionView, cellProvider: { (collectionView, indexPath, good) -> UICollectionViewCell? in
+                let cellOfCart = collectionView.dequeueReusableCell(withReuseIdentifier: "productCell", for: indexPath) as? CartCollectionViewCell
+                
+                cellOfCart!.layer.cornerRadius = 30
+                cellOfCart!.clipsToBounds = true
+                
+                cellOfCart?.productImage.image = UIImage.init(data: good.goodsUIImageData as! Data)
+                cellOfCart?.nameLabel.text = good.name
+                cellOfCart?.priceLabel.text = String(format: "$%.2f usd", good.price)
+                cellOfCart?.specificGood = good
+                
+                return cell })
+            
+//              dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
+//                guard kind == UICollectionView.elementKindSectionHeader else {
+//                  return nil
+//                }
+//
+//                let view = collectionView.dequeueReusableSupplementaryView(
+//                  ofKind: kind,
+//                  withReuseIdentifier: SectionHeaderReusableView.reuseIdentifier,
+//                  for: indexPath) as? SectionHeaderReusableView
+//                // 4
+//                let section = self.dataSource.snapshot().sectionIdentifiers[indexPath.section]
+//                view?.titleLabel.text = section.title
+//                return view
+//              }
+
+            
+            return dataSource
+        
     }
     
     

@@ -31,9 +31,8 @@ class CatalogData{
 }
 
 
-class CategoriesForCatalog {
+class CategoriesForCatalog: Hashable {
     
-    var id: Int = 0
     let name: String
     let sortOrder: Int
     let image: String
@@ -67,6 +66,14 @@ class CategoriesForCatalog {
         }
         self.subCategories = subCategories2
         
+    }
+    
+    static func == (lhs: CategoriesForCatalog, rhs: CategoriesForCatalog) -> Bool {
+        lhs.sortOrder == rhs.sortOrder
+    }
+    
+    func hash(into hasher: inout Hasher) {
+      hasher.combine(sortOrder)
     }
     
 }

@@ -72,11 +72,12 @@ class VCGoods: UIViewController {
             Persistence.shared.deleteGoodsFromCart(article: specificGood!.article)
             transformSizeToBought(statusInCart: false)
         } else {
+            tempA = CatalogData.instance.categoriesArray.firstIndex(where: { $0.sortOrder == AppSystemData.instance.activeCatalogCategory })!
             toCartButton.isSelected = true
             specificGood!.inCart = true
 //            specificGood?.sizeInCart? = sizeOfGood!
 //            print("addGoodsToCart.isSelected = true, good= \(specificGood?.name)")
-            Persistence.shared.addGoodsToCart(good: specificGood!, size: sizeOfGood)
+            Persistence.shared.addGoodsToCart(good: specificGood!, size: sizeOfGood, catalog: CatalogData.instance.categoriesArray[tempA!].name)
             transformSizeToBought(statusInCart: true)
         }
     }

@@ -48,6 +48,7 @@ class FavoriteGoods: Object{
 
 class CartGoods: Object {
     @objc dynamic var name: String = ""
+    @objc dynamic var category: String = ""
     @objc dynamic var englishName: String = ""
     @objc dynamic var sortOrder: Int = 0
     @objc dynamic var article: String = ""
@@ -58,6 +59,7 @@ class CartGoods: Object {
     @objc dynamic var isFavorite: Bool = false
     @objc dynamic var size: SizeOfGood? = SizeOfGood()
 }
+
 
 class SizeOfGood: Object {
     @objc dynamic var sSize: Bool = false
@@ -146,10 +148,11 @@ class Persistence{
 
 
     //Сохранение товаров корзины
-    func addGoodsToCart(good: GoodsOfCategory, size: SizeOfGood) {
+    func addGoodsToCart(good: GoodsOfCategory, size: SizeOfGood, catalog: String) {
         print("addGoodsToCart")
         let cartGood = CartGoods()
         cartGood.name = good.name
+        cartGood.name = catalog
         cartGood.englishName = good.englishName
         cartGood.sortOrder = good.sortOrder
         cartGood.article = good.article

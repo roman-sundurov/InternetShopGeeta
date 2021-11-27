@@ -239,7 +239,7 @@ extension CatalogData {
     func requestCategoriesData() {
         var categories: [CategoriesForCatalog] = []
         let request = AF.request("https://blackstarshop.ru/index.php?route=api/v1/categories")
-        AppSystemData.instance.vcMainCatalogDelegate!.hudAppear()
+//        AppSystemData.instance.vcMainCatalogDelegate!.hudAppear()
         request.responseJSON(completionHandler: { response in
             if let object = response.value, let jsonDict = object as? NSDictionary {
 //                print("jsonDict= \(jsonDict)")
@@ -254,16 +254,16 @@ extension CatalogData {
 //                                print("\(category.id)")
                             }
                         }
-                        CatalogData.instance.categoriesArray = categories
-                        AppSystemData.instance.vcMainCatalogDelegate!.catalogCollectionViewUpdate()
+//                        CatalogData.instance.categoriesArray = categories
+//                        AppSystemData.instance.vcMainCatalogDelegate!.catalogCollectionViewUpdate()
                     }
-//                CatalogData.instance.categoriesArray = categories
+                CatalogData.instance.categoriesArray = categories
                 CatalogData.instance.showCategories()
                 
                 print("AppSystemData.instance.VCMainCatalogDelegate_333= \(AppSystemData.instance.vcMainCatalogDelegate)")
                 
                 AppSystemData.instance.vcMainCatalogDelegate!.catalogCollectionViewUpdate()
-                AppSystemData.instance.vcMainCatalogDelegate!.hudDisapper()
+//                AppSystemData.instance.vcMainCatalogDelegate!.hudDisapper()
                 print("categories= \(categories)")
                 }
             })
@@ -375,11 +375,11 @@ extension CatalogData {
     }
     
     
-    func getAllExistCategoriesForCatalog() -> [CategoriesForCatalog] {
-//        print("getAllCategoriesForCatalog= \(catalogsAndCartGoodsDiffableArray)")
-        print("categoriesArray888= \(categoriesArray)")
-        return categoriesArray
-    }
+//    func getAllExistCategoriesForCatalog() -> [CategoriesForCatalog] {
+////        print("getAllCategoriesForCatalog= \(catalogsAndCartGoodsDiffableArray)")
+//        print("categoriesArray888= \(categoriesArray)")
+//        return categoriesArray
+//    }
 
     
 }

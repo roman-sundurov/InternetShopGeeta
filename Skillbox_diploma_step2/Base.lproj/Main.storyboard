@@ -657,7 +657,7 @@
                         <outlet property="buttonSecondMenuMens" destination="DwA-0g-Ccg" id="Kdf-5h-Aaw"/>
                         <outlet property="buttonSecondMenuSale" destination="dxN-Sx-Fyk" id="Bwk-9Z-EvC"/>
                         <outlet property="buttonSecondMenuWomens" destination="X0k-4J-3tm" id="DRb-As-n9J"/>
-                        <outlet property="catalogCategriesCollectionView" destination="4oF-mX-9Eb" id="DBj-fr-Nf1"/>
+                        <outlet property="catalogCollectionView" destination="4oF-mX-9Eb" id="DBj-fr-Nf1"/>
                         <outlet property="constraintSecondMenuStrip2" destination="Qgu-Xo-kfF" id="RWl-zU-Xoc"/>
                         <outlet property="labelCategories" destination="yS0-tp-yyN" id="d56-bP-bgf"/>
                         <outlet property="labelMens" destination="4ZH-SD-aor" id="yXO-Ve-VpR"/>
@@ -1809,12 +1809,12 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Cart" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cgb-gc-Z0e">
-                                <rect key="frame" x="165.33333333333334" y="20" width="59.333333333333343" height="19.333333333333329"/>
+                                <rect key="frame" x="165.33333333333334" y="20" width="59.333333333333343" height="19"/>
                                 <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="16"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="TRm-eH-KlC">
-                                <rect key="frame" x="0.0" y="59.333333333333314" width="390" height="626.66666666666674"/>
+                                <rect key="frame" x="0.0" y="59" width="390" height="627"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="EHp-R6-nEw">
                                     <size key="itemSize" width="350" height="140"/>
@@ -2447,8 +2447,8 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="Vdd-Pl-HZw"/>
-        <segue reference="WeL-0E-wdd"/>
-        <segue reference="EIv-eB-LWm"/>
+        <segue reference="AYg-qH-NT3"/>
+        <segue reference="tQR-CR-vDb"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="AddToCart" width="354" height="54"/>
@@ -2478,7 +2478,7 @@
         <image name="Log In Button" width="222" height="54"/>
         <image name="LogInButton" width="324" height="54"/>
         <image name="LogOut" width="20.333333969116211" height="20.333333969116211"/>
-        <image name="Logo" width="71" height="20"/>
+        <image name="Logo" width="305" height="77.666664123535156"/>
         <image name="Menu" width="37" height="24"/>
         <image name="Notification" width="22.333333969116211" height="24.333333969116211"/>
         <image name="NotificationsButton" width="18.333333969116211" height="20.333333969116211"/>

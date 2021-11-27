@@ -25,7 +25,7 @@ class CartCollectionViewCell: UICollectionViewCell {
     
     @IBAction func deleteProductButton(_ sender: Any) {
         Persistence.shared.deleteGoodsFromCart(article: specificGood!.article)
-        AppSystemData.instance.vcCart?.updateData()
+        AppSystemData.instance.vcCartDelegate?.updateData()
     }
     
 }

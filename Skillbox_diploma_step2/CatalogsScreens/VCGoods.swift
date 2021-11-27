@@ -47,7 +47,7 @@ class VCGoods: UIViewController {
             
             CatalogData.instance.categoriesArray[tempA!].subCategories[tempB!].goodsOfCategory[tempC!].isFavorite = false
             Persistence.shared.deleteGoodsFromFavorite(article: specificGood!.article)
-            AppSystemData.instance.vcMainCatalogDelegate!.catalogCategriesCollectionView.reloadData()
+            AppSystemData.instance.vcMainCatalogDelegate!.catalogCollectionView.reloadData()
             
             print("VCGoods_favoriteButton.isSelected = false, good= \(specificGood?.name)")
         } else {
@@ -57,7 +57,7 @@ class VCGoods: UIViewController {
             
             CatalogData.instance.categoriesArray[tempA!].subCategories[tempB!].goodsOfCategory[tempC!].isFavorite = true
             Persistence.shared.addGoodsToFavorite(good: specificGood!)
-            AppSystemData.instance.vcMainCatalogDelegate!.catalogCategriesCollectionView.reloadData()
+            AppSystemData.instance.vcMainCatalogDelegate!.catalogCollectionView.reloadData()
             
             print("VCGoods_favoriteButton.isSelected = true, good= \(specificGood?.name)")
         }

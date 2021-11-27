@@ -41,19 +41,12 @@ class VCCart: UIViewController {
     
     
     func applySnapshot(animatingDifferences: Bool = true) {
-      // 2
-      var snapshot = SnapshotAlias()
-      // 3
+        var snapshot = SnapshotAlias()
 //      snapshot.appendSections([.main])
-//      // 4
 //      snapshot.appendItems(videoList)
-      snapshot.appendSections(sections)
-      sections.forEach { section in
-          snapshot.appendItems(section.cartGoodsDiffable, toSection: section)
-      }
-
-      // 5
-      dataSource.apply(snapshot, animatingDifferences: animatingDifferences)
+        snapshot.appendSections(sections)
+        sections.forEach { section in snapshot.appendItems(section.cartGoodsDiffable, toSection: section) }
+        dataSource.apply(snapshot, animatingDifferences: animatingDifferences)
     }
     
     
@@ -107,7 +100,6 @@ class VCCart: UIViewController {
 //                view?.titleLabel.text = section.title
 //                return view
 //              }
-
         
         return dataSource
         
@@ -118,7 +110,7 @@ class VCCart: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        AppSystemData.instance.vcCart = self
+        AppSystemData.instance.vcCartDelegate = self
         
         applySnapshot(animatingDifferences: false)
     }

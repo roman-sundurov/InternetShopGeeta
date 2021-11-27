@@ -7,7 +7,7 @@
 
 import Foundation
 import Alamofire
-import RealmSwift
+//import RealmSwift
 import UIKit
 
 
@@ -132,7 +132,7 @@ class CategoriesForCatalog: Hashable {
 
 
 //MARK: - class SubCategories
-class SubCategories: Equatable {
+class SubCategories: Equatable, Hashable {
     
     static func == (lhs: SubCategories, rhs: SubCategories) -> Bool { return lhs == rhs }
     
@@ -157,11 +157,22 @@ class SubCategories: Equatable {
 //        self.goodsOfCategory = CatalogData.instance.requestGoodsData(idOfSubCategory: self.id)
     }
     
+    
+//    static func == (lhs: SubCategories, rhs: SubCategories) -> Bool {
+//        lhs.id == rhs.id
+//    }
+    
+    func hash(into hasher: inout Hasher) {
+      hasher.combine(id)
+    }
+    
+    
 }
 
 
 //MARK: - class GoodsOfCategory
-class GoodsOfCategory {
+class GoodsOfCategory: Hashable {
+    var id = UUID()
     
     let name: String
     let englishName: String
@@ -209,6 +220,15 @@ class GoodsOfCategory {
         }
     }
     
+    
+        static func == (lhs: GoodsOfCategory, rhs: GoodsOfCategory) -> Bool {
+            lhs.id == rhs.id
+        }
+        
+        func hash(into hasher: inout Hasher) {
+          hasher.combine(id)
+        }
+    
 }
 
 
@@ -234,13 +254,15 @@ extension CatalogData {
 //                                print("\(category.id)")
                             }
                         }
+                        CatalogData.instance.categoriesArray = categories
+                        AppSystemData.instance.vcMainCatalogDelegate!.catalogCollectionViewUpdate()
                     }
-                CatalogData.instance.categoriesArray = categories
+//                CatalogData.instance.categoriesArray = categories
                 CatalogData.instance.showCategories()
                 
                 print("AppSystemData.instance.VCMainCatalogDelegate_333= \(AppSystemData.instance.vcMainCatalogDelegate)")
                 
-                AppSystemData.instance.vcMainCatalogDelegate!.mainCatalogCollectionUpdate()
+                AppSystemData.instance.vcMainCatalogDelegate!.catalogCollectionViewUpdate()
                 AppSystemData.instance.vcMainCatalogDelegate!.hudDisapper()
                 print("categories= \(categories)")
                 }
@@ -280,7 +302,7 @@ extension CatalogData {
                 print("jsonDict.count= \(jsonDict.count)")
                 print("goods.count= \(goods.count)")
                 CatalogData.instance.categoriesArray[tempA].subCategories[tempB].goodsOfCategory = goods
-                AppSystemData.instance.vcMainCatalogDelegate!.mainCatalogCollectionUpdate()
+                AppSystemData.instance.vcMainCatalogDelegate!.catalogCollectionViewUpdate()
                 AppSystemData.instance.vcMainCatalogDelegate!.hudDisapper()
                 }
             })
@@ -351,5 +373,13 @@ extension CatalogData {
         print("getAllCatalogsAndCartGoodsDiffable2= \(catalogsAndCartGoodsDiffableArray)")
         return catalogsAndCartGoodsDiffableArray
     }
+    
+    
+    func getAllExistCategoriesForCatalog() -> [CategoriesForCatalog] {
+//        print("getAllCategoriesForCatalog= \(catalogsAndCartGoodsDiffableArray)")
+        print("categoriesArray888= \(categoriesArray)")
+        return categoriesArray
+    }
+
     
 }

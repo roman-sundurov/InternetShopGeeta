@@ -239,14 +239,14 @@ extension CatalogData {
     func requestCategoriesData() {
         var categories: [CategoriesForCatalog] = []
         let request = AF.request("https://blackstarshop.ru/index.php?route=api/v1/categories")
-//        AppSystemData.instance.vcMainCatalogDelegate!.hudAppear()
+        AppSystemData.instance.vcMainCatalogDelegate!.hudAppear()
         request.responseJSON(completionHandler: { response in
             if let object = response.value, let jsonDict = object as? NSDictionary {
 //                print("jsonDict= \(jsonDict)")
                     for (index, data) in jsonDict where data is NSDictionary{
-                            print("index= \(index)")
+//                            print("index= \(index)")
                         if let category = CategoriesForCatalog(data: data as! NSDictionary) {
-                            print("111")
+//                            print("111")
                             if category.image != "" && category.subCategories != [] {
                                 category.subCategories.removeAll{ value in return value.iconImage == ""}
 //                                category.id = index as? Int ?? Int(index as! String) ?? 0
@@ -254,16 +254,18 @@ extension CatalogData {
 //                                print("\(category.id)")
                             }
                         }
-//                        CatalogData.instance.categoriesArray = categories
-//                        AppSystemData.instance.vcMainCatalogDelegate!.catalogCollectionViewUpdate()
+                        CatalogData.instance.categoriesArray = categories
+                        print("categories.count111= \(categories.count)")
+                        AppSystemData.instance.vcMainCatalogDelegate!.catalogCollectionViewUpdate()
                     }
                 CatalogData.instance.categoriesArray = categories
+                print("categories.count222= \(categories.count)")
                 CatalogData.instance.showCategories()
                 
                 print("AppSystemData.instance.VCMainCatalogDelegate_333= \(AppSystemData.instance.vcMainCatalogDelegate)")
                 
                 AppSystemData.instance.vcMainCatalogDelegate!.catalogCollectionViewUpdate()
-//                AppSystemData.instance.vcMainCatalogDelegate!.hudDisapper()
+                AppSystemData.instance.vcMainCatalogDelegate!.hudDisapper()
                 print("categories= \(categories)")
                 }
             })

@@ -65,24 +65,24 @@ class VCCart: UIViewController {
             cellOfCart!.priceLabel.text = String(format: "$%.2f usd", cartGoodsDiffable.price)
             cellOfCart!.specificGood = cartGoodsDiffable
 
-//            if cartGoods.size?.sSize == true {
+            if cartGoodsDiffable.size.sSize == true {
                 cellOfCart?.buttonSize.setImage(UIImage.init(named: "sSizeCart"), for: .normal)
-//            }
-//            if good.size?.mSize == true {
-//                cellOfCart?.buttonSize.setImage(UIImage.init(named: "sSizeCart"), for: .normal)
-//            }
-//
-//            if good.size?.lSize == true {
-//                cellOfCart?.buttonSize.setImage(UIImage.init(named: "lSizePainted"), for: .normal)
-//            }
-//
-//            if good.size?.xlSize == true {
-//                cellOfCart?.buttonSize.setImage(UIImage.init(named: "xlSizePainted"), for: .normal)
-//            }
-//
-//            if good.size?.xxlSize == true {
-//                cellOfCart?.buttonSize.setImage(UIImage.init(named: "xxlSizePainted"), for: .normal)
-//            }
+            }
+            if cartGoodsDiffable.size.mSize == true {
+                cellOfCart?.buttonSize.setImage(UIImage.init(named: "sSizeCart"), for: .normal)
+            }
+
+            if cartGoodsDiffable.size.lSize == true {
+                cellOfCart?.buttonSize.setImage(UIImage.init(named: "lSizePainted"), for: .normal)
+            }
+
+            if cartGoodsDiffable.size.xlSize == true {
+                cellOfCart?.buttonSize.setImage(UIImage.init(named: "xlSizePainted"), for: .normal)
+            }
+
+            if cartGoodsDiffable.size.xxlSize == true {
+                cellOfCart?.buttonSize.setImage(UIImage.init(named: "xxlSizePainted"), for: .normal)
+            }
             
             return cellOfCart })
         

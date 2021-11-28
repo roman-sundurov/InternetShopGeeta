@@ -56,9 +56,9 @@ class CartGoodsDiffable: Hashable {
     var goodsUIImageData: NSData? = nil
     var price: Double = 0
     var isFavorite: Bool = false
-//    var size: SizeOfGood? = SizeOfGood()
+    var size: SizeOfGood = SizeOfGood()
     
-    init(name: String, catalog: String, englishName: String, sortOrder: Int, article: String, descriptionGoods: String, goodsImage: String, goodsUIImageData: NSData?, price: Double, isFavorite: Bool) {
+    init(name: String, catalog: String, englishName: String, sortOrder: Int, article: String, descriptionGoods: String, goodsImage: String, goodsUIImageData: NSData?, price: Double, isFavorite: Bool, size: SizeOfGood) {
         self.name = name
         self.catalog = catalog
         self.englishName = englishName
@@ -69,6 +69,7 @@ class CartGoodsDiffable: Hashable {
         self.goodsUIImageData = goodsUIImageData
         self.price = price
         self.isFavorite = isFavorite
+        self.size = size
     }
     
     func hash(into hasher: inout Hasher) {
@@ -348,18 +349,18 @@ extension CatalogData {
                 var id = isCategoryContain(category: persistenceCartGood.category, place: catalogsAndCartGoodsDiffableArray)
                 
                 if id != 0 {
-                    catalogsAndCartGoodsDiffableArray[id].cartGoodsDiffable.append(CartGoodsDiffable.init(name: persistenceCartGood.name, catalog: persistenceCartGood.category, englishName: persistenceCartGood.englishName, sortOrder: persistenceCartGood.sortOrder, article: persistenceCartGood.article, descriptionGoods: persistenceCartGood.description, goodsImage: persistenceCartGood.goodsImage, goodsUIImageData: persistenceCartGood.goodsUIImageData, price: persistenceCartGood.price, isFavorite: persistenceCartGood.isFavorite))
+                    catalogsAndCartGoodsDiffableArray[id].cartGoodsDiffable.append(CartGoodsDiffable.init(name: persistenceCartGood.name, catalog: persistenceCartGood.category, englishName: persistenceCartGood.englishName, sortOrder: persistenceCartGood.sortOrder, article: persistenceCartGood.article, descriptionGoods: persistenceCartGood.description, goodsImage: persistenceCartGood.goodsImage, goodsUIImageData: persistenceCartGood.goodsUIImageData, price: persistenceCartGood.price, isFavorite: persistenceCartGood.isFavorite, size: persistenceCartGood.size!))
                 } else {
                     catalogsAndCartGoodsDiffableArray.append(CatalogsAndCartGoodsDiffable.init(
                         catalog: persistenceCartGood.category,
-                        cartGoods: [CartGoodsDiffable.init(name: persistenceCartGood.name, catalog: persistenceCartGood.category, englishName: persistenceCartGood.englishName, sortOrder: persistenceCartGood.sortOrder, article: persistenceCartGood.article, descriptionGoods: persistenceCartGood.description, goodsImage: persistenceCartGood.goodsImage, goodsUIImageData: persistenceCartGood.goodsUIImageData, price: persistenceCartGood.price, isFavorite: persistenceCartGood.isFavorite)]
+                        cartGoods: [CartGoodsDiffable.init(name: persistenceCartGood.name, catalog: persistenceCartGood.category, englishName: persistenceCartGood.englishName, sortOrder: persistenceCartGood.sortOrder, article: persistenceCartGood.article, descriptionGoods: persistenceCartGood.description, goodsImage: persistenceCartGood.goodsImage, goodsUIImageData: persistenceCartGood.goodsUIImageData, price: persistenceCartGood.price, isFavorite: persistenceCartGood.isFavorite, size: persistenceCartGood.size!)]
                     ))
 
                 }
             } else {
                 catalogsAndCartGoodsDiffableArray.append(CatalogsAndCartGoodsDiffable.init(
                     catalog: persistenceCartGood.category,
-                    cartGoods: [CartGoodsDiffable.init(name: persistenceCartGood.name, catalog: persistenceCartGood.category, englishName: persistenceCartGood.englishName, sortOrder: persistenceCartGood.sortOrder, article: persistenceCartGood.article, descriptionGoods: persistenceCartGood.description, goodsImage: persistenceCartGood.goodsImage, goodsUIImageData: persistenceCartGood.goodsUIImageData, price: persistenceCartGood.price, isFavorite: persistenceCartGood.isFavorite)]
+                    cartGoods: [CartGoodsDiffable.init(name: persistenceCartGood.name, catalog: persistenceCartGood.category, englishName: persistenceCartGood.englishName, sortOrder: persistenceCartGood.sortOrder, article: persistenceCartGood.article, descriptionGoods: persistenceCartGood.description, goodsImage: persistenceCartGood.goodsImage, goodsUIImageData: persistenceCartGood.goodsUIImageData, price: persistenceCartGood.price, isFavorite: persistenceCartGood.isFavorite, size: persistenceCartGood.size!)]
                 ))
             }
             

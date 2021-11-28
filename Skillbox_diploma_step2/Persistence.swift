@@ -67,14 +67,6 @@ class SizeOfGood: Object {
     @objc dynamic var lSize: Bool = false
     @objc dynamic var xlSize: Bool = false
     @objc dynamic var xxlSize: Bool = false
-    
-//    init(sSize: Bool, mSize: Bool, lSize: Bool, xlSize: Bool, xxlSize: Bool) {
-//        self.sSize = sSize
-//        self.mSize = mSize
-//        self.lSize = lSize
-//        self.xlSize = xlSize
-//        self.xxlSize = xxlSize
-//    }
 }
 
 

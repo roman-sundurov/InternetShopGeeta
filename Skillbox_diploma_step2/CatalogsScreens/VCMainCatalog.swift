@@ -41,12 +41,9 @@ class VCMainCatalog: UIViewController {
       case main
     }
     
-    private lazy var dataSourceCatalogMode = makeDataSourceCatalogMode()
+    private lazy var dataSourceCategoriesMode = makeDataSourceCategoriesMode()
     private lazy var dataSourceSubcategoriesMode = makeDataSourceSubcategoriesMode()
     private lazy var dataSourceProductMode = makeDataSourceProductMode()
-    
-//    private var categoriesArray = CatalogData.instance.getAllExistCategoriesForCatalog()
-////    private var subcategoriesArray = CatalogData.instance.getAllExistCategoriesForCatalog()
     
     typealias DataSourceAliastCatalogMode = UICollectionViewDiffableDataSource<SectionCategories, CategoriesForCatalog>
     typealias SnapshotAliasCatalogMode = NSDiffableDataSourceSnapshot<SectionCategories, CategoriesForCatalog>
@@ -73,9 +70,9 @@ class VCMainCatalog: UIViewController {
                 var snapshot = SnapshotAliasCatalogMode()
                 snapshot.appendSections([.main])
                 snapshot.appendItems(CatalogData.instance.categoriesArray)
-                dataSourceCatalogMode = makeDataSourceCatalogMode()
+                dataSourceCategoriesMode = makeDataSourceCategoriesMode()
                 
-                dataSourceCatalogMode.apply(snapshot, animatingDifferences: animatingDifferences)
+                dataSourceCategoriesMode.apply(snapshot, animatingDifferences: animatingDifferences)
                 
             case "subcategories":
                 print("applySnapshot subcategories")
@@ -113,7 +110,7 @@ class VCMainCatalog: UIViewController {
     }
     
     
-    func makeDataSourceCatalogMode() -> DataSourceAliastCatalogMode {
+    func makeDataSourceCategoriesMode() -> DataSourceAliastCatalogMode {
         print("9000")
         print("makeDataSource catalog")
         
@@ -471,7 +468,7 @@ class VCMainCatalog: UIViewController {
             print("333")
             
             dataSourceSubcategoriesMode = makeDataSourceSubcategoriesMode()
-            dataSourceCatalogMode = makeDataSourceCatalogMode()
+            dataSourceCategoriesMode = makeDataSourceCategoriesMode()
             
             AppSystemData.instance.activeCatalogMode = "catalog"
             buttonCategoriesGesture(nil)
@@ -506,8 +503,9 @@ class VCMainCatalog: UIViewController {
     //Push "Categories" button in upper menu
     @IBAction func buttonCategoriesGesture(_ sender: Any?) {
         borderLineForSecondMenu(button: 1)
+        changeModeIntoSecondMenu(activeMode: "categories", categoriesID: 0)
 //        AppSystemData.instance.activeCatalogMode = "catalog"
-        catalogCollectionViewUpdate()
+//        catalogCollectionViewUpdate()
     }
     
     
@@ -602,14 +600,6 @@ class VCMainCatalog: UIViewController {
 
 
 //MARK: - additional protocols
-
-//extension VCMainCatalog: UICollectionViewDelegate {
-//
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        <#code#>
-//    }
-//
-//}
 
 
 // Dimension of CollectionView

@@ -65,11 +65,12 @@ class VCMainCatalog: UIViewController {
         print("AppSystemData.instance.activeCatalogMode111= \(AppSystemData.instance.activeCatalogMode)")
         
         switch AppSystemData.instance.activeCatalogMode {
-            case "catalog":
+            case "categories":
                 print("applySnapshot catalog")
                 var snapshot = SnapshotAliasCatalogMode()
                 snapshot.appendSections([.main])
                 snapshot.appendItems(CatalogData.instance.categoriesArray)
+                
                 dataSourceCategoriesMode = makeDataSourceCategoriesMode()
                 
                 dataSourceCategoriesMode.apply(snapshot, animatingDifferences: animatingDifferences)
@@ -240,7 +241,6 @@ class VCMainCatalog: UIViewController {
 
     }
 
-
     
     //MARK: - объекты
     
@@ -255,6 +255,7 @@ class VCMainCatalog: UIViewController {
         }
     }
     
+    
     func logOut() {
         Persistence.shared.deleteUser()
         performSegue(withIdentifier: "segueToVCWelcome", sender: nil)
@@ -263,7 +264,7 @@ class VCMainCatalog: UIViewController {
     
     //Переключение верхнего меню
     func tapToCVCell(){
-        if AppSystemData.instance.activeCatalogMode == "catalog" {
+        if AppSystemData.instance.activeCatalogMode == "categories" {
             AppSystemData.instance.activeCatalogMode = "subcategories"
             switch AppSystemData.instance.activeCatalogCategory {
                 case 0:
@@ -293,9 +294,12 @@ class VCMainCatalog: UIViewController {
     //MARK: - анимация верхнего меню
     
     func changeModeIntoSecondMenu(activeMode: String, categoriesID: Int) {
+        print("AppSystemData.instance.activeCatalogMode888= \(AppSystemData.instance.activeCatalogMode)")
         AppSystemData.instance.activeCatalogMode = activeMode
+        print("AppSystemData.instance.activeCatalogMode888_2= \(AppSystemData.instance.activeCatalogMode)")
         AppSystemData.instance.activeCatalogCategory = categoriesID
         catalogCollectionViewUpdate()
+        
     }
     
     
@@ -470,7 +474,7 @@ class VCMainCatalog: UIViewController {
             dataSourceSubcategoriesMode = makeDataSourceSubcategoriesMode()
             dataSourceCategoriesMode = makeDataSourceCategoriesMode()
             
-            AppSystemData.instance.activeCatalogMode = "catalog"
+            AppSystemData.instance.activeCatalogMode = "categories"
             buttonCategoriesGesture(nil)
             print("334")
         } else if AppSystemData.instance.activeCatalogMode == "product" {
@@ -504,8 +508,6 @@ class VCMainCatalog: UIViewController {
     @IBAction func buttonCategoriesGesture(_ sender: Any?) {
         borderLineForSecondMenu(button: 1)
         changeModeIntoSecondMenu(activeMode: "categories", categoriesID: 0)
-//        AppSystemData.instance.activeCatalogMode = "catalog"
-//        catalogCollectionViewUpdate()
     }
     
     
@@ -550,7 +552,6 @@ class VCMainCatalog: UIViewController {
     //MARK: - viewDidAppear
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-//        AppSystemData.instance.activeCatalogMode = "catalog"
         print("viewDidAppear")
     }
 
@@ -560,7 +561,7 @@ class VCMainCatalog: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("viewDidLoad")
-        AppSystemData.instance.activeCatalogMode = "catalog"
+        AppSystemData.instance.activeCatalogMode = "categories"
         
         print("AppSystemData.instance.VCMainCatalogDelegate_222= \(AppSystemData.instance.vcMainCatalogDelegate)")
         
@@ -602,8 +603,9 @@ class VCMainCatalog: UIViewController {
 //MARK: - additional protocols
 
 
-// Dimension of CollectionView
+//MARK: - Dimension of CollectionView
 extension VCMainCatalog: UICollectionViewDelegateFlowLayout{
+    
 //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 //      let paddingSpace = CGFloat(45.0) * (itemsPerRow + 1)
 //      let availableWidth = view.frame.width - CGFloat(paddingSpace)

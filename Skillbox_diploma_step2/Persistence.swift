@@ -14,7 +14,7 @@ class AppSystemData {
 
     var vcMainCatalogDelegate: VCMainCatalog?
     var vcCartDelegate: VCCart?
-    var activeCatalogMode: String = "catalog" // catalog/subcategories/product
+    var activeCatalogMode: String = "categories" // catalog/subcategories/product
     var activeCatalogCategory: Int = 0
     var activeCatalogSubCategory: Int = 0
     var activeCatalogProduct: Int = 0

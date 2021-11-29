@@ -22,6 +22,8 @@ class VCCart: UIViewController {
     typealias DataSourceAlias = UICollectionViewDiffableDataSource<CatalogsAndCartGoodsDiffable, CartGoodsDiffable>
     typealias SnapshotAlias = NSDiffableDataSourceSnapshot<CatalogsAndCartGoodsDiffable, CartGoodsDiffable>
     
+    private let sectionInsets = UIEdgeInsets(top: 15.0, left: 15.0, bottom: 0, right: 15.0)
+    
     
     //MARK: - клики
     
@@ -118,56 +120,22 @@ class VCCart: UIViewController {
 }
 
 
-//MARK: - additional protocols
+//MARK: - Dimension of CollectionView
+extension VCCart: UICollectionViewDelegateFlowLayout{
+    
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//      let paddingSpace = CGFloat(45.0) * (itemsPerRow + 1)
+//      let availableWidth = view.frame.width - CGFloat(paddingSpace)
+//      let widthPerItem = availableWidth / itemsPerRow
+//        print("widthPerItem= \(widthPerItem)")
+//        return CGSize(width: widthPerItem, height: widthPerItem * 1.5)
+//    }
 
-//extension VCCart: UICollectionViewDataSource {
-//
-//    func numberOfSections(in collectionView: UICollectionView) -> Int {
-//        return 1
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return sectionInsets
+    }
+
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+//        return sectionInsets.left * 1.5
 //    }
-//
-//
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return Persistence.shared.getAllObjectOfCart().count
-//    }
-//
-//
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//
-//        var specificGood: CartGoods? = Persistence.shared.getAllObjectOfCart()[indexPath.row]
-//
-//        var cellOfCart: CartCollectionViewCell?
-//        cellOfCart = collectionView.dequeueReusableCell(withReuseIdentifier: "productCell", for: indexPath) as? CartCollectionViewCell
-//
-//        cellOfCart!.layer.cornerRadius = 30
-//        cellOfCart!.clipsToBounds = true
-//
-//        cellOfCart?.productImage.image = UIImage.init(data: specificGood!.goodsUIImageData as! Data)
-//        cellOfCart?.nameLabel.text = specificGood?.name
-//        cellOfCart?.priceLabel.text = String(format: "$%.2f usd", specificGood!.price)
-//        cellOfCart?.specificGood = specificGood
-//
-//        if specificGood?.size?.sSize == true {
-//            cellOfCart?.buttonSize.setImage(UIImage.init(named: "sSizeCart"), for: .normal)
-//        }
-//        if specificGood?.size?.mSize == true {
-//            cellOfCart?.buttonSize.setImage(UIImage.init(named: "sSizeCart"), for: .normal)
-//        }
-//
-//        if specificGood?.size?.lSize == true {
-//            cellOfCart?.buttonSize.setImage(UIImage.init(named: "lSizePainted"), for: .normal)
-//        }
-//
-//        if specificGood?.size?.xlSize == true {
-//            cellOfCart?.buttonSize.setImage(UIImage.init(named: "xlSizePainted"), for: .normal)
-//        }
-//
-//        if specificGood?.size?.xxlSize == true {
-//            cellOfCart?.buttonSize.setImage(UIImage.init(named: "xxlSizePainted"), for: .normal)
-//        }
-//
-//        return cellOfCart!
-//    }
-//
-//
-//}
+}

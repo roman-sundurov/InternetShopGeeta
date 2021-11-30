@@ -7,8 +7,6 @@
 
 import UIKit
 
-private let reuseIdentifier = "Cell"
-
 class VCCartCollectionController: UICollectionViewController {
     
     //MARK: - объявление аутлетов
@@ -43,8 +41,6 @@ class VCCartCollectionController: UICollectionViewController {
     
     func applySnapshot(animatingDifferences: Bool = true) {
         var snapshot = SnapshotAlias()
-//      snapshot.appendSections([.main])
-//      snapshot.appendItems(videoList)
         snapshot.appendSections(sections)
         sections.forEach { section in snapshot.appendItems(section.cartGoodsDiffable, toSection: section) }
         dataSource.apply(snapshot, animatingDifferences: animatingDifferences)
@@ -105,11 +101,12 @@ class VCCartCollectionController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-
+        
+        print("VCCartCollectionController_111")
         AppSystemData.instance.vcCartDelegate = self
         applySnapshot(animatingDifferences: false)
+        print("VCCartCollectionController_222")
+        
     }
     
 }
@@ -126,47 +123,29 @@ extension VCCartCollectionController: UICollectionViewDelegateFlowLayout{
 
 }
 
-    
-//override func numberOfSections(in collectionView: UICollectionView) -> Int {
-//    // #warning Incomplete implementation, return the number of sections
-//    return 0
-//}
-//
-//
-//    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        // #warning Incomplete implementation, return the number of items
-//        return 0
-//    }
-//
-//    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-//        // Configure the cell
-//        return cell
-//    }
-
-
 // MARK: - Layout Handling
 extension VCCartCollectionController {
     
-  private func configureLayout() { collectionView.register(
-    CartCollectionHeaderReusableView.self,
-    forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-    withReuseIdentifier: CartCollectionHeaderReusableView.reuseIdentifier
-  )
+  private func configureLayout() {
+      collectionView.register(
+        CartCollectionHeaderReusableView.self,
+        forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+        withReuseIdentifier: CartCollectionHeaderReusableView.reuseIdentifier
+      )
 
-    
-    collectionView.collectionViewLayout = UICollectionViewCompositionalLayout(sectionProvider: { (sectionIndex, layoutEnvironment) -> NSCollectionLayoutSection? in
-      let isPhone = layoutEnvironment.traitCollection.userInterfaceIdiom == UIUserInterfaceIdiom.phone
-      let size = NSCollectionLayoutSize(
+    collectionView.collectionViewLayout = UICollectionViewCompositionalLayout(sectionProvider: {
+        (sectionIndex, layoutEnvironment) -> NSCollectionLayoutSection? in
+        let isPhone = layoutEnvironment.traitCollection.userInterfaceIdiom == UIUserInterfaceIdiom.phone
+        let size = NSCollectionLayoutSize(
         widthDimension: NSCollectionLayoutDimension.fractionalWidth(1),
         heightDimension: NSCollectionLayoutDimension.absolute(isPhone ? 280 : 250)
-      )
-      let itemCount = isPhone ? 1 : 3
-      let item = NSCollectionLayoutItem(layoutSize: size)
-      let group = NSCollectionLayoutGroup.horizontal(layoutSize: size, subitem: item, count: itemCount)
-      let section = NSCollectionLayoutSection(group: group)
-      section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
-      section.interGroupSpacing = 10
+        )
+        let itemCount = isPhone ? 1 : 3
+        let item = NSCollectionLayoutItem(layoutSize: size)
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: size, subitem: item, count: itemCount)
+        let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
+        section.interGroupSpacing = 10
       
         // Supplementary header view setup
         let headerFooterSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(20))
@@ -176,5 +155,14 @@ extension VCCartCollectionController {
       return section
     })
   }
+    
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+      super.viewWillTransition(to: size, with: coordinator)
+      coordinator.animate(alongsideTransition: { context in
+        self.collectionView.collectionViewLayout.invalidateLayout()
+      }, completion: nil)
+    }
+    
 
 }

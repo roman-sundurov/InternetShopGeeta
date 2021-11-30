@@ -2019,7 +2019,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="cartCollectionView" destination="TRm-eH-KlC" id="L3s-T0-3kM"/>
+                        <outlet property="cartCollectionView" destination="TRm-eH-KlC" id="97f-hT-sNW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tba-si-U1l" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

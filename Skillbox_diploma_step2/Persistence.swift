@@ -13,7 +13,7 @@ class AppSystemData {
     static let instance = AppSystemData()
 
     var vcMainCatalogDelegate: VCMainCatalog?
-    var vcCartDelegate: VCCartCollectionController2?
+    var vcCartDelegate: VCCart?
     var activeCatalogMode: String = "categories" // catalog/subcategories/product
     var activeCatalogCategory: Int = 0
     var activeCatalogSubCategory: Int = 0

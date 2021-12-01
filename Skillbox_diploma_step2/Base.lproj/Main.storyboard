@@ -187,7 +187,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zKX-Rc-OEh" userLabel="SecondMenu">
-                                <rect key="frame" x="5" y="108.66666666666669" width="380" height="48"/>
+                                <rect key="frame" x="5" y="103" width="380" height="38"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="3CG-ov-f7W">
                                         <rect key="frame" x="10" y="0.0" width="360" height="28"/>
@@ -299,7 +299,7 @@
                                         </constraints>
                                     </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Glq-Xy-59q" userLabel="strip2">
-                                        <rect key="frame" x="10" y="33.999999999999986" width="90" height="3"/>
+                                        <rect key="frame" x="10" y="34" width="90" height="3"/>
                                         <viewLayoutGuide key="safeArea" id="0Yn-Q9-zRX"/>
                                         <color key="backgroundColor" name="Purple"/>
                                         <constraints>
@@ -308,7 +308,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9bK-PI-lvj" userLabel="strip">
-                                        <rect key="frame" x="10" y="36.999999999999986" width="360" height="1"/>
+                                        <rect key="frame" x="10" y="37" width="360" height="1"/>
                                         <color key="backgroundColor" name="Purple"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="B29-FG-8SE"/>
@@ -316,7 +316,7 @@
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="9bK-PI-lvj" secondAttribute="bottom" constant="10" id="BiV-8S-Ahe"/>
+                                    <constraint firstAttribute="bottom" secondItem="9bK-PI-lvj" secondAttribute="bottom" id="BiV-8S-Ahe"/>
                                     <constraint firstItem="3CG-ov-f7W" firstAttribute="top" secondItem="zKX-Rc-OEh" secondAttribute="top" id="Pv7-mv-tmo"/>
                                     <constraint firstItem="Glq-Xy-59q" firstAttribute="leading" secondItem="zKX-Rc-OEh" secondAttribute="leading" constant="10" id="Qgu-Xo-kfF"/>
                                     <constraint firstItem="3CG-ov-f7W" firstAttribute="leading" secondItem="zKX-Rc-OEh" secondAttribute="leading" constant="10" id="YDA-Qh-vKh"/>
@@ -328,7 +328,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rC6-jp-4t3" userLabel="ThirdMenu">
-                                <rect key="frame" x="25" y="176.66666666666666" width="340" height="41"/>
+                                <rect key="frame" x="25" y="155" width="340" height="41"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9MA-nM-qhV">
                                         <rect key="frame" x="90" y="0.0" width="160" height="41"/>
@@ -344,7 +344,7 @@
                                                 </state>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TRa-rk-43i" userLabel="Notification">
-                                                <rect key="frame" x="133" y="8.3333333333333428" width="27" height="24"/>
+                                                <rect key="frame" x="133" y="8.6666666666666572" width="27" height="24"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="24" id="giB-Gq-e2M"/>
                                                     <constraint firstAttribute="width" constant="27" id="yjM-uz-nz1"/>
@@ -363,7 +363,7 @@
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VYr-fd-eZ0" userLabel="FullSizeViewButton">
-                                        <rect key="frame" x="316" y="8.3333333333333428" width="24" height="24"/>
+                                        <rect key="frame" x="316" y="8.6666666666666572" width="24" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="24" id="cnl-uA-hSK"/>
                                             <constraint firstAttribute="width" constant="24" id="tcT-UB-s7D"/>
@@ -371,7 +371,7 @@
                                         <state key="normal" backgroundImage="Full View"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hTd-XD-Z9p" userLabel="BrieflySizeViewButton">
-                                        <rect key="frame" x="282" y="8.3333333333333428" width="24" height="24"/>
+                                        <rect key="frame" x="282" y="8.6666666666666572" width="24" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="24" id="F09-PT-S23"/>
                                             <constraint firstAttribute="width" constant="24" id="VeP-oU-9Ts"/>
@@ -379,7 +379,7 @@
                                         <state key="normal" backgroundImage="Grid View"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2eg-qG-jMh" userLabel="BrieflySizeViewButton">
-                                        <rect key="frame" x="0.0" y="8.3333333333333428" width="26" height="24"/>
+                                        <rect key="frame" x="0.0" y="8.6666666666666572" width="26" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="26" id="QOc-N9-BiT"/>
                                             <constraint firstAttribute="height" constant="24" id="feb-D5-kk9"/>
@@ -404,10 +404,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sfA-tC-MPF">
-                                <rect key="frame" x="0.0" y="237.66666666666669" width="390" height="562.33333333333326"/>
+                                <rect key="frame" x="0.0" y="216" width="390" height="584"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" contentInsetAdjustmentBehavior="never" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="4oF-mX-9Eb">
-                                        <rect key="frame" x="0.0" y="0.0" width="390" height="562.33333333333337"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="390" height="584"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="hTz-ty-ILO">
                                             <size key="itemSize" width="170" height="280"/>
@@ -633,7 +633,6 @@
                         <constraints>
                             <constraint firstItem="lTI-t6-02T" firstAttribute="leading" secondItem="Gyf-Dm-dfy" secondAttribute="trailing" id="3G5-2h-N3s"/>
                             <constraint firstItem="0jP-lh-VGD" firstAttribute="top" secondItem="ykj-rp-rC1" secondAttribute="top" id="4wG-N2-Fhg"/>
-                            <constraint firstItem="rC6-jp-4t3" firstAttribute="top" secondItem="zKX-Rc-OEh" secondAttribute="bottom" constant="20" id="8tT-3h-HvT"/>
                             <constraint firstItem="sfA-tC-MPF" firstAttribute="leading" secondItem="ykj-rp-rC1" secondAttribute="leading" id="9FX-Cl-rBL"/>
                             <constraint firstItem="sfA-tC-MPF" firstAttribute="top" secondItem="rC6-jp-4t3" secondAttribute="bottom" constant="20" id="Adt-55-jHp"/>
                             <constraint firstItem="zKX-Rc-OEh" firstAttribute="centerX" secondItem="KYk-yT-Poi" secondAttribute="centerX" id="C2f-Jn-X6a"/>
@@ -641,12 +640,13 @@
                             <constraint firstItem="qUz-fO-Fha" firstAttribute="centerY" secondItem="Toe-nc-him" secondAttribute="centerY" id="MJD-UK-Hfw"/>
                             <constraint firstItem="0jP-lh-VGD" firstAttribute="leading" secondItem="ykj-rp-rC1" secondAttribute="leading" constant="25" id="R0j-yv-Mhg"/>
                             <constraint firstItem="ykj-rp-rC1" firstAttribute="bottom" secondItem="sfA-tC-MPF" secondAttribute="bottom" constant="10" id="XOd-CS-v1V"/>
+                            <constraint firstItem="zKX-Rc-OEh" firstAttribute="firstBaseline" secondItem="0jP-lh-VGD" secondAttribute="baseline" constant="18" id="aDr-wf-VGo"/>
                             <constraint firstItem="lTI-t6-02T" firstAttribute="leading" secondItem="rC6-jp-4t3" secondAttribute="trailing" constant="25" id="b7f-9H-R9X"/>
                             <constraint firstItem="lTI-t6-02T" firstAttribute="leading" secondItem="sfA-tC-MPF" secondAttribute="trailing" id="eWo-xa-iMG"/>
-                            <constraint firstItem="zKX-Rc-OEh" firstAttribute="top" secondItem="qUz-fO-Fha" secondAttribute="bottom" constant="20" id="h7S-Q2-7dN"/>
                             <constraint firstAttribute="trailing" secondItem="qUz-fO-Fha" secondAttribute="trailing" id="kuQ-on-C7A"/>
                             <constraint firstAttribute="trailing" secondItem="0jP-lh-VGD" secondAttribute="trailing" constant="25" id="ovU-L7-GAa"/>
                             <constraint firstItem="lTI-t6-02T" firstAttribute="top" secondItem="KYk-yT-Poi" secondAttribute="top" id="sVb-kK-SDx"/>
+                            <constraint firstItem="rC6-jp-4t3" firstAttribute="firstBaseline" secondItem="zKX-Rc-OEh" secondAttribute="baseline" constant="14" id="tCT-XA-9oC"/>
                             <constraint firstAttribute="bottom" secondItem="lTI-t6-02T" secondAttribute="bottom" id="zRB-Zy-tJ5"/>
                         </constraints>
                     </view>
@@ -2465,7 +2465,7 @@
         <image name="Log In Button" width="222" height="54"/>
         <image name="LogInButton" width="324" height="54"/>
         <image name="LogOut" width="20.333333969116211" height="20.333333969116211"/>
-        <image name="Logo" width="71" height="20"/>
+        <image name="Logo" width="305" height="77.666664123535156"/>
         <image name="Menu" width="37" height="24"/>
         <image name="Notification" width="22.333333969116211" height="24.333333969116211"/>
         <image name="NotificationsButton" width="18.333333969116211" height="20.333333969116211"/>

@@ -110,7 +110,7 @@ class VCCart: UIViewController {
 }
 
 
-extension VCCartCollectionController2: UICollectionViewDelegateFlowLayout{
+extension VCCart: UICollectionViewDelegateFlowLayout{
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return cellPadding
@@ -120,44 +120,52 @@ extension VCCartCollectionController2: UICollectionViewDelegateFlowLayout{
 
 
 // MARK: - Layout Handling
-extension VCCartCollectionController2 {
+extension VCCart {
     
   private func configureLayout() {
-      collectionView.register(
+      cartCollectionView.register(
         CartCollectionHeaderReusableView.self,
         forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
         withReuseIdentifier: CartCollectionHeaderReusableView.reuseIdentifier
       )
 
-    collectionView.collectionViewLayout = UICollectionViewCompositionalLayout(sectionProvider: {
-        (sectionIndex, layoutEnvironment) -> NSCollectionLayoutSection? in
-        let isPhone = layoutEnvironment.traitCollection.userInterfaceIdiom == UIUserInterfaceIdiom.phone
-        let size = NSCollectionLayoutSize(
-        widthDimension: NSCollectionLayoutDimension.fractionalWidth(1),
-        heightDimension: NSCollectionLayoutDimension.absolute(isPhone ? 280 : 250)
-        )
-        let itemCount = isPhone ? 1 : 3
-        let item = NSCollectionLayoutItem(layoutSize: size)
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: size, subitem: item, count: itemCount)
-        let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
-        section.interGroupSpacing = 10
-      
-        // Supplementary header view setup
-        let headerFooterSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(20))
-        let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerFooterSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
-        section.boundarySupplementaryItems = [sectionHeader]
-      
-      return section
-    })
+//      cartCollectionView.collectionViewLayout = UICollectionViewCompositionalLayout(sectionProvider: {
+//        (sectionIndex, layoutEnvironment) -> NSCollectionLayoutSection? in
+//        let isPhone = layoutEnvironment.traitCollection.userInterfaceIdiom == UIUserInterfaceIdiom.phone
+//        let size = NSCollectionLayoutSize(
+//        widthDimension: NSCollectionLayoutDimension.fractionalWidth(1),
+//        heightDimension: NSCollectionLayoutDimension.absolute(isPhone ? 280 : 250)
+//        )
+//        let itemCount = isPhone ? 1 : 3
+//        let item = NSCollectionLayoutItem(layoutSize: size)
+//        let group = NSCollectionLayoutGroup.horizontal(layoutSize: size, subitem: item, count: itemCount)
+//        let section = NSCollectionLayoutSection(group: group)
+//        section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
+//        section.interGroupSpacing = 10
+//
+//        // Supplementary header view setup
+//        let headerFooterSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(20))
+//        let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerFooterSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
+//        section.boundarySupplementaryItems = [sectionHeader]
+//
+//      return section
+//    })
+  
   }
     
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
       super.viewWillTransition(to: size, with: coordinator)
-      coordinator.animate(alongsideTransition: { context in self.collectionView.collectionViewLayout.invalidateLayout()
+        coordinator.animate(alongsideTransition: { context in self.cartCollectionView.collectionViewLayout.invalidateLayout()
       }, completion: nil)
     }
     
-
 }
+
+
+//extension VCCart: UICollectionViewDelegateFlowLayout{
+//
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+//        return cellPadding
+//    }
+//}

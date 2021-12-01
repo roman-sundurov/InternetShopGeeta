@@ -78,7 +78,8 @@ class VCCart: UIViewController {
                 cellOfCart?.buttonSize.setImage(UIImage.init(named: "xxlSizePainted"), for: .normal)
             }
             
-            return cellOfCart })
+            return cellOfCart
+        })
         
         dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
         guard kind == UICollectionView.elementKindSectionHeader else {
@@ -89,6 +90,7 @@ class VCCart: UIViewController {
         // 4
             let section = self.dataSource.snapshot().sectionIdentifiers[indexPath.section]
             view?.titleLabel.text = section.category
+            print("section.category= \(section.category)")
         return view
         }
         
@@ -129,27 +131,26 @@ extension VCCart {
         withReuseIdentifier: CartCollectionHeaderReusableView.reuseIdentifier
       )
 
-//      cartCollectionView.collectionViewLayout = UICollectionViewCompositionalLayout(sectionProvider: {
-//        (sectionIndex, layoutEnvironment) -> NSCollectionLayoutSection? in
-//        let isPhone = layoutEnvironment.traitCollection.userInterfaceIdiom == UIUserInterfaceIdiom.phone
-//        let size = NSCollectionLayoutSize(
-//        widthDimension: NSCollectionLayoutDimension.fractionalWidth(1),
-//        heightDimension: NSCollectionLayoutDimension.absolute(isPhone ? 280 : 250)
-//        )
-//        let itemCount = isPhone ? 1 : 3
-//        let item = NSCollectionLayoutItem(layoutSize: size)
-//        let group = NSCollectionLayoutGroup.horizontal(layoutSize: size, subitem: item, count: itemCount)
-//        let section = NSCollectionLayoutSection(group: group)
-//        section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
-//        section.interGroupSpacing = 10
-//
-//        // Supplementary header view setup
-//        let headerFooterSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(20))
-//        let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerFooterSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
-//        section.boundarySupplementaryItems = [sectionHeader]
-//
-//      return section
-//    })
+      cartCollectionView.collectionViewLayout = UICollectionViewCompositionalLayout(sectionProvider: {
+        (sectionIndex, layoutEnvironment) -> NSCollectionLayoutSection? in
+          let isPhone = layoutEnvironment.traitCollection.userInterfaceIdiom == UIUserInterfaceIdiom.phone
+          let size = NSCollectionLayoutSize(
+            widthDimension: NSCollectionLayoutDimension.fractionalWidth(1),
+            heightDimension: NSCollectionLayoutDimension.absolute(isPhone ? 140 : 110)
+            )
+          let itemCount = isPhone ? 1 : 3
+          let item = NSCollectionLayoutItem(layoutSize: size)
+          let group = NSCollectionLayoutGroup.horizontal(layoutSize: size, subitem: item, count: itemCount)
+          let section = NSCollectionLayoutSection(group: group)
+          section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
+          section.interGroupSpacing = 10
+          
+        // Supplementary header view setup
+          let headerFooterSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(20))
+          let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerFooterSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
+          section.boundarySupplementaryItems = [sectionHeader]
+          return section
+      })
   
   }
     
@@ -161,11 +162,3 @@ extension VCCart {
     }
     
 }
-
-
-//extension VCCart: UICollectionViewDelegateFlowLayout{
-//
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-//        return cellPadding
-//    }
-//}

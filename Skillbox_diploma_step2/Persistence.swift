@@ -141,10 +141,10 @@ class Persistence{
 
     //Сохранение товаров корзины
     func addGoodsToCart(good: GoodsOfCategory, size: SizeOfGood, catalog: String) {
-        print("addGoodsToCart")
+        print("addGoodsToCart catalog= \(catalog)")
         let cartGood = CartGoods()
         cartGood.name = good.name
-        cartGood.name = catalog
+        cartGood.category = catalog
         cartGood.englishName = good.englishName
         cartGood.sortOrder = good.sortOrder
         cartGood.article = good.article

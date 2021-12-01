@@ -77,7 +77,7 @@ class VCGoods: UIViewController {
             specificGood!.inCart = true
 //            specificGood?.sizeInCart? = sizeOfGood!
 //            print("addGoodsToCart.isSelected = true, good= \(specificGood?.name)")
-            Persistence.shared.addGoodsToCart(good: specificGood!, size: sizeOfGood, catalog: CatalogData.instance.categoriesArray[tempA!].name)
+            Persistence.shared.addGoodsToCart(good: specificGood!, size: sizeOfGood, catalog: CatalogData.instance.categoriesArray[tempA!].subCategories[tempB!].name)
             transformSizeToBought(statusInCart: true)
         }
     }

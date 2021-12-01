@@ -324,7 +324,7 @@ extension CatalogData {
     
     
     func isCategoryContain(category: String, place: [CatalogsAndCartGoodsDiffable]) -> Int {
-        var result: Int = 0
+        var result: Int = -1
         var checker: Int = 0
         
         for n in place {
@@ -348,9 +348,11 @@ extension CatalogData {
                 
                 var id = isCategoryContain(category: persistenceCartGood.category, place: catalogsAndCartGoodsDiffableArray)
                 
-                if id != 0 {
+                if id >= 0 {
+                    print("updateCatalogsAndCartGoodsDiffableArray id != 0, \(persistenceCartGood.category)")
                     catalogsAndCartGoodsDiffableArray[id].cartGoodsDiffable.append(CartGoodsDiffable.init(name: persistenceCartGood.name, catalog: persistenceCartGood.category, englishName: persistenceCartGood.englishName, sortOrder: persistenceCartGood.sortOrder, article: persistenceCartGood.article, descriptionGoods: persistenceCartGood.description, goodsImage: persistenceCartGood.goodsImage, goodsUIImageData: persistenceCartGood.goodsUIImageData, price: persistenceCartGood.price, isFavorite: persistenceCartGood.isFavorite, size: persistenceCartGood.size!))
                 } else {
+                    print("updateCatalogsAndCartGoodsDiffableArray id == 0, \(persistenceCartGood.category)")
                     catalogsAndCartGoodsDiffableArray.append(CatalogsAndCartGoodsDiffable.init(
                         catalog: persistenceCartGood.category,
                         cartGoods: [CartGoodsDiffable.init(name: persistenceCartGood.name, catalog: persistenceCartGood.category, englishName: persistenceCartGood.englishName, sortOrder: persistenceCartGood.sortOrder, article: persistenceCartGood.article, descriptionGoods: persistenceCartGood.description, goodsImage: persistenceCartGood.goodsImage, goodsUIImageData: persistenceCartGood.goodsUIImageData, price: persistenceCartGood.price, isFavorite: persistenceCartGood.isFavorite, size: persistenceCartGood.size!)]
@@ -358,12 +360,12 @@ extension CatalogData {
 
                 }
             } else {
+                print("updateCatalogsAndCartGoodsDiffableArray emptyArray, \(persistenceCartGood.category)")
                 catalogsAndCartGoodsDiffableArray.append(CatalogsAndCartGoodsDiffable.init(
                     catalog: persistenceCartGood.category,
                     cartGoods: [CartGoodsDiffable.init(name: persistenceCartGood.name, catalog: persistenceCartGood.category, englishName: persistenceCartGood.englishName, sortOrder: persistenceCartGood.sortOrder, article: persistenceCartGood.article, descriptionGoods: persistenceCartGood.description, goodsImage: persistenceCartGood.goodsImage, goodsUIImageData: persistenceCartGood.goodsUIImageData, price: persistenceCartGood.price, isFavorite: persistenceCartGood.isFavorite, size: persistenceCartGood.size!)]
                 ))
             }
-            
             
         }
         

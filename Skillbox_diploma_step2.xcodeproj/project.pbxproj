@@ -34,6 +34,7 @@
 		47AA7F7A26F7E83300F26DDC /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 47AA7F7926F7E83300F26DDC /* Alamofire */; };
 		47AA7F7C26F7E86E00F26DDC /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AA7F7B26F7E86E00F26DDC /* Networking.swift */; };
 		47ABA2052758108E008D521C /* VCCartCollectionController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47ABA2042758108E008D521C /* VCCartCollectionController2.swift */; };
+		47ABA20727581CDE008D521C /* VCCart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47ABA20627581CDD008D521C /* VCCart.swift */; };
 		47B2ABE926A76F5800526490 /* Lato-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47B2ABDF26A76F5700526490 /* Lato-BlackItalic.ttf */; };
 		47B2ABEA26A76F5800526490 /* Lato-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47B2ABDF26A76F5700526490 /* Lato-BlackItalic.ttf */; };
 		47B2ABEB26A76F5800526490 /* Lato-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47B2ABDF26A76F5700526490 /* Lato-BlackItalic.ttf */; };
@@ -117,6 +118,7 @@
 		4797B72F275590E400579813 /* CartCollectionHeaderReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartCollectionHeaderReusableView.swift; sourceTree = "<group>"; };
 		47AA7F7B26F7E86E00F26DDC /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		47ABA2042758108E008D521C /* VCCartCollectionController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCCartCollectionController2.swift; sourceTree = "<group>"; };
+		47ABA20627581CDD008D521C /* VCCart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCCart.swift; sourceTree = "<group>"; };
 		47B2ABDF26A76F5700526490 /* Lato-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-BlackItalic.ttf"; sourceTree = "<group>"; };
 		47B2ABE026A76F5700526490 /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
 		47B2ABE126A76F5800526490 /* Lato-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Italic.ttf"; sourceTree = "<group>"; };
@@ -273,6 +275,7 @@
 				4728623E2749B2A900178AA5 /* CartCollectionViewCell.swift */,
 				4797B72F275590E400579813 /* CartCollectionHeaderReusableView.swift */,
 				47ABA2042758108E008D521C /* VCCartCollectionController2.swift */,
+				47ABA20627581CDD008D521C /* VCCart.swift */,
 			);
 			path = CartScreen;
 			sourceTree = "<group>";
@@ -496,6 +499,7 @@
 				479771F126E579C1006B0EFE /* Persistence.swift in Sources */,
 				470B249F2739DED1001C060C /* VCLaunchScreen.swift in Sources */,
 				4728623F2749B2A900178AA5 /* CartCollectionViewCell.swift in Sources */,
+				47ABA20727581CDE008D521C /* VCCart.swift in Sources */,
 				470C001F271C469800D18353 /* catalogGoodsCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

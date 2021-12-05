@@ -89,7 +89,7 @@ class VCMainCatalog: UIViewController {
                 dataSourceSubcategoriesMode.apply(snapshot, animatingDifferences: animatingDifferences)
 
             case "product":
-                print("applySnapshot product")
+                print("applySnapshot product, CatalogData.instance.categoriesArray= \(CatalogData.instance.categoriesArray.count)")
                 let tempA: Int = CatalogData.instance.categoriesArray.firstIndex(where: { $0.sortOrder == AppSystemData.instance.activeCatalogCategory })!
                 let tempB: Int = CatalogData.instance.categoriesArray[tempA].subCategories.firstIndex(where: { $0.id == AppSystemData.instance.activeCatalogSubCategory })!
                 let specificSubcategory = CatalogData.instance.categoriesArray[tempA].subCategories[tempB].goodsOfCategory
@@ -550,9 +550,36 @@ class VCMainCatalog: UIViewController {
     
     
     //MARK: - viewDidAppear
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-        print("viewDidAppear")
+    
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(true)
+//        print("viewDidAppear")
+//
+////        AppSystemData.instance.activeCatalogMode = "categories"
+////
+////        print("AppSystemData.instance.VCMainCatalogDelegate_222= \(AppSystemData.instance.vcMainCatalogDelegate)")
+////
+////        AppSystemData.instance.vcMainCatalogDelegate = self
+//
+////        applySnapshot(animatingDifferences: false)
+////        CatalogData.instance.requestCategoriesData()
+////
+////        menuButtonView.layer.cornerRadius = 8
+////        menuButtonView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
+////        menuButtonView.layer.borderWidth = 0
+////        menuButtonView.layer.borderColor = UIColor.clear.cgColor
+////        menuButtonView.clipsToBounds = true
+////
+////        hud.textLabel.text = "Loading"
+//
+//    }
+    
+    
+    //MARK: - viewWillAppear
+    override func viewWillAppear(_ animated: Bool) {
+//        AppSystemData.instance.activeCatalogMode = "categories"
+        CatalogData.instance.requestCategoriesData()
+        applySnapshot(animatingDifferences: false)
     }
 
     
@@ -562,39 +589,39 @@ class VCMainCatalog: UIViewController {
         super.viewDidLoad()
         print("viewDidLoad")
         AppSystemData.instance.activeCatalogMode = "categories"
-        
+//
         print("AppSystemData.instance.VCMainCatalogDelegate_222= \(AppSystemData.instance.vcMainCatalogDelegate)")
-        
+//
         AppSystemData.instance.vcMainCatalogDelegate = self
-        applySnapshot(animatingDifferences: false)
-        CatalogData.instance.requestCategoriesData()
-        
+//        applySnapshot(animatingDifferences: false)
+//        CatalogData.instance.requestCategoriesData()
+//
         menuButtonView.layer.cornerRadius = 8
         menuButtonView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
         menuButtonView.layer.borderWidth = 0
         menuButtonView.layer.borderColor = UIColor.clear.cgColor
         menuButtonView.clipsToBounds = true
-        
+
         hud.textLabel.text = "Loading"
         
         
-        print("Persistence.shared.printAllObject()_2= \(Persistence.shared.getAllObjectPersonalData())")
-        var dataName: String = ""
-        for n in Persistence.shared.getAllObjectOfFavorite() {
-            dataName += " + \(n.name)"
-            print("Favorite n.name= \(n.name)")
-            print("Favorite n= \(n)")
-        }
-        print("getAllObjectOfFavorite= \(dataName)")
+//        print("Persistence.shared.printAllObject()_2= \(Persistence.shared.getAllObjectPersonalData())")
+//        var dataName: String = ""
+//        for n in Persistence.shared.getAllObjectOfFavorite() {
+//            dataName += " + \(n.name)"
+//            print("Favorite n.name= \(n.name)")
+//            print("Favorite n= \(n)")
+//        }
+//        print("getAllObjectOfFavorite= \(dataName)")
         
         
-        var dataName2: String = ""
-        for n in Persistence.shared.getAllObjectOfCart() {
-            dataName2 += " + \(n.name)"
-            print("Cart n.name= \(n.name)")
-            print("Cart n= \(n)")
-        }
-        print("getAllObjectOfCart= \(dataName2)")
+//        var dataName2: String = ""
+//        for n in Persistence.shared.getAllObjectOfCart() {
+//            dataName2 += " + \(n.name)"
+//            print("Cart n.name= \(n.name)")
+//            print("Cart n= \(n)")
+//        }
+//        print("getAllObjectOfCart= \(dataName2)")
     }
     
 }

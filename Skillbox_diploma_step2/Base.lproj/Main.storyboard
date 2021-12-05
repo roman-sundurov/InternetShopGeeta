@@ -1716,7 +1716,6 @@
                                         <buttonConfiguration key="configuration" style="plain" image="AddToCart" title=""/>
                                         <connections>
                                             <action selector="toCartButtonAction:" destination="hb6-fT-t5E" eventType="touchUpInside" id="2PY-bp-6bj"/>
-                                            <action selector="toCartButtonAction:" destination="Ker-SI-tCP" eventType="touchUpInside" id="JZ0-2E-4fV"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -1772,7 +1771,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="47U-kY-iqZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <exit id="Ker-SI-tCP" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="4263" y="-141"/>
         </scene>
@@ -2434,8 +2432,8 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="Vdd-Pl-HZw"/>
-        <segue reference="WeL-0E-wdd"/>
-        <segue reference="EIv-eB-LWm"/>
+        <segue reference="AYg-qH-NT3"/>
+        <segue reference="tQR-CR-vDb"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="AddToCart" width="354" height="54"/>
@@ -2465,7 +2463,7 @@
         <image name="Log In Button" width="222" height="54"/>
         <image name="LogInButton" width="324" height="54"/>
         <image name="LogOut" width="20.333333969116211" height="20.333333969116211"/>
-        <image name="Logo" width="305" height="77.666664123535156"/>
+        <image name="Logo" width="71" height="20"/>
         <image name="Menu" width="37" height="24"/>
         <image name="Notification" width="22.333333969116211" height="24.333333969116211"/>
         <image name="NotificationsButton" width="18.333333969116211" height="20.333333969116211"/>

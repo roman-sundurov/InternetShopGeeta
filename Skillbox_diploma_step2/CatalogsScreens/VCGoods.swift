@@ -35,6 +35,15 @@ class VCGoods: UIViewController {
     var tempC: Int?
     var specificGood: GoodsOfCategory?
     var sizeOfGood = SizeOfGood()
+    
+    
+    //MARK: - объекты
+    
+    let alertEnterTheSize = UIAlertController(title: "Выберите размер товара", message: nil, preferredStyle: .alert)
+    
+    func createAlertNotRegistration() {
+        alertEnterTheSize.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil ))
+    }
         
     
     //MARK: - клики
@@ -65,6 +74,10 @@ class VCGoods: UIViewController {
     
     
     @IBAction func toCartButtonAction(_ sender: Any) {
+        guard sizeOfGood.sSize == true || sizeOfGood.mSize == true || sizeOfGood.lSize == true || sizeOfGood.xlSize == true || sizeOfGood.xxlSize == true else {
+            self.present(alertEnterTheSize, animated: true, completion: nil)
+            return
+        }
         if toCartButton.isSelected == true {
             toCartButton.isSelected = false
             self.specificGood!.inCart = false
@@ -262,6 +275,8 @@ class VCGoods: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        createAlertNotRegistration()
         
         tempA = CatalogData.instance.categoriesArray.firstIndex(where: { $0.sortOrder == AppSystemData.instance.activeCatalogCategory })!
         tempB = CatalogData.instance.categoriesArray[tempA!].subCategories.firstIndex(where: { $0.id == AppSystemData.instance.activeCatalogSubCategory })!

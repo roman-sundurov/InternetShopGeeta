@@ -238,6 +238,9 @@ extension CatalogData {
     
     
     func requestCategoriesData() {
+//        guard AppSystemData.instance.activeCatalogMode == "categories" else {
+//            return
+//        }
         var categories: [CategoriesForCatalog] = []
         let request = AF.request("https://blackstarshop.ru/index.php?route=api/v1/categories")
         AppSystemData.instance.vcMainCatalogDelegate!.hudAppear()
@@ -257,7 +260,7 @@ extension CatalogData {
                         }
                         CatalogData.instance.categoriesArray = categories
                         print("categories.count111= \(categories.count)")
-                        AppSystemData.instance.vcMainCatalogDelegate!.catalogCollectionViewUpdate()
+//                        AppSystemData.instance.vcMainCatalogDelegate!.catalogCollectionViewUpdate()
                     }
                 CatalogData.instance.categoriesArray = categories
                 print("categories.count222= \(categories.count)")
@@ -279,18 +282,18 @@ extension CatalogData {
 //        print("idOfSubCategory= \(idOfSubCategory)")
         let tempA: Int = CatalogData.instance.categoriesArray.firstIndex(where: { $0.sortOrder == idOfCategory })!
         let tempB: Int = CatalogData.instance.categoriesArray[tempA].subCategories.firstIndex(where: { $0.id == AppSystemData.instance.activeCatalogSubCategory })!
-        print("111_idOfCategory= \(idOfCategory)")
-        print("111_idOfSubCategory= \(idOfSubCategory)")
-        print("111_activeCatalogCategory= \(AppSystemData.instance.activeCatalogCategory)")
-        print("111_activeCatalogSubCategory= \(AppSystemData.instance.activeCatalogSubCategory)")
-        print("222_subcategoryname = \(CatalogData.instance.categoriesArray[tempA].subCategories[tempB].name)")
+//        print("111_idOfCategory= \(idOfCategory)")
+//        print("111_idOfSubCategory= \(idOfSubCategory)")
+//        print("111_activeCatalogCategory= \(AppSystemData.instance.activeCatalogCategory)")
+//        print("111_activeCatalogSubCategory= \(AppSystemData.instance.activeCatalogSubCategory)")
+//        print("222_subcategoryname = \(CatalogData.instance.categoriesArray[tempA].subCategories[tempB].name)")
         
         var goods: [GoodsOfCategory] = []
         let request = AF.request("https://blackstarshop.ru/index.php?route=api/v1/products&cat_id=\(idOfSubCategory)")
         AppSystemData.instance.vcMainCatalogDelegate!.hudAppear()
         request.responseJSON(completionHandler: { response in
             if let object = response.value, let jsonDict = object as? NSDictionary {
-                print("jsonDict= \(jsonDict)")
+//                print("jsonDict= \(jsonDict)")
                     for (index, data) in jsonDict where data is NSDictionary{
                             print("index= \(index)")
                         if let product = GoodsOfCategory(data: data as! NSDictionary) {

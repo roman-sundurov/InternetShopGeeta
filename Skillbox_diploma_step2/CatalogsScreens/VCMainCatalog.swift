@@ -97,6 +97,9 @@ class VCMainCatalog: UIViewController {
                 var snapshot = SnapshotAliasProductMode()
                 snapshot.appendSections([.main])
                 snapshot.appendItems(specificSubcategory)
+                print("tempA111= \(tempA)")
+                print("tempB111= \(tempB)")
+                print("specificSubcategory.count111= \(specificSubcategory.count)")
 //                snapshot.appendItems(section.videos, toSection: section)
                 
                 dataSourceProductMode = makeDataSourceProductMode()
@@ -232,6 +235,7 @@ class VCMainCatalog: UIViewController {
                 let tempB: Int = CatalogData.instance.categoriesArray[tempA].subCategories.firstIndex(where: { $0.id == AppSystemData.instance.activeCatalogSubCategory })!
 
                 AppSystemData.instance.activeCatalogProduct = CatalogData.instance.categoriesArray[tempA].subCategories[tempB].goodsOfCategory[indexPath.row].sortOrder
+//                CatalogData.instance.requestGoodsData()
                 self.tapToCVCell()
                 self.buttonSegueToVCCatalogGoods()
             })
@@ -579,7 +583,10 @@ class VCMainCatalog: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
 //        AppSystemData.instance.activeCatalogMode = "categories"
         CatalogData.instance.requestCategoriesData()
-        applySnapshot(animatingDifferences: false)
+        if AppSystemData.instance.activeCatalogMode == "product" {
+            CatalogData.instance.requestGoodsData()
+        }
+//        applySnapshot(animatingDifferences: false)
     }
 
     
@@ -593,7 +600,7 @@ class VCMainCatalog: UIViewController {
         print("AppSystemData.instance.VCMainCatalogDelegate_222= \(AppSystemData.instance.vcMainCatalogDelegate)")
 //
         AppSystemData.instance.vcMainCatalogDelegate = self
-//        applySnapshot(animatingDifferences: false)
+        applySnapshot(animatingDifferences: false)
 //        CatalogData.instance.requestCategoriesData()
 //
         menuButtonView.layer.cornerRadius = 8

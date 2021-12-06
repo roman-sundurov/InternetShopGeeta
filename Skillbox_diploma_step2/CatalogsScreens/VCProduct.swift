@@ -93,7 +93,7 @@ class VCProduct: UIViewController {
     }
     
     
-    @IBAction func buttonCloseGoodsScreen(_ sender: Any) {
+    @IBAction func buttonBackToCatalogScreen(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
     

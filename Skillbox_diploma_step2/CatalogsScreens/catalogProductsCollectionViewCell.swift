@@ -1,5 +1,5 @@
 //
-//  catalogGoodsCollectionViewCell.swift
+//  catalogProductsCollectionViewCell.swift
 //  Skillbox_diploma_step2
 //
 //  Created by Roman on 17.10.2021.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class catalogGoodsCollectionViewCell: UICollectionViewCell {
+class catalogProductsCollectionViewCell: UICollectionViewCell {
     
     
     //MARK: - объявление аутлетов
@@ -21,7 +21,7 @@ class catalogGoodsCollectionViewCell: UICollectionViewCell {
     
     
     //MARK: - объекты
-    var dataOfCell: GoodsOfCategory?
+    var dataOfCell: Products?
     var cellIndexPath: IndexPath?
     
     

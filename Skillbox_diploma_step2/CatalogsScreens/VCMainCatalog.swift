@@ -45,14 +45,14 @@ class VCMainCatalog: UIViewController {
     private lazy var dataSourceSubcategoriesMode = makeDataSourceSubcategoriesMode()
     private lazy var dataSourceProductMode = makeDataSourceProductMode()
     
-    typealias DataSourceAliastCatalogMode = UICollectionViewDiffableDataSource<SectionCategories, CategoriesForCatalog>
-    typealias SnapshotAliasCatalogMode = NSDiffableDataSourceSnapshot<SectionCategories, CategoriesForCatalog>
+    typealias DataSourceAliastCatalogMode = UICollectionViewDiffableDataSource<SectionCategories, Categories>
+    typealias SnapshotAliasCatalogMode = NSDiffableDataSourceSnapshot<SectionCategories, Categories>
     
     typealias DataSourceAliastSubcategoriesMode = UICollectionViewDiffableDataSource<SectionCategories, SubCategories>
     typealias SnapshotAliasSubcategoriesMode = NSDiffableDataSourceSnapshot<SectionCategories, SubCategories>
     
-    typealias DataSourceAliasProductMode = UICollectionViewDiffableDataSource<SectionCategories, GoodsOfCategory>
-    typealias SnapshotAliasProductMode = NSDiffableDataSourceSnapshot<SectionCategories, GoodsOfCategory>
+    typealias DataSourceAliasProductMode = UICollectionViewDiffableDataSource<SectionCategories, Products>
+    typealias SnapshotAliasProductMode = NSDiffableDataSourceSnapshot<SectionCategories, Products>
     
     var menuState: Bool = false
     private let sectionInsets = UIEdgeInsets(top: 0.0, left: 15.0, bottom: 0.0, right: 15.0)
@@ -196,7 +196,7 @@ class VCMainCatalog: UIViewController {
 
         let dataSource = DataSourceAliasProductMode(collectionView: catalogCollectionView, cellProvider: { (collectionView, indexPath, subCategories) -> UICollectionViewCell? in
 
-            var cellProd: catalogGoodsCollectionViewCell?
+            var cellProd: catalogProductsCollectionViewCell?
 
             //Set cell's content
             print("product case in CollectionView indexPath.row= \(indexPath.row)")
@@ -206,7 +206,7 @@ class VCMainCatalog: UIViewController {
             let tempB: Int = CatalogData.instance.categoriesArray[tempA].subCategories.firstIndex(where: { $0.id == AppSystemData.instance.activeCatalogSubCategory })!
             let goodsData = CatalogData.instance.categoriesArray[tempA].subCategories[tempB].goodsOfCategory[indexPath.row]
 
-            cellProd = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductCell", for: indexPath) as? catalogGoodsCollectionViewCell
+            cellProd = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductCell", for: indexPath) as? catalogProductsCollectionViewCell
             cellProd!.productImage.image = goodsData.goodsUIImage
             cellProd!.nameProduct.text = goodsData.name
             cellProd!.priceProduct.text = String(format: "$%.2f usd", goodsData.price)
@@ -250,7 +250,7 @@ class VCMainCatalog: UIViewController {
     //MARK: - переходы
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let vc = segue.destination as? VCGoods, segue.identifier == "segueToVCCatalogGoods" {
+        if let vc = segue.destination as? VCProduct, segue.identifier == "segueToVCCatalogGoods" {
             //Something
         }
     }

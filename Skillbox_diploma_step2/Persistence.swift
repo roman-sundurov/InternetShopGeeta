@@ -28,12 +28,12 @@ class PersonalData: Object {
     @objc dynamic var email: String = ""
     @objc dynamic var password: String = ""
 //    var cart = List<CartGoods>()
-    var favorite = List<FavoriteGoods>()
-    var cart = List<CartGoods>()
+    var favorite = List<PersistenceFavorite>()
+    var cart = List<PersistenceCart>()
 }
 
 
-class FavoriteGoods: Object{
+class PersistenceFavorite: Object{
     @objc dynamic var name: String = ""
     @objc dynamic var englishName: String = ""
     @objc dynamic var sortOrder: Int = 0
@@ -46,7 +46,7 @@ class FavoriteGoods: Object{
 }
 
 
-class CartGoods: Object {
+class PersistenceCart: Object {
     @objc dynamic var name: String = ""
     @objc dynamic var category: String = ""
     @objc dynamic var englishName: String = ""
@@ -57,11 +57,11 @@ class CartGoods: Object {
     @objc dynamic var goodsUIImageData: NSData? = nil
     @objc dynamic var price: Double = 0
     @objc dynamic var isFavorite: Bool = false
-    @objc dynamic var size: SizeOfGood? = SizeOfGood()
+    @objc dynamic var size: PersistenceSize? = PersistenceSize()
 }
 
 
-class SizeOfGood: Object {
+class PersistenceSize: Object {
     @objc dynamic var sSize: Bool = false
     @objc dynamic var mSize: Bool = false
     @objc dynamic var lSize: Bool = false
@@ -93,9 +93,9 @@ class Persistence{
         try! realm.write{
 //            realm.delete(realm.objects(AppSystemData.self))
             realm.delete(realm.objects(PersonalData.self))
-            realm.delete(realm.objects(FavoriteGoods.self))
-            realm.delete(realm.objects(CartGoods.self))
-            realm.delete(realm.objects(SizeOfGood.self))
+            realm.delete(realm.objects(PersistenceFavorite.self))
+            realm.delete(realm.objects(PersistenceCart.self))
+            realm.delete(realm.objects(PersistenceSize.self))
         }
     }
     
@@ -108,9 +108,9 @@ class Persistence{
     
     
     //Сохранение избранных товаров
-    func addGoodsToFavorite(good: GoodsOfCategory) {
+    func addGoodsToFavorite(good: Products) {
         print("addGoodsToFavorite")
-        let favoriteGood = FavoriteGoods()
+        let favoriteGood = PersistenceFavorite()
         favoriteGood.name = good.name
         favoriteGood.englishName = good.englishName
         favoriteGood.sortOrder = good.sortOrder
@@ -131,7 +131,7 @@ class Persistence{
         for n in Persistence.shared.getAllObjectOfFavorite() {
             print("article= \(n.article), name= \(n.name)")
         }
-        let objectForDeleting: FavoriteGoods? = realm.objects(FavoriteGoods.self).filter("article == '\(article)'").first
+        let objectForDeleting: PersistenceFavorite? = realm.objects(PersistenceFavorite.self).filter("article == '\(article)'").first
         print("article= \(article), objectForDeleting.article= \(objectForDeleting)")
         try! realm.write {
             realm.delete(objectForDeleting!)
@@ -140,9 +140,9 @@ class Persistence{
 
 
     //Сохранение товаров корзины
-    func addGoodsToCart(good: GoodsOfCategory, size: SizeOfGood, catalog: String) {
+    func addGoodsToCart(good: Products, size: PersistenceSize, catalog: String) {
         print("addGoodsToCart catalog= \(catalog)")
-        let cartGood = CartGoods()
+        let cartGood = PersistenceCart()
         cartGood.name = good.name
         cartGood.category = catalog
         cartGood.englishName = good.englishName
@@ -165,23 +165,35 @@ class Persistence{
         for n in Persistence.shared.getAllObjectOfCart() {
             print("article= \(n.article), name= \(n.name)")
         }
-        let objectForDeleting: CartGoods? = realm.objects(CartGoods.self).filter("article == '\(article)'").first
+        let objectForDeleting: PersistenceCart? = realm.objects(PersistenceCart.self).filter("article == '\(article)'").first
         print("article= \(article), objectForDeleting.article= \(objectForDeleting)")
         try! realm.write {
+            print("deleteGoodsToCart2, article= \(article)")
             realm.delete(objectForDeleting!)
         }
     }
 
 
-    func getAllObjectOfFavorite() -> Results<FavoriteGoods> {
-        let allFavoriteGoods = realm.objects(FavoriteGoods.self)
+    func getAllObjectOfFavorite() -> Results<PersistenceFavorite> {
+        let allFavoriteGoods = realm.objects(PersistenceFavorite.self)
             return allFavoriteGoods
     }
     
     
-    func getAllObjectOfCart() -> Results<CartGoods> {
-        let allCartGoods = realm.objects(CartGoods.self)
+    func getAllObjectOfCart() -> Results<PersistenceCart> {
+        let allCartGoods = realm.objects(PersistenceCart.self)
+        print("getAllObjectOfCart, allCartGoods.count= \(allCartGoods.count)")
             return allCartGoods
+    }
+    
+    func newInstanceSizeOfGoode(size: Size) -> PersistenceSize {
+        let cartGood = PersistenceSize()
+        cartGood.sSize = size.sSize
+        cartGood.mSize = size.mSize
+        cartGood.lSize = size.lSize
+        cartGood.xlSize = size.xlSize
+        cartGood.xxlSize = size.xxlSize
+        return cartGood
     }
     
 }

@@ -16,20 +16,20 @@ class CatalogData{
     
     static let instance = CatalogData()
     
-    var categoriesArray: [CategoriesForCatalog] = []
-    var catalogsAndCartGoodsDiffableArray: [CatalogsAndCartGoodsDiffable] = []
+    var categoriesArray: [Categories] = []
+    var cartCategoriesAndProductsDiffableArray: [CartCategoriesAndProductsDiffable] = []
     
 }
 
 
-//MARK: - class CatalogsAndCartGoodsDiffable
-class CatalogsAndCartGoodsDiffable: Hashable {
+//MARK: - class CatalogsAndProductsDiffable
+class CartCategoriesAndProductsDiffable: Hashable {
     var id = UUID()
     
     var category: String
-    var cartGoodsDiffable: [CartGoodsDiffable]
+    var cartGoodsDiffable: [Cart]
     
-    init(catalog: String, cartGoods: [CartGoodsDiffable]) {
+    init(catalog: String, cartGoods: [Cart]) {
         self.category = catalog
         self.cartGoodsDiffable = cartGoods
     }
@@ -38,14 +38,14 @@ class CatalogsAndCartGoodsDiffable: Hashable {
       hasher.combine(id)
     }
     
-    static func == (lhs: CatalogsAndCartGoodsDiffable, rhs: CatalogsAndCartGoodsDiffable) -> Bool {
+    static func == (lhs: CartCategoriesAndProductsDiffable, rhs: CartCategoriesAndProductsDiffable) -> Bool {
       lhs.id == rhs.id
     }
     
 }
 
-//MARK: - class CartGoodsDiffable
-class CartGoodsDiffable: Hashable {
+//MARK: - class Cart
+class Cart: Hashable {
     var name: String = ""
     var catalog: String = ""
     var englishName: String = ""
@@ -56,9 +56,9 @@ class CartGoodsDiffable: Hashable {
     var goodsUIImageData: NSData? = nil
     var price: Double = 0
     var isFavorite: Bool = false
-    var size: SizeOfGood = SizeOfGood()
+    var size: PersistenceSize = PersistenceSize()
     
-    init(name: String, catalog: String, englishName: String, sortOrder: Int, article: String, descriptionGoods: String, goodsImage: String, goodsUIImageData: NSData?, price: Double, isFavorite: Bool, size: SizeOfGood) {
+    init(name: String, catalog: String, englishName: String, sortOrder: Int, article: String, descriptionGoods: String, goodsImage: String, goodsUIImageData: NSData?, price: Double, isFavorite: Bool, size: PersistenceSize) {
         self.name = name
         self.catalog = catalog
         self.englishName = englishName
@@ -76,15 +76,15 @@ class CartGoodsDiffable: Hashable {
       hasher.combine(sortOrder)
     }
     
-    static func == (lhs: CartGoodsDiffable, rhs: CartGoodsDiffable) -> Bool {
+    static func == (lhs: Cart, rhs: Cart) -> Bool {
       lhs.sortOrder == rhs.sortOrder
     }
 
 }
 
 
-//MARK: - class CategoriesForCatalog
-class CategoriesForCatalog: Hashable {
+//MARK: - class Categories
+class Categories: Hashable {
     
     let name: String
     let sortOrder: Int
@@ -121,7 +121,7 @@ class CategoriesForCatalog: Hashable {
         
     }
     
-    static func == (lhs: CategoriesForCatalog, rhs: CategoriesForCatalog) -> Bool {
+    static func == (lhs: Categories, rhs: Categories) -> Bool {
         lhs.sortOrder == rhs.sortOrder
     }
     
@@ -137,12 +137,11 @@ class SubCategories: Equatable, Hashable {
     
     static func == (lhs: SubCategories, rhs: SubCategories) -> Bool { return lhs == rhs }
     
-    
     let id: Int
     let iconImage: String
     let iconUIImage: UIImage?
     let name: String
-    var goodsOfCategory: [GoodsOfCategory] = []
+    var goodsOfCategory: [Products] = []
     
     init?(data: NSDictionary) {
         guard let id = data["id"] as? Int ?? Int(data["id"] as! String),
@@ -171,8 +170,26 @@ class SubCategories: Equatable, Hashable {
 }
 
 
-//MARK: - class GoodsOfCategory
-class GoodsOfCategory: Hashable {
+//MARK: - class Products
+
+class Size {
+    var sSize: Bool = false
+    var mSize: Bool = false
+    var lSize: Bool = false
+    var xlSize: Bool = false
+    var xxlSize: Bool = false
+    
+        init?(sSize: Bool, mSize: Bool, lSize: Bool, xlSize: Bool, xxlSize: Bool) {
+            self.sSize = sSize
+            self.mSize = mSize
+            self.lSize = lSize
+            self.xlSize = xlSize
+            self.xxlSize = xxlSize
+        }
+    
+}
+
+class Products: Hashable {
     var id = UUID()
     
     let name: String
@@ -185,7 +202,7 @@ class GoodsOfCategory: Hashable {
     let price: Double
     var isFavorite: Bool?
     var inCart: Bool?
-    var sizeInCart: SizeOfGood?
+    var sizeInCart: Size?
     
     init?(data: NSDictionary) {
         guard let name = data["name"] as? String,
@@ -210,19 +227,15 @@ class GoodsOfCategory: Hashable {
         self.isFavorite = !Persistence.shared.getAllObjectOfFavorite().filter("article == '\(article)'").isEmpty
         self.inCart = !Persistence.shared.getAllObjectOfCart().filter("article == '\(article)'").isEmpty
         if self.inCart == true {
-            self.sizeInCart = Persistence.shared.getAllObjectOfCart().filter("article == '\(article)'").first?.size
+            let persistenceSize = Persistence.shared.getAllObjectOfCart().filter("article == '\(article)'").first?.size
+            self.sizeInCart = Size.init(sSize: persistenceSize!.sSize, mSize: persistenceSize!.mSize, lSize: persistenceSize!.lSize, xlSize: persistenceSize!.xlSize, xxlSize: persistenceSize!.xxlSize)
         } else {
-            self.sizeInCart = SizeOfGood()
-            self.sizeInCart?.sSize = false
-            self.sizeInCart?.mSize = false
-            self.sizeInCart?.lSize = false
-            self.sizeInCart?.xlSize = false
-            self.sizeInCart?.xxlSize = false
+            self.sizeInCart = Size.init(sSize: false, mSize: false, lSize: false, xlSize: false, xxlSize: false)
         }
     }
     
     
-        static func == (lhs: GoodsOfCategory, rhs: GoodsOfCategory) -> Bool {
+        static func == (lhs: Products, rhs: Products) -> Bool {
             lhs.id == rhs.id
         }
         
@@ -241,7 +254,7 @@ extension CatalogData {
 //        guard AppSystemData.instance.activeCatalogMode == "categories" else {
 //            return
 //        }
-        var categories: [CategoriesForCatalog] = []
+        var categories: [Categories] = []
         let request = AF.request("https://blackstarshop.ru/index.php?route=api/v1/categories")
         AppSystemData.instance.vcMainCatalogDelegate!.hudAppear()
         request.responseJSON(completionHandler: { response in
@@ -249,7 +262,7 @@ extension CatalogData {
 //                print("jsonDict= \(jsonDict)")
                     for (index, data) in jsonDict where data is NSDictionary{
 //                            print("index= \(index)")
-                        if let category = CategoriesForCatalog(data: data as! NSDictionary) {
+                        if let category = Categories(data: data as! NSDictionary) {
 //                            print("111")
                             if category.image != "" && category.subCategories != [] {
                                 category.subCategories.removeAll{ value in return value.iconImage == ""}
@@ -288,7 +301,7 @@ extension CatalogData {
 //        print("111_activeCatalogSubCategory= \(AppSystemData.instance.activeCatalogSubCategory)")
 //        print("222_subcategoryname = \(CatalogData.instance.categoriesArray[tempA].subCategories[tempB].name)")
         
-        var goods: [GoodsOfCategory] = []
+        var goods: [Products] = []
         let request = AF.request("https://blackstarshop.ru/index.php?route=api/v1/products&cat_id=\(idOfSubCategory)")
         AppSystemData.instance.vcMainCatalogDelegate!.hudAppear()
         request.responseJSON(completionHandler: { response in
@@ -296,7 +309,7 @@ extension CatalogData {
 //                print("jsonDict= \(jsonDict)")
                     for (index, data) in jsonDict where data is NSDictionary{
                             print("index= \(index)")
-                        if let product = GoodsOfCategory(data: data as! NSDictionary) {
+                        if let product = Products(data: data as! NSDictionary) {
                             print("777")
                             if product.goodsImage != "" {
                                 goods.append(product)
@@ -326,7 +339,7 @@ extension CatalogData {
     }
     
     
-    func isCategoryContain(category: String, place: [CatalogsAndCartGoodsDiffable]) -> Int {
+    func isCategoryContain(category: String, place: [CartCategoriesAndProductsDiffable]) -> Int {
         var result: Int = -1
         var checker: Int = 0
         
@@ -344,29 +357,29 @@ extension CatalogData {
     
     func updateCatalogsAndCartGoodsDiffableArray() {
         print("updateCatalogsAndCartGoodsDiffable")
-        catalogsAndCartGoodsDiffableArray = []
+        cartCategoriesAndProductsDiffableArray = []
         
         for persistenceCartGood in Persistence.shared.getAllObjectOfCart() {
-            if catalogsAndCartGoodsDiffableArray.isEmpty == false {
+            if cartCategoriesAndProductsDiffableArray.isEmpty == false {
                 
-                var id = isCategoryContain(category: persistenceCartGood.category, place: catalogsAndCartGoodsDiffableArray)
+                var id = isCategoryContain(category: persistenceCartGood.category, place: cartCategoriesAndProductsDiffableArray)
                 
                 if id >= 0 {
                     print("updateCatalogsAndCartGoodsDiffableArray id != 0, \(persistenceCartGood.category)")
-                    catalogsAndCartGoodsDiffableArray[id].cartGoodsDiffable.append(CartGoodsDiffable.init(name: persistenceCartGood.name, catalog: persistenceCartGood.category, englishName: persistenceCartGood.englishName, sortOrder: persistenceCartGood.sortOrder, article: persistenceCartGood.article, descriptionGoods: persistenceCartGood.description, goodsImage: persistenceCartGood.goodsImage, goodsUIImageData: persistenceCartGood.goodsUIImageData, price: persistenceCartGood.price, isFavorite: persistenceCartGood.isFavorite, size: persistenceCartGood.size!))
+                    cartCategoriesAndProductsDiffableArray[id].cartGoodsDiffable.append(Cart.init(name: persistenceCartGood.name, catalog: persistenceCartGood.category, englishName: persistenceCartGood.englishName, sortOrder: persistenceCartGood.sortOrder, article: persistenceCartGood.article, descriptionGoods: persistenceCartGood.description, goodsImage: persistenceCartGood.goodsImage, goodsUIImageData: persistenceCartGood.goodsUIImageData, price: persistenceCartGood.price, isFavorite: persistenceCartGood.isFavorite, size: persistenceCartGood.size!))
                 } else {
                     print("updateCatalogsAndCartGoodsDiffableArray id == 0, \(persistenceCartGood.category)")
-                    catalogsAndCartGoodsDiffableArray.append(CatalogsAndCartGoodsDiffable.init(
+                    cartCategoriesAndProductsDiffableArray.append(CartCategoriesAndProductsDiffable.init(
                         catalog: persistenceCartGood.category,
-                        cartGoods: [CartGoodsDiffable.init(name: persistenceCartGood.name, catalog: persistenceCartGood.category, englishName: persistenceCartGood.englishName, sortOrder: persistenceCartGood.sortOrder, article: persistenceCartGood.article, descriptionGoods: persistenceCartGood.description, goodsImage: persistenceCartGood.goodsImage, goodsUIImageData: persistenceCartGood.goodsUIImageData, price: persistenceCartGood.price, isFavorite: persistenceCartGood.isFavorite, size: persistenceCartGood.size!)]
+                        cartGoods: [Cart.init(name: persistenceCartGood.name, catalog: persistenceCartGood.category, englishName: persistenceCartGood.englishName, sortOrder: persistenceCartGood.sortOrder, article: persistenceCartGood.article, descriptionGoods: persistenceCartGood.description, goodsImage: persistenceCartGood.goodsImage, goodsUIImageData: persistenceCartGood.goodsUIImageData, price: persistenceCartGood.price, isFavorite: persistenceCartGood.isFavorite, size: persistenceCartGood.size!)]
                     ))
 
                 }
             } else {
                 print("updateCatalogsAndCartGoodsDiffableArray emptyArray, \(persistenceCartGood.category)")
-                catalogsAndCartGoodsDiffableArray.append(CatalogsAndCartGoodsDiffable.init(
+                cartCategoriesAndProductsDiffableArray.append(CartCategoriesAndProductsDiffable.init(
                     catalog: persistenceCartGood.category,
-                    cartGoods: [CartGoodsDiffable.init(name: persistenceCartGood.name, catalog: persistenceCartGood.category, englishName: persistenceCartGood.englishName, sortOrder: persistenceCartGood.sortOrder, article: persistenceCartGood.article, descriptionGoods: persistenceCartGood.description, goodsImage: persistenceCartGood.goodsImage, goodsUIImageData: persistenceCartGood.goodsUIImageData, price: persistenceCartGood.price, isFavorite: persistenceCartGood.isFavorite, size: persistenceCartGood.size!)]
+                    cartGoods: [Cart.init(name: persistenceCartGood.name, catalog: persistenceCartGood.category, englishName: persistenceCartGood.englishName, sortOrder: persistenceCartGood.sortOrder, article: persistenceCartGood.article, descriptionGoods: persistenceCartGood.description, goodsImage: persistenceCartGood.goodsImage, goodsUIImageData: persistenceCartGood.goodsUIImageData, price: persistenceCartGood.price, isFavorite: persistenceCartGood.isFavorite, size: persistenceCartGood.size!)]
                 ))
             }
             
@@ -375,15 +388,15 @@ extension CatalogData {
     }
     
     
-    func getAllCatalogsAndCartGoodsDiffable() -> [CatalogsAndCartGoodsDiffable] {
-        print("getAllCatalogsAndCartGoodsDiffable1= \(catalogsAndCartGoodsDiffableArray)")
+    func getAllCatalogsAndCartGoodsDiffable() -> [CartCategoriesAndProductsDiffable] {
+        print("getAllCatalogsAndCartGoodsDiffable1= \(cartCategoriesAndProductsDiffableArray)")
         updateCatalogsAndCartGoodsDiffableArray()
-        print("getAllCatalogsAndCartGoodsDiffable2= \(catalogsAndCartGoodsDiffableArray)")
-        return catalogsAndCartGoodsDiffableArray
+        print("getAllCatalogsAndCartGoodsDiffable2= \(cartCategoriesAndProductsDiffableArray)")
+        return cartCategoriesAndProductsDiffableArray
     }
     
     
-//    func getAllExistCategoriesForCatalog() -> [CategoriesForCatalog] {
+//    func getAllExistCategoriesForCatalog() -> [Categories] {
 ////        print("getAllCategoriesForCatalog= \(catalogsAndCartGoodsDiffableArray)")
 //        print("categoriesArray888= \(categoriesArray)")
 //        return categoriesArray

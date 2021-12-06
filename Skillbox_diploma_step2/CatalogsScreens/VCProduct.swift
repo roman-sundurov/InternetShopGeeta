@@ -7,7 +7,7 @@
 
 import UIKit
 
-class VCGoods: UIViewController {
+class VCProduct: UIViewController {
     
     
         //MARK: - объявление аутлетов
@@ -33,8 +33,8 @@ class VCGoods: UIViewController {
     var tempA: Int?
     var tempB: Int?
     var tempC: Int?
-    var specificGood: GoodsOfCategory?
-    var sizeOfGood = SizeOfGood()
+    var specificGood: Products?
+    var sizeOfGood: Size?
     
     
     //MARK: - объекты
@@ -74,23 +74,20 @@ class VCGoods: UIViewController {
     
     
     @IBAction func toCartButtonAction(_ sender: Any) {
-        guard sizeOfGood.sSize == true || sizeOfGood.mSize == true || sizeOfGood.lSize == true || sizeOfGood.xlSize == true || sizeOfGood.xxlSize == true else {
+        guard sizeOfGood!.sSize == true || sizeOfGood!.mSize == true || sizeOfGood!.lSize == true || sizeOfGood!.xlSize == true || sizeOfGood!.xxlSize == true else {
             self.present(alertEnterTheSize, animated: true, completion: nil)
             return
         }
         if toCartButton.isSelected == true {
             toCartButton.isSelected = false
             self.specificGood!.inCart = false
-//            print("addGoodsToCart.isSelected = false, good= \(specificGood?.name)")
             Persistence.shared.deleteGoodsFromCart(article: specificGood!.article)
             transformSizeToBought(statusInCart: false)
         } else {
             tempA = CatalogData.instance.categoriesArray.firstIndex(where: { $0.sortOrder == AppSystemData.instance.activeCatalogCategory })!
             toCartButton.isSelected = true
             specificGood!.inCart = true
-//            specificGood?.sizeInCart? = sizeOfGood!
-//            print("addGoodsToCart.isSelected = true, good= \(specificGood?.name)")
-            Persistence.shared.addGoodsToCart(good: specificGood!, size: sizeOfGood, catalog: CatalogData.instance.categoriesArray[tempA!].subCategories[tempB!].name)
+            Persistence.shared.addGoodsToCart(good: specificGood!, size: Persistence.shared.newInstanceSizeOfGoode(size: sizeOfGood!), catalog: CatalogData.instance.categoriesArray[tempA!].subCategories[tempB!].name)
             transformSizeToBought(statusInCart: true)
         }
     }
@@ -217,6 +214,7 @@ class VCGoods: UIViewController {
                     buttonSizeL.isSelected = false
                     buttonSizeXXL.isSelected = false
                     buttonSizeXL.isSelected = true
+                    print("77721")
                 case "XXL":
                     buttonSizeS.isSelected = false
                     buttonSizeM.isSelected = false
@@ -226,12 +224,16 @@ class VCGoods: UIViewController {
                 default:
                     return
             }
-            sizeOfGood.sSize = buttonSizeS.isSelected
-            sizeOfGood.mSize = buttonSizeM.isSelected
-            sizeOfGood.lSize = buttonSizeL.isSelected
-            sizeOfGood.xlSize = buttonSizeXL.isSelected
-            sizeOfGood.xxlSize = buttonSizeXXL.isSelected
-            specificGood?.sizeInCart? = sizeOfGood
+            print("7773")
+            print("specificGood= \(specificGood)")
+            print("sizeOfGood= \(sizeOfGood)")
+            sizeOfGood!.sSize = buttonSizeS.isSelected
+            sizeOfGood!.mSize = buttonSizeM.isSelected
+            sizeOfGood!.lSize = buttonSizeL.isSelected
+            sizeOfGood!.xlSize = buttonSizeXL.isSelected
+            sizeOfGood!.xxlSize = buttonSizeXXL.isSelected
+            print("7774")
+            specificGood?.sizeInCart? = sizeOfGood!
         }
         
     }
@@ -259,12 +261,13 @@ class VCGoods: UIViewController {
     
     
     //MARK: - данные
+    
     func goodDataUpdate() {
         tempA = CatalogData.instance.categoriesArray.firstIndex(where: { $0.sortOrder == AppSystemData.instance.activeCatalogCategory })!
         tempB = CatalogData.instance.categoriesArray[tempA!].subCategories.firstIndex(where: { $0.id == AppSystemData.instance.activeCatalogSubCategory })!
         tempC = CatalogData.instance.categoriesArray[tempA!].subCategories[tempB!].goodsOfCategory.firstIndex(where: { $0.sortOrder == AppSystemData.instance.activeCatalogProduct })!
         specificGood = CatalogData.instance.categoriesArray[tempA!].subCategories[tempB!].goodsOfCategory[tempC!]
-        sizeOfGood = specificGood!.sizeInCart!
+        sizeOfGood = Size.init(sSize: specificGood!.sizeInCart!.sSize, mSize: specificGood!.sizeInCart!.mSize, lSize: specificGood!.sizeInCart!.lSize, xlSize: specificGood!.sizeInCart!.xlSize, xxlSize: specificGood!.sizeInCart!.xxlSize)
         
 //        print("specificGood?.name= \(specificGood?.name), specificGood?.inCart= \(specificGood?.inCart)")
 

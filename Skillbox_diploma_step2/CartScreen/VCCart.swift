@@ -15,8 +15,8 @@ class VCCart: UIViewController {
     private lazy var dataSource = makeDataSource()
     private var sections = CatalogData.instance.getAllCatalogsAndCartGoodsDiffable()
     
-    typealias DataSourceAlias = UICollectionViewDiffableDataSource<CatalogsAndCartGoodsDiffable, CartGoodsDiffable>
-    typealias SnapshotAlias = NSDiffableDataSourceSnapshot<CatalogsAndCartGoodsDiffable, CartGoodsDiffable>
+    typealias DataSourceAlias = UICollectionViewDiffableDataSource<CartCategoriesAndProductsDiffable, Cart>
+    typealias SnapshotAlias = NSDiffableDataSourceSnapshot<CartCategoriesAndProductsDiffable, Cart>
     
     private let cellPadding = UIEdgeInsets(top: 15.0, left: 15.0, bottom: 0, right: 15.0)
     @IBOutlet var cartCollectionView: UICollectionView!
@@ -63,7 +63,7 @@ class VCCart: UIViewController {
                 cellOfCart?.buttonSize.setImage(UIImage.init(named: "sSizeCart"), for: .normal)
             }
             if cartGoodsDiffable.size.mSize == true {
-                cellOfCart?.buttonSize.setImage(UIImage.init(named: "sSizeCart"), for: .normal)
+                cellOfCart?.buttonSize.setImage(UIImage.init(named: "mSizeCart"), for: .normal)
             }
 
             if cartGoodsDiffable.size.lSize == true {

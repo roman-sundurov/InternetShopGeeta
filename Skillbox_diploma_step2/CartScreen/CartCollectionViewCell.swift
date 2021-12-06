@@ -18,7 +18,7 @@ class CartCollectionViewCell: UICollectionViewCell {
     @IBOutlet var priceLabel: UILabel!
     @IBOutlet var buttonSize: UIButton!
     
-    var specificGood: CartGoodsDiffable?
+    var specificGood: Cart?
     
     
     //MARK: - клики

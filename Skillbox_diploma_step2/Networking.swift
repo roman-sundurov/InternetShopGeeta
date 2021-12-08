@@ -273,7 +273,7 @@ extension CatalogData {
                         }
                         CatalogData.instance.categoriesArray = categories
                         print("categories.count111= \(categories.count)")
-//                        AppSystemData.instance.vcMainCatalogDelegate!.catalogCollectionViewUpdate()
+                        AppSystemData.instance.vcMainCatalogDelegate!.catalogCollectionViewUpdate()
                     }
                 CatalogData.instance.categoriesArray = categories
                 print("categories.count222= \(categories.count)")

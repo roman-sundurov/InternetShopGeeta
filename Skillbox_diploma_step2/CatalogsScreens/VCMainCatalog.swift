@@ -540,7 +540,7 @@ class VCMainCatalog: UIViewController {
     
     func catalogCollectionViewUpdate() {
         applySnapshot()
-        print("mainCatalogCollectionUpdate")
+        print("categories.count111 mainCatalogCollectionUpdate")
     }
     
     func hudAppear() {
@@ -582,7 +582,9 @@ class VCMainCatalog: UIViewController {
     //MARK: - viewWillAppear
     override func viewWillAppear(_ animated: Bool) {
 //        AppSystemData.instance.activeCatalogMode = "categories"
-        CatalogData.instance.requestCategoriesData()
+      Task {
+        await CatalogData.instance.requestCategoriesData()
+      }
         if AppSystemData.instance.activeCatalogMode == "product" {
             CatalogData.instance.requestGoodsData()
         }

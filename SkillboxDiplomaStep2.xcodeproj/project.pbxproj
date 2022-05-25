@@ -25,6 +25,10 @@
 		4748E11526A75195004B8D88 /* VCLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4748E11426A75195004B8D88 /* VCLogin.swift */; };
 		4752A8F226AB5C00000E4AC5 /* VCMainCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4752A8F126AB5C00000E4AC5 /* VCMainCatalog.swift */; };
 		4752A8F526AB63D1000E4AC5 /* VCProfileSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4752A8F426AB63D1000E4AC5 /* VCProfileSlider.swift */; };
+		478E4A36283E849200F15774 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 478E4A35283E849200F15774 /* Alamofire */; };
+		478E4A39283E84CF00F15774 /* SimpleCheckbox in Frameworks */ = {isa = PBXBuildFile; productRef = 478E4A38283E84CF00F15774 /* SimpleCheckbox */; };
+		478E4A3C283E84F400F15774 /* JGProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 478E4A3B283E84F400F15774 /* JGProgressHUD */; };
+		478E4A3F283E87BE00F15774 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 478E4A3E283E87BE00F15774 /* RealmSwift */; };
 		479771F126E579C1006B0EFE /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479771F026E579C1006B0EFE /* Persistence.swift */; };
 		479771F326E5F5F6006B0EFE /* catalogCategriesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479771F226E5F5F6006B0EFE /* catalogCategriesCollectionViewCell.swift */; };
 		4797B730275590E400579813 /* CartCollectionHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4797B72F275590E400579813 /* CartCollectionHeaderReusableView.swift */; };
@@ -130,6 +134,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				478E4A3F283E87BE00F15774 /* RealmSwift in Frameworks */,
+				478E4A36283E849200F15774 /* Alamofire in Frameworks */,
+				478E4A3C283E84F400F15774 /* JGProgressHUD in Frameworks */,
+				478E4A39283E84CF00F15774 /* SimpleCheckbox in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,6 +319,10 @@
 			);
 			name = SkillboxDiplomaStep2;
 			packageProductDependencies = (
+				478E4A35283E849200F15774 /* Alamofire */,
+				478E4A38283E84CF00F15774 /* SimpleCheckbox */,
+				478E4A3B283E84F400F15774 /* JGProgressHUD */,
+				478E4A3E283E87BE00F15774 /* RealmSwift */,
 			);
 			productName = Skillbox_diploma_step2;
 			productReference = 472D946A2676AA0300482C20 /* SkillboxDiplomaStep2.app */;
@@ -384,10 +396,10 @@
 			);
 			mainGroup = 472D94612676AA0300482C20;
 			packageReferences = (
-				47F9DEB1283E7FCE00385EA2 /* XCRemoteSwiftPackageReference "realm-swift" */,
-				47F9DEB2283E7FE800385EA2 /* XCRemoteSwiftPackageReference "SimpleCheckbox" */,
-				47F9DEB3283E7FFD00385EA2 /* XCRemoteSwiftPackageReference "Alamofire" */,
-				47F9DEB4283E801F00385EA2 /* XCRemoteSwiftPackageReference "JGProgressHUD" */,
+				478E4A34283E849200F15774 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				478E4A37283E84CF00F15774 /* XCRemoteSwiftPackageReference "SimpleCheckbox" */,
+				478E4A3A283E84F400F15774 /* XCRemoteSwiftPackageReference "JGProgressHUD" */,
+				478E4A3D283E87BE00F15774 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = 472D946B2676AA0300482C20 /* Products */;
 			projectDirPath = "";
@@ -839,23 +851,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		47F9DEB1283E7FCE00385EA2 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/realm/realm-swift";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
-		47F9DEB2283E7FE800385EA2 /* XCRemoteSwiftPackageReference "SimpleCheckbox" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/BeauNouvelle/SimpleCheckbox";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.0;
-			};
-		};
-		47F9DEB3283E7FFD00385EA2 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+		478E4A34283E849200F15774 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire";
 			requirement = {
@@ -863,7 +859,15 @@
 				minimumVersion = 5.0.0;
 			};
 		};
-		47F9DEB4283E801F00385EA2 /* XCRemoteSwiftPackageReference "JGProgressHUD" */ = {
+		478E4A37283E84CF00F15774 /* XCRemoteSwiftPackageReference "SimpleCheckbox" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/BeauNouvelle/SimpleCheckbox";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+		478E4A3A283E84F400F15774 /* XCRemoteSwiftPackageReference "JGProgressHUD" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/JonasGessner/JGProgressHUD";
 			requirement = {
@@ -871,7 +875,38 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		478E4A3D283E87BE00F15774 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.26.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		478E4A35283E849200F15774 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 478E4A34283E849200F15774 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		478E4A38283E84CF00F15774 /* SimpleCheckbox */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 478E4A37283E84CF00F15774 /* XCRemoteSwiftPackageReference "SimpleCheckbox" */;
+			productName = SimpleCheckbox;
+		};
+		478E4A3B283E84F400F15774 /* JGProgressHUD */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 478E4A3A283E84F400F15774 /* XCRemoteSwiftPackageReference "JGProgressHUD" */;
+			productName = JGProgressHUD;
+		};
+		478E4A3E283E87BE00F15774 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 478E4A3D283E87BE00F15774 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 472D94622676AA0300482C20 /* Project object */;
 }

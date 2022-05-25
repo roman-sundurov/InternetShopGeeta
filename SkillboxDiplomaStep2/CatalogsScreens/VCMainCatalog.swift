@@ -199,7 +199,7 @@ class VCMainCatalog: UIViewController {
 
         let dataSource = DataSourceAliasProductMode(collectionView: catalogCollectionView, cellProvider: { (collectionView, indexPath, subCategories) -> UICollectionViewCell? in
 
-            var cellProd: catalogProductsCollectionViewCell?
+            var cellProd: CatalogProductsCollectionViewCell?
 
             //Set cell's content
             print("product case in CollectionView indexPath.row= \(indexPath.row)")
@@ -209,7 +209,7 @@ class VCMainCatalog: UIViewController {
             let tempB: Int = CatalogData.instance.categoriesArray[tempA].subCategories.firstIndex(where: { $0.id == AppSystemData.instance.activeCatalogSubCategory })!
             let goodsData = CatalogData.instance.categoriesArray[tempA].subCategories[tempB].goodsOfCategory[indexPath.row]
 
-            cellProd = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductCell", for: indexPath) as? catalogProductsCollectionViewCell
+            cellProd = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductCell", for: indexPath) as? CatalogProductsCollectionViewCell
             cellProd!.productImage.image = goodsData.goodsUIImage
             cellProd!.nameProduct.text = goodsData.name
             cellProd!.priceProduct.text = String(format: "$%.2f usd", goodsData.price)

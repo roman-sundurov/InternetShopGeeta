@@ -280,7 +280,7 @@ extension CatalogData {
           print("index= \(index)")
           if let product = Products(data: data as! NSDictionary) {
             print("777")
-            if let value = product.goodsImage, value.isEmpty == false {
+            if product.goodsImage.isEmpty == false {
               goods.append(product)
               print("\(product) is add to goods")
             }

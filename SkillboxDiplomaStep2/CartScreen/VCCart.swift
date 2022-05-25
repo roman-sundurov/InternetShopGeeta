@@ -86,7 +86,10 @@ class VCCart: UIViewController {
             return nil
         }
 
-        let view = collectionView.dequeueReusableSupplementaryView( ofKind: kind, withReuseIdentifier: CartCollectionHeaderReusableView.reuseIdentifier, for: indexPath) as? CartCollectionHeaderReusableView
+        let view = collectionView.dequeueReusableSupplementaryView(
+          ofKind: kind,
+          withReuseIdentifier: CartCollectionHeaderReusableView.reuseIdentifier,
+          for: indexPath) as? CartCollectionHeaderReusableView
         // 4
             let section = self.dataSource.snapshot().sectionIdentifiers[indexPath.section]
             view?.titleLabel.text = section.category

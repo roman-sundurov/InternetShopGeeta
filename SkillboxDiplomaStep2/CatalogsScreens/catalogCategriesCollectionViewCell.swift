@@ -7,7 +7,7 @@
 
 import UIKit
 
-class catalogCategriesCollectionViewCell: UICollectionViewCell {
+class CatalogCategriesCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet var categoryImage: UIImageView!
     @IBOutlet var upperView: UIView!

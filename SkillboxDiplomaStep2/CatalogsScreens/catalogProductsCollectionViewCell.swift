@@ -7,7 +7,7 @@
 
 import UIKit
 
-class catalogProductsCollectionViewCell: UICollectionViewCell {
+class CatalogProductsCollectionViewCell: UICollectionViewCell {
     
     
     //MARK: - объявление аутлетов

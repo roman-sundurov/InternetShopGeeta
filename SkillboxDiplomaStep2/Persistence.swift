@@ -11,6 +11,7 @@ import UIKit
 
 class AppSystemData {
   static let instance = AppSystemData()
+  private init() {}
   var vcMainCatalogDelegate: VCMainCatalog?
   var vcCartDelegate: VCCart?
   var activeCatalogMode: String = "categories" // catalog/subcategories/product
@@ -188,12 +189,12 @@ class Persistence {
   }
 
   func newInstanceSizeOfGoode(size: Size) -> PersistenceSize {
-    // let cartGood = PersistenceSize()
-    // cartGood.sSize = size.sSize
-    // cartGood.mSize = size.mSize
-    // cartGood.lSize = size.lSize
-    // cartGood.xlSize = size.xlSize
-    // cartGood.xxlSize = size.xxlSize
-    // return cartGood
+    let cartGood = PersistenceSize()
+    cartGood.sSize = size.sSize
+    cartGood.mSize = size.mSize
+    cartGood.lSize = size.lSize
+    cartGood.xlSize = size.xlSize
+    cartGood.xxlSize = size.xxlSize
+    return cartGood
   }
 }

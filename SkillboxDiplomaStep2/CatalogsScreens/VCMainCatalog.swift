@@ -120,10 +120,10 @@ class VCMainCatalog: UIViewController {
         
         let dataSource = DataSourceAliastCatalogMode(collectionView: catalogCollectionView, cellProvider: { (collectionView, indexPath, subCategories) -> UICollectionViewCell? in
             
-            var cellCat: catalogCategriesCollectionViewCell?
+            var cellCat: CatalogCategriesCollectionViewCell?
     
             //Set cell's content
-            cellCat = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as? catalogCategriesCollectionViewCell
+            cellCat = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as? CatalogCategriesCollectionViewCell
             cellCat!.categoryImage.image = CatalogData.instance.categoriesArray[indexPath.row].imageUIImage
             print("imagePrint_catalog= \(CatalogData.instance.categoriesArray[indexPath.row].image)")
             cellCat!.nameCategory.text = CatalogData.instance.categoriesArray[indexPath.row].name
@@ -155,13 +155,13 @@ class VCMainCatalog: UIViewController {
 
         let dataSource = DataSourceAliastSubcategoriesMode(collectionView: catalogCollectionView, cellProvider: { (collectionView, indexPath, subCategories) -> UICollectionViewCell? in
 
-            var cellCat: catalogCategriesCollectionViewCell?
+            var cellCat: CatalogCategriesCollectionViewCell?
 
             //Set cell's content
             for data in CatalogData.instance.categoriesArray {
                 if data.sortOrder == AppSystemData.instance.activeCatalogCategory {
                     print("AppActualData.instance.activeCatalogCategory222= \(AppSystemData.instance.activeCatalogCategory)")
-                    cellCat = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as? catalogCategriesCollectionViewCell
+                    cellCat = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as? CatalogCategriesCollectionViewCell
                     cellCat!.categoryImage.image = data.subCategories[indexPath.row].iconUIImage
                     cellCat!.nameCategory.text = data.subCategories[indexPath.row].name
                     print("name_subcategories= \(data.subCategories[indexPath.row].name)")
@@ -401,7 +401,9 @@ class VCMainCatalog: UIViewController {
         guard let gestureView = gesture.view else {
           return
         }
-        if gestureView.frame.origin.x + translation.x >= UIScreen.main.bounds.width - gesture.view!.frame.size.width - 255 && gestureView.frame.origin.x + translation.x <= UIScreen.main.bounds.width - gesture.view!.frame.size.width {
+      var originX = gestureView.frame.origin.x
+      var screenW = UIScreen.main.bounds.width
+        if originX + translation.x >= screenW - gesture.view!.frame.size.width - 255 && originX + translation.x <= screenW - gesture.view!.frame.size.width {
             gestureView.center = CGPoint(
               x: gestureView.center.x + translation.x,
               y: gestureView.center.y

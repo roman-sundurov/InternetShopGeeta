@@ -87,7 +87,11 @@ class VCProduct: UIViewController {
             tempA = CatalogData.instance.categoriesArray.firstIndex(where: { $0.sortOrder == AppSystemData.instance.activeCatalogCategory })!
             toCartButton.isSelected = true
             specificGood!.inCart = true
-            Persistence.shared.addGoodsToCart(good: specificGood!, size: Persistence.shared.newInstanceSizeOfGoode(size: sizeOfGood!), catalog: CatalogData.instance.categoriesArray[tempA!].subCategories[tempB!].name)
+            Persistence.shared.addGoodsToCart(
+              good: specificGood!,
+              size: Persistence.shared.newInstanceSizeOfGoode(size: sizeOfGood!),
+              catalog: CatalogData.instance.categoriesArray[tempA!].subCategories[tempB!].name
+            )
             transformSizeToBought(statusInCart: true)
         }
     }
@@ -267,7 +271,13 @@ class VCProduct: UIViewController {
         tempB = CatalogData.instance.categoriesArray[tempA!].subCategories.firstIndex(where: { $0.id == AppSystemData.instance.activeCatalogSubCategory })!
         tempC = CatalogData.instance.categoriesArray[tempA!].subCategories[tempB!].goodsOfCategory.firstIndex(where: { $0.sortOrder == AppSystemData.instance.activeCatalogProduct })!
         specificGood = CatalogData.instance.categoriesArray[tempA!].subCategories[tempB!].goodsOfCategory[tempC!]
-        sizeOfGood = Size.init(sSize: specificGood!.sizeInCart!.sSize, mSize: specificGood!.sizeInCart!.mSize, lSize: specificGood!.sizeInCart!.lSize, xlSize: specificGood!.sizeInCart!.xlSize, xxlSize: specificGood!.sizeInCart!.xxlSize)
+        sizeOfGood = Size.init(
+          sSize: specificGood!.sizeInCart!.sSize,
+          mSize: specificGood!.sizeInCart!.mSize,
+          lSize: specificGood!.sizeInCart!.lSize,
+          xlSize: specificGood!.sizeInCart!.xlSize,
+          xxlSize: specificGood!.sizeInCart!.xxlSize
+        )
         
 //        print("specificGood?.name= \(specificGood?.name), specificGood?.inCart= \(specificGood?.inCart)")
 

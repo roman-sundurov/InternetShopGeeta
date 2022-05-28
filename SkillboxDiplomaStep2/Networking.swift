@@ -47,7 +47,7 @@ class Cart: Hashable {
   var article: String = ""
   var descriptionGoods: String = ""
   var goodsImage: String = ""
-  var goodsUIImageData: NSData? = nil
+  var goodsUIImageData: NSData?
   var price: Double = 0
   var isFavorite = false
   var size = PersistenceSize()
@@ -149,7 +149,6 @@ class SubCategories: Equatable, Hashable {
 
 
 // MARK: - class Products
-
 class Size {
   var sSize = false
   var mSize = false
@@ -204,12 +203,17 @@ class Products: Hashable {
     self.inCart = !Persistence.shared.getAllObjectOfCart().filter("article == '\(article)'").isEmpty
     if self.inCart == true {
       let persistenceSize = Persistence.shared.getAllObjectOfCart().filter("article == '\(article)'").first?.size
-      self.sizeInCart = Size.init(sSize: persistenceSize!.sSize, mSize: persistenceSize!.mSize, lSize: persistenceSize!.lSize, xlSize: persistenceSize!.xlSize, xxlSize: persistenceSize!.xxlSize)
+      self.sizeInCart = Size.init(
+        sSize: persistenceSize!.sSize,
+        mSize: persistenceSize!.mSize,
+        lSize: persistenceSize!.lSize,
+        xlSize: persistenceSize!.xlSize,
+        xxlSize: persistenceSize!.xxlSize
+      )
     } else {
       self.sizeInCart = Size.init(sSize: false, mSize: false, lSize: false, xlSize: false, xxlSize: false)
     }
   }
-
 
   static func == (lhs: Products, rhs: Products) -> Bool {
     lhs.id == rhs.id
@@ -297,7 +301,6 @@ extension CatalogData {
     print("goods2= \(goods)")
   }
 
-
   func showCategories() {
     print("start")
     print(CatalogData.instance.categoriesArray.count)
@@ -306,7 +309,6 @@ extension CatalogData {
     print("[0].id= \(CatalogData.instance.categoriesArray[0].subCategories[0].id)")
     print("finish")
   }
-
 
   func isCategoryContain(category: String, place: [CartCategoriesAndProductsDiffable]) -> Int {
     var result: Int = -1
@@ -321,7 +323,6 @@ extension CatalogData {
     }
     return result
   }
-
 
   func updateCatalogsAndCartGoodsDiffableArray() {
     print("updateCatalogsAndCartGoodsDiffable")

@@ -27,7 +27,6 @@ class CartCollectionHeaderReusableView: UICollectionReusableView {
 
     override init(frame: CGRect) {
       super.init(frame: frame)
-      // 3
       backgroundColor = .systemBackground
       addSubview(titleLabel)
 

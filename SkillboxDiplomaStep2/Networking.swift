@@ -227,7 +227,7 @@ class Products: Hashable {
 
 // MARK: - extension CatalogData
 extension CatalogData {
-  func requestCategoriesData() async {
+  func requestCategoriesData() {
     guard AppSystemData.instance.activeCatalogMode != "product" else {
       return
     }

@@ -478,7 +478,7 @@
                                                     <outlet property="widthConstraint" destination="ftF-tz-1rb" id="r2F-dI-ciK"/>
                                                 </connections>
                                             </collectionViewCell>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" reuseIdentifier="ProductCell" id="bsO-5b-glV" customClass="catalogProductsCollectionViewCell" customModule="SkillboxDiplomaStep2" customModuleProvider="target">
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" reuseIdentifier="ProductCell" id="bsO-5b-glV" customClass="CatalogProductsCollectionViewCell" customModule="SkillboxDiplomaStep2" customModuleProvider="target">
                                                 <rect key="frame" x="180" y="0.0" width="170" height="282.33333333333331"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Jda-EV-m8j">
@@ -561,7 +561,7 @@
                                                     <outlet property="heightConstraint" destination="9Q1-9H-CUS" id="oqv-xv-j5B"/>
                                                     <outlet property="nameProduct" destination="FTc-Vy-bvN" id="9gr-lk-Nl2"/>
                                                     <outlet property="priceProduct" destination="wt1-Bo-ZQQ" id="Lio-4C-HOT"/>
-                                                    <outlet property="productImage" destination="bF4-AY-QrA" id="BYw-ws-kWh"/>
+                                                    <outlet property="productImage" destination="bF4-AY-QrA" id="yen-c3-50t"/>
                                                     <outlet property="upperView" destination="hTW-j9-2N2" id="9eY-fN-1il"/>
                                                     <outlet property="widthConstraint" destination="rPM-m4-2Js" id="Vme-Ga-pMV"/>
                                                 </connections>
@@ -2433,7 +2433,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="Vdd-Pl-HZw"/>
         <segue reference="WeL-0E-wdd"/>
-        <segue reference="tQR-CR-vDb"/>
+        <segue reference="EIv-eB-LWm"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="AddToCart" width="354" height="54"/>
@@ -2463,7 +2463,7 @@
         <image name="Log In Button" width="222" height="54"/>
         <image name="LogInButton" width="324" height="54"/>
         <image name="LogOut" width="20.333333969116211" height="20.333333969116211"/>
-        <image name="Logo" width="71" height="20"/>
+        <image name="Logo" width="305" height="77.666664123535156"/>
         <image name="Menu" width="37" height="24"/>
         <image name="Notification" width="22.333333969116211" height="24.333333969116211"/>
         <image name="NotificationsButton" width="18.333333969116211" height="20.333333969116211"/>

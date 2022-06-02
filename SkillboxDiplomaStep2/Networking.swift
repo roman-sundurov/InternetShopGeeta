@@ -244,17 +244,20 @@ extension CatalogData {
           }
           CatalogData.instance.categoriesArray = categories
           print("categories.count111= \(categories.count)")
-          Task {
-            await AppSystemData.instance.vcMainCatalogDelegate!.catalogCollectionViewUpdate()
-          }
+          // Task {
+          //   await AppSystemData.instance.vcMainCatalogDelegate!.catalogCollectionViewUpdate()
+          // }
         }
         CatalogData.instance.categoriesArray = categories
         print("categories.count222= \(categories.count)")
         CatalogData.instance.showCategories()
         print("AppSystemData.instance.VCMainCatalogDelegate_333= \(AppSystemData.instance.vcMainCatalogDelegate)")
-        Task {
-          await AppSystemData.instance.vcMainCatalogDelegate!.catalogCollectionViewUpdate()
-        }
+        // Task {
+        //   await AppSystemData.instance.vcMainCatalogDelegate!.catalogCollectionViewUpdate()
+        // }
+        AppSystemData.instance.vcMainCatalogDelegate!.hudDisapper()
+//                CatalogData.instance.requestGoodsData()
+        AppSystemData.instance.vcMainCatalogDelegate!.catalogCollectionViewUpdate()
         print("categories888= \(categories)")
       }
     }

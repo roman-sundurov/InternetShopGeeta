@@ -42,17 +42,18 @@ class VCProduct: UIViewController {
 
   // MARK: - клики
   @IBAction func favoriteButtonAction(_ sender: Any) {
+    let categoriesArray = CatalogData.instance.getCategoriesArray()
     if favoriteButton.isSelected == true {
       favoriteButton.isSelected = false
       specificGood?.isFavorite = false
-      CatalogData.instance.categoriesArray[tempA!].subCategories[tempB!].goodsOfCategory[tempC!].isFavorite = false
+      categoriesArray[tempA!].subCategories[tempB!].goodsOfCategory[tempC!].isFavorite = false
       Persistence.shared.deleteGoodsFromFavorite(article: specificGood!.article)
       AppSystemData.instance.vcMainCatalogDelegate!.catalogCollectionView.reloadData()
       print("VCGoods_favoriteButton.isSelected = false, good= \(specificGood?.name)")
     } else {
       favoriteButton.isSelected = true
       specificGood?.isFavorite = true
-      CatalogData.instance.categoriesArray[tempA!].subCategories[tempB!].goodsOfCategory[tempC!].isFavorite = true
+      categoriesArray[tempA!].subCategories[tempB!].goodsOfCategory[tempC!].isFavorite = true
       Persistence.shared.addGoodsToFavorite(good: specificGood!)
       AppSystemData.instance.vcMainCatalogDelegate!.catalogCollectionView.reloadData()
       print("VCGoods_favoriteButton.isSelected = true, good= \(specificGood?.name)")
@@ -60,6 +61,7 @@ class VCProduct: UIViewController {
   }
 
   @IBAction func toCartButtonAction(_ sender: Any) {
+    let categoriesArray = CatalogData.instance.getCategoriesArray()
     guard sizeOfGood!.sSize == true || sizeOfGood!.mSize == true || sizeOfGood!.lSize == true || sizeOfGood!.xlSize == true || sizeOfGood!.xxlSize == true else {
       self.present(alertEnterTheSize, animated: true, completion: nil)
       return
@@ -70,13 +72,13 @@ class VCProduct: UIViewController {
       Persistence.shared.deleteGoodsFromCart(article: specificGood!.article)
       transformSizeToBought(statusInCart: false)
     } else {
-      tempA = CatalogData.instance.categoriesArray.firstIndex(where: { $0.sortOrder == AppSystemData.instance.activeCatalogCategory })!
+      tempA = categoriesArray.firstIndex(where: { $0.sortOrder == AppSystemData.instance.activeCatalogCategory })!
       toCartButton.isSelected = true
       specificGood!.inCart = true
       Persistence.shared.addGoodsToCart(
         good: specificGood!,
         size: Persistence.shared.newInstanceSizeOfGoode(size: sizeOfGood!),
-        catalog: CatalogData.instance.categoriesArray[tempA!].subCategories[tempB!].name
+        catalog: categoriesArray[tempA!].subCategories[tempB!].name
       )
       transformSizeToBought(statusInCart: true)
     }
@@ -244,20 +246,20 @@ class VCProduct: UIViewController {
   func goodDataUpdate() {
     tempA = CatalogData
       .instance
-      .categoriesArray
+      .getCategoriesArray()
       .firstIndex { $0.sortOrder == AppSystemData.instance.activeCatalogCategory }
     tempB = CatalogData
       .instance
-      .categoriesArray[tempA!]
+      .getCategoriesArray()[tempA!]
       .subCategories
       .firstIndex { $0.id == AppSystemData.instance.activeCatalogSubCategory }
     tempC = CatalogData
       .instance
-      .categoriesArray[tempA!]
+      .getCategoriesArray()[tempA!]
       .subCategories[tempB!]
       .goodsOfCategory
       .firstIndex { $0.sortOrder == AppSystemData.instance.activeCatalogProduct }
-    specificGood = CatalogData.instance.categoriesArray[tempA!].subCategories[tempB!].goodsOfCategory[tempC!]
+    specificGood = CatalogData.instance.getCategoriesArray()[tempA!].subCategories[tempB!].goodsOfCategory[tempC!]
     sizeOfGood = Size.init(
       sSize: specificGood!.sizeInCart!.sSize,
       mSize: specificGood!.sizeInCart!.mSize,
@@ -274,15 +276,15 @@ class VCProduct: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     createAlertNotRegistration()
-    tempA = CatalogData.instance.categoriesArray.firstIndex { $0.sortOrder == AppSystemData.instance.activeCatalogCategory }
-    tempB = CatalogData.instance.categoriesArray[tempA!].subCategories.firstIndex(where: { $0.id == AppSystemData.instance.activeCatalogSubCategory })!
-    tempC = CatalogData.instance.categoriesArray[tempA!].subCategories[tempB!].goodsOfCategory.firstIndex(where: { $0.sortOrder == AppSystemData.instance.activeCatalogProduct })!
+    tempA = CatalogData.instance.getCategoriesArray().firstIndex { $0.sortOrder == AppSystemData.instance.activeCatalogCategory }
+    tempB = CatalogData.instance.getCategoriesArray()[tempA!].subCategories.firstIndex(where: { $0.id == AppSystemData.instance.activeCatalogSubCategory })!
+    tempC = CatalogData.instance.getCategoriesArray()[tempA!].subCategories[tempB!].goodsOfCategory.firstIndex(where: { $0.sortOrder == AppSystemData.instance.activeCatalogProduct })!
 
     goodDataUpdate()
 
     favoriteButton.isSelected = specificGood!.isFavorite ?? false
 
-    labelNameOfCategory.text = CatalogData.instance.categoriesArray[tempA!].name
+    labelNameOfCategory.text = CatalogData.instance.getCategoriesArray()[tempA!].name
     labelNameOfProduct.text = specificGood!.name
     labelPrice.text = String(format: "$%.2f usd", specificGood!.price)
     imageProduct.image = specificGood!.goodsUIImage // ?.trim()

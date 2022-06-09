@@ -206,7 +206,7 @@
     }
 
     func hudAppear() {
-      hud.show(in: self.mainView)
+      hud.show(in: mainView)
       print("hudAppear")
   }
     func hudDisapper() {
@@ -245,16 +245,10 @@
     override func viewWillAppear(_ animated: Bool) {
       super.viewWillAppear(true)
          AppSystemData.instance.activeCatalogMode = "categories"
-      // DispatchQueue.global(qos: .utility).async {
         CatalogData.instance.requestCategoriesData()
-      // }
-      // Task {
-      //   await CatalogData.instance.requestCategoriesData()
-      // }
       if AppSystemData.instance.activeCatalogMode == "product" {
           CatalogData.instance.requestGoodsData()
       }
-  //        applySnapshot(animatingDifferences: false)
     }
 
 
@@ -470,35 +464,36 @@
     // MARK: - данные
     func applySnapshot(animatingDifferences: Bool = true) {
       print("AppSystemData.instance.activeCatalogMode111= \(AppSystemData.instance.activeCatalogMode)")
+      let categoriesArray = CatalogData.instance.getCategoriesArray()
 
       switch AppSystemData.instance.activeCatalogMode {
       case "categories":
         print("applySnapshot catalog")
         var snapshot = SnapshotAliasCatalogMode()
         snapshot.appendSections([.main])
-        snapshot.appendItems(CatalogData.instance.categoriesArray)
+        snapshot.appendItems(categoriesArray)
         dataSourceCategoriesMode = makeDataSourceCategoriesMode()
         dataSourceCategoriesMode.apply(snapshot, animatingDifferences: animatingDifferences)
       case "subcategories":
         print("applySnapshot subcategories")
-        let tempA: Int = CatalogData.instance.categoriesArray.firstIndex(where: {
+        let tempA: Int = categoriesArray.firstIndex(where: {
           $0.sortOrder == AppSystemData.instance.activeCatalogCategory
         })!
-        let subCategories = CatalogData.instance.categoriesArray[tempA].subCategories
+        let subCategories = categoriesArray[tempA].subCategories
         var snapshot = SnapshotAliasSubcategoriesMode()
         snapshot.appendSections([.main])
         snapshot.appendItems(subCategories)
         dataSourceSubcategoriesMode = makeDataSourceSubcategoriesMode()
         dataSourceSubcategoriesMode.apply(snapshot, animatingDifferences: animatingDifferences)
       case "product":
-        print("applySnapshot product,CatalogData.instance.categoriesArray= \(CatalogData.instance.categoriesArray.count)")
-        let tempA: Int = CatalogData.instance.categoriesArray.firstIndex(where: {
+        print("applySnapshot product,CatalogData.instance.categoriesArray= \(categoriesArray.count)")
+        let tempA: Int = categoriesArray.firstIndex(where: {
           $0.sortOrder == AppSystemData.instance.activeCatalogCategory
         })!
-        let tempB: Int = CatalogData.instance.categoriesArray[tempA].subCategories.firstIndex(where: {
+        let tempB: Int = categoriesArray[tempA].subCategories.firstIndex(where: {
           $0.id == AppSystemData.instance.activeCatalogSubCategory
         })!
-        let specificSubcategory = CatalogData.instance.categoriesArray[tempA].subCategories[tempB].goodsOfCategory
+        let specificSubcategory = categoriesArray[tempA].subCategories[tempB].goodsOfCategory
 
         var snapshot = SnapshotAliasProductMode()
         snapshot.appendSections([.main])
@@ -516,14 +511,15 @@
     func makeDataSourceCategoriesMode() -> DataSourceAliastCatalogMode {
       print("9000")
       print("makeDataSource catalog")
+      let categoriesArray = CatalogData.instance.getCategoriesArray()
       let dataSource = DataSourceAliastCatalogMode(collectionView: catalogCollectionView, cellProvider: { (collectionView, indexPath, subCategories) -> UICollectionViewCell? in
         var cellCat: CatalogCategriesCollectionViewCell?
 
         // Set cell's content
         cellCat = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as? CatalogCategriesCollectionViewCell
-        cellCat!.categoryImage.image = CatalogData.instance.categoriesArray[indexPath.row].imageUIImage
-        print("imagePrint_catalog= \(CatalogData.instance.categoriesArray[indexPath.row].image)")
-        cellCat!.nameCategory.text = CatalogData.instance.categoriesArray[indexPath.row].name
+        cellCat!.categoryImage.image = categoriesArray[indexPath.row].imageUIImage
+        print("imagePrint_catalog= \(categoriesArray[indexPath.row].image)")
+        cellCat!.nameCategory.text = categoriesArray[indexPath.row].name
 
         // Set constraints
         cellCat!.upperView.layer.cornerRadius = 30
@@ -537,7 +533,7 @@
 
         // Настройка Closures, которое срабатывает при клике на ячейку
         cellCat!.startCell(tag: indexPath.row, action: {
-          AppSystemData.instance.activeCatalogCategory = CatalogData.instance.categoriesArray[indexPath.row].sortOrder
+          AppSystemData.instance.activeCatalogCategory = categoriesArray[indexPath.row].sortOrder
           self.tapToCVCell()
         })
         return cellCat
@@ -548,11 +544,12 @@
     func makeDataSourceSubcategoriesMode() -> DataSourceAliastSubcategoriesMode {
       print("9001")
       print("makeDataSource subcategories")
+      let categoriesArray = CatalogData.instance.getCategoriesArray()
       let dataSource = DataSourceAliastSubcategoriesMode(collectionView: catalogCollectionView, cellProvider: { (collectionView, indexPath, subCategories) -> UICollectionViewCell? in
         var cellCat: CatalogCategriesCollectionViewCell?
 
         // Set cell's content
-        for data in CatalogData.instance.categoriesArray where data.sortOrder == AppSystemData.instance.activeCatalogCategory {
+        for data in categoriesArray where data.sortOrder == AppSystemData.instance.activeCatalogCategory {
           print("AppActualData.instance.activeCatalogCategory222= \(AppSystemData.instance.activeCatalogCategory)")
           cellCat = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as? CatalogCategriesCollectionViewCell
           cellCat!.categoryImage.image = data.subCategories[indexPath.row].iconUIImage
@@ -570,10 +567,10 @@
         cellCat!.heightConstraint.constant = widthPerItem * 1.3
         // Настройка Closures, которое срабатывает при клике на ячейку
         cellCat!.startCell(tag: indexPath.row, action: {
-          let tempA: Int = CatalogData.instance.categoriesArray.firstIndex(where: {
+          let tempA: Int = categoriesArray.firstIndex(where: {
             $0.sortOrder == AppSystemData.instance.activeCatalogCategory
           })!
-          AppSystemData.instance.activeCatalogSubCategory = CatalogData.instance.categoriesArray[tempA].subCategories[indexPath.row].id
+          AppSystemData.instance.activeCatalogSubCategory = categoriesArray[tempA].subCategories[indexPath.row].id
           CatalogData.instance.requestGoodsData()
           self.tapToCVCell()
         })
@@ -585,7 +582,7 @@
     func makeDataSourceProductMode() -> DataSourceAliasProductMode {
       print("9002")
       print("makeDataSource product")
-
+      let categoriesArray = CatalogData.instance.getCategoriesArray()
       let dataSource = DataSourceAliasProductMode(collectionView: catalogCollectionView, cellProvider: { (collectionView, indexPath, subCategories) -> UICollectionViewCell? in
         var cellProd: CatalogProductsCollectionViewCell?
 
@@ -593,10 +590,10 @@
         print("product case in CollectionView indexPath.row= \(indexPath.row)")
         let idOfCategory = AppSystemData.instance.activeCatalogCategory
         // let idOfSubCategory = AppSystemData.instance.activeCatalogSubCategory
-        let tempA: Int = CatalogData.instance.categoriesArray.firstIndex(where: { $0.sortOrder == idOfCategory })!
-        let tempB: Int = CatalogData.instance.categoriesArray[tempA].subCategories.firstIndex(where: { $0.id == AppSystemData.instance.activeCatalogSubCategory
+        let tempA: Int = categoriesArray.firstIndex(where: { $0.sortOrder == idOfCategory })!
+        let tempB: Int = categoriesArray[tempA].subCategories.firstIndex(where: { $0.id == AppSystemData.instance.activeCatalogSubCategory
         })!
-        let goodsData = CatalogData.instance.categoriesArray[tempA].subCategories[tempB].goodsOfCategory[indexPath.row]
+        let goodsData = categoriesArray[tempA].subCategories[tempB].goodsOfCategory[indexPath.row]
 
         cellProd = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductCell", for: indexPath) as? CatalogProductsCollectionViewCell
         cellProd!.productImage.image = goodsData.goodsUIImage
@@ -605,7 +602,7 @@
         cellProd!.favoriteButton.isSelected = goodsData.isFavorite!
         print("cellProd!.favoriteButton.isSelected= \(cellProd!.favoriteButton.isSelected), name= \(cellProd?.nameProduct.text)")
         cellProd?.dataOfCell = goodsData
-        print("name_subcategories= \(CatalogData.instance.categoriesArray[tempA].subCategories[tempB].name)")
+        print("name_subcategories= \(categoriesArray[tempA].subCategories[tempB].name)")
 
         // Set constraints
         cellProd!.upperView.layer.cornerRadius = 30
@@ -619,15 +616,15 @@
 
         // Настройка Closures, которое срабатывает при клике на ячейку
         cellProd!.startCell(indexPath: indexPath) {
-          let tempA: Int = CatalogData.instance.categoriesArray.firstIndex {
+          let tempA: Int = categoriesArray.firstIndex {
             $0.sortOrder == AppSystemData.instance.activeCatalogCategory
           }!
-          let tempB: Int = CatalogData.instance.categoriesArray[tempA].subCategories.firstIndex {
+          let tempB: Int = categoriesArray[tempA].subCategories.firstIndex {
             $0.id == AppSystemData.instance.activeCatalogSubCategory
           }!
           AppSystemData.instance.activeCatalogProduct = CatalogData
             .instance
-            .categoriesArray[tempA]
+            .getCategoriesArray()[tempA]
             .subCategories[tempB]
             .goodsOfCategory[indexPath.row]
             .sortOrder

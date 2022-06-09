@@ -13,7 +13,7 @@
   // MARK: - class CatalogData
   class CatalogData {
     static let instance = CatalogData()
-    var categoriesArray: [Categories] = []
+    private var categoriesArray: [Categories] = []
     var cartCategoriesAndProductsDiffableArray: [CartCategoriesAndProductsDiffable] = []
   }
 
@@ -24,6 +24,7 @@
 
     func setCategoriesArray(newArray: [Categories]) {
       categoriesArray = newArray
+    }
   }
 
 
@@ -246,31 +247,31 @@
         }
         var categories: [Categories] = []
       let request = AF.request("https://blackstarshop.ru/index.php?route=api/v1/categories")
-        request.responseJSON { response in
-          if let object = response.value, let jsonDict = object as? NSDictionary {
-            DispatchQueue.global(qos: .userInitiated).async {
-              for ( _, data) in jsonDict where data is NSDictionary {
-                print("TAKT")
-                if let category = Categories(data: data as! NSDictionary) {
-                  if category.image.isEmpty == false && category.subCategories.isEmpty == false {
-                    category.subCategories.removeAll { value in return value.iconImage.isEmpty == true }
-                    categories.append(category)
-                  }
-                }
-                CatalogData.instance.categoriesArray = categories
-                DispatchQueue.main.async {
-                  AppSystemData.instance.vcMainCatalogDelegate!.catalogCollectionViewUpdate()
+      request.responseJSON { response in
+        if let object = response.value, let jsonDict = object as? NSDictionary {
+          let findCategoriesInData = DispatchWorkItem {
+            for ( _, data) in jsonDict where data is NSDictionary {
+              print("TAKT")
+              if let category = Categories(data: data as! NSDictionary) {
+                if category.image.isEmpty == false && category.subCategories.isEmpty == false {
+                  category.subCategories.removeAll { value in return value.iconImage.isEmpty == true }
+                  categories.append(category)
                 }
               }
+              CatalogData.instance.setCategoriesArray(newArray: categories)
+              DispatchQueue.main.async {
+                AppSystemData.instance.vcMainCatalogDelegate!.catalogCollectionViewUpdate()
+              }
             }
-            print("AppSystemData.instance.VCMainCatalogDelegate_333= \(AppSystemData.instance.vcMainCatalogDelegate)")
-            DispatchQueue.main.async {
-              AppSystemData.instance.vcMainCatalogDelegate!.hudDisapper()()
-            }
-            print("categories888= \(categories)")
           }
+          findCategoriesInData.notify(queue: .main) {
+            AppSystemData.instance.vcMainCatalogDelegate!.hudDisapper()
+          }
+          DispatchQueue.global(qos: .userInitiated).async(execute: findCategoriesInData)
+          // print("AppSystemData.instance.VCMainCatalogDelegate_333= \(AppSystemData.instance.vcMainCatalogDelegate)")
+          // print("categories888= \(categories)")
         }
-      // }
+      }
     }
 
     func requestGoodsData() {

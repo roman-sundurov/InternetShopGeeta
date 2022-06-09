@@ -662,6 +662,7 @@
                         <outlet property="labelMens" destination="4ZH-SD-aor" id="yXO-Ve-VpR"/>
                         <outlet property="labelSales" destination="sRo-bt-K4u" id="vJh-po-aE1"/>
                         <outlet property="labelWomens" destination="NNa-Xq-554" id="MYd-XB-E9L"/>
+                        <outlet property="mainView" destination="sfA-tC-MPF" id="GD3-DG-f3j"/>
                         <outlet property="menuButtonHorizonGesture" destination="vXn-zq-4jz" id="Uwo-cQ-oeE"/>
                         <outlet property="menuButtonView" destination="qUz-fO-Fha" id="ckz-Bb-jbw"/>
                         <outlet property="secondMenuStrip2" destination="Glq-Xy-59q" id="qzY-UB-ogE"/>

@@ -201,7 +201,7 @@
 
     func catalogCollectionViewUpdate() {
       applySnapshot()
-      print("TAKT_2")
+      print("TAKT_Update")
       // print("categories.count111 mainCatalogCollectionUpdate")
     }
 
@@ -213,32 +213,6 @@
       hud.dismiss(animated: true)
       print("hudDisapper")
     }
-
-
-    // MARK: - viewDidAppear
-
-  //    override func viewDidAppear(_ animated: Bool) {
-  //        super.viewDidAppear(true)
-  //        print("viewDidAppear")
-  //
-  ////        AppSystemData.instance.activeCatalogMode = "categories"
-  ////
-  ////        print("AppSystemData.instance.VCMainCatalogDelegate_222= \(AppSystemData.instance.vcMainCatalogDelegate)")
-  ////
-  ////        AppSystemData.instance.vcMainCatalogDelegate = self
-  //
-  ////        applySnapshot(animatingDifferences: false)
-  ////        CatalogData.instance.requestCategoriesData()
-  ////
-  ////        menuButtonView.layer.cornerRadius = 8
-  ////        menuButtonView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
-  ////        menuButtonView.layer.borderWidth = 0
-  ////        menuButtonView.layer.borderColor = UIColor.clear.cgColor
-  ////        menuButtonView.clipsToBounds = true
-  ////
-  ////        hud.textLabel.text = "Loading"
-  //
-  //    }
 
 
     // MARK: - viewWillAppear
@@ -260,7 +234,6 @@
       print("AppSystemData.instance.VCMainCatalogDelegate_222= \(AppSystemData.instance.vcMainCatalogDelegate)")
       AppSystemData.instance.vcMainCatalogDelegate = self
       applySnapshot(animatingDifferences: false)
-  //    CatalogData.instance.requestCategoriesData()
       menuButtonView.layer.cornerRadius = 8
       menuButtonView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
       menuButtonView.layer.borderWidth = 0
@@ -534,6 +507,7 @@
         // Настройка Closures, которое срабатывает при клике на ячейку
         cellCat!.startCell(tag: indexPath.row, action: {
           AppSystemData.instance.activeCatalogCategory = categoriesArray[indexPath.row].sortOrder
+          CatalogData.instance.requestSubcategoriesData()
           self.tapToCVCell()
         })
         return cellCat
@@ -547,6 +521,7 @@
       let categoriesArray = CatalogData.instance.getCategoriesArray()
       let dataSource = DataSourceAliastSubcategoriesMode(collectionView: catalogCollectionView, cellProvider: { (collectionView, indexPath, subCategories) -> UICollectionViewCell? in
         var cellCat: CatalogCategriesCollectionViewCell?
+        print("7777_AppSystemData.instance.activeCatalogCategory= \(AppSystemData.instance.activeCatalogCategory)")
 
         // Set cell's content
         for data in categoriesArray where data.sortOrder == AppSystemData.instance.activeCatalogCategory {

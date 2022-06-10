@@ -25,6 +25,24 @@
     func setCategoriesArray(newArray: [Categories]) {
       categoriesArray = newArray
     }
+
+    func getSubcategoriesData() -> [NSDictionary] {
+      let categoriesArray = CatalogData.instance.getCategoriesArray()
+      let tempA: Int = categoriesArray.firstIndex {
+        $0.sortOrder == AppSystemData.instance.activeCatalogCategory
+      }!
+      return categoriesArray[tempA].subCategoriesData
+    }
+
+    func setSubcategoriesArray(newArray: [SubCategories]) {
+      // DispatchQueue.global(qos: .userInitiated).sync(flags: .barrier) {
+        let categoriesArray = CatalogData.instance.getCategoriesArray()
+        let tempA: Int = categoriesArray.firstIndex {
+          $0.sortOrder == AppSystemData.instance.activeCatalogCategory
+        }!
+        categoriesArray[tempA].subCategories = newArray
+      // }
+    }
   }
 
 
@@ -94,6 +112,7 @@
     let iconImage: String
     let iconImageActive: String
     let imageUIImage: UIImage?
+    let subCategoriesData: [NSDictionary]
     var subCategories: [SubCategories]
 
     init?(data: NSDictionary) {
@@ -106,7 +125,7 @@
       let image = data["image"] as? String,
       let iconImage = data["iconImage"] as? String,
       let iconImageActive = data["iconImageActive"] as? String,
-      let subCategories = data["subcategories"] as? [NSDictionary] else {
+      let subCategoriesData = data["subcategories"] as? [NSDictionary] else {
         return nil
       }
       self.name = name
@@ -115,15 +134,8 @@
       self.iconImage = iconImage
       self.iconImageActive = iconImageActive
       self.imageUIImage = UIImage(data: try! Data(contentsOf: URL(string: "https://blackstarshop.ru/\(image)")!))?.trim()
-      var subCategories2: [SubCategories] = []
-      // DispatchQueue.global(qos: .utility).async {
-        for value in subCategories {
-          if let subCategories3 = SubCategories(data: value) {
-            subCategories2.append(subCategories3)
-          }
-        }
-      // }
-      self.subCategories = subCategories2
+      self.subCategoriesData = subCategoriesData
+      self.subCategories = []
     }
 
     static func == (lhs: Categories, rhs: Categories) -> Bool {
@@ -260,12 +272,9 @@
         if let object = response.value, let jsonDict = object as? NSDictionary {
           let findCategoriesInData = DispatchWorkItem {
             for ( _, data) in jsonDict where data is NSDictionary {
-              print("TAKT")
+              print("TAKT_1")
               if let category = Categories(data: data as! NSDictionary) {
-                // if category.image.isEmpty == false && category.subCategories.isEmpty == false {
-                  // category.subCategories.removeAll { value in return value.iconImage.isEmpty == true }
-                  categories.append(category)
-                // }
+                categories.append(category)
               }
               CatalogData.instance.setCategoriesArray(newArray: categories)
               DispatchQueue.main.async {
@@ -285,20 +294,57 @@
       }
     }
 
+    func requestSubcategoriesData() {
+      print("requestSubcategoriesData")
+      var subcategories: [SubCategories] = []
+
+      DispatchQueue.main.async {
+        AppSystemData.instance.vcMainCatalogDelegate!.hudAppear()
+      }
+      guard AppSystemData.instance.activeCatalogMode != "subcategories" else {
+        print("Strange activeCatalogMode == 'subcategories'")
+        return
+      }
+
+      let findSubcategoriesInData = DispatchWorkItem {
+        let object = CatalogData.instance.getSubcategoriesData()
+        for data in object {
+          print("TAKT_2")
+          if let subCategories2 = SubCategories(data: data) {
+            subcategories.append(subCategories2)
+            print("subCategories2.name= \(subCategories2.name)")
+          }
+          CatalogData.instance.setSubcategoriesArray(newArray: subcategories)
+          DispatchQueue.main.async {
+            AppSystemData.instance.vcMainCatalogDelegate!.catalogCollectionViewUpdate()
+          }
+        }
+        //
+      }
+
+      findSubcategoriesInData.notify(queue: .main) {
+        AppSystemData.instance.vcMainCatalogDelegate!.hudDisapper()
+      }
+
+      DispatchQueue.global(qos: .userInitiated).async(execute: findSubcategoriesInData)
+    }
+
+
     func requestGoodsData() {
       let idOfCategory = AppSystemData.instance.activeCatalogCategory
       let idOfSubCategory = AppSystemData.instance.activeCatalogSubCategory
-      let tempA: Int = CatalogData.instance.categoriesArray.firstIndex {
+      let categoriesArray = CatalogData.instance.getCategoriesArray()
+      let tempA: Int = categoriesArray.firstIndex {
         $0.sortOrder == idOfCategory
       }!
-      let tempB: Int = CatalogData.instance.categoriesArray[tempA].subCategories.firstIndex {
+      let tempB: Int = categoriesArray[tempA].subCategories.firstIndex {
         $0.id == AppSystemData.instance.activeCatalogSubCategory
       }!
-      print("111_idOfCategory= \(idOfCategory)")
-      print("111_idOfSubCategory= \(idOfSubCategory)")
-      print("111_activeCatalogCategory= \(AppSystemData.instance.activeCatalogCategory)")
-      print("111_activeCatalogSubCategory= \(AppSystemData.instance.activeCatalogSubCategory)")
-      print("222_subcategoryname = \(CatalogData.instance.categoriesArray[tempA].subCategories[tempB].name)")
+      // print("111_idOfCategory= \(idOfCategory)")
+      // print("111_idOfSubCategory= \(idOfSubCategory)")
+      // print("111_activeCatalogCategory= \(AppSystemData.instance.activeCatalogCategory)")
+      // print("111_activeCatalogSubCategory= \(AppSystemData.instance.activeCatalogSubCategory)")
+      // print("222_subcategoryname = \(CatalogData.instance.categoriesArray[tempA].subCategories![tempB].name)")
 
       var goods: [Products] = []
       let request = AF.request("https://blackstarshop.ru/index.php?route=api/v1/products&cat_id=\(idOfSubCategory)")
@@ -318,7 +364,7 @@
           print("goods1= \(goods)")
           print("jsonDict.count= \(jsonDict.count)")
           print("goods.count= \(goods.count)")
-          CatalogData.instance.categoriesArray[tempA].subCategories[tempB].goodsOfCategory = goods
+          categoriesArray[tempA].subCategories[tempB].goodsOfCategory = goods
           AppSystemData.instance.vcMainCatalogDelegate!.catalogCollectionViewUpdate()
           AppSystemData.instance.vcMainCatalogDelegate!.hudDisapper()
         }
@@ -328,10 +374,10 @@
 
     func showCategories() {
       print("start")
-      print(CatalogData.instance.categoriesArray.count)
-      print(CatalogData.instance.categoriesArray)
-      print("[0].name= \(CatalogData.instance.categoriesArray[0].subCategories[0].name)")
-      print("[0].id= \(CatalogData.instance.categoriesArray[0].subCategories[0].id)")
+      print(categoriesArray.count)
+      print(categoriesArray)
+      print("[0].name= \(categoriesArray[0].subCategories[0].name)")
+      print("[0].id= \(categoriesArray[0].subCategories[0].id)")
       print("finish")
     }
 

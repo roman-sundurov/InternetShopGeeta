@@ -97,6 +97,10 @@
     var subCategories: [SubCategories]
 
     init?(data: NSDictionary) {
+      if (data["image"] as? String)?.isEmpty == true || (data["subcategories"] as? [NSDictionary])?.isEmpty == true {
+        return nil
+      }
+      print("Categories init")
       guard let name = data["name"] as? String,
       let sortOrder = data["sortOrder"] as? String,
       let image = data["image"] as? String,
@@ -112,11 +116,13 @@
       self.iconImageActive = iconImageActive
       self.imageUIImage = UIImage(data: try! Data(contentsOf: URL(string: "https://blackstarshop.ru/\(image)")!))?.trim()
       var subCategories2: [SubCategories] = []
-      for value in subCategories {
-        if let subCategories3 = SubCategories(data: value) {
-          subCategories2.append(subCategories3)
+      // DispatchQueue.global(qos: .utility).async {
+        for value in subCategories {
+          if let subCategories3 = SubCategories(data: value) {
+            subCategories2.append(subCategories3)
+          }
         }
-      }
+      // }
       self.subCategories = subCategories2
     }
 
@@ -141,6 +147,10 @@
     var goodsOfCategory: [Products] = []
 
     init?(data: NSDictionary) {
+      if (data["iconImage"] as? String)?.isEmpty == true {
+        return nil
+      }
+      print("Subategories init")
       guard let id = data["id"] as? Int ?? Int(data["id"] as! String),
       let iconImage = data["iconImage"] as? String,
       let name = data["name"] as? String else {
@@ -241,11 +251,10 @@
       DispatchQueue.main.async {
         AppSystemData.instance.vcMainCatalogDelegate!.hudAppear()
       }
-      // DispatchQueue.global(qos: .utility).async {
-        guard AppSystemData.instance.activeCatalogMode != "product" else {
-          return
-        }
-        var categories: [Categories] = []
+      guard AppSystemData.instance.activeCatalogMode != "product" else {
+        return
+      }
+      var categories: [Categories] = []
       let request = AF.request("https://blackstarshop.ru/index.php?route=api/v1/categories")
       request.responseJSON { response in
         if let object = response.value, let jsonDict = object as? NSDictionary {
@@ -253,10 +262,10 @@
             for ( _, data) in jsonDict where data is NSDictionary {
               print("TAKT")
               if let category = Categories(data: data as! NSDictionary) {
-                if category.image.isEmpty == false && category.subCategories.isEmpty == false {
-                  category.subCategories.removeAll { value in return value.iconImage.isEmpty == true }
+                // if category.image.isEmpty == false && category.subCategories.isEmpty == false {
+                  // category.subCategories.removeAll { value in return value.iconImage.isEmpty == true }
                   categories.append(category)
-                }
+                // }
               }
               CatalogData.instance.setCategoriesArray(newArray: categories)
               DispatchQueue.main.async {
@@ -264,9 +273,11 @@
               }
             }
           }
+
           findCategoriesInData.notify(queue: .main) {
             AppSystemData.instance.vcMainCatalogDelegate!.hudDisapper()
           }
+
           DispatchQueue.global(qos: .userInitiated).async(execute: findCategoriesInData)
           // print("AppSystemData.instance.VCMainCatalogDelegate_333= \(AppSystemData.instance.vcMainCatalogDelegate)")
           // print("categories888= \(categories)")

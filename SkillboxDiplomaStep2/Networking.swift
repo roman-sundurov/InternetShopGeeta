@@ -8,6 +8,7 @@
   import Foundation
   import Alamofire
   import UIKit
+import RealmSwift
 
 
   // MARK: - class CatalogData
@@ -180,22 +181,24 @@
   }
 
 
-  // MARK: - class Products
-  class Size {
-    var sSize = false
-    var mSize = false
-    var lSize = false
-    var xlSize = false
-    var xxlSize = false
+class Size {
+  var sSize = false
+  var mSize = false
+  var lSize = false
+  var xlSize = false
+  var xxlSize = false
 
-    init?(sSize: Bool, mSize: Bool, lSize: Bool, xlSize: Bool, xxlSize: Bool) {
-      self.sSize = sSize
-      self.mSize = mSize
-      self.lSize = lSize
-      self.xlSize = xlSize
-      self.xxlSize = xxlSize
-    }
+  init?(sSize: Bool, mSize: Bool, lSize: Bool, xlSize: Bool, xxlSize: Bool) {
+    self.sSize = sSize
+    self.mSize = mSize
+    self.lSize = lSize
+    self.xlSize = xlSize
+    self.xxlSize = xxlSize
   }
+}
+
+
+  // MARK: - class Products
 
   class Products: Hashable {
     var id = UUID()
@@ -212,15 +215,20 @@
     var sizeInCart: Size?
 
     init?(data: NSDictionary) {
+      if (data["mainImage"] as? String)?.isEmpty == true {
+        print("Product init return nil")
+        return nil
+      }
+
       guard let name = data["name"] as? String,
-        let englishName = data["englishName"] as? String,
-          let sortOrder = data["sortOrder"] as? String,
-          let article = data["article"] as? String,
-          let description = data["description"] as? String,
-          let price = data["price"] as? Double ?? Double(data["price"] as! String),
-          let mainImage = data["mainImage"] as? String else {
-            return nil
-          }
+            let englishName = data["englishName"] as? String,
+            let sortOrder = data["sortOrder"] as? String,
+            let article = data["article"] as? String,
+            let description = data["description"] as? String,
+            let price = data["price"] as? Double ?? Double(data["price"] as! String),
+            let mainImage = data["mainImage"] as? String else {
+              return nil
+      }
       self.name = name
       self.englishName = englishName
       self.sortOrder = Int(sortOrder) ?? 0
@@ -231,8 +239,10 @@
       self.goodsImage = mainImage
       self.goodsUIImage = UIImage(data: try! Data(contentsOf: URL(string: "https://blackstarshop.ru/\(mainImage)")!))?.trim()
       // Проверка, имеется ли данный артикул в Realm в Избранном или в корзине.
-      self.isFavorite = !Persistence.shared.getAllObjectOfFavorite().filter("article == '\(article)'").isEmpty
-      self.inCart = !Persistence.shared.getAllObjectOfCart().filter("article == '\(article)'").isEmpty
+      DispatchQueue.main.async {
+        self.isFavorite = !Persistence.shared.getAllObjectOfFavorite().filter("article == '\(article)'").isEmpty
+        self.inCart = !Persistence.shared.getAllObjectOfCart().filter("article == '\(article)'").isEmpty
+      }
       if self.inCart == true {
         let persistenceSize = Persistence.shared.getAllObjectOfCart().filter("article == '\(article)'").first?.size
         self.sizeInCart = Size.init(
@@ -288,8 +298,6 @@
           }
 
           DispatchQueue.global(qos: .userInitiated).async(execute: findCategoriesInData)
-          // print("AppSystemData.instance.VCMainCatalogDelegate_333= \(AppSystemData.instance.vcMainCatalogDelegate)")
-          // print("categories888= \(categories)")
         }
       }
     }
@@ -331,6 +339,9 @@
 
 
     func requestGoodsData() {
+      DispatchQueue.main.async {
+        AppSystemData.instance.vcMainCatalogDelegate!.hudAppear()
+      }
       let idOfCategory = AppSystemData.instance.activeCatalogCategory
       let idOfSubCategory = AppSystemData.instance.activeCatalogSubCategory
       let categoriesArray = CatalogData.instance.getCategoriesArray()
@@ -340,45 +351,37 @@
       let tempB: Int = categoriesArray[tempA].subCategories.firstIndex {
         $0.id == AppSystemData.instance.activeCatalogSubCategory
       }!
-      // print("111_idOfCategory= \(idOfCategory)")
-      // print("111_idOfSubCategory= \(idOfSubCategory)")
-      // print("111_activeCatalogCategory= \(AppSystemData.instance.activeCatalogCategory)")
-      // print("111_activeCatalogSubCategory= \(AppSystemData.instance.activeCatalogSubCategory)")
-      // print("222_subcategoryname = \(CatalogData.instance.categoriesArray[tempA].subCategories![tempB].name)")
 
       var goods: [Products] = []
       let request = AF.request("https://blackstarshop.ru/index.php?route=api/v1/products&cat_id=\(idOfSubCategory)")
-      AppSystemData.instance.vcMainCatalogDelegate!.hudAppear()
       request.responseJSON { response in
         if let object = response.value, let jsonDict = object as? NSDictionary {
-          for (index, data) in jsonDict where data is NSDictionary {
-            print("index= \(index)")
-            if let product = Products(data: data as! NSDictionary) {
-              print("777")
-              if product.goodsImage.isEmpty == false {
-                goods.append(product)
-                print("\(product) is add to goods")
+          let findProductsInData = DispatchWorkItem {
+            for (index, data) in jsonDict where data is NSDictionary {
+              print("TAKT_3")
+              print("DispatchQueue.current222= \(OperationQueue.current?.underlyingQueue)")
+              if let product = Products(data: data as! NSDictionary) {
+                print("99999")
+                // if product.goodsImage.isEmpty == false {
+                  goods.append(product)
+                  print("\(product) is add to goods")
+                // }
+              }
+              categoriesArray[tempA].subCategories[tempB].goodsOfCategory = goods
+              DispatchQueue.main.async {
+                AppSystemData.instance.vcMainCatalogDelegate!.catalogCollectionViewUpdate()
               }
             }
           }
-          print("goods1= \(goods)")
-          print("jsonDict.count= \(jsonDict.count)")
-          print("goods.count= \(goods.count)")
-          categoriesArray[tempA].subCategories[tempB].goodsOfCategory = goods
-          AppSystemData.instance.vcMainCatalogDelegate!.catalogCollectionViewUpdate()
-          AppSystemData.instance.vcMainCatalogDelegate!.hudDisapper()
+
+          findProductsInData.notify(queue: .main) {
+            AppSystemData.instance.vcMainCatalogDelegate!.hudDisapper()
+          }
+
+          DispatchQueue.global(qos: .userInitiated).async(execute: findProductsInData)
         }
       }
       print("goods2= \(goods)")
-    }
-
-    func showCategories() {
-      print("start")
-      print(categoriesArray.count)
-      print(categoriesArray)
-      print("[0].name= \(categoriesArray[0].subCategories[0].name)")
-      print("[0].id= \(categoriesArray[0].subCategories[0].id)")
-      print("finish")
     }
 
     func isCategoryContain(category: String, place: [CartCategoriesAndProductsDiffable]) -> Int {

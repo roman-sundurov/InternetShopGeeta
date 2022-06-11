@@ -240,24 +240,6 @@
       menuButtonView.layer.borderColor = UIColor.clear.cgColor
       menuButtonView.clipsToBounds = true
       hud.textLabel.text = "Loading"
-
-  //        print("Persistence.shared.printAllObject()_2= \(Persistence.shared.getAllObjectPersonalData())")
-  //        var dataName: String = ""
-  //        for n in Persistence.shared.getAllObjectOfFavorite() {
-  //            dataName += " + \(n.name)"
-  //            print("Favorite n.name= \(n.name)")
-  //            print("Favorite n= \(n)")
-  //        }
-  //        print("getAllObjectOfFavorite= \(dataName)")
-
-
-  //        var dataName2: String = ""
-  //        for n in Persistence.shared.getAllObjectOfCart() {
-  //            dataName2 += " + \(n.name)"
-  //            print("Cart n.name= \(n.name)")
-  //            print("Cart n= \(n)")
-  //        }
-  //        print("getAllObjectOfCart= \(dataName2)")
     }
   }
 

@@ -155,7 +155,7 @@ class VCMainCatalog: UIViewController {
   // MARK: - viewWillAppear
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(true)
-    AppSystemData.instance.activeCatalogMode = "categories"
+    // AppSystemData.instance.activeCatalogMode = "categories"
     CatalogData.instance.requestCategoriesData()
     if AppSystemData.instance.activeCatalogMode == "product" {
       CatalogData.instance.requestGoodsData()
@@ -167,7 +167,7 @@ class VCMainCatalog: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     print("viewDidLoad")
-    AppSystemData.instance.activeCatalogMode = "categories"
+    // AppSystemData.instance.activeCatalogMode = "categories"
     print("AppSystemData.instance.VCMainCatalogDelegate_222= \(AppSystemData.instance.vcMainCatalogDelegate)")
     AppSystemData.instance.vcMainCatalogDelegate = self
     applySnapshot(animatingDifferences: false)

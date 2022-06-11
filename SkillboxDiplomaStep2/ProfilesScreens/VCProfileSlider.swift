@@ -30,8 +30,8 @@ class VCProfileSlider: UIViewController {
   }
 
   @IBAction func gestureGoFavoriteScreen(_ sender: Any) {
-    AppSystemData.instance.vcMainCatalogDelegate!.slideSimpleClose()
-    AppSystemData.instance.vcMainCatalogDelegate!.performSegue(withIdentifier: "segueToVCFavorite", sender: nil)
+    // AppSystemData.instance.vcMainCatalogDelegate!.slideSimpleClose()
+    // AppSystemData.instance.vcMainCatalogDelegate!.performSegue(withIdentifier: "segueToVCFavorite", sender: nil)
   }
 
 

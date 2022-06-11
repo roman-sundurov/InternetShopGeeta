@@ -215,6 +215,8 @@ class Size {
     var sizeInCart: Size?
 
     init?(data: NSDictionary) {
+      // print("mainImage= \(data["mainImage"] as? String)")
+      // print("mainImage= \(data["englishName"] as? String)")
       if (data["mainImage"] as? String)?.isEmpty == true {
         print("Product init return nil")
         return nil

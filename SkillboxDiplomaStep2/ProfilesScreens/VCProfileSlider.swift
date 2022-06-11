@@ -21,6 +21,10 @@ class VCProfileSlider: UIViewController {
 
 
   // MARK: - клики
+  @IBAction func closeSlider(_ sender: Any) {
+    AppSystemData.instance.vcMainCatalogDelegate!.slideSimpleClose()
+  }
+
   @IBAction func gestureLogOut(_ sender: Any) {
     AppSystemData.instance.vcMainCatalogDelegate?.logOut()
   }

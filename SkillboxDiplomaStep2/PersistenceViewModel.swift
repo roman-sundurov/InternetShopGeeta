@@ -1,23 +1,139 @@
 //
-//  Networking.swift
-//  Skillbox_diploma_step2
+//  ViewModel.swift
+//  SkillboxDiplomaStep2
 //
-//  Created by Roman on 20.09.2021.
+//  Created by Roman on 11.06.2022.
 //
 
 import Foundation
-import Alamofire
-import UIKit
 import RealmSwift
+import Alamofire
 
+// MARK: - extension Persistence
+extension Persistence {
+  func activateNewUser(fullName: String, email: String, password: String) {
+    print("888")
+    let newUser = PersonalData()
+    newUser.name = fullName
+    newUser.email = email
+    newUser.password = password
+    try! realm.write {
+      realm.add(newUser)
+    }
+    print("888000")
+  }
 
-// MARK: - class CatalogData
-class CatalogData {
-  static let instance = CatalogData()
-  private var categoriesArray: [Categories] = []
-  var cartCategoriesAndProductsDiffableArray: [CartCategoriesAndProductsDiffable] = []
+  func deleteUser() {
+    print("deleteUser")
+    try! realm.write {
+      realm.delete(realm.objects(PersonalData.self))
+      realm.delete(realm.objects(PersistenceFavorite.self))
+      realm.delete(realm.objects(PersistenceCart.self))
+      realm.delete(realm.objects(PersistenceSize.self))
+    }
+  }
+
+  func getAllObjectPersonalData() -> Results<PersonalData> {
+    try! realm.write {
+      return realm.objects(PersonalData.self)
+    }
+  }
+
+  // Сохранение избранных товаров
+  func addGoodsToFavorite(good: Products) {
+    print("addGoodsToFavorite")
+    let favoriteGood = PersistenceFavorite()
+    favoriteGood.name = good.name
+    favoriteGood.englishName = good.englishName
+    favoriteGood.sortOrder = good.sortOrder
+    favoriteGood.article = good.article
+    favoriteGood.descriptionGoods = good.descriptionGoods
+    favoriteGood.goodsImage = good.goodsImage
+    favoriteGood.goodsUIImageData = good.goodsUIImage?.jpegData(compressionQuality: 1.0) as NSData?
+    favoriteGood.price = good.price
+    favoriteGood.inCart = good.inCart ?? false
+    try! realm.write {
+      realm.add(favoriteGood)
+    }
+  }
+
+  // Удаление избранных товаров
+  func deleteGoodsFromFavorite(article: String) {
+    print("deleteGoodsToFavorite, article= \(article)")
+    for object in Persistence.shared.getAllObjectOfFavorite() {
+      print("article= \(object.article), name= \(object.name)")
+    }
+    let objectForDeleting: PersistenceFavorite? = realm
+      .objects(PersistenceFavorite.self)
+      .filter("article == '\(article)'")
+      .first
+    // print("article= \(article), objectForDeleting.article= \(objectForDeleting)")
+    try! realm.write {
+      realm.delete(objectForDeleting!)
+    }
+  }
+
+  // Сохранение товаров корзины
+  func addGoodsToCart(good: Products, size: PersistenceSize, catalog: String) {
+    print("addGoodsToCart catalog= \(catalog)")
+    let cartGood = PersistenceCart()
+    cartGood.name = good.name
+    cartGood.category = catalog
+    cartGood.englishName = good.englishName
+    cartGood.sortOrder = good.sortOrder
+    cartGood.article = good.article
+    cartGood.descriptionGoods = good.descriptionGoods
+    cartGood.goodsImage = good.goodsImage
+    cartGood.size = size
+    cartGood.goodsUIImageData = good.goodsUIImage?.jpegData(compressionQuality: 1.0) as NSData?
+    cartGood.price = good.price
+    cartGood.isFavorite = good.isFavorite ?? false
+    try! realm.write {
+      realm.add(cartGood)
+    }
+  }
+
+  // Удаление товаров корзины
+  func deleteGoodsFromCart(article: String) {
+    print("deleteGoodsToCart, article= \(article)")
+    for object in Persistence.shared.getAllObjectOfCart() {
+      // print("article= \(object.article), name= \(object.name)")
+    }
+    let objectForDeleting: PersistenceCart? = realm
+      .objects(PersistenceCart.self)
+      .filter("article == '\(article)'")
+      .first
+    print("article= \(article), objectForDeleting.article= \(objectForDeleting)")
+    try! realm.write {
+      // print("deleteGoodsToCart2, article= \(article)")
+      realm.delete(objectForDeleting!)
+    }
+  }
+
+  func getAllObjectOfFavorite() -> Results<PersistenceFavorite> {
+    let allFavoriteGoods = realm.objects(PersistenceFavorite.self)
+    return allFavoriteGoods
+  }
+
+  func getAllObjectOfCart() -> Results<PersistenceCart> {
+    let allCartGoods = realm.objects(PersistenceCart.self)
+    print("getAllObjectOfCart, allCartGoods.count= \(allCartGoods.count)")
+    return allCartGoods
+  }
+
+  func newInstanceSizeOfGoode(size: Size) -> PersistenceSize {
+    let cartGood = PersistenceSize()
+    cartGood.sSize = size.sSize
+    cartGood.mSize = size.mSize
+    cartGood.lSize = size.lSize
+    cartGood.xlSize = size.xlSize
+    cartGood.xxlSize = size.xxlSize
+    return cartGood
+  }
 }
 
+
+// MARK: - extension CatalogData
 extension CatalogData {
   func getCategoriesArray() -> [Categories] {
     return categoriesArray
@@ -42,228 +158,8 @@ extension CatalogData {
     }!
     categoriesArray[tempA].subCategories = newArray
   }
-}
 
 
-// MARK: - class CatalogsAndProductsDiffable
-class CartCategoriesAndProductsDiffable: Hashable {
-  var id = UUID()
-  var category: String
-  var cartGoodsDiffable: [Cart]
-
-  init(catalog: String, cartGoods: [Cart]) {
-    self.category = catalog
-    self.cartGoodsDiffable = cartGoods
-  }
-
-  func hash(into hasher: inout Hasher) {
-    hasher.combine(id)
-  }
-
-  static func == (lhs: CartCategoriesAndProductsDiffable, rhs: CartCategoriesAndProductsDiffable) -> Bool {
-    lhs.id == rhs.id
-  }
-}
-
-
-// MARK: - class Cart
-class Cart: Hashable {
-  var name: String = ""
-  var catalog: String = ""
-  var englishName: String = ""
-  var sortOrder: Int = 0
-  var article: String = ""
-  var descriptionGoods: String = ""
-  var goodsImage: String = ""
-  var goodsUIImageData: NSData?
-  var price: Double = 0
-  var isFavorite = false
-  var size = PersistenceSize()
-
-init(name: String, catalog: String, englishName: String, sortOrder: Int, article: String, descriptionGoods: String, goodsImage: String, goodsUIImageData: NSData?, price: Double, isFavorite: Bool, size: PersistenceSize) {
-  self.name = name
-  self.catalog = catalog
-  self.englishName = englishName
-  self.sortOrder = sortOrder
-  self.article = article
-  self.descriptionGoods = descriptionGoods
-  self.goodsImage = goodsImage
-  self.goodsUIImageData = goodsUIImageData
-  self.price = price
-  self.isFavorite = isFavorite
-  self.size = size
-  }
-
-  func hash(into hasher: inout Hasher) {
-    hasher.combine(sortOrder)
-  }
-
-  static func == (lhs: Cart, rhs: Cart) -> Bool {
-    lhs.sortOrder == rhs.sortOrder
-  }
-}
-
-
-// MARK: - class Categories
-class Categories: Hashable {
-  let name: String
-  let sortOrder: Int
-  let image: String
-  let iconImage: String
-  let iconImageActive: String
-  let imageUIImage: UIImage?
-  let subCategoriesData: [NSDictionary]
-  var subCategories: [SubCategories]
-
-  init?(data: NSDictionary) {
-    if (data["image"] as? String)?.isEmpty == true || (data["subcategories"] as? [NSDictionary])?.isEmpty == true {
-      return nil
-    }
-    print("Categories init")
-    guard let name = data["name"] as? String,
-    let sortOrder = data["sortOrder"] as? String,
-    let image = data["image"] as? String,
-    let iconImage = data["iconImage"] as? String,
-    let iconImageActive = data["iconImageActive"] as? String,
-    let subCategoriesData = data["subcategories"] as? [NSDictionary] else {
-      return nil
-    }
-    self.name = name
-    self.sortOrder = Int(sortOrder) ?? 0
-    self.image = image
-    self.iconImage = iconImage
-    self.iconImageActive = iconImageActive
-    self.imageUIImage = UIImage(data: try! Data(contentsOf: URL(string: "https://blackstarshop.ru/\(image)")!))?.trim()
-    self.subCategoriesData = subCategoriesData
-    self.subCategories = []
-  }
-
-  static func == (lhs: Categories, rhs: Categories) -> Bool {
-    lhs.sortOrder == rhs.sortOrder
-  }
-
-  func hash(into hasher: inout Hasher) {
-    hasher.combine(sortOrder)
-  }
-}
-
-
-// MARK: - class SubCategories
-class SubCategories: Equatable, Hashable {
-  static func == (lhs: SubCategories, rhs: SubCategories) -> Bool { return lhs == rhs }
-  let id: Int
-  let iconImage: String
-  let iconUIImage: UIImage?
-  let name: String
-  var goodsOfCategory: [Products] = []
-  init?(data: NSDictionary) {
-    if (data["iconImage"] as? String)?.isEmpty == true {
-      return nil
-    }
-    // print("Subategories init")
-    guard let id = data["id"] as? Int ?? Int(data["id"] as! String),
-    let iconImage = data["iconImage"] as? String,
-    let name = data["name"] as? String else {
-      return nil
-    }
-    self.id = id
-    self.iconImage = iconImage
-    self.iconUIImage = UIImage(data: try! Data(contentsOf: URL(string: "https://blackstarshop.ru/\(iconImage)")!))?.trim()
-    self.name = name
-  }
-
-  func hash(into hasher: inout Hasher) {
-    hasher.combine(id)
-  }
-}
-
-class Size {
-  var sSize = false
-  var mSize = false
-  var lSize = false
-  var xlSize = false
-  var xxlSize = false
-
-  init?(sSize: Bool, mSize: Bool, lSize: Bool, xlSize: Bool, xxlSize: Bool) {
-    self.sSize = sSize
-    self.mSize = mSize
-    self.lSize = lSize
-    self.xlSize = xlSize
-    self.xxlSize = xxlSize
-  }
-}
-
-
-// MARK: - class Products
-class Products: Hashable {
-  var id = UUID()
-  let name: String
-  let englishName: String
-  let sortOrder: Int
-  let article: String
-  let descriptionGoods: String
-  let goodsImage: String
-  let goodsUIImage: UIImage?
-  let price: Double
-  var isFavorite: Bool?
-  var inCart: Bool?
-  var sizeInCart: Size?
-
-  init?(data: NSDictionary) {
-    if (data["mainImage"] as? String)?.isEmpty == true {
-      print("Product init return nil")
-      return nil
-    }
-
-    guard let name = data["name"] as? String,
-      let englishName = data["englishName"] as? String,
-      let sortOrder = data["sortOrder"] as? String,
-      let article = data["article"] as? String,
-      let description = data["description"] as? String,
-      let price = data["price"] as? Double ?? Double(data["price"] as! String),
-      let mainImage = data["mainImage"] as? String else {
-        return nil
-    }
-    self.name = name
-    self.englishName = englishName
-    self.sortOrder = Int(sortOrder) ?? 0
-    self.article = article
-    self.descriptionGoods = description
-    print("Special Price= \(price)")
-    self.price = price
-    self.goodsImage = mainImage
-    self.goodsUIImage = UIImage(data: try! Data(contentsOf: URL(string: "https://blackstarshop.ru/\(mainImage)")!))?.trim()
-    // Проверка, имеется ли данный артикул в Realm в Избранном или в корзине.
-    DispatchQueue.main.async {
-      self.isFavorite = !Persistence.shared.getAllObjectOfFavorite().filter("article == '\(article)'").isEmpty
-      self.inCart = !Persistence.shared.getAllObjectOfCart().filter("article == '\(article)'").isEmpty
-    }
-    if self.inCart == true {
-      let persistenceSize = Persistence.shared.getAllObjectOfCart().filter("article == '\(article)'").first?.size
-      self.sizeInCart = Size.init(
-        sSize: persistenceSize!.sSize,
-        mSize: persistenceSize!.mSize,
-        lSize: persistenceSize!.lSize,
-        xlSize: persistenceSize!.xlSize,
-        xxlSize: persistenceSize!.xxlSize
-      )
-    } else {
-      self.sizeInCart = Size.init(sSize: false, mSize: false, lSize: false, xlSize: false, xxlSize: false)
-    }
-  }
-
-  static func == (lhs: Products, rhs: Products) -> Bool {
-    lhs.id == rhs.id
-  }
-
-  func hash(into hasher: inout Hasher) {
-    hasher.combine(id)
-  }
-}
-
-
-// MARK: - extension CatalogData
-extension CatalogData {
   func requestCategoriesData() {
     DispatchQueue.main.async {
       AppSystemData.instance.vcMainCatalogDelegate!.hudAppear()

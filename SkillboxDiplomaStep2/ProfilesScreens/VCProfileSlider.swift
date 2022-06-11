@@ -15,11 +15,6 @@ class VCProfileSlider: UIViewController {
   @IBOutlet var labelEmail: UILabel!
 
 
-  // MARK: - делегаты и переменные
-  // MARK: - объекты
-  // MARK: - переходы
-
-
   // MARK: - клики
   @IBAction func closeSlider(_ sender: Any) {
     AppSystemData.instance.vcMainCatalogDelegate!.slideSimpleClose()
@@ -39,25 +34,22 @@ class VCProfileSlider: UIViewController {
     AppSystemData.instance.vcMainCatalogDelegate!.performSegue(withIdentifier: "segueToVCFavorite", sender: nil)
   }
 
+
   // MARK: - данные
   func updateScreenData() {
     lableName.text = Persistence.shared.getAllObjectPersonalData().first?.name
     labelEmail.text = Persistence.shared.getAllObjectPersonalData().first?.email
   }
 
-  // MARK: - viewDidLoad
 
+  // MARK: - viewDidLoad
   override func viewDidLoad() {
     super.viewDidLoad()
-
     accountImage.layer.cornerRadius = 30
     accountImage.layer.borderWidth = 3
     accountImage.layer.borderColor = UIColor.white.cgColor
     accountImage.clipsToBounds = true
     accountImage.backgroundColor = .white
-
     updateScreenData()
   }
-
-  // MARK: - additional protocols
 }

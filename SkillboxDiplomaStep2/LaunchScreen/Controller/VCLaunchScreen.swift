@@ -12,12 +12,12 @@ class VCLaunchScreen: UIViewController {
     super.viewDidAppear(false)
     if Persistence.shared.getAllObjectPersonalData().first?.email.isEmpty == false {
       performSegue(withIdentifier: "segueToVCMainCatalog", sender: nil)
-      print("segueToVCMainCatalog Yes= \(Persistence.shared.getAllObjectPersonalData().first?.email)")
-      print("email.isEmpty= \(Persistence.shared.getAllObjectPersonalData().first?.email.isEmpty)")
+      // print("segueToVCMainCatalog Yes= \(Persistence.shared.getAllObjectPersonalData().first?.email)")
+      // print("email.isEmpty= \(Persistence.shared.getAllObjectPersonalData().first?.email.isEmpty)")
     } else {
       performSegue(withIdentifier: "segueToVCWelcome", sender: nil)
-      print("segueToVCMainCatalog No= \(Persistence.shared.getAllObjectPersonalData().first?.email)")
-      print("email.isEmpty= \(Persistence.shared.getAllObjectPersonalData().first?.email.isEmpty)")
+      // print("segueToVCMainCatalog No= \(Persistence.shared.getAllObjectPersonalData().first?.email)")
+      // print("email.isEmpty= \(Persistence.shared.getAllObjectPersonalData().first?.email.isEmpty)")
     }
   }
 

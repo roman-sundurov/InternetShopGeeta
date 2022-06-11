@@ -47,13 +47,13 @@ class VCCart: UIViewController {
         withReuseIdentifier: "productCell",
         for: indexPath) as? CartCollectionViewCell
       print("0222")
-      cellOfCart!.layer.cornerRadius = 30
-      cellOfCart!.clipsToBounds = true
+      cellOfCart?.layer.cornerRadius = 30
+      cellOfCart?.clipsToBounds = true
       print("0333")
-      cellOfCart!.productImage.image = UIImage.init(data: cartGoodsDiffable.goodsUIImageData as! Data)
-      cellOfCart!.nameLabel.text = cartGoodsDiffable.name
-      cellOfCart!.priceLabel.text = String(format: "$%.2f usd", cartGoodsDiffable.price)
-      cellOfCart!.specificGood = cartGoodsDiffable
+      cellOfCart?.productImage.image = UIImage.init(data: cartGoodsDiffable.goodsUIImageData as! Data)
+      cellOfCart?.nameLabel.text = cartGoodsDiffable.name
+      cellOfCart?.priceLabel.text = String(format: "$%.2f usd", cartGoodsDiffable.price)
+      cellOfCart?.specificGood = cartGoodsDiffable
       if cartGoodsDiffable.size.sSize == true {
         cellOfCart?.buttonSize.setImage(UIImage.init(named: "sSizeCart"), for: .normal)
       }
@@ -117,8 +117,7 @@ extension VCCart {
       withReuseIdentifier: CartCollectionHeaderReusableView.reuseIdentifier
     )
 
-    cartCollectionView.collectionViewLayout = UICollectionViewCompositionalLayout() {
-      (sectionIndex, layoutEnvironment) -> NSCollectionLayoutSection? in
+    cartCollectionView.collectionViewLayout = UICollectionViewCompositionalLayout() { _, layoutEnvironment -> NSCollectionLayoutSection? in
       let isPhone = layoutEnvironment.traitCollection.userInterfaceIdiom == UIUserInterfaceIdiom.phone
       let size = NSCollectionLayoutSize(
         widthDimension: NSCollectionLayoutDimension.fractionalWidth(1),

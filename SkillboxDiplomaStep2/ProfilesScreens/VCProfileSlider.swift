@@ -10,10 +10,10 @@ import UIKit
 
 class VCProfileSlider: UIViewController {
   // MARK: - объявление аутлетов
-
   @IBOutlet var accountImage: UIImageView!
   @IBOutlet var lableName: UILabel!
   @IBOutlet var labelEmail: UILabel!
+
 
   // MARK: - делегаты и переменные
   // MARK: - объекты
@@ -35,8 +35,8 @@ class VCProfileSlider: UIViewController {
   }
 
   @IBAction func gestureGoFavoriteScreen(_ sender: Any) {
-//        AppSystemData.instance.VCMainCatalogDelegate!.slideSimpleClose()
-//        AppSystemData.instance.VCMainCatalogDelegate!.performSegue(withIdentifier: "segueToVCFavorite", sender: nil)
+    AppSystemData.instance.vcMainCatalogDelegate!.slideSimpleClose()
+    AppSystemData.instance.vcMainCatalogDelegate!.performSegue(withIdentifier: "segueToVCFavorite", sender: nil)
   }
 
   // MARK: - данные

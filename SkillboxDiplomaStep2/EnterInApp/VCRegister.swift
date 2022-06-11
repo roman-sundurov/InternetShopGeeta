@@ -20,7 +20,7 @@ class VCRegister: UIViewController {
 
   // MARK: - делегаты и переменные
   var checkForRegister = false
-  var keyboardHeight: CGFloat = 0 //хранит высоту клавиатуры
+  var keyboardHeight: CGFloat = 0 // хранит высоту клавиатуры
 
 
   // MARK: - переходы

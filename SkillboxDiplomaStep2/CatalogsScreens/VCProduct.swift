@@ -14,14 +14,12 @@ class VCProduct: UIViewController {
   @IBOutlet var labelPrice: UILabel!
   @IBOutlet var imageProduct: UIImageView!
   @IBOutlet var labelDescription: UILabel!
-
   @IBOutlet var buttonSizeS: UIButton!
   @IBOutlet var buttonSizeM: UIButton!
   @IBOutlet var buttonSizeL: UIButton!
   @IBOutlet var buttonSizeXL: UIButton!
   @IBOutlet var buttonSizeXXL: UIButton!
   @IBOutlet var toCartButton: UIButton!
-
   @IBOutlet var favoriteButton: UIButton!
 
 
@@ -122,9 +120,8 @@ class VCProduct: UIViewController {
     toCartButton.isSelected = true
   }
 
-
   func transformSizeToBought(statusInCart: Bool) {
-    print("transformSizeToBought, specificGood?.sizeInCart?.sSize= \(specificGood?.sizeInCart?.sSize)")
+    // print("transformSizeToBought, specificGood?.sizeInCart?.sSize= \(specificGood?.sizeInCart?.sSize)")
     if statusInCart == true {
       if specificGood?.sizeInCart?.sSize == true {
         buttonSizeS.setImage(UIImage.init(named: "sSizeBought"), for: .selected)
@@ -142,7 +139,6 @@ class VCProduct: UIViewController {
         buttonSizeXL.setImage(UIImage.init(named: "xlSizeBought"), for: .selected)
         print("sizeInCart?.xlSize")
       }
-
       if specificGood?.sizeInCart?.xxlSize == true {
         buttonSizeXXL.setImage(UIImage.init(named: "xxlSizeBought"), for: .selected)
         print("sizeInCart?.xxlSize")
@@ -168,7 +164,6 @@ class VCProduct: UIViewController {
       }
     }
   }
-
 
   func newSizeSelected(newSize: String) {
     print("specificGood?.inCart= \(specificGood?.inCart)")
@@ -272,18 +267,20 @@ class VCProduct: UIViewController {
 
 
   // MARK: - viewDidLoad
-
   override func viewDidLoad() {
     super.viewDidLoad()
     createAlertNotRegistration()
-    tempA = CatalogData.instance.getCategoriesArray().firstIndex { $0.sortOrder == AppSystemData.instance.activeCatalogCategory }
-    tempB = CatalogData.instance.getCategoriesArray()[tempA!].subCategories.firstIndex(where: { $0.id == AppSystemData.instance.activeCatalogSubCategory })!
-    tempC = CatalogData.instance.getCategoriesArray()[tempA!].subCategories[tempB!].goodsOfCategory.firstIndex(where: { $0.sortOrder == AppSystemData.instance.activeCatalogProduct })!
-
+    tempA = CatalogData.instance.getCategoriesArray().firstIndex {
+      $0.sortOrder == AppSystemData.instance.activeCatalogCategory
+    }
+    tempB = CatalogData.instance.getCategoriesArray()[tempA!].subCategories.firstIndex {
+      $0.id == AppSystemData.instance.activeCatalogSubCategory
+    }
+    tempC = CatalogData.instance.getCategoriesArray()[tempA!].subCategories[tempB!].goodsOfCategory.firstIndex {
+      $0.sortOrder == AppSystemData.instance.activeCatalogProduct
+    }
     goodDataUpdate()
-
     favoriteButton.isSelected = specificGood!.isFavorite ?? false
-
     labelNameOfCategory.text = CatalogData.instance.getCategoriesArray()[tempA!].name
     labelNameOfProduct.text = specificGood!.name
     labelPrice.text = String(format: "$%.2f usd", specificGood!.price)

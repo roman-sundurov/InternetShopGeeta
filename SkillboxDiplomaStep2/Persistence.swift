@@ -20,7 +20,6 @@ class AppSystemData {
   var activeCatalogProduct: Int = 0
 }
 
-
 class PersonalData: Object {
   static let instance = PersonalData()
   @objc dynamic var name: String = ""
@@ -30,7 +29,6 @@ class PersonalData: Object {
   var cart = List<PersistenceCart>()
 }
 
-
 class PersistenceFavorite: Object {
   @objc dynamic var name: String = ""
   @objc dynamic var englishName: String = ""
@@ -38,7 +36,7 @@ class PersistenceFavorite: Object {
   @objc dynamic var article: String = ""
   @objc dynamic var descriptionGoods: String = ""
   @objc dynamic var goodsImage: String = ""
-  @objc dynamic var goodsUIImageData: NSData? = nil
+  @objc dynamic var goodsUIImageData: NSData?
   @objc dynamic var price: Double = 0
   @objc dynamic var inCart = false // Bool
 }
@@ -51,12 +49,11 @@ class PersistenceCart: Object {
   @objc dynamic var article: String = ""
   @objc dynamic var descriptionGoods: String = ""
   @objc dynamic var goodsImage: String = ""
-  @objc dynamic var goodsUIImageData: NSData? = nil
+  @objc dynamic var goodsUIImageData: NSData?
   @objc dynamic var price: Double = 0
   @objc dynamic var isFavorite = false // Bool
   @objc dynamic var size: PersistenceSize? = PersistenceSize()
 }
-
 
 class PersistenceSize: Object {
   @objc dynamic var sSize = false
@@ -66,11 +63,9 @@ class PersistenceSize: Object {
   @objc dynamic var xxlSize = false
 }
 
-
 class Persistence {
   static let shared = Persistence()
   private let realm = try! Realm()
-
 
   func activateNewUser(fullName: String, email: String, password: String) {
     print("888")
@@ -84,7 +79,6 @@ class Persistence {
     print("888000")
   }
 
-
   func deleteUser() {
     print("deleteUser")
     try! realm.write {
@@ -95,13 +89,11 @@ class Persistence {
     }
   }
 
-
   func getAllObjectPersonalData() -> Results<PersonalData> {
     try! realm.write {
       return realm.objects(PersonalData.self)
     }
   }
-
 
   // Сохранение избранных товаров
   func addGoodsToFavorite(good: Products) {
@@ -131,12 +123,11 @@ class Persistence {
       .objects(PersistenceFavorite.self)
       .filter("article == '\(article)'")
       .first
-    print("article= \(article), objectForDeleting.article= \(objectForDeleting)")
+    // print("article= \(article), objectForDeleting.article= \(objectForDeleting)")
     try! realm.write {
       realm.delete(objectForDeleting!)
     }
   }
-
 
   // Сохранение товаров корзины
   func addGoodsToCart(good: Products, size: PersistenceSize, catalog: String) {
@@ -162,7 +153,7 @@ class Persistence {
   func deleteGoodsFromCart(article: String) {
     print("deleteGoodsToCart, article= \(article)")
     for object in Persistence.shared.getAllObjectOfCart() {
-      print("article= \(object.article), name= \(object.name)")
+      // print("article= \(object.article), name= \(object.name)")
     }
     let objectForDeleting: PersistenceCart? = realm
       .objects(PersistenceCart.self)
@@ -170,17 +161,15 @@ class Persistence {
       .first
     print("article= \(article), objectForDeleting.article= \(objectForDeleting)")
     try! realm.write {
-      print("deleteGoodsToCart2, article= \(article)")
+      // print("deleteGoodsToCart2, article= \(article)")
       realm.delete(objectForDeleting!)
     }
   }
-
 
   func getAllObjectOfFavorite() -> Results<PersistenceFavorite> {
     let allFavoriteGoods = realm.objects(PersistenceFavorite.self)
     return allFavoriteGoods
   }
-
 
   func getAllObjectOfCart() -> Results<PersistenceCart> {
     let allCartGoods = realm.objects(PersistenceCart.self)

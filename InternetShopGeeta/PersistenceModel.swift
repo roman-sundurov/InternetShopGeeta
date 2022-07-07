@@ -1,6 +1,6 @@
 //
 //  Persistence.swift
-//  Skillbox_diploma_step2
+//  InternetShopGeeta
 //
 //  Created by Roman on 06.09.2021.
 //

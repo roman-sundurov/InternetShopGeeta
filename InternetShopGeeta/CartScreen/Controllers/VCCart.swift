@@ -1,6 +1,6 @@
 //
 //  VCCart.swift
-//  Skillbox_diploma_step2
+//  InternetShopGeeta
 //
 //  Created by Roman on 02.12.2021.
 //

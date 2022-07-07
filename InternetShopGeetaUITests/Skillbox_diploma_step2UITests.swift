@@ -1,13 +1,13 @@
 //
-//  SkillboxDiplomaStep2UITests.swift
-//  SkillboxDiplomaStep2UITests
+//  InternetShopGeetaUITests.swift
+//  InternetShopGeetaUITests
 //
 //  Created by Roman on 14.06.2021.
 //
 
 import XCTest
 
-class SkillboxDiplomaStep2UITests: XCTestCase {
+class InternetShopGeetaUITests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.

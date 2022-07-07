@@ -1,6 +1,6 @@
 //
-//  CartCollectionReusableView.swift
-//  Skillbox_diploma_step2
+//  CartCollectionHeaderReusableView.swift
+//  InternetShopGeeta
 //
 //  Created by Roman on 30.11.2021.
 //

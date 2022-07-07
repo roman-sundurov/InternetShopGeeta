@@ -1,6 +1,6 @@
 //
 //  MainProductViewModel.swift
-//  SkillboxDiplomaStep2
+//  InternetShopGeeta
 //
 //  Created by Roman on 11.06.2022.
 //

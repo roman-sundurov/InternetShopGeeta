@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		47076DC226AA25ED002D8A65 /* VCRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47076DC126AA25ED002D8A65 /* VCRegister.swift */; };
 		470B249F2739DED1001C060C /* VCLaunchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470B249E2739DED0001C060C /* VCLaunchScreen.swift */; };
-		470C001F271C469800D18353 /* catalogProductsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470C001E271C469800D18353 /* catalogProductsCollectionViewCell.swift */; };
+		470C001F271C469800D18353 /* CatalogProductsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470C001E271C469800D18353 /* CatalogProductsCollectionViewCell.swift */; };
 		4712BB1C26A310C5003701D5 /* VCRecognition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4712BB1B26A310C5003701D5 /* VCRecognition.swift */; };
 		4728623F2749B2A900178AA5 /* CartCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4728623E2749B2A900178AA5 /* CartCollectionViewCell.swift */; };
 		472D946E2676AA0300482C20 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472D946D2676AA0300482C20 /* AppDelegate.swift */; };
@@ -26,7 +26,7 @@
 		4752A8F226AB5C00000E4AC5 /* VCMainCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4752A8F126AB5C00000E4AC5 /* VCMainCatalog.swift */; };
 		4752A8F526AB63D1000E4AC5 /* VCProfileSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4752A8F426AB63D1000E4AC5 /* VCProfileSlider.swift */; };
 		479771F126E579C1006B0EFE /* PersistenceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479771F026E579C1006B0EFE /* PersistenceModel.swift */; };
-		479771F326E5F5F6006B0EFE /* catalogCategriesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479771F226E5F5F6006B0EFE /* catalogCategriesCollectionViewCell.swift */; };
+		479771F326E5F5F6006B0EFE /* CatalogCategriesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479771F226E5F5F6006B0EFE /* CatalogCategriesCollectionViewCell.swift */; };
 		4797B730275590E400579813 /* CartCollectionHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4797B72F275590E400579813 /* CartCollectionHeaderReusableView.swift */; };
 		47AA7F7C26F7E86E00F26DDC /* MainCatalogViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AA7F7B26F7E86E00F26DDC /* MainCatalogViewModel.swift */; };
 		47ABA20727581CDE008D521C /* VCCart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47ABA20627581CDD008D521C /* VCCart.swift */; };
@@ -92,7 +92,7 @@
 /* Begin PBXFileReference section */
 		47076DC126AA25ED002D8A65 /* VCRegister.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCRegister.swift; sourceTree = "<group>"; };
 		470B249E2739DED0001C060C /* VCLaunchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCLaunchScreen.swift; sourceTree = "<group>"; };
-		470C001E271C469800D18353 /* catalogProductsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = catalogProductsCollectionViewCell.swift; sourceTree = "<group>"; };
+		470C001E271C469800D18353 /* CatalogProductsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogProductsCollectionViewCell.swift; sourceTree = "<group>"; };
 		4712BB1B26A310C5003701D5 /* VCRecognition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCRecognition.swift; sourceTree = "<group>"; };
 		4728623E2749B2A900178AA5 /* CartCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartCollectionViewCell.swift; sourceTree = "<group>"; };
 		472D946A2676AA0300482C20 /* InternetShopGeeta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InternetShopGeeta.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -115,7 +115,7 @@
 		4752A8F126AB5C00000E4AC5 /* VCMainCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCMainCatalog.swift; sourceTree = "<group>"; };
 		4752A8F426AB63D1000E4AC5 /* VCProfileSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCProfileSlider.swift; sourceTree = "<group>"; };
 		479771F026E579C1006B0EFE /* PersistenceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceModel.swift; sourceTree = "<group>"; };
-		479771F226E5F5F6006B0EFE /* catalogCategriesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = catalogCategriesCollectionViewCell.swift; sourceTree = "<group>"; };
+		479771F226E5F5F6006B0EFE /* CatalogCategriesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogCategriesCollectionViewCell.swift; sourceTree = "<group>"; };
 		4797B72F275590E400579813 /* CartCollectionHeaderReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartCollectionHeaderReusableView.swift; sourceTree = "<group>"; };
 		47AA7F7B26F7E86E00F26DDC /* MainCatalogViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCatalogViewModel.swift; sourceTree = "<group>"; };
 		47ABA20627581CDD008D521C /* VCCart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCCart.swift; sourceTree = "<group>"; };
@@ -305,8 +305,8 @@
 			children = (
 				4752A8F126AB5C00000E4AC5 /* VCMainCatalog.swift */,
 				4748BB332724C92300AB8B86 /* VCProduct.swift */,
-				479771F226E5F5F6006B0EFE /* catalogCategriesCollectionViewCell.swift */,
-				470C001E271C469800D18353 /* catalogProductsCollectionViewCell.swift */,
+				479771F226E5F5F6006B0EFE /* CatalogCategriesCollectionViewCell.swift */,
+				470C001E271C469800D18353 /* CatalogProductsCollectionViewCell.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -547,7 +547,7 @@
 			files = (
 				4752A8F526AB63D1000E4AC5 /* VCProfileSlider.swift in Sources */,
 				4712BB1C26A310C5003701D5 /* VCRecognition.swift in Sources */,
-				479771F326E5F5F6006B0EFE /* catalogCategriesCollectionViewCell.swift in Sources */,
+				479771F326E5F5F6006B0EFE /* CatalogCategriesCollectionViewCell.swift in Sources */,
 				4748BB342724C92300AB8B86 /* VCProduct.swift in Sources */,
 				47AA7F7C26F7E86E00F26DDC /* MainCatalogViewModel.swift in Sources */,
 				472D94722676AA0300482C20 /* VCWelcome.swift in Sources */,
@@ -565,7 +565,7 @@
 				470B249F2739DED1001C060C /* VCLaunchScreen.swift in Sources */,
 				4728623F2749B2A900178AA5 /* CartCollectionViewCell.swift in Sources */,
 				47ABA20727581CDE008D521C /* VCCart.swift in Sources */,
-				470C001F271C469800D18353 /* catalogProductsCollectionViewCell.swift in Sources */,
+				470C001F271C469800D18353 /* CatalogProductsCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -783,14 +783,14 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6VWFU6AND8;
-				INFOPLIST_FILE = Skillbox_diploma_step2Tests/Info.plist;
+				INFOPLIST_FILE = InternetShopGeetaTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "roman.sundurov.work.Skillbox-diploma-step2Tests";
+				PRODUCT_BUNDLE_IDENTIFIER = roman.sundurov.work.InternetShopGeetaTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -805,14 +805,14 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6VWFU6AND8;
-				INFOPLIST_FILE = Skillbox_diploma_step2Tests/Info.plist;
+				INFOPLIST_FILE = InternetShopGeetaTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "roman.sundurov.work.Skillbox-diploma-step2Tests";
+				PRODUCT_BUNDLE_IDENTIFIER = roman.sundurov.work.InternetShopGeetaTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -826,17 +826,17 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6VWFU6AND8;
-				INFOPLIST_FILE = Skillbox_diploma_step2UITests/Info.plist;
+				INFOPLIST_FILE = InternetShopGeetaUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "roman.sundurov.work.Skillbox-diploma-step2UITests";
+				PRODUCT_BUNDLE_IDENTIFIER = roman.sundurov.work.InternetShopGeetaUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Skillbox_diploma_step2;
+				TEST_TARGET_NAME = InternetShopGeeta;
 			};
 			name = Debug;
 		};
@@ -846,17 +846,17 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6VWFU6AND8;
-				INFOPLIST_FILE = Skillbox_diploma_step2UITests/Info.plist;
+				INFOPLIST_FILE = InternetShopGeetaUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "roman.sundurov.work.Skillbox-diploma-step2UITests";
+				PRODUCT_BUNDLE_IDENTIFIER = roman.sundurov.work.InternetShopGeetaUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Skillbox_diploma_step2;
+				TEST_TARGET_NAME = InternetShopGeeta;
 			};
 			name = Release;
 		};

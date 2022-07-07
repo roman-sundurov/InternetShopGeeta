@@ -1,6 +1,6 @@
 //
 //  SceneDelegate.swift
-//  Skillbox_diploma_step2
+//  InternetShopGeeta
 //
 //  Created by Roman on 14.06.2021.
 //

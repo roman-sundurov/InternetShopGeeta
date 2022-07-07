@@ -1,6 +1,6 @@
 //
-//  Networking.swift
-//  Skillbox_diploma_step2
+//  MainCatalogViewModel.swift
+//  InternetShopGeeta
 //
 //  Created by Roman on 20.09.2021.
 //

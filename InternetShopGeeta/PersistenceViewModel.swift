@@ -1,6 +1,6 @@
 //
-//  ViewModel.swift
-//  SkillboxDiplomaStep2
+//  PersistenceViewModel.swift
+//  InternetShopGeeta
 //
 //  Created by Roman on 11.06.2022.
 //

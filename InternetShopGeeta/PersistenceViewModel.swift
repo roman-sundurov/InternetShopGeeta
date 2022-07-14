@@ -160,34 +160,31 @@ extension CatalogData {
   }
 
 
-  func requestCategoriesData() {
-    DispatchQueue.main.async {
-      AppSystemData.instance.vcMainCatalogDelegate!.hudAppear()
-    }
+  func requestCategoriesData() async {
+    await AppSystemData.instance.vcMainCatalogDelegate!.hudAppear()
     guard AppSystemData.instance.activeCatalogMode != "product" else {
       return
     }
-    var categories: [Categories] = []
+
     let request = AF.request("https://blackstarshop.ru/index.php?route=api/v1/categories")
     request.responseJSON { response in
       if let object = response.value, let jsonDict = object as? NSDictionary {
-        let findCategoriesInData = DispatchWorkItem {
+        let findCategoriesInData = Task.init(priority: .userInitiated) {
+          var categories: [Categories] = []
           for ( _, data) in jsonDict where data is NSDictionary {
             // print("TAKT_1")
             if let category = Categories(data: data as! NSDictionary) {
               categories.append(category)
             }
             CatalogData.instance.setCategoriesArray(newArray: categories)
-            DispatchQueue.main.async {
-              AppSystemData.instance.vcMainCatalogDelegate?.catalogCollectionViewUpdate()
+            Task {
+              await AppSystemData.instance.vcMainCatalogDelegate?.catalogCollectionViewUpdate()
             }
           }
+          Task.init(priority: .high) {
+            await AppSystemData.instance.vcMainCatalogDelegate?.hudDisapper()
+          }
         }
-        findCategoriesInData.notify(queue: .main) {
-          AppSystemData.instance.vcMainCatalogDelegate?.hudDisapper()
-        }
-
-        DispatchQueue.global(qos: .userInitiated).async(execute: findCategoriesInData)
       }
     }
   }
@@ -195,9 +192,9 @@ extension CatalogData {
   func requestSubcategoriesData() {
     // print("requestSubcategoriesData")
     var subcategories: [SubCategories] = []
-    DispatchQueue.main.async {
-      AppSystemData.instance.vcMainCatalogDelegate?.hudAppear()
-    }
+    // DispatchQueue.main.async {
+      // await AppSystemData.instance.vcMainCatalogDelegate?.hudAppear()
+    // }
     guard AppSystemData.instance.activeCatalogMode != "subcategories" else {
       // print("Strange activeCatalogMode == 'subcategories'")
       return
@@ -217,17 +214,17 @@ extension CatalogData {
       }
     }
 
-    findSubcategoriesInData.notify(queue: .main) {
-      AppSystemData.instance.vcMainCatalogDelegate?.hudDisapper()
-    }
+    // findSubcategoriesInData.notify(queue: .main) {
+    //   AppSystemData.instance.vcMainCatalogDelegate?.hudDisapper()
+    // }
 
     DispatchQueue.global(qos: .userInitiated).async(execute: findSubcategoriesInData)
   }
 
   func requestGoodsData() {
-    DispatchQueue.main.async {
-      AppSystemData.instance.vcMainCatalogDelegate?.hudAppear()
-    }
+    // DispatchQueue.main.async {
+    //   AppSystemData.instance.vcMainCatalogDelegate?.hudAppear()
+    // }
     let idOfCategory = AppSystemData.instance.activeCatalogCategory
     let idOfSubCategory = AppSystemData.instance.activeCatalogSubCategory
     let categoriesArray = CatalogData.instance.getCategoriesArray()
@@ -254,9 +251,9 @@ extension CatalogData {
           }
         }
 
-        findProductsInData.notify(queue: .main) {
-          AppSystemData.instance.vcMainCatalogDelegate?.hudDisapper()
-        }
+        // findProductsInData.notify(queue: .main) {
+        //   AppSystemData.instance.vcMainCatalogDelegate?.hudDisapper()
+        // }
 
         DispatchQueue.global(qos: .userInitiated).async(execute: findProductsInData)
       }

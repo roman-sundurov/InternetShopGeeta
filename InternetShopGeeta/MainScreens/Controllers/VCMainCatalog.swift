@@ -156,7 +156,9 @@ class VCMainCatalog: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(true)
     // AppSystemData.instance.activeCatalogMode = "categories"
-    CatalogData.instance.requestCategoriesData()
+    Task {
+      await CatalogData.instance.requestCategoriesData()
+    }
     if AppSystemData.instance.activeCatalogMode == "product" {
       CatalogData.instance.requestGoodsData()
     }

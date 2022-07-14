@@ -48,11 +48,11 @@ extension VCMainCatalog {
       print("TAKT_Update")
     }
 
-    func hudAppear() {
+    func hudAppear() async {
       hud.show(in: mainView)
       print("hudAppear")
   }
-    func hudDisapper() {
+    func hudDisapper() async {
       hud.dismiss(animated: true)
       print("hudDisapper")
     }

@@ -266,9 +266,11 @@ class Products: Hashable {
     self.goodsImage = mainImage
     self.goodsUIImage = UIImage(data: try! Data(contentsOf: URL(string: "https://blackstarshop.ru/\(mainImage)")!))?.trim()
     // Проверка, имеется ли данный артикул в Realm в Избранном или в корзине.
-    DispatchQueue.main.async {
-      self.isFavorite = !Persistence.shared.getAllObjectOfFavorite().filter("article == '\(article)'").isEmpty
-      self.inCart = !Persistence.shared.getAllObjectOfCart().filter("article == '\(article)'").isEmpty
+    Task {
+      await MainActor.run {
+        self.isFavorite = !Persistence.shared.getAllObjectOfFavorite().filter("article == '\(article)'").isEmpty
+        self.inCart = !Persistence.shared.getAllObjectOfCart().filter("article == '\(article)'").isEmpty
+      }
     }
     if self.inCart == true {
       let persistenceSize = Persistence.shared.getAllObjectOfCart().filter("article == '\(article)'").first?.size

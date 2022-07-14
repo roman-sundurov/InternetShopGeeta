@@ -160,7 +160,10 @@ class VCMainCatalog: UIViewController {
       await CatalogData.instance.requestCategoriesData()
     }
     if AppSystemData.instance.activeCatalogMode == "product" {
-      CatalogData.instance.requestGoodsData()
+      Task {
+        print("Task.currentPriority= \(Task.currentPriority)")
+        await CatalogData.instance.requestGoodsData()
+      }
     }
   }
 

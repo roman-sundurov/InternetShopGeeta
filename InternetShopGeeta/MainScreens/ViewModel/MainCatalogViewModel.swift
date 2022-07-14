@@ -35,6 +35,7 @@ extension VCMainCatalog {
     }
     catalogCollectionViewUpdate()
     self.view.layoutIfNeeded()
+    print("tapToCVCell= \(AppSystemData.instance.activeCatalogMode)")
   }
 
 
@@ -279,8 +280,10 @@ extension VCMainCatalog {
       // Настройка Closures, которое срабатывает при клике на ячейку
       cellCat?.startCell(tag: indexPath.row) {
         AppSystemData.instance.activeCatalogCategory = categoriesArray[indexPath.row].sortOrder
-        CatalogData.instance.requestSubcategoriesData()
-        self.tapToCVCell()
+        Task {
+          await CatalogData.instance.requestSubcategoriesData()
+          self.tapToCVCell()
+        }
       }
       return cellCat
     }
@@ -318,8 +321,10 @@ extension VCMainCatalog {
           $0.sortOrder == AppSystemData.instance.activeCatalogCategory
         })!
         AppSystemData.instance.activeCatalogSubCategory = categoriesArray[tempA].subCategories[indexPath.row].id
-        CatalogData.instance.requestGoodsData()
-        self.tapToCVCell()
+        Task {
+          await CatalogData.instance.requestGoodsData()
+          self.tapToCVCell()
+        }
       }
       return cellCat!
     }

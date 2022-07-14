@@ -165,11 +165,10 @@ extension CatalogData {
     guard AppSystemData.instance.activeCatalogMode != "product" else {
       return
     }
-
     let request = AF.request("https://blackstarshop.ru/index.php?route=api/v1/categories")
     request.responseJSON { response in
       if let object = response.value, let jsonDict = object as? NSDictionary {
-        let findCategoriesInData = Task.init(priority: .userInitiated) {
+        Task.init(priority: .userInitiated) {
           var categories: [Categories] = []
           for ( _, data) in jsonDict where data is NSDictionary {
             // print("TAKT_1")
@@ -177,7 +176,7 @@ extension CatalogData {
               categories.append(category)
             }
             CatalogData.instance.setCategoriesArray(newArray: categories)
-            Task {
+            Task.init(priority: .high) {
               await AppSystemData.instance.vcMainCatalogDelegate?.catalogCollectionViewUpdate()
             }
           }
@@ -189,42 +188,36 @@ extension CatalogData {
     }
   }
 
-  func requestSubcategoriesData() {
-    // print("requestSubcategoriesData")
-    var subcategories: [SubCategories] = []
-    // DispatchQueue.main.async {
-      // await AppSystemData.instance.vcMainCatalogDelegate?.hudAppear()
-    // }
+  func requestSubcategoriesData() async {
+    print("requestSubcategoriesData")
+    print("activeCatalogMode == \(AppSystemData.instance.activeCatalogMode)")
+    await AppSystemData.instance.vcMainCatalogDelegate?.hudAppear()
     guard AppSystemData.instance.activeCatalogMode != "subcategories" else {
-      // print("Strange activeCatalogMode == 'subcategories'")
+      print("Strange activeCatalogMode == \(AppSystemData.instance.activeCatalogMode)")
       return
     }
-    let findSubcategoriesInData = DispatchWorkItem {
+    Task.init(priority: .userInitiated) {
+      var subcategories: [SubCategories] = []
       let object = CatalogData.instance.getSubcategoriesData()
       for data in object {
-        // print("TAKT_2")
+        print("TAKT_2")
         if let subCategories2 = SubCategories(data: data) {
           subcategories.append(subCategories2)
-          // print("subCategories2.name= \(subCategories2.name)")
+          print("subCategories2.name= \(subCategories2.name)")
         }
         CatalogData.instance.setSubcategoriesArray(newArray: subcategories)
-        DispatchQueue.main.async {
-          AppSystemData.instance.vcMainCatalogDelegate?.catalogCollectionViewUpdate()
+        Task.init(priority: .high) {
+          await AppSystemData.instance.vcMainCatalogDelegate?.catalogCollectionViewUpdate()
         }
       }
+      Task.init(priority: .high) {
+        await AppSystemData.instance.vcMainCatalogDelegate?.hudDisapper()
+      }
     }
-
-    // findSubcategoriesInData.notify(queue: .main) {
-    //   AppSystemData.instance.vcMainCatalogDelegate?.hudDisapper()
-    // }
-
-    DispatchQueue.global(qos: .userInitiated).async(execute: findSubcategoriesInData)
   }
 
-  func requestGoodsData() {
-    // DispatchQueue.main.async {
-    //   AppSystemData.instance.vcMainCatalogDelegate?.hudAppear()
-    // }
+  func requestGoodsData() async {
+    await AppSystemData.instance.vcMainCatalogDelegate?.hudAppear()
     let idOfCategory = AppSystemData.instance.activeCatalogCategory
     let idOfSubCategory = AppSystemData.instance.activeCatalogSubCategory
     let categoriesArray = CatalogData.instance.getCategoriesArray()
@@ -234,31 +227,29 @@ extension CatalogData {
     let tempB: Int = categoriesArray[tempA].subCategories.firstIndex {
       $0.id == AppSystemData.instance.activeCatalogSubCategory
     }!
-    var goods: [Products] = []
+
     let request = AF.request("https://blackstarshop.ru/index.php?route=api/v1/products&cat_id=\(idOfSubCategory)")
     request.responseJSON { response in
       if let object = response.value, let jsonDict = object as? NSDictionary {
-        let findProductsInData = DispatchWorkItem {
+        Task.init(priority: .userInitiated) {
+          var goods: [Products] = []
           for (_, data) in jsonDict where data is NSDictionary {
             // print("TAKT_3")
             if let product = Products(data: data as! NSDictionary) {
               goods.append(product)
             }
             categoriesArray[tempA].subCategories[tempB].goodsOfCategory = goods
-            DispatchQueue.main.async {
-              AppSystemData.instance.vcMainCatalogDelegate?.catalogCollectionViewUpdate()
+            Task.init(priority: .high) {
+              await AppSystemData.instance.vcMainCatalogDelegate?.catalogCollectionViewUpdate()
             }
           }
+          print("goods2= \(goods)")
         }
-
-        // findProductsInData.notify(queue: .main) {
-        //   AppSystemData.instance.vcMainCatalogDelegate?.hudDisapper()
-        // }
-
-        DispatchQueue.global(qos: .userInitiated).async(execute: findProductsInData)
+        Task.init(priority: .high) {
+          await AppSystemData.instance.vcMainCatalogDelegate?.hudDisapper()
+        }
       }
     }
-    print("goods2= \(goods)")
   }
 
   func isCategoryContain(category: String, place: [CartCategoriesAndProductsDiffable]) -> Int {

@@ -1,0 +1,95 @@
+{
+    "67": {
+        "name": "Аксессуары",
+        "sortOrder": "29",
+        "image": "image/catalog/im2017/4.png",
+        "iconImage": "image/catalog/style/modile/acc_cat.png",
+        "iconImageActive": "image/catalog/style/modile/acc_cat_active_s.png",
+        "subcategories": [
+            {
+                "id": "311",
+                "iconImage": "",
+                "sortOrder": "2",
+                "name": "Маски, повязки на лицо",
+                "type": "Category"
+            },
+            {
+                "id": "60",
+                "iconImage": "image/catalog/style/modile/icons-12.png",
+                "sortOrder": "3",
+                "name": "Шапки",
+                "type": "Category"
+            },
+            {
+                "id": "61",
+                "iconImage": "image/catalog/style/modile/icons-09.png",
+                "sortOrder": "1",
+                "name": "Чехлы на телефоны",
+                "type": "Category"
+            },
+            {
+                "id": "62",
+                "iconImage": "image/catalog/style/modile/icons-23.png",
+                "sortOrder": "5",
+                "name": "Носки",
+                "type": "Category"
+            },
+            {
+                "id": "64",
+                "iconImage": "image/catalog/style/modile/icons-02.png",
+                "sortOrder": "2",
+                "name": "Рюкзаки и сумки",
+                "type": "Category"
+            },
+            {
+                "id": "65",
+                "iconImage": "image/catalog/style/modile/icons-15.png",
+                "sortOrder": "2",
+                "name": "Бейсболки и кепки",
+                "type": "Category"
+            },
+            {
+                "id": "138",
+                "iconImage": "image/catalog/style/modile/mobicon-paket.png",
+                "sortOrder": "99",
+                "name": "Другое",
+                "type": "Category"
+            },
+            {
+                "id": "183",
+                "iconImage": "image/catalog/style/modile/icons-18.png",
+                "sortOrder": "98",
+                "name": "Кружки",
+                "type": "Category"
+            },
+            {
+                "id": "187",
+                "iconImage": "image/catalog/style/modile/mobicon-braslet.png",
+                "sortOrder": "9",
+                "name": "Браслеты",
+                "type": "Category"
+            },
+            {
+                "id": "217",
+                "iconImage": "",
+                "sortOrder": "0",
+                "name": "Очки",
+                "type": "Category"
+            },
+            {
+                "id": "252",
+                "iconImage": "",
+                "sortOrder": "1",
+                "name": "Кошельки",
+                "type": "Category"
+            },
+            {
+                "id": 67,
+                "iconImage": "image/catalog/style/modile/icons-03.png",
+                "sortOrder": 900,
+                "name": "Все товары категории",
+                "type": "Category"
+            }
+        ]
+    }
+}

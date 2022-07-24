@@ -18,8 +18,8 @@
 		472D94752676AA0300482C20 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 472D94732676AA0300482C20 /* Main.storyboard */; };
 		472D94772676AA0500482C20 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 472D94762676AA0500482C20 /* Assets.xcassets */; };
 		472D947A2676AA0500482C20 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 472D94782676AA0500482C20 /* LaunchScreen.storyboard */; };
-		472D94852676AA0600482C20 /* Skillbox_diploma_step2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472D94842676AA0600482C20 /* Skillbox_diploma_step2Tests.swift */; };
-		472D94902676AA0600482C20 /* Skillbox_diploma_step2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472D948F2676AA0600482C20 /* Skillbox_diploma_step2UITests.swift */; };
+		472D94852676AA0600482C20 /* InternetShopGeetaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472D94842676AA0600482C20 /* InternetShopGeetaTests.swift */; };
+		472D94902676AA0600482C20 /* InternetShopGeetaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472D948F2676AA0600482C20 /* InternetShopGeetaUITests.swift */; };
 		472FCDBD26A840C20030B157 /* TextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472FCDBC26A840C20030B157 /* TextFieldView.swift */; };
 		4748BB342724C92300AB8B86 /* VCProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4748BB332724C92300AB8B86 /* VCProduct.swift */; };
 		4748E11526A75195004B8D88 /* VCLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4748E11426A75195004B8D88 /* VCLogin.swift */; };
@@ -27,6 +27,10 @@
 		4752A8F526AB63D1000E4AC5 /* VCProfileSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4752A8F426AB63D1000E4AC5 /* VCProfileSlider.swift */; };
 		479771F126E579C1006B0EFE /* PersistenceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479771F026E579C1006B0EFE /* PersistenceModel.swift */; };
 		479771F326E5F5F6006B0EFE /* CatalogCategriesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479771F226E5F5F6006B0EFE /* CatalogCategriesCollectionViewCell.swift */; };
+		479792FD288C78470069404F /* testData.json in Resources */ = {isa = PBXBuildFile; fileRef = 479792FC288C78470069404F /* testData.json */; };
+		479792FE288D69BE0069404F /* testData.json in Resources */ = {isa = PBXBuildFile; fileRef = 479792FC288C78470069404F /* testData.json */; };
+		47979300288D9BC90069404F /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479792FF288D9BC90069404F /* NetworkMonitor.swift */; };
+		47979301288D9BC90069404F /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479792FF288D9BC90069404F /* NetworkMonitor.swift */; };
 		4797B730275590E400579813 /* CartCollectionHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4797B72F275590E400579813 /* CartCollectionHeaderReusableView.swift */; };
 		47AA7F7C26F7E86E00F26DDC /* MainCatalogViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AA7F7B26F7E86E00F26DDC /* MainCatalogViewModel.swift */; };
 		47ABA20727581CDE008D521C /* VCCart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47ABA20627581CDD008D521C /* VCCart.swift */; };
@@ -104,10 +108,10 @@
 		472D94792676AA0500482C20 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		472D947B2676AA0500482C20 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		472D94802676AA0600482C20 /* InternetShopGeetaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InternetShopGeetaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		472D94842676AA0600482C20 /* Skillbox_diploma_step2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Skillbox_diploma_step2Tests.swift; sourceTree = "<group>"; };
+		472D94842676AA0600482C20 /* InternetShopGeetaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetShopGeetaTests.swift; sourceTree = "<group>"; };
 		472D94862676AA0600482C20 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		472D948B2676AA0600482C20 /* InternetShopGeetaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InternetShopGeetaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		472D948F2676AA0600482C20 /* Skillbox_diploma_step2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Skillbox_diploma_step2UITests.swift; sourceTree = "<group>"; };
+		472D948F2676AA0600482C20 /* InternetShopGeetaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetShopGeetaUITests.swift; sourceTree = "<group>"; };
 		472D94912676AA0600482C20 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		472FCDBC26A840C20030B157 /* TextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TextFieldView.swift; path = InternetShopGeeta/Elements/TextFieldView.swift; sourceTree = SOURCE_ROOT; };
 		4748BB332724C92300AB8B86 /* VCProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCProduct.swift; sourceTree = "<group>"; };
@@ -116,6 +120,8 @@
 		4752A8F426AB63D1000E4AC5 /* VCProfileSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCProfileSlider.swift; sourceTree = "<group>"; };
 		479771F026E579C1006B0EFE /* PersistenceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceModel.swift; sourceTree = "<group>"; };
 		479771F226E5F5F6006B0EFE /* CatalogCategriesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogCategriesCollectionViewCell.swift; sourceTree = "<group>"; };
+		479792FC288C78470069404F /* testData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = testData.json; sourceTree = "<group>"; };
+		479792FF288D9BC90069404F /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		4797B72F275590E400579813 /* CartCollectionHeaderReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartCollectionHeaderReusableView.swift; sourceTree = "<group>"; };
 		47AA7F7B26F7E86E00F26DDC /* MainCatalogViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCatalogViewModel.swift; sourceTree = "<group>"; };
 		47ABA20627581CDD008D521C /* VCCart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCCart.swift; sourceTree = "<group>"; };
@@ -209,6 +215,7 @@
 				472D94732676AA0300482C20 /* Main.storyboard */,
 				472D94762676AA0500482C20 /* Assets.xcassets */,
 				472D947B2676AA0500482C20 /* Info.plist */,
+				479792FF288D9BC90069404F /* NetworkMonitor.swift */,
 			);
 			path = InternetShopGeeta;
 			sourceTree = "<group>";
@@ -216,8 +223,9 @@
 		472D94832676AA0600482C20 /* InternetShopGeetaTests */ = {
 			isa = PBXGroup;
 			children = (
-				472D94842676AA0600482C20 /* Skillbox_diploma_step2Tests.swift */,
+				472D94842676AA0600482C20 /* InternetShopGeetaTests.swift */,
 				472D94862676AA0600482C20 /* Info.plist */,
+				479792FC288C78470069404F /* testData.json */,
 			);
 			path = InternetShopGeetaTests;
 			sourceTree = "<group>";
@@ -225,7 +233,7 @@
 		472D948E2676AA0600482C20 /* InternetShopGeetaUITests */ = {
 			isa = PBXGroup;
 			children = (
-				472D948F2676AA0600482C20 /* Skillbox_diploma_step2UITests.swift */,
+				472D948F2676AA0600482C20 /* InternetShopGeetaUITests.swift */,
 				472D94912676AA0600482C20 /* Info.plist */,
 			);
 			path = InternetShopGeetaUITests;
@@ -477,6 +485,7 @@
 				472D94772676AA0500482C20 /* Assets.xcassets in Resources */,
 				47B2ABEF26A76F5800526490 /* Lato-Italic.ttf in Resources */,
 				472D94752676AA0300482C20 /* Main.storyboard in Resources */,
+				479792FE288D69BE0069404F /* testData.json in Resources */,
 				47B2ABF226A76F5800526490 /* Lato-LightItalic.ttf in Resources */,
 				47B2AC0426A76F5800526490 /* Lato-Thin.ttf in Resources */,
 			);
@@ -489,6 +498,7 @@
 				47B2ABEA26A76F5800526490 /* Lato-BlackItalic.ttf in Resources */,
 				47B2AC0926A76F5E00526490 /* OFL.txt in Resources */,
 				47B2AC0226A76F5800526490 /* Lato-Black.ttf in Resources */,
+				479792FD288C78470069404F /* testData.json in Resources */,
 				47B2ABF926A76F5800526490 /* Lato-ThinItalic.ttf in Resources */,
 				47B2ABF026A76F5800526490 /* Lato-Italic.ttf in Resources */,
 				47B2ABED26A76F5800526490 /* Lato-Regular.ttf in Resources */,
@@ -556,6 +566,7 @@
 				4797B730275590E400579813 /* CartCollectionHeaderReusableView.swift in Sources */,
 				47ECAF0628552D1100157F01 /* MainProductViewModel.swift in Sources */,
 				4748E11526A75195004B8D88 /* VCLogin.swift in Sources */,
+				47979300288D9BC90069404F /* NetworkMonitor.swift in Sources */,
 				472D946E2676AA0300482C20 /* AppDelegate.swift in Sources */,
 				47ECAF00285502E400157F01 /* PersistenceViewModel.swift in Sources */,
 				472D94702676AA0300482C20 /* SceneDelegate.swift in Sources */,
@@ -573,7 +584,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				472D94852676AA0600482C20 /* Skillbox_diploma_step2Tests.swift in Sources */,
+				472D94852676AA0600482C20 /* InternetShopGeetaTests.swift in Sources */,
+				47979301288D9BC90069404F /* NetworkMonitor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -581,7 +593,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				472D94902676AA0600482C20 /* Skillbox_diploma_step2UITests.swift in Sources */,
+				472D94902676AA0600482C20 /* InternetShopGeetaUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

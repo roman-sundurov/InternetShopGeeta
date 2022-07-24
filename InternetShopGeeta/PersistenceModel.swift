@@ -72,6 +72,7 @@ class Persistence {
 // MARK: - class CatalogData
 class CatalogData {
   static let instance = CatalogData()
+  static let requestCategoriesPath = "https://blackstarshop.ru/index.php?route=api/v1/categories"
   var categoriesArray: [Categories] = []
   var cartCategoriesAndProductsDiffableArray: [CartCategoriesAndProductsDiffable] = []
 }

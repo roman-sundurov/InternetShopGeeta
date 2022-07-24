@@ -159,13 +159,12 @@ extension CatalogData {
     categoriesArray[tempA].subCategories = newArray
   }
 
-
   func requestCategoriesData() async {
     await AppSystemData.instance.vcMainCatalogDelegate!.hudAppear()
     guard AppSystemData.instance.activeCatalogMode != "product" else {
       return
     }
-    let request = AF.request("https://blackstarshop.ru/index.php?route=api/v1/categories")
+    let request = AF.request(CatalogData.requestCategoriesPath)
     request.responseJSON { response in
       if let object = response.value, let jsonDict = object as? NSDictionary {
         Task.init(priority: .userInitiated) {

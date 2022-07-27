@@ -36,10 +36,6 @@ extension AppDelegate {
     func resetOnboardingStatus() {
       AppSystemData.instance.activateTestWithoutUserMode()
       print("User deleted for testing")
-        // guard CommandLine.arguments.contains("-reset-onboarding") else {
-        //     return
-        // }
-        // UserDefaults.standard.removeObject(forKey: "hasSeenOnboarding")
     }
 }
 #endif

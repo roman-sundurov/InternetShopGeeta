@@ -18,7 +18,7 @@ class AppSystemData {
   var activeCatalogCategory: Int = 0
   var activeCatalogSubCategory: Int = 0
   var activeCatalogProduct: Int = 0
-  var testWithoutMode = false
+  var testWithoutUserMode = false
 }
 
 class PersonalData: Object {

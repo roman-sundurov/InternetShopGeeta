@@ -343,6 +343,6 @@ extension CatalogData {
 
 extension AppSystemData {
   func activateTestWithoutUserMode() {
-    AppSystemData.instance.testWithoutMode = true
+    AppSystemData.instance.testWithoutUserMode = true
   }
 }

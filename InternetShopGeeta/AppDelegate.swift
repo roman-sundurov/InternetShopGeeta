@@ -10,7 +10,9 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-    // Override point for customization after application launch.
+      #if DEBUG
+        resetOnboardingStatus()
+      #endif
     return true
   }
 
@@ -28,3 +30,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
   }
 }
+
+#if DEBUG
+extension AppDelegate {
+    func resetOnboardingStatus() {
+      AppSystemData.instance.activateTestWithoutUserMode()
+      print("User deleted for testing")
+        // guard CommandLine.arguments.contains("-reset-onboarding") else {
+        //     return
+        // }
+        // UserDefaults.standard.removeObject(forKey: "hasSeenOnboarding")
+    }
+}
+#endif

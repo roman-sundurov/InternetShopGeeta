@@ -14,15 +14,16 @@ class InternetShopGeetaUITests: XCTestCase {
   override func setUpWithError() throws {
     continueAfterFailure = false
     app = XCUIApplication()
+    app.launchArguments += ["-reset-onboarding"]
     app.launch()
   }
 
   override func tearDownWithError() throws {
-      // Put teardown code here. This method is called after the invocation of each test method in the class.
+    app = nil
   }
 
   func testRegistration() throws {
-    let app = XCUIApplication()
+    app.buttons["Get Started Button"].tap()
     app.buttons["RegisterButton"].tap()
     app.textFields["Your Name"].tap()
     app.textFields["Email address"].tap()
@@ -31,8 +32,7 @@ class InternetShopGeetaUITests: XCTestCase {
   }
 
   func testBuyTheProduct() throws {
-    // let app = XCUIApplication()
-    // sleep(10)
+
   }
 
   func testLaunchPerformance() throws {

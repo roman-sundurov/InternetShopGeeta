@@ -340,3 +340,9 @@ extension CatalogData {
     return cartCategoriesAndProductsDiffableArray
   }
 }
+
+extension AppSystemData {
+  func activateTestWithoutUserMode() {
+    AppSystemData.instance.testWithoutMode = true
+  }
+}
